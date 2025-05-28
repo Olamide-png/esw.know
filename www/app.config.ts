@@ -14,7 +14,7 @@ export default defineAppConfig({
     },
     theme: {
       customizable: true,
-      color: 'zinc',
+      color: 'green',
       radius: 0.5,
     },
     banner: {
@@ -34,7 +34,7 @@ export default defineAppConfig({
       },
       darkModeToggle: true,
       languageSwitcher: {
-        enable: true,
+        enable: false,
         triggerType: 'icon',
         dropdownType: 'select',
       },
@@ -88,12 +88,7 @@ export default defineAppConfig({
       }],
       links: [
         {
-          icon: 'lucide:coffee',
-          to: 'https://ko-fi.com/ztl_uwu',
-          target: '_blank',
-        },
-        {
-          icon: 'lucide:github',
+          icon: 'lucide:square-chevron-right',
           to: 'https://github.com/ZTL-UwU/shadcn-docs-nuxt',
           target: '_blank',
         },
@@ -167,29 +162,33 @@ export default defineAppConfig({
       credits: 'FOOTER_CREDIT',
       links: [
         {
-          icon: 'lucide:heart',
-          title: 'Sponsor Me',
-          to: 'https://ko-fi.com/ztl_uwu',
+          icon: 'lucide:users',
+          title: 'About us ',
+          to: 'https://esw.com/about-us/',
           target: '_blank',
         },
         {
-          icon: 'lucide:twitter',
-          to: 'https://x.com/ZTL_UwU',
+          icon: 'lucide:package-open',
+          title: 'Products & Services',
+          to: 'https://esw.com/product-and-services/',
           target: '_blank',
         },
         {
-          icon: 'lucide-lab:butterfly',
-          to: 'https://bsky.app/profile/ztl-uwu.bsky.social',
+          icon: 'lucide-lab:factory',
+          title: 'Industry expertise',
+          to: 'https://esw.com/industry-expertise/',
           target: '_blank',
         },
         {
-          icon: 'simple-icons:discord',
-          to: 'https://discord.gg/9P5HzAz8DT',
+          icon: 'lucide:arrow-right-from-line',
+          title: 'Talk to an expert',
+          to: 'https://esw.com/talk-to-an-expert/',
           target: '_blank',
         },
         {
-          icon: 'lucide:github',
-          to: 'https://github.com/ZTL-UwU/shadcn-docs-nuxt',
+          icon: 'lucide:headset',
+          title: 'Customer service',
+          to: 'https://service.esw.com/',
           target: '_blank',
         },
       ],

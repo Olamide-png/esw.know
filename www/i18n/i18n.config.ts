@@ -28,8 +28,7 @@ export default defineI18nConfig(() => ({
       'Create Issues': 'Create Issues',
 
       // Footer
-      'FOOTER_CREDIT': 'Made with ❤️ by [**Tony Zhang**](https://github.com/ZTL-UwU/)',
-      'Sponsor Me': 'Sponsor Me',
+      'FOOTER_CREDIT': '2025',
     },
     fr: {
       // Header nav
