@@ -35,7 +35,7 @@ const defaultConfig: DefaultConfig = {
   },
   header: {
     showLoadingIndicator: true,
-    title: 'shadcn-docs',
+    title: 'Knowledge Centre',
     showTitle: true,
     logo: {
       light: '/logo-dark.svg',

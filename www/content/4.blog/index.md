@@ -9,7 +9,7 @@ icon: lucide:newspaper
 announcement:
   icon: lucide:newspaper
   to: /blog/v1
-  title: shadcn-docs v1.0
+  title: Knowledge Centre v1.0
 ---
 
 #title
@@ -27,7 +27,7 @@ Read the latest articles and news about the project.
   ---
 
   #title
-  shadcn-docs v1.0
+  Knowledge Centre v1.0
 
   #description
   Changes and upgrade guide for v1.0.
