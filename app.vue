@@ -1,27 +1,24 @@
 <template>
-  <NuxtLoadingIndicator :color="false" class="z-100 bg-primary/80" />
-  <LayoutBanner v-if="config.banner.enable" />
-  <LayoutHeader />
-  <div v-if="page && !page.fullpage && route.path !== '/'" class="min-h-screen border-b">
-    <div
-      class="flex-1 items-start px-4 md:grid md:gap-6 md:px-8 lg:gap-10"
-      :class="[
-        config.main.padded && 'container',
-        (page.aside ?? true) && 'md:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[240px_minmax(0,1fr)]',
-      ]"
-    >
-      <aside v-if="page.aside ?? true" class="fixed top-[102px] z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 overflow-y-auto md:sticky md:top-[60px] md:block">
-        <LayoutAside :is-mobile="false" />
-      </aside>
-      <NuxtPage />
-    </div>
-  </div>
-  <div v-else class="min-h-screen">
-    <NuxtPage />
-  </div>
+  <UApp>
+    <NuxtLoadingIndicator />
 
-  <Toaster />
-  <LayoutFooter />
+    <AppHeader />
+
+    <UMain>
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
+    </UMain>
+
+    <AppFooter />
+
+    <ClientOnly>
+      <LazyUContentSearch
+        :files="files"
+        :navigation="navigation"
+      />
+    </ClientOnly>
+  </UApp>
 </template>
 
 <script setup lang="ts">
