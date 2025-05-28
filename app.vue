@@ -26,7 +26,7 @@
   <div v-else class="relative min-h-screen overflow-hidden">
     <!-- ✅ Add SVG here -->
     <svg
-      class="absolute right-0 top-0 -z-10"
+      class="absolute right-0 top-0"
       width="629"
       height="593"
       viewBox="0 0 629 593"
