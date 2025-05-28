@@ -18,7 +18,7 @@ actions:
 Shopify Native.
 
 #description
-ESW Shopify leverages Shopify's native checkout to handle shopper's purchase flow.
+The ESW integration with Shopify enables merchants to expand globally, process payments in multiple currencies, accurately calculate duties and taxes, streamline shipping, comply with regulations, and make data-driven optimizations.
 ::
 
 ::card
@@ -31,7 +31,25 @@ Image Card
 #content
 Beautifully designed **Nuxt Content** template with **shadcn-vue**. _Customizable. Compatible. Open Source._
 ::
+---
+<h3>Integration Features</h3>
 
+Shopify’s *look and feel* with ESW’s international DTC capabilities
+
+| Feature                    | By                                                             |
+|---------------------------|----------------------------------------------------------------|
+| Browsing                  | Shopify                                                        |
+| Price calculation         | ESW (embedded as pricing advisor service in Shopify)                                           |
+| Checkout flow             | Shopify                                                        |
+| Shipping methods and pricing | ESW (embedded as routing service in Shopify checkout) |
+| Duties & Taxes calculation| ESW   |
+| Payment methods           | ESW (embedded as payment app in Shopify checkout)       |
+| Merchant Of Record        | ESW (embedded as payment app in Shopify checkout)       |
+| Customer communications   | Shopify                                                        |
+| Gift cards, coupons, etc. | Shopify                                                        |
+| Product restrictions      | ESW (embedded in Shopify browsing)                       |
+|Checkout Languages & translations | Shopify |
+|Returns & tracking languages & translations | ESW |
 
 ::card-group
   ::card
