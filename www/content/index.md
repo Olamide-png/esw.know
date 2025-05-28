@@ -12,22 +12,14 @@ announcement:
 actions:
   - name: Get Started
     to: /getting-started/introduction
-  - name: GitHub
-    variant: outline
-    to: https://github.com/ZTL-UwU/shadcn-docs-nuxt
-    leftIcon: 'lucide:github'
-  - name: Sponsor
-    variant: outline
-    target: _blank
-    to: https://ko-fi.com/ztl_uwu
-    leftIcon: 'lucide:heart'
+    leftIcon: 'lucide:cable'
 ---
 
 #title
-Effortless and Beautiful :br Docs Template.
+Shopify Native.
 
 #description
-Beautifully designed Nuxt Content template built with shadcn-vue. :br Customizable. Compatible. Open Source.
+ESW Shopify leverages Shopify's native checkout to handle shopper's purchase flow.
 ::
 
 ::div{class="border rounded-lg shadow-md"}
