@@ -9,8 +9,8 @@ const customDefu = createDefu((obj, key, value) => {
 
 const defaultConfig: DefaultConfig = {
   site: {
-    name: 'shadcn-docs',
-    description: 'Beautifully designed Nuxt Content template built with shadcn-vue. Customizable. Compatible. Open Source.',
+    name: 'Knowledge Centre',
+    description: 'ESW Shopify leverages Shopify's native checkout to handle shopper's purchase flow.',
     ogImage: '/hero.png',
     ogImageComponent: 'ShadcnDocs',
     ogImageColor: 'light',
@@ -38,8 +38,8 @@ const defaultConfig: DefaultConfig = {
     title: 'shadcn-docs',
     showTitle: true,
     logo: {
-      light: '/logo.svg',
-      dark: '/logo-dark.svg',
+      light: '/logo-dark.svg',
+      dark: '/logo.svg',
     },
     showTitleInMobile: false,
     border: false,
