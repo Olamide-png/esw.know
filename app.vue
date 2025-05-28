@@ -41,7 +41,7 @@ useSeoMeta({
 useServerHead({
   bodyAttrs: {
     class: themeClass.value,
-    style: --radius: ${radius.value}rem;,
+    style: `--radius: ${radius.value}rem;`,
   },
 });
 </script>
