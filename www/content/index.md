@@ -24,7 +24,7 @@ ESW Shopify leverages Shopify's native checkout to handle shopper's purchase flo
 
 ::card
 ---
-img: /shopify-partner-img1.png
+img: /shopify-2.jpg
 ---
 #title
 Image Card
