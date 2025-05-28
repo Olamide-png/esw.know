@@ -1,6 +1,6 @@
 <template>
   <NuxtLoadingIndicator :color="false" class="z-100 bg-primary/80" />
-  <LayoutBanner v-if="config.banner.enable" />
+  <LayoutBanner v-if="config?.banner?.enable" /> <!-- ✅ Safe -->
   <LayoutHeader />
 
   <!-- Docs pages with sidebar -->
