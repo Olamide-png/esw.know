@@ -23,7 +23,7 @@
   </div>
 
   <!-- Index page with SVG background -->
- 
+  <div v-else class="relative min-h-screen overflow-hidden"></div>
     <!-- ✅ Add SVG here -->
     <svg
       class="absolute right-0 top-0"
