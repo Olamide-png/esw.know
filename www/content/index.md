@@ -3,6 +3,8 @@ title: Home
 navigation: false
 ---
 
+:ellipsis{right=0px width=75% blur=150px}
+
 ::hero
 ---
 announcement:
