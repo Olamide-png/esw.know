@@ -10,7 +10,7 @@ const customDefu = createDefu((obj, key, value) => {
 const defaultConfig: DefaultConfig = {
   site: {
     name: 'Knowledge Centre',
-    description: 'ESW Shopify leverages Shopify's native checkout to handle shopper's purchase flow.',
+    description: "ESW Shopify leverages Shopify's native checkout to handle shopper's purchase flow.",
     ogImage: '/hero.png',
     ogImageComponent: 'ShadcnDocs',
     ogImageColor: 'light',
