@@ -22,6 +22,16 @@ Shopify Native.
 ESW Shopify leverages Shopify's native checkout to handle shopper's purchase flow.
 ::
 
-::div{class="border rounded-lg shadow-md"}
-  :iframe{src="/getting-started/introduction" height="700" width="100%" class="rounded-lg" scrolling="no" frameborder="0"}
+::card
+---
+img: /shopify-partner-img1.png
+---
+#title
+Image Card
+
+#content
+Beautifully designed **Nuxt Content** template with **shadcn-vue**. _Customizable. Compatible. Open Source._
 ::
+
+
+
