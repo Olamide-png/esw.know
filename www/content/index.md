@@ -32,9 +32,22 @@ Image Card
 Beautifully designed **Nuxt Content** template with **shadcn-vue**. _Customizable. Compatible. Open Source._
 ::
 ---
-<h3>Integration Features</h3>
 
-Shopify’s *look and feel* with ESW’s international DTC capabilities
+::card
+---
+icon: 'lucide:fold-horizontal'
+icon-size: 26
+horizontal: true
+---
+
+#title
+Integration Features
+
+#description
+Shopify’s *look and feel* with ESW’s international DTC capabilities._
+::
+
+
 
 | Feature                    | By                                                             |
 |---------------------------|----------------------------------------------------------------|
