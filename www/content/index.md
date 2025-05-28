@@ -28,10 +28,10 @@ The ESW integration with Shopify enables merchants to expand globally, process p
 img: /shopify-2.jpg
 ---
 #title
-Image Card
+ESW icon: 'lucide:arrow-left-right' Shopify
 
 #content
-Beautifully designed **Nuxt Content** template with **shadcn-vue**. _Customizable. Compatible. Open Source._
+ESW Shopify integration levarages Shopify's native checkout to handle shopper's purchase flow._
 ::
 ---
 
