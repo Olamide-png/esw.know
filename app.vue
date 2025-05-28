@@ -16,7 +16,39 @@
       <NuxtPage />
     </div>
   </div>
-  <div v-else class="min-h-screen">
+  <div v-else class="relative min-h-screen overflow-hidden">
+  <!-- ✅ Only show SVG blob on index route -->
+  <svg
+    v-if="route.path === '/'"
+    class="absolute top-0 right-0 -z-10 mix-blend-multiply"
+    width="629"
+    height="593"
+    viewBox="0 0 629 593"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g filter="url(#filter0_f)">
+      <path
+        d="M628.5 -578L..."
+        fill="#00DC82"
+        fill-opacity="0.4"
+      />
+    </g>
+    <defs>
+      <filter
+        id="filter0_f"
+        x="0"
+        y="-659"
+        width="1255"
+        height="1251"
+        filterUnits="userSpaceOnUse"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+        <feGaussianBlur stdDeviation="60" result="effect1_foregroundBlur" />
+      </filter>
+    </defs>
+  </svg>
     <NuxtPage />
   </div>
 
