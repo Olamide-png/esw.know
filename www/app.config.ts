@@ -237,9 +237,9 @@ export default defineAppConfig({
         },
       ],
       carbonAds: {
-        enable: true,
+        enable: false,
         disableInDev: true,
-        disableInMobile: false,
+        disableInMobile: true,
         fallback: false,
         fallbackMessage: 'Please support us by disabling your ad blocker.',
         code: 'CW7ITKJN',
