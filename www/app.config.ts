@@ -34,7 +34,7 @@ export default defineAppConfig({
       },
       darkModeToggle: true,
       languageSwitcher: {
-        enable: true,
+        enable: false,
         triggerType: 'icon',
         dropdownType: 'select',
       },
