@@ -136,7 +136,7 @@ const defaultConfig: DefaultConfig = {
     links: [],
     iconLinks: [],
     carbonAds: {
-      enable: false,
+      enable: true,
       disableInDev: true,
       disableInMobile: true,
       fallback: false,
