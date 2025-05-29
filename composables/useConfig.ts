@@ -34,7 +34,7 @@ const defaultConfig: DefaultConfig = {
     border: true,
   },
   header: {
-    showLoadingIndicator: true,
+    showLoadingIndicator: false,
     title: 'Knowledge Centre',
     showTitle: true,
     logo: {
