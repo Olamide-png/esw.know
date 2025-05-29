@@ -137,8 +137,8 @@ const defaultConfig: DefaultConfig = {
     iconLinks: [],
     carbonAds: {
       enable: false,
-      disableInDev: false,
-      disableInMobile: false,
+      disableInDev: true,
+      disableInMobile: true,
       fallback: false,
       fallbackMessage: 'Please support us by disabling your ad blocker.',
       code: '',
