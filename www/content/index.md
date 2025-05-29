@@ -14,7 +14,7 @@ actions:
   - name: Get Started
     to: /getting-started/introduction
     leftIcon: 'lucide:cable'
----
+
 
 #title
 Shopify Native.
