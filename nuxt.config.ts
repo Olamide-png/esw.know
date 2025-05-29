@@ -48,8 +48,8 @@ export default defineNuxtConfig({
     documentDriven: true,
     highlight: {
       theme: {
-        default: 'Source Code Pro',
-        dark: 'Source Code Pro',
+        default: 'github',
+        dark: 'github',
       },
       preload: ['json', 'js', 'ts', 'html', 'css', 'vue', 'diff', 'shell', 'markdown', 'mdc', 'yaml', 'bash', 'ini', 'dotenv'],
     },
