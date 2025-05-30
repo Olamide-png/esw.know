@@ -12,7 +12,7 @@ announcement:
   to: /blog/v1
 actions:
   - name: Get Started
-    to: /getting-started/introduction
+    to: /getting-started/installation
     leftIcon: 'lucide:cable'
 ---
 
