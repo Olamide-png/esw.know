@@ -28,10 +28,6 @@ The ESW integration with Shopify enables merchants to expand globally, process p
 img: /shopify-2.jpg
 ---
 #title
-ESW 
--------->
-<--------
-Shopify
 
 #content
 ESW Shopify integration levarages Shopify's native checkout to handle shopper's purchase flow._
@@ -52,22 +48,65 @@ Integration Features
 Shopify’s *look and feel* with ESW’s international DTC capabilities._
 ::
 
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>By</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Browsing</td>
+      <td>Shopify</td>
+    </tr>
+    <tr>
+      <td>Price calculation</td>
+      <td>ESW (embedded as pricing advisor service in Shopify)</td>
+    </tr>
+    <tr>
+      <td>Checkout flow</td>
+      <td>Shopify</td>
+    </tr>
+    <tr>
+      <td>Shipping methods and pricing</td>
+      <td>ESW (embedded as routing service in Shopify checkout)</td>
+    </tr>
+    <tr>
+      <td>Duties &amp; Taxes calculation</td>
+      <td>ESW</td>
+    </tr>
+    <tr>
+      <td>Payment methods</td>
+      <td>ESW (embedded as payment app in Shopify checkout)</td>
+    </tr>
+    <tr>
+      <td>Merchant Of Record</td>
+      <td>ESW (embedded as payment app in Shopify checkout)</td>
+    </tr>
+    <tr>
+      <td>Customer communications</td>
+      <td>Shopify</td>
+    </tr>
+    <tr>
+      <td>Gift cards, coupons, etc.</td>
+      <td>Shopify</td>
+    </tr>
+    <tr>
+      <td>Product restrictions</td>
+      <td>ESW (embedded in Shopify browsing)</td>
+    </tr>
+    <tr>
+      <td>Checkout Languages &amp; translations</td>
+      <td>Shopify</td>
+    </tr>
+    <tr>
+      <td>Returns &amp; tracking languages &amp; translations</td>
+      <td>ESW</td>
+    </tr>
+  </tbody>
+</table>
 
-
-| Feature                    | By                                                             |
-|---------------------------|----------------------------------------------------------------|
-| Browsing                  | Shopify                                                        |
-| Price calculation         | ESW (embedded as pricing advisor service in Shopify)                                           |
-| Checkout flow             | Shopify                                                        |
-| Shipping methods and pricing | ESW (embedded as routing service in Shopify checkout) |
-| Duties & Taxes calculation| ESW   |
-| Payment methods           | ESW (embedded as payment app in Shopify checkout)       |
-| Merchant Of Record        | ESW (embedded as payment app in Shopify checkout)       |
-| Customer communications   | Shopify                                                        |
-| Gift cards, coupons, etc. | Shopify                                                        |
-| Product restrictions      | ESW (embedded in Shopify browsing)                       |
-|Checkout Languages & translations | Shopify |
-|Returns & tracking languages & translations | ESW |
 
 ::card-group
   ::card
