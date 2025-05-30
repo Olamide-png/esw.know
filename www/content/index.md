@@ -48,66 +48,67 @@ Integration Features
 Shopify’s *look and feel* with ESW’s international DTC capabilities._
 ::
 
-<div class="overflow-x-auto rounded-md border border-gray-200 dark:border-gray-700 shadow-sm my-8">
+<div class="overflow-x-auto rounded-md border border-stone-200 dark:border-stone-700 shadow-sm my-8">
   <table class="min-w-full border-collapse">
-    <thead class="bg-gray-100 dark:bg-gray-800">
+    <thead class="bg-stone-100 dark:bg-stone-800">
       <tr>
-        <th class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-100">Feature</th>
-        <th class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-100">By</th>
+        <th class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-left text-sm font-semibold text-stone-700 dark:text-stone-100">Feature</th>
+        <th class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-left text-sm font-semibold text-stone-700 dark:text-stone-100">By</th>
       </tr>
     </thead>
-    <tbody class="bg-white dark:bg-gray-900">
+    <tbody class="bg-white dark:bg-stone-900">
       <tr>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">Browsing</td>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">Shopify</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">Browsing</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">Shopify</td>
       </tr>
       <tr>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">Price calculation</td>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">ESW (embedded as pricing advisor service in Shopify)</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">Price calculation</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">ESW (embedded as pricing advisor service in Shopify)</td>
       </tr>
       <tr>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">Checkout flow</td>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">Shopify</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">Checkout flow</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">Shopify</td>
       </tr>
       <tr>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">Shipping methods and pricing</td>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">ESW (embedded as routing service in Shopify checkout)</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">Shipping methods and pricing</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">ESW (embedded as routing service in Shopify checkout)</td>
       </tr>
       <tr>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">Duties &amp; Taxes calculation</td>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">ESW</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">Duties &amp; Taxes calculation</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">ESW</td>
       </tr>
       <tr>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">Payment methods</td>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">ESW (embedded as payment app in Shopify checkout)</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">Payment methods</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">ESW (embedded as payment app in Shopify checkout)</td>
       </tr>
       <tr>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">Merchant Of Record</td>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">ESW (embedded as payment app in Shopify checkout)</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">Merchant Of Record</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">ESW (embedded as payment app in Shopify checkout)</td>
       </tr>
       <tr>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">Customer communications</td>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">Shopify</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">Customer communications</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">Shopify</td>
       </tr>
       <tr>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">Gift cards, coupons, etc.</td>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">Shopify</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">Gift cards, coupons, etc.</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">Shopify</td>
       </tr>
       <tr>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">Product restrictions</td>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">ESW (embedded in Shopify browsing)</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">Product restrictions</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">ESW (embedded in Shopify browsing)</td>
       </tr>
       <tr>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">Checkout Languages &amp; translations</td>
-        <td class="border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-gray-800 dark:text-gray-200">Shopify</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">Checkout Languages &amp; translations</td>
+        <td class="border-b border-stone-200 dark:border-stone-700 px-4 py-3 text-stone-800 dark:text-stone-200">Shopify</td>
       </tr>
       <tr>
-        <td class="px-4 py-3 text-gray-800 dark:text-gray-200">Returns &amp; tracking languages &amp; translations</td>
-        <td class="px-4 py-3 text-gray-800 dark:text-gray-200">ESW</td>
+        <td class="px-4 py-3 text-stone-800 dark:text-stone-200">Returns &amp; tracking languages &amp; translations</td>
+        <td class="px-4 py-3 text-stone-800 dark:text-stone-200">ESW</td>
       </tr>
     </tbody>
   </table>
 </div>
+
 
 
 
