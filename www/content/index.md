@@ -29,7 +29,8 @@ img: /shopify-2.jpg
 ---
 #title
 ESW 
-icon: 'lucide:arrow-left-right' 
+-------->
+<--------
 Shopify
 
 #content
