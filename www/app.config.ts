@@ -106,7 +106,7 @@ export default defineAppConfig({
       codeCopyToast: true,
       codeCopyIcon: 'lucide:clipboard',
       editLink: {
-        enable: true,
+        enable: false,
         pattern: 'https://github.com/ZTL-UwU/shadcn-docs-nuxt/edit/main/www/content/:path',
         text: 'Edit this page',
         icon: 'lucide:square-pen',
