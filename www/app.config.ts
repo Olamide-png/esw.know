@@ -30,7 +30,7 @@ export default defineAppConfig({
       showTitle: true,
       logo: {
         light: '/logo.svg',
-        dark: '/ESW-Logo-White (1).svg',
+        dark: '/ESW-Logo-Light.svg',
       },
       darkModeToggle: true,
       languageSwitcher: {
