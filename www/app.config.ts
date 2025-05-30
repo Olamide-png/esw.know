@@ -43,7 +43,7 @@ export default defineAppConfig({
         links: [{
           title: 'Getting Started',
           to: '/getting-started',
-          description: 'Start building your document with shadcn-docs-nuxt',
+          description: 'Learn how to set up and use the ESW Shopify Apps.',
           icon: 'lucide:rocket',
         }, {
           title: 'Components',
