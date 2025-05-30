@@ -28,7 +28,9 @@ The ESW integration with Shopify enables merchants to expand globally, process p
 img: /shopify-2.jpg
 ---
 #title
-ESW icon: 'lucide:arrow-left-right' Shopify
+ESW 
+icon: 'lucide:arrow-left-right' 
+Shopify
 
 #content
 ESW Shopify integration levarages Shopify's native checkout to handle shopper's purchase flow._
