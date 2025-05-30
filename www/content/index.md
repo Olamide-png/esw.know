@@ -48,64 +48,67 @@ Integration Features
 Shopify’s *look and feel* with ESW’s international DTC capabilities._
 ::
 
-<table>
-  <thead>
-    <tr>
-      <th>Feature</th>
-      <th>By</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Browsing</td>
-      <td>Shopify</td>
-    </tr>
-    <tr>
-      <td>Price calculation</td>
-      <td>ESW (embedded as pricing advisor service in Shopify)</td>
-    </tr>
-    <tr>
-      <td>Checkout flow</td>
-      <td>Shopify</td>
-    </tr>
-    <tr>
-      <td>Shipping methods and pricing</td>
-      <td>ESW (embedded as routing service in Shopify checkout)</td>
-    </tr>
-    <tr>
-      <td>Duties &amp; Taxes calculation</td>
-      <td>ESW</td>
-    </tr>
-    <tr>
-      <td>Payment methods</td>
-      <td>ESW (embedded as payment app in Shopify checkout)</td>
-    </tr>
-    <tr>
-      <td>Merchant Of Record</td>
-      <td>ESW (embedded as payment app in Shopify checkout)</td>
-    </tr>
-    <tr>
-      <td>Customer communications</td>
-      <td>Shopify</td>
-    </tr>
-    <tr>
-      <td>Gift cards, coupons, etc.</td>
-      <td>Shopify</td>
-    </tr>
-    <tr>
-      <td>Product restrictions</td>
-      <td>ESW (embedded in Shopify browsing)</td>
-    </tr>
-    <tr>
-      <td>Checkout Languages &amp; translations</td>
-      <td>Shopify</td>
-    </tr>
-    <tr>
-      <td>Returns &amp; tracking languages &amp; translations</td>
-      <td>ESW</td>
-    </tr>
-  </tbody>
-</table>
+<div class="overflow-x-auto rounded-md border border-gray-200 shadow-sm my-8">
+  <table class="min-w-full border-collapse">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="border-b px-4 py-3 text-left text-sm font-semibold text-gray-700">Feature</th>
+        <th class="border-b px-4 py-3 text-left text-sm font-semibold text-gray-700">By</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white">
+      <tr>
+        <td class="border-b px-4 py-3">Browsing</td>
+        <td class="border-b px-4 py-3">Shopify</td>
+      </tr>
+      <tr>
+        <td class="border-b px-4 py-3">Price calculation</td>
+        <td class="border-b px-4 py-3">ESW (embedded as pricing advisor service in Shopify)</td>
+      </tr>
+      <tr>
+        <td class="border-b px-4 py-3">Checkout flow</td>
+        <td class="border-b px-4 py-3">Shopify</td>
+      </tr>
+      <tr>
+        <td class="border-b px-4 py-3">Shipping methods and pricing</td>
+        <td class="border-b px-4 py-3">ESW (embedded as routing service in Shopify checkout)</td>
+      </tr>
+      <tr>
+        <td class="border-b px-4 py-3">Duties &amp; Taxes calculation</td>
+        <td class="border-b px-4 py-3">ESW</td>
+      </tr>
+      <tr>
+        <td class="border-b px-4 py-3">Payment methods</td>
+        <td class="border-b px-4 py-3">ESW (embedded as payment app in Shopify checkout)</td>
+      </tr>
+      <tr>
+        <td class="border-b px-4 py-3">Merchant Of Record</td>
+        <td class="border-b px-4 py-3">ESW (embedded as payment app in Shopify checkout)</td>
+      </tr>
+      <tr>
+        <td class="border-b px-4 py-3">Customer communications</td>
+        <td class="border-b px-4 py-3">Shopify</td>
+      </tr>
+      <tr>
+        <td class="border-b px-4 py-3">Gift cards, coupons, etc.</td>
+        <td class="border-b px-4 py-3">Shopify</td>
+      </tr>
+      <tr>
+        <td class="border-b px-4 py-3">Product restrictions</td>
+        <td class="border-b px-4 py-3">ESW (embedded in Shopify browsing)</td>
+      </tr>
+      <tr>
+        <td class="border-b px-4 py-3">Checkout Languages &amp; translations</td>
+        <td class="border-b px-4 py-3">Shopify</td>
+      </tr>
+      <tr>
+        <td class="border-b px-4 py-3">Returns &amp; tracking languages &amp; translations</td>
+        <td class="border-b px-4 py-3">ESW</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
 
 ::card-group
