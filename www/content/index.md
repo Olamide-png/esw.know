@@ -8,7 +8,7 @@ navigation: false
 ::hero
 ---
 announcement:
-  title: 'v1.0 release'
+  title: '[1.0.0] release'
   to: /blog/v1
 actions:
   - name: Get Started
