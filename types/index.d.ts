@@ -4,7 +4,7 @@ interface DefaultConfig {
     description: string;
     ogImage: string;
     ogImageComponent: string;
-    ogImageColor: 'dark' | 'light';
+    ogImageColor: 'light' | 'dark';
     umami: {
       enable: boolean;
       src: string;

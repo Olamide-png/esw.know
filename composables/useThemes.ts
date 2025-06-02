@@ -8,7 +8,7 @@ interface Config {
 
 export function useThemes() {
   const { value: color } = useColorMode();
-  const isDark = color === 'dark';
+  const isLight = color === 'light';
 
   const defaultTheme = useConfig().value.theme;
   const config = useCookie<Config>('theme', {
@@ -33,7 +33,7 @@ export function useThemes() {
 
   const themePrimary = computed(() => {
     const t = themes.find(t => t.name === theme.value);
-    return `hsl(${t?.cssVars[isDark ? 'dark' : 'light'].primary})`;
+    return `hsl(${t?.cssVars[isLight ? 'light' : 'dark'].primary})`;
   });
 
   return {
