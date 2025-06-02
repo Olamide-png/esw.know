@@ -25,7 +25,7 @@ The ESW integration with Shopify enables merchants to expand globally, process p
 
 ::card
 ---
-img: /shopify-2.jpg
+img: /imageedit_1_9370624560.png
 ---
 #title
 
