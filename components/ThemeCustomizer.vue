@@ -90,7 +90,7 @@ const allColors: Color[] = [
   'green',
   'orange',
   'red',
-  'teal',Not in the themes, but included for completeness
+  'teal',
   'slate',
   'stone',
   'gray',
