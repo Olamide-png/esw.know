@@ -22,7 +22,7 @@ const defaultConfig: DefaultConfig = {
   },
   theme: {
     customizable: true,
-    color: 'green',
+    color: 'teal',
     radius: 0.5,
   },
   banner: {
