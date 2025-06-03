@@ -16,12 +16,10 @@ actions:
     leftIcon: 'lucide:cable'
   - name: Integration
     variant: ghost
-    target: _blank
     to: /integration/overview
     leftIcon: 'lucide:plug'
   - name: Basics
     variant: ghost
-    target: _blank
     to: /getting-started/the-basics/supported-countries
     leftIcon: 'lucide:shapes'
 ---
