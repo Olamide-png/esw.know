@@ -2,7 +2,7 @@ export default defineAppConfig({
   shadcnDocs: {
     site: {
       name: 'Knowledge Centre',
-      description: 'Beautifully designed Nuxt Content template built with shadcn-vue. Customizable. Compatible. Open Source.',
+      description: 'ESW Docs.',
       ogImage: '/hero.png',
       ogImageComponent: 'ShadcnDocs',
       ogImageColor: 'light',
