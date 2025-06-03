@@ -60,8 +60,7 @@ export default defineAppConfig({
       links: [
         {
           icon: 'lucide:square-chevron-right',
-          to: 
-          target: '_blank',
+          to:  
         },
       ],
     },
