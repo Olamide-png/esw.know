@@ -50,12 +50,6 @@ export default defineAppConfig({
           to: '/integration',
           description: 'Integrate Shopify with ESW services',
           icon: 'lucide:plug',
-        }, {
-          title: 'API',
-          to: '/api',
-          description: 'Discover the configurations and exposed APIs.',
-          target: '_self',
-          icon: 'lucide:code',
         }],
       }, {
         title: 'Credits',
