@@ -43,13 +43,13 @@ export default defineAppConfig({
         links: [{
           title: 'Getting Started',
           to: '/getting-started',
-          description: 'Learn how to set up and use the ESW Shopify Apps.',
+          description: 'Install the ESW Shopify Apps.',
           icon: 'lucide:rocket',
         }, {
-          title: 'Components',
-          to: '/components',
-          description: 'Explore available UI components and usage examples.',
-          icon: 'lucide:box',
+          title: 'Integration',
+          to: '/integration',
+          description: 'Integration leverages Shopify’s native checkout to handle the shopper purchase flow',
+          icon: 'lucide:plug',
         }, {
           title: 'API',
           to: '/api',
