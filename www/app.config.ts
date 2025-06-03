@@ -58,10 +58,7 @@ export default defineAppConfig({
         showLinkIcon: false,
       }],
       links: [
-        {
-          icon: 'lucide:square-chevron-right',
-          to:  
-        },
+        // Add valid link objects here if needed, or leave the array empty if not used
       ],
     },
     aside: {
