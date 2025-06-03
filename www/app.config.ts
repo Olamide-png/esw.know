@@ -166,42 +166,10 @@ export default defineAppConfig({
       enableInHomepage: false,
       title: 'On this page',
       links: [
-        {
-          title: 'Star on GitHub',
-          icon: 'lucide:star',
-          to: 'https://github.com/ZTL-UwU/shadcn-docs-nuxt',
-          target: '_blank',
-          showLinkIcon: true,
-        },
-        {
-          title: 'Create Issues',
-          icon: 'lucide:circle-dot',
-          to: 'https://github.com/ZTL-UwU/shadcn-docs-nuxt/issues',
-          target: '_blank',
-          showLinkIcon: true,
-        },
+        
       ],
       iconLinks: [
-        {
-          icon: 'lucide:coffee',
-          to: 'https://ko-fi.com/ztl_uwu',
-          target: '_blank',
-        },
-        {
-          icon: 'lucide:twitter',
-          to: 'https://x.com/ZTL_UwU',
-          target: '_blank',
-        },
-        {
-          icon: 'lucide-lab:butterfly',
-          to: 'https://bsky.app/profile/ztl-uwu.bsky.social',
-          target: '_blank',
-        },
-        {
-          icon: 'simple-icons:discord',
-          to: 'https://discord.gg/9P5HzAz8DT',
-          target: '_blank',
-        },
+        
       ],
       carbonAds: {
         enable: false,
