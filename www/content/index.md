@@ -66,7 +66,7 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities._
         <th class="border-b border-border px-4 py-3 text-left text-sm font-semibold text-foreground">By</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="[&>tr:nth-child(even)]:bg-transparent">
       <tr>
         <td class="border-b border-border px-4 py-3 text-foreground">Browsing</td>
         <td class="border-b border-border px-4 py-3 text-foreground">Shopify</td>
@@ -118,6 +118,7 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities._
     </tbody>
   </table>
 </div>
+
 
 
 
