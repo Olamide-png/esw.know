@@ -16,6 +16,7 @@ actions:
     leftIcon: 'lucide:cable'
   - name: Integration
     variant: ghost
+    target: _blank
     to: /integration/overview
     leftIcon: 'lucide:plug'
   - name: Basics
@@ -39,7 +40,7 @@ img: /Untitled design (1).png
 #title
 
 #content
-ESW Shopify integration levarages Shopify's native checkout to handle shopper's purchase flow._
+ESW Shopify integration levarages Shopify's native checkout to handle shopper's purchase flow.
 ::
 ---
 
@@ -118,49 +119,4 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities._
   </table>
 </div>
 
-
-
-
-
-::card-group
-  ::card
-  ---
-  title: Components
-  icon: lucide:box
-  to: 
-  target: _blank
-  ---
-  Explore Nuxt built-in components for pages, layouts, head, and more.
-  ::
-
-  ::card
-  ---
-  title: Composables
-  icon: lucide:arrow-right-left
-  to: 
-  target: _blank
-  ---
-  Discover Nuxt composable functions for data-fetching, head management and more.
-  ::
-
-  ::card
-  ---
-  title: Utils
-  icon: lucide:scissors
-  to: 
-  target: _blank
-  ---
-  Learn about Nuxt utility functions for navigation, error handling and more.
-  ::
-
-  ::card
-  ---
-  title: Commands
-  icon: lucide:square-terminal
-  to: 
-  target: _blank
-  ---
-  List of Nuxt CLI commands to init, analyze, build, and preview your application.
-  ::
-::
 
