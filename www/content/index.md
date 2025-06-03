@@ -58,10 +58,10 @@ Integration Features
 Shopify’s *look and feel* with ESW’s international DTC capabilities._
 ::
 
-<div class="overflow-x-auto rounded-md border shadow-sm border-border my-8">
+<div class="overflow-x-auto rounded-md border shadow-sm border-border my-8 bg-background">
   <table class="min-w-full border-collapse">
     <thead>
-      <tr class="bg-muted">
+      <tr>
         <th class="border-b border-border px-4 py-3 text-left text-sm font-semibold text-foreground">Feature</th>
         <th class="border-b border-border px-4 py-3 text-left text-sm font-semibold text-foreground">By</th>
       </tr>
@@ -118,6 +118,7 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities._
     </tbody>
   </table>
 </div>
+
 
 
 
