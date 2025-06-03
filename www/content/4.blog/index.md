@@ -22,7 +22,7 @@ Read the latest articles and news about the project.
 ::card-group{cols=3}
   ::card
   ---
-  img: /blog/v1.png
+  img: /ESW-Logo-Light.svg
   to: /blog/v1
   ---
 
@@ -30,7 +30,7 @@ Read the latest articles and news about the project.
   Knowledge Centre v1.0
 
   #description
-  Changes and upgrade guide for v1.0.
+  Initial release.
 
   #footer
   May 13, 2025
