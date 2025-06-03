@@ -48,7 +48,7 @@ export default defineAppConfig({
         }, {
           title: 'Integration',
           to: '/integration',
-          description: 'Integration leverages Shopify’s native checkout to handle the shopper purchase flow',
+          description: 'Integrate Shopify with ESW services',
           icon: 'lucide:plug',
         }, {
           title: 'API',

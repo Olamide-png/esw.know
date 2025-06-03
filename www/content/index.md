@@ -14,6 +14,15 @@ actions:
   - name: Get Started
     to: /getting-started/installation
     leftIcon: 'lucide:cable'
+  - name: Integration
+    variant: ghost
+    to: /integration/overview
+    leftIcon: 'lucide:plug'
+  - name: Basics
+    variant: ghost
+    target: _blank
+    to: /getting-started/the-basics/supported-countries
+    leftIcon: 'lucide:shapes'
 ---
 
 #title
