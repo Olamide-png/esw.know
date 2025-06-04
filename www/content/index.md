@@ -36,6 +36,7 @@ The ESW integration with Shopify enables merchants to expand globally, process p
 img: /Untitled design (1).png
 ---
 #title
+ESW Shopify integration
 
 #content
 ESW Shopify integration levarages Shopify's native checkout to handle shopper's purchase flow.
@@ -53,7 +54,7 @@ horizontal: true
 Integration Features
 
 #description
-Shopify’s *look and feel* with ESW’s international DTC capabilities._
+Shopify’s *look and feel* with ESW’s international DTC capabilities.
 ::
 
 <div class="overflow-x-auto rounded-md border shadow-sm border-border my-8 bg-background">
