@@ -158,6 +158,18 @@ export default defineAppConfig({
           to: 'https://service.esw.com/',
           target: '_blank',
         },
+        {
+          icon: 'lucide:file-lock',
+          title: 'Trust Centre',
+          to: 'https://trust.esw.com/',
+          target: '_blank',
+        },
+        {
+          icon: 'lucide:globe-lock',
+          title: 'Privacy Policy',
+          to: 'https://esw.com/privacy-policy/',
+          target: '_blank',
+        },
       ],
     },
     toc: {
