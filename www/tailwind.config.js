@@ -18,7 +18,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Geist'],
+        sans: ['Ubuntu'],
         mono: ['Geist Mono'],
       },
       colors: {
