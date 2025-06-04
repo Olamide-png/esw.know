@@ -61,8 +61,6 @@ export default defineAppConfig({
         {
           icon: 'lucide:log-in',
           title: 'Login',
-          to: 'https://security-sts.test.eshopworld.net/Account/Login?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Desw.esp.spa%26redirect_uri%3Dhttps%253A%252F%252Fesp-core-ui.test.eshopworld.net%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520esp.tahoe%2520esp.settings%2520esp.config%2520esp.rob%2520esp.analytics%2520esp.logistics%2520esp.pricing%2520esp.currency%2520esp.country%2520esp.sfs%2520esp.sfs.rec%2520esp.payments%2520esp.declarationsengine%2520esp.configProp%2520esp.fx%2520esp.checkout%2520esp.ruleset%2520esp.pricingadvisor%2520esp.revisions%2520esp.tenantprovisioning%2520esp.ch%2520retailer.brandstyling%2520esp.platform%2520esp.pricingmodels%2520esp.shippingrates%2520esp.logisticsreturns%2520esp.returns%2520esp.promotion%2520esp.logisticsrouting%2520esp.tooling%2520esp.logisticsdte%2520esp.finance%2520esp.catalog%2520esp.invoicing%2520esp.etp%2520esp.order%2520esp.security%2520esp.retailer%2520esp.shopper%2520esp.tradecomp%26nonce%3D960a56700b669faa4f2188ff7844f50636QhKouYn%26state%3Da908421f36968c69e87524b956d54c26d1iTrOwZU%26code_challenge%3D4mpO_enW61qkH3-IXePTipcV9VnYv9OwOJLPATar9yI%26code_challenge_method%3DS256',
-          target: '_blank',
         }
       ],
     },
