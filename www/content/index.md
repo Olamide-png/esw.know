@@ -16,7 +16,7 @@ actions:
     leftIcon: 'lucide:cable'
   - name: Integration
     variant: ghost
-    to: /integration/overview
+    to: /integration/integration/overview
     leftIcon: 'lucide:plug'
   - name: Basics
     variant: ghost
