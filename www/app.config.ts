@@ -184,8 +184,6 @@ export default defineAppConfig({
         {
           title: 'Login',
           icon: 'lucide:log-in',
-          to: '/login',
-          target: '_blank',
           showLinkIcon: true,
         },
       ],
