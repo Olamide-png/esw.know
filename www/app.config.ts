@@ -47,7 +47,7 @@ export default defineAppConfig({
           icon: 'lucide:rocket',
         }, {
           title: 'Integration',
-          to: '/integration/inegration/overview',
+          to: '/integration/integration/overview',
           description: 'Integrate Shopify with ESW services',
           icon: 'lucide:plug',
         }],
