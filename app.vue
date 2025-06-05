@@ -76,5 +76,16 @@ useServerHead({
     style: `--radius: ${radius.value}rem;`,
   },
 });
+
+// ✅ Add favicon here
+useHead({
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico',
+    },
+  ],
+})
 </script>
 
