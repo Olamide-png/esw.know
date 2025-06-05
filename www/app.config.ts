@@ -181,7 +181,13 @@ export default defineAppConfig({
       enableInHomepage: false,
       title: 'On this page',
       links: [
-        
+        {
+          title: 'Login',
+          icon: 'lucide:log-in',
+          to: '/login',
+          target: '_blank',
+          showLinkIcon: true,
+        },
       ],
       iconLinks: [
         
