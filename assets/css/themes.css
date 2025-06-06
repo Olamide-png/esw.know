@@ -812,7 +812,7 @@ html.dark {
     --foreground: 60 9.1% 97.8%;
 
     --muted: 180 10% 20%;
-    --muted-foreground: 180 10% 70%;
+    --muted-foreground: 180 8% 65%;
 
     --popover: 180 10% 7%;
     --popover-foreground: 60 9.1% 97.8%;
@@ -820,21 +820,22 @@ html.dark {
     --card: 180 10% 6%;
     --card-foreground: 60 9.1% 97.8%;
 
-    --border: 180 15% 25%;
-    --input: 180 15% 25%;
+    --border: 180 12% 22%;
+    --input: 180 12% 22%;
 
-    --primary: 174 70% 40%;
-    --primary-foreground: 180 100% 95%;
+    --primary: 174 60% 38%;
+    --primary-foreground: 180 80% 92%;
 
-    --secondary: 180 10% 25%;
+    --secondary: 180 8% 22%;
     --secondary-foreground: 60 9.1% 97.8%;
 
-    --accent: 174 30% 25%;
+    --accent: 174 20% 20%;
     --accent-foreground: 60 9.1% 97.8%;
 
     --destructive: 2 60% 40%;
     --destructive-foreground: 60 9.1% 97.8%;
 
-    --ring: 174 80% 45%;
+    --ring: 174 60% 42%;
 }
+
 
