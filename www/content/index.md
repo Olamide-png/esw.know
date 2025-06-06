@@ -55,7 +55,7 @@ horizontal: true
 ---
 
 #title
-Integration Features
+Integration Features Matrix
 
 #description
 Shopify’s *look and feel* with ESW’s international DTC capabilities.
@@ -66,7 +66,7 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
     <thead>
       <tr>
         <th class="border-b border-border px-4 py-3 text-left text-sm font-semibold text-foreground">Feature</th>
-        <th class="border-b border-border px-4 py-3 text-left text-sm font-semibold text-foreground">By</th>
+        <th class="border-b border-border px-4 py-3 text-left text-sm font-semibold text-foreground">Provider</th>
       </tr>
     </thead>
     <tbody class="[&>tr:nth-child(even)]:bg-transparent">
