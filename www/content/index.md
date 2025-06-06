@@ -22,6 +22,10 @@ actions:
     variant: ghost
     to: /getting-started/the-basics/supported-countries
     leftIcon: 'lucide:shapes'
+  - name: Shopify Configuration
+    variant: ghost
+    to: /getting-started/configuration/shopify-setup
+    leftIcon: 'lucide:wrench'
 ---
 
 #title

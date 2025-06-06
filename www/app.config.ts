@@ -7,7 +7,7 @@ export default defineAppConfig({
       ogImageComponent: 'ShadcnDocs',
       ogImageColor: 'light',
       umami: {
-        enable: true,
+        enable: false,
         src: 'https://cloud.umami.is/script.js',
         dataWebsiteId: 'd793fbf3-461e-4e26-9ec9-4e9141df96ee',
       },
