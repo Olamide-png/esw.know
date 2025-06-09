@@ -19,7 +19,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Geist'],
-        mono: ['Geist Mono'],
+        mono: ['JetBrains Mono'],
       },
       colors: {
         border: 'hsl(var(--border))',
