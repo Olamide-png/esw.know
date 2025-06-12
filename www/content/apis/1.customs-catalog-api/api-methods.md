@@ -6,6 +6,8 @@ icon: 'lucide:file-json'
 
 ### POST/`Upload Catalog`
 
+<br>
+
 <div class="space-y-6 text-base leading-relaxed text-neutral-800 dark:text-neutral-200">
 
   <p>
@@ -13,12 +15,8 @@ icon: 'lucide:file-json'
     <code class="px-1 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-green-600 font-mono text-sm">
       POST
     </code>
-    request to:
+    request to `/api/v2/RetailerCatalog`
   </p>
-
-  <div class="bg-neutral-100 dark:bg-neutral-800 rounded px-4 py-2 text-sm font-mono text-neutral-700 dark:text-neutral-300">
-    /api/v2/RetailerCatalog
-  </div>
 
   <p>
     The <span class="text-teal-600 font-semibold underline decoration-dotted">ESW Customs Catalog API</span>
@@ -50,3 +48,9 @@ icon: 'lucide:file-json'
   </div>
 
 </div>
+
+---
+
+### Minimum Required Parameters
+
+The Customs Catalog API contains certain parameters, which are required at a minimum to correctly identify the items in the catalog. If you submit the API request but do not include these parameters, internal exceptions are created in the ESW system, impacting the overall catalog integration process and product availability.
