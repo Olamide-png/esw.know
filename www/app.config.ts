@@ -2,12 +2,12 @@ export default defineAppConfig({
   shadcnDocs: {
     site: {
       name: 'Knowledge Centre',
-      description: 'ESW Docs.',
+      description: 'ESW Knowledge Centre',
       ogImage: '/hero.png',
       ogImageComponent: 'ShadcnDocs',
       ogImageColor: 'light',
       umami: {
-        enable: true,
+        enable: false,
         src: 'https://cloud.umami.is/script.js',
         dataWebsiteId: 'd793fbf3-461e-4e26-9ec9-4e9141df96ee',
       },
@@ -49,13 +49,27 @@ export default defineAppConfig({
           title: 'Integration',
           to: '/integration/integration/overview',
           description: 'Integrate Shopify with ESW services',
-          icon: 'lucide:plug',
+          icon: 'lucide:code-xml',
+        }, {
+          title: 'Configuration',
+          to: '/configuration/configuration/shopify-setup',
+          description: 'Tailor your store for customers in a particular country or region.',
+          icon: 'lucide:monitor-cog',
         }],
       }, {
         title: 'Blog',
         to: '/blog',
         target: '_self',
         showLinkIcon: false,
+        description: 'Latest news and updates',
+        icon: 'lucide:book-open',
+      }, {
+        title: 'APIs',
+        to: '/apis',
+        target: '_blank',
+        showLinkIcon: true,
+        description: 'API documentation for ESW services',
+        icon: 'lucide:code',
       }],
       links: [
         {
