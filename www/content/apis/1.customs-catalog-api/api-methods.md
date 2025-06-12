@@ -1,6 +1,6 @@
 ---
-title: Customs Catalog API Methods
-description: he following methods are included in Customs Catalog API
+title: API Methods
+description: The following methods are included in Customs Catalog API
 icon: 'lucide:file-json'
 ---
 

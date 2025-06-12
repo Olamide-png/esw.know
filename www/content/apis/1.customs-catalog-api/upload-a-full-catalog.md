@@ -1,5 +1,5 @@
 ---
-title: Customs Catalog API Methods
+title: Upload a full catalog
 description: Uploading a full catalog
 icon: 'lucide:hard-drive-upload'
 ---
