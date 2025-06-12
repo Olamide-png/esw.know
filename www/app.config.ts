@@ -65,8 +65,8 @@ export default defineAppConfig({
         icon: 'lucide:book-open',
       }, {
         title: 'APIs',
-        to: '/fr',
-        target: '_blank',
+        to: '/fr/index',
+        target: '_self',
         showLinkIcon: true,
         description: 'API documentation for ESW services',
         icon: 'lucide:code',
