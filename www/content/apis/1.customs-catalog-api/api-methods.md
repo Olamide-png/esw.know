@@ -280,3 +280,32 @@ The Customs Catalog API contains certain parameters, which are required at a min
   </table>
 </div>
 
+---
+
+### Parameter Example
+
+```json [Minimum Required Parameters] height=150 collapse
+[
+     {
+       "productCode": "11160296020014",
+       "name": "JACKET",
+       "description": "JACKET",
+       "material": "FABRIC 53% cotton, 21% polyester, 21% acrylic, 4% viscose, 1% polyester, lining 100% polyester",
+       "countryOfOrigin": "IT",
+       "hsCode": "62043290",
+       "hsCodeRegion": "EU",
+       "category": null,
+       "gender": null,
+       "ageGroup": null,
+       "size": null,
+       "weight": null,
+       "weightUnit": null,
+       "url": null,
+       "imageUrl": null,
+       "unitPrice": null,
+       "dangerousGoods": null,
+       "additionalProductCode": null,
+       "variantProductCode": null
+     },
+ ]
+ ```
