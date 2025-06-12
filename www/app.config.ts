@@ -61,6 +61,15 @@ export default defineAppConfig({
         to: '/blog',
         target: '_self',
         showLinkIcon: false,
+        description: 'Latest news and updates',
+        icon: 'lucide:book-open',
+      }, {
+        title: 'APIs',
+        to: '/apis/index.md',
+        target: '_blank',
+        showLinkIcon: true,
+        description: 'API documentation for ESW services',
+        icon: 'lucide:code',
       }],
       links: [
         {
