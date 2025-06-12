@@ -1,4 +1,5 @@
 ---
+title: APIs
 navigation: false
 layout: no-sidebar
 ---
