@@ -64,6 +64,11 @@ const config = useConfig();
 const route = useRoute();
 const { themeClass, radius } = useThemes();
 
+const isSidebarPage = computed(() => {
+  return !route.path.startsWith('/payments') && route.path !== '/' && !(page?.fullpage ?? false);
+});
+
+
 useSeoMeta({
   description: config.value.site.description,
   ogDescription: config.value.site.description,

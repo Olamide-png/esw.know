@@ -1,5 +1,5 @@
 ---
-title: API Home
+title: API
 navigation: false
 ---
 ::hero-alt
