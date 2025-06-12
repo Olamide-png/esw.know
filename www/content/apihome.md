@@ -1,6 +1,7 @@
 ---
 title: Home
 navigation: false
+layout: no-sidebar
 ---
 
 ::hero
