@@ -24,7 +24,7 @@ actions:
     leftIcon: 'lucide:shapes'
   - name: Shopify Configuration
     variant: ghost
-    to: /getting-started/configuration/shopify-setup
+    to: /configuration/configuration/shopify-setup
     leftIcon: 'lucide:wrench'
 ---
 
