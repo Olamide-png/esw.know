@@ -18,10 +18,6 @@ actions:
     variant: ghost
     to: /integration/integration/overview
     leftIcon: 'lucide:plug'
-  - name: Basics
-    variant: ghost
-    to: /getting-started/the-basics/supported-countries
-    leftIcon: 'lucide:shapes'
   - name: Shopify Configuration
     variant: ghost
     to: /configuration/configuration/shopify-setup
