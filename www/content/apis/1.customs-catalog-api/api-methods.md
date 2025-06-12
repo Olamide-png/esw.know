@@ -4,13 +4,13 @@ description: To send the catalog information to ESW, send a POST request to /api
 icon: 'lucide:file-json'
 ---
 
-## POST/`Upload Catalog`
+### POST/`Upload Catalog`
 
 <div class="space-y-6 text-base leading-relaxed text-neutral-800 dark:text-neutral-200">
 
   <p>
     To send catalog information to ESW, submit a
-    <code class="px-1 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-pink-600 font-mono text-sm">
+    <code class="px-1 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-green-600 font-mono text-sm">
       POST
     </code>
     request to:
