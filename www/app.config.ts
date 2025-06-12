@@ -2,7 +2,7 @@ export default defineAppConfig({
   shadcnDocs: {
     site: {
       name: 'Knowledge Centre',
-      description: 'ESW Docs.',
+      description: 'ESW Knowledge Centre',
       ogImage: '/hero.png',
       ogImageComponent: 'ShadcnDocs',
       ogImageColor: 'light',
@@ -49,7 +49,12 @@ export default defineAppConfig({
           title: 'Integration',
           to: '/integration/integration/overview',
           description: 'Integrate Shopify with ESW services',
-          icon: 'lucide:plug',
+          icon: 'lucide:code-xml',
+        }, {
+          title: 'Configuration',
+          to: '/configuration/configuration/shopify-setup',
+          description: 'Tailor your store for customers in a particular country or region.',
+          icon: 'lucide:monitor-cog',
         }],
       }, {
         title: 'Blog',
