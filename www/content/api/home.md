@@ -6,7 +6,7 @@ fullpage: true
 ::div{class="overflow-hidden border rounded-lg shadow-md max-w-full"}
 :iframe{
   src="https://eswapis.vercel.app/contacts"
-  width="1500px"
+  width="2000px"
   height="1000px"
   class="w-full rounded-lg"
   loading="lazy"
