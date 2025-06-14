@@ -4,6 +4,6 @@ navigation: false
 fullpage: true
 ---
 ::div{class="border rounded-lg shadow-md"}
-:iframe{src="https://eswapis.vercel.app/contacts" height="3000px" width="1500px" class="rounded-lg" scrolling="yes" frameborder="0"}
+:iframe{src="https://eswapis.vercel.app/contacts" height="4500px" width="1500px" class="rounded-lg" scrolling="no" frameborder="0"}
 ::
 
