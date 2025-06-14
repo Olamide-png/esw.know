@@ -2,9 +2,15 @@
 navigation: false
 fullpage: true
 ---
-::div{class="border rounded-xs shadow-md"}
-:iframe{src="https://eswapis.vercel.app/contacts" height="1000px" width="100%" class="rounded-xs" scrolling="yes" frameborder="0"}
+::div{class="fixed inset-0 z-50 bg-white dark:bg-black"}
+:iframe{
+  src="https://eswapis.vercel.app/contacts"
+  class="w-full h-full"
+  frameborder="0"
+  scrolling="auto"
+}
 ::
+
 
 
 
