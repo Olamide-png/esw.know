@@ -10,6 +10,7 @@ fullpage: true
   height="1000px"
   class="w-full rounded-lg"
   loading="lazy"
+  allowfullscreen
   allow="fullscreen"
   sandbox="allow-same-origin allow-scripts"
   frameborder="0"
