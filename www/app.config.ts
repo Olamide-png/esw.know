@@ -64,7 +64,7 @@ export default defineAppConfig({
         description: 'Latest news and updates',
         icon: 'lucide:book-open',
       }, {
-        title: 'APIs',
+        title: 'API References',
         to: '/api/home',
         target: '_self',
         showLinkIcon: false,
