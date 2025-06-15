@@ -66,7 +66,7 @@ export default defineAppConfig({
       }, {
         title: 'API References',
         to: '/api/home',
-        target: '_self',
+        target: '_blank',
         showLinkIcon: false,
         description: 'API documentation for ESW services',
         icon: 'lucide:code',
