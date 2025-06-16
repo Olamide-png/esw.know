@@ -55,14 +55,12 @@ export default defineAppConfig({
           to: '/configuration/configuration/shopify-setup',
           description: 'Tailor your store for customers in a particular country or region.',
           icon: 'lucide:monitor-cog',
+        }, {
+          title: 'APIs',
+          to: '/apis/customs-catalog-api/overview',
+          description: 'Explore ESW APIs.',
+          icon: 'lucide:terminal',
         }],
-      }, {
-        title: 'Blog',
-        to: '/blog',
-        target: '_self',
-        showLinkIcon: false,
-        description: 'Latest news and updates',
-        icon: 'lucide:book-open',
       }, {
         title: 'API References',
         to: '/api/home.md',
@@ -70,6 +68,13 @@ export default defineAppConfig({
         showLinkIcon: false,
         description: 'API documentation for ESW services',
         icon: 'lucide:code',
+      }, {
+        title: 'Blog',
+        to: '/blog',
+        target: '_self',
+        showLinkIcon: false,
+        description: 'Latest news and updates',
+        icon: 'lucide:book-open',
       }],
       links: [
         {
@@ -223,3 +228,4 @@ export default defineAppConfig({
     data: {},
   },
 });
+
