@@ -69,11 +69,11 @@ export default defineAppConfig({
         description: 'API documentation for ESW services',
         icon: 'lucide:code',
       }, {
-        title: 'Blog',
-        to: '/blog',
+        title: 'Help Centre',
+        to: '/help-centre',
         target: '_self',
         showLinkIcon: false,
-        description: 'Latest news and updates',
+        description: 'Common questions and answers',
         icon: 'lucide:book-open',
       }],
       links: [
