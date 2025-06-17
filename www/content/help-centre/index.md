@@ -45,7 +45,7 @@ Commom queries and help documentation
   to: /help-centre/order-issues
   target: _self
   ---
-  Explore common order queries, and more.
+  Explore common order queries
   ::
 
   ::card
@@ -53,7 +53,7 @@ Commom queries and help documentation
   title: Checkout
   icon: lucide:shopping-cart
   ---
-  Explore common checkout queries, and more.
+  Explore common checkout queries
   ::
 
   ::card
@@ -61,7 +61,7 @@ Commom queries and help documentation
   title: Returns
   icon: lucide:truck
   ---
-  Explore common returns queries, and more.
+  Explore common returns queries
   ::
 
   ::card
@@ -69,6 +69,6 @@ Commom queries and help documentation
   title: Pricing and Tarriffs
   icon: lucide:hand-coins
   ---
-  Explore common pricing and tarriff queries, and more.
+  Explore common pricing and tarriff queries
   ::
 ::
