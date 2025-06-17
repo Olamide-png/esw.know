@@ -7,7 +7,7 @@ fullpage: true
   src="https://eswapis.vercel.app"
   class="w-full h-full"
   frameborder="0"
-  scrolling="no"
+  scrolling="yes"
 }
 ::
 
