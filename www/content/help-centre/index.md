@@ -23,6 +23,20 @@ ESW Help Centre.
 Commom queries and help documentation.
 ::
 
+
+::card
+---
+img: /content-manager-man-woman-uploading-content-account_491047-247.avif
+---
+#title
+ESW Help Centre
+
+#content
+Commom queries and help documentation
+::
+
+
+
 ::card-group
   ::card
   ---
