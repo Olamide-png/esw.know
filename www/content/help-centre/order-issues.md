@@ -1,6 +1,6 @@
 ---
-title: "[1.0.0] 2025-09-15"
-description: Initial Release.
+title: "Order Queries"
+description: Common order queries.
 aside: false
 prevNext: false
 ---
