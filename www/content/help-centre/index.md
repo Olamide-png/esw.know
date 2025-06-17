@@ -40,7 +40,7 @@ Commom queries and help documentation
 ::card-group
   ::card
   ---
-  title: Order
+  title: Orders
   icon: lucide:package-open
   to: /help-centre/order-issues
   target: _self
@@ -66,7 +66,7 @@ Commom queries and help documentation
 
   ::card
   ---
-  title: Pricing and Tarriff
+  title: Pricing and Tarriffs
   icon: lucide:hand-coins
   ---
   Explore common pricing and tarriff queries, and more.
