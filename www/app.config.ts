@@ -63,7 +63,7 @@ export default defineAppConfig({
         }],
       }, {
         title: 'API References',
-        to: '/api/home.md',
+        to: '/api/home',
         target: '_blank',
         showLinkIcon: false,
         description: 'API documentation for ESW services',
