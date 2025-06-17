@@ -5,6 +5,5 @@ aside: false
 prevNext: false
 ---
 
-## [1.0.0] - 2024-03-15
+## Order Queries
 
-Launched ESW Knowledge Centre with ESW Shopify documentation.
