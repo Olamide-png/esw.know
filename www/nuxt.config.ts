@@ -18,5 +18,15 @@ export default defineNuxtConfig({
     ],
   },
   compatibilityDate: '2025-05-13',
+
+  app: {
+    head: {
+      link: [
+        { rel: 'preconnect', href: 'https://eswapis.vercel.app' },
+        { rel: 'dns-prefetch', href: 'https://eswapis.vercel.app' }
+      ]
+    }
+  }
 });
+
 
