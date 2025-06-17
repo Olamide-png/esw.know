@@ -26,7 +26,7 @@ Commom queries and help documentation.
 
 ::card
 ---
-img: /content-manager-man-woman-uploading-content-account_491047-247.avif
+img: /flat-colored-architect-composition-woman-architect-front-her-layout-her-attributes-create-project-present-it-client-vector-illustration_1284-69384.avif
 ---
 #title
 ESW Help Centre
