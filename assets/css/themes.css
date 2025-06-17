@@ -765,13 +765,13 @@ html.dark {
     --secondary: 215 27.9% 16.9%;
     --secondary-foreground: 210 20% 98%;
 
-    --accent: 215 27.9% 16.9%;
-    --accent-foreground: 210 20% 98%;
+    --accent: 174 20% 20%;
+    --accent-foreground: 60 9.1% 97.8%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 20% 98%;
 
-    --ring: 263.4 70% 50.4%;
+    --ring: 174 60% 42%;
 }
 
 .theme-teal {
