@@ -8,6 +8,7 @@ fullpage: true
   class="w-full h-full"
   frameborder="0"
   scrolling="yes"
+  loading="lazy"
 }
 ::
 
