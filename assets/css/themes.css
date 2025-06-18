@@ -744,34 +744,34 @@ html.dark {
 }
 
 .dark .theme-violet {
-    --background: 224 71.4% 4.1%;
-    --foreground: 210 20% 98%;
+    --background: 250 14% 5%;
+  --foreground: 300 10% 98%;
 
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 217.9 10.6% 64.9%;
+  --muted: 260 10% 20%;
+  --muted-foreground: 260 8% 65%;
 
-    --popover: 224 71.4% 4.1%;
-    --popover-foreground: 210 20% 98%;
+  --popover: 260 10% 7%;
+  --popover-foreground: 300 10% 98%;
 
-    --card: 224 71.4% 4.1%;
-    --card-foreground: 210 20% 98%;
+  --card: 260 10% 6%;
+  --card-foreground: 300 10% 98%;
 
-    --border: 215 12% 22%;
-    --input: 215 12% 22%;
+  --border: 260 12% 22%;
+  --input: 260 12% 22%;
 
-    --primary: 263.4 70% 50.4%;
-    --primary-foreground: 210 20% 98%;
+  --primary: 265 70% 50%;
+  --primary-foreground: 300 80% 92%;
 
-    --secondary: 215 27.9% 16.9%;
-    --secondary-foreground: 210 20% 98%;
+  --secondary: 260 8% 22%;
+  --secondary-foreground: 300 10% 98%;
 
-    --accent: 215 27.9% 16.9%;
-    --accent-foreground: 210 20% 98%;
+  --accent: 265 30% 25%;
+  --accent-foreground: 300 10% 98%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 20% 98%;
+  --destructive: 2 60% 40%;
+  --destructive-foreground: 300 10% 98%;
 
-    --ring: 263.4 70% 50.4%;
+  --ring: 265 70% 55%;
 }
 
 .theme-teal {
