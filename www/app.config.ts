@@ -163,7 +163,7 @@ export default defineAppConfig({
           target: '_blank',
         },
         {
-          icon: 'lucide-lab:factory',
+          icon: 'lucide:factory',
           title: 'Industry expertise',
           to: 'https://esw.com/industry-expertise/',
           target: '_blank',
