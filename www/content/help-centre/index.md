@@ -20,7 +20,7 @@ actions:
 ESW Help Centre.
 
 #description
-Commom queries and help documentation.
+Common queries and help documentation.
 ::
 
 
