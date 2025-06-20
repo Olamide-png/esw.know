@@ -32,7 +32,7 @@ img: /flat-colored-architect-composition-woman-architect-front-her-layout-her-at
 ESW Help Centre
 
 #content
-Commom queries and help documentation
+Common queries and help documentation
 ::
 
 
