@@ -119,41 +119,33 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
 
 
 
-<div class="relative bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
-  <img class="w-full h-auto rounded-xl" src="https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=560&q=80" alt="Card Image">
-  <div class="absolute top-0 start-0 end-0">
-    <div class="p-4 md:p-5">
-      <h3 class="text-lg font-bold text-gray-800">
-        Card title
-      </h3>
-      <p class="mt-1 text-gray-800">
-        Some quick example text to build on the card title and make up the bulk of the card's content.
-      </p>
-      <p class="mt-5 text-xs text-gray-500 dark:text-neutral-500">
-        Last updated 5 mins ago
-      </p>
-    </div>
-  </div>
-</div>
 
 
-<div class="bg-white border border-gray-200 rounded-xl shadow-2xs sm:flex dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
-  <div class="shrink-0 relative w-full rounded-t-xl overflow-hidden pt-[40%] sm:rounded-s-xl sm:max-w-60 md:rounded-se-none md:max-w-xs">
-    <img class="size-full absolute top-0 start-0 object-cover" src="https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=560&q=80" alt="Card Image">
-  </div>
-  <div class="flex flex-wrap">
-    <div class="p-4 flex flex-col h-full sm:p-7">
-      <h3 class="text-lg font-bold text-gray-800 dark:text-white">
-        Card title
-      </h3>
-      <p class="mt-1 text-gray-500 dark:text-neutral-400">
-        Some quick example text to build on the card title and make up the bulk of the card's content.
-      </p>
-      <div class="mt-5 sm:mt-auto">
-        <p class="text-xs text-gray-500 dark:text-neutral-500">
-          Last updated 5 mins ago
-        </p>
+
+<!-- component -->
+<!-- component -->
+<!-- component -->
+<div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+  
+  <div class="py-3 sm:max-w-xl sm:mx-auto">
+    <div class="bg-white shadow-lg border-gray-100 max-h-80	 border sm:rounded-3xl p-8 flex space-x-8">
+      <div class="h-48 overflow-visible w-1/2">
+          <img class="rounded-3xl shadow-lg" src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/1LRLLWGvs5sZdTzuMqLEahb88Pc.jpg" alt="">
       </div>
+      <div class="flex flex-col w-1/2 space-y-4">
+        <div class="flex justify-between items-start">
+          <h2 class="text-3xl font-bold">Sweet Tooth: El niño ciervo</h2>
+          <div class="bg-yellow-400 font-bold rounded-xl p-2">7.2</div>
+        </div>
+        <div>
+          <div class="text-sm text-gray-400">Series</div>
+          <div class="text-lg text-gray-800">2019</div>
+        </div>
+          <p class=" text-gray-400 max-h-40 overflow-y-hidden">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <div class="flex text-2xl font-bold text-a">$83.90</div>
+      </div>
+
     </div>
   </div>
+  
 </div>
