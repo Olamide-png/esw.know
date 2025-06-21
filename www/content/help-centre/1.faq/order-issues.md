@@ -1,7 +1,7 @@
 ---
 title: "FAQs"
 description: Common order queries.
-aside: true
+aside: false
 prevNext: false
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Order Queries"
 description: Common order queries.
-aside: true
+aside: false
 prevNext: false
 ---
 
