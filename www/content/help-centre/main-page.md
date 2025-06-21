@@ -26,15 +26,15 @@ Self-service hub.
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-lg mx-auto md:max-w-2xl lg:max-w-full">
   <!-- First Block -->
   <div class="relative w-full h-auto md:col-span-2">
-    <div class="bg-gray rounded-2xl flex justify-between flex-row flex-wrap">
+    <div class="bg-gray-800 rounded-2xl flex justify-between flex-row flex-wrap">
       <div class="p-5 xl:p-8 w-full md:w-1/2">
         <div class="block">
-          <img src="https://icons8.com/icon/rhNJ4aVAWrpL/shopify" alt="Shopify Icon" class="w-10 h-10" />
+          <img src="https://icons8.com/icon/rhNJ4aVAWrpL/shopify" alt="Shopify Icon" class="w-6 h-6" />
         </div>
         <h3 class="text-lg font-bold xl:text-xl text-white py-5 w-full xl:w-64">
           Shopify Native.
         </h3>
-        <p class="text-xs font-normal text-white w-full mb-8 xl:w-64">
+        <p class="text-xs font-normal text-gray-300 w-full mb-8 xl:w-64">
           ESW integration with Shopify enables merchants to expand globally, process payments in multiple currencies, accurately calculate duties and taxes, streamline shipping, comply with regulations, and make data-driven optimizations.
         </p>
         <button class="py-2 px-5 border border-solid border-gray-300 rounded-full gap-2 text-xs text-white font-semibold flex items-center justify-between transition-all duration-500 hover:bg-white/5">
