@@ -74,13 +74,13 @@ Common queries and help documentation
 ::
 
 
----
+<br>
 
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-lg mx-auto md:max-w-2xl lg:max-w-full">
   <!-- First Block -->
   <div class="relative w-full h-auto md:col-span-2">
-    <div class="bg-gray-800 rounded-2xl flex justify-between flex-row flex-wrap">
+    <div class="bg-primary rounded-2xl flex justify-between flex-row flex-wrap">
       <div class="p-5 xl:p-8 w-full md:w-1/2">
         <div class="block">
           <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
