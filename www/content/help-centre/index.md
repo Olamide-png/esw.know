@@ -74,7 +74,7 @@ Common queries and help documentation
 ::
 
 
-
+---
 
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-lg mx-auto md:max-w-2xl lg:max-w-full">
