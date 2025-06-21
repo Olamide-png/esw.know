@@ -17,7 +17,7 @@ actions:
 ---
 
 #title
-ESW Help Centre.
+Help Centre.
 
 #description
 Common queries and help documentation.
