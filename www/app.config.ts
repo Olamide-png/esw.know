@@ -63,7 +63,7 @@ export default defineAppConfig({
         }],
       }, {
         title: 'API References',
-        to: '/api/home',
+        to: 'https://eswapis.vercel.app',
         target: '_blank',
         showLinkIcon: true,
         description: 'API documentation for ESW services',
