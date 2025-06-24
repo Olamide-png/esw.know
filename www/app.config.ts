@@ -207,7 +207,7 @@ export default defineAppConfig({
         },
         {
           title: 'API Reference',
-          icon: 'lucide:braces',
+          icon: 'lucide:file-json',
           to: 'https://eswapis.vercel.app/',
           target: '_blank',
           showLinkIcon: true,
