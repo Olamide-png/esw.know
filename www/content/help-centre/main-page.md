@@ -9,8 +9,6 @@ icon: lucide:hand-helping
 announcement:
   title: 'Knowledge Centre'
   icon: 'lucide:book-open'
-actions:
-  - name: Get Started
 ---
 
 #title
@@ -25,7 +23,7 @@ Explore our guides and documentation.
 <section class="bg-background text-foreground">
   <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
     <div class="mr-auto place-self-center lg:col-span-7">
-      <h1 class="max-w-2xl mb-4 text-lg font-medium tracking-tight leading-none md:text-5xl xl:text-6xl">
+      <h1 class="max-w-2xl mb-4 text-lg font-semibold tracking-tight leading-none md:text-5xl xl:text-6xl">
         Shopify Native
       </h1>
       <p class="max-w-2xl mb-6 font-light text-muted-foreground lg:mb-8 md:text-lg lg:text-xl">
@@ -45,12 +43,12 @@ Explore our guides and documentation.
   </div>
 </section>
 
-<br>
+---
 
 <section class="bg-background text-foreground">
   <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
     <div class="mr-auto place-self-center lg:col-span-7">
-      <h1 class="max-w-2xl mb-4 text-lg font-medium tracking-tight leading-none md:text-5xl xl:text-6xl">
+      <h1 class="max-w-2xl mb-4 text-lg font-semibold tracking-tight leading-none md:text-5xl xl:text-6xl">
         Salesforce Commerce Cloud
       </h1>
       <p class="max-w-2xl mb-6 font-light text-muted-foreground lg:mb-8 md:text-lg lg:text-xl">
