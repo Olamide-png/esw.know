@@ -205,6 +205,13 @@ export default defineAppConfig({
           icon: 'lucide:log-in',
           showLinkIcon: true,
         },
+        {
+          title: 'API Reference',
+          icon: 'lucide:braces',
+          to: 'https://eswapis.vercel.app/',
+          target: '_blank',
+          showLinkIcon: true,
+        },
       ],
       iconLinks: [
         
