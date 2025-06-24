@@ -1,5 +1,5 @@
 ---
-title: Lamding Page
+title: Home
 fullpage: true
 icon: lucide:hand-helping
 ---
