@@ -81,7 +81,7 @@ export default defineAppConfig({
     aside: {
       useLevel: true,
       collapse: true,
-      collapseLevel: 2,
+      collapseLevel: 1,
       folderStyle: 'default',
     },
     main: {
