@@ -1,5 +1,6 @@
 ---
 title: Home
+fullpage: true
 navigation: false
 ---
 
