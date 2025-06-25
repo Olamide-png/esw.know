@@ -1,124 +1,66 @@
 ---
 title: Home
-navigation: false
+fullpage: true
+icon: lucide:hand-helping
 ---
-
-:ellipsis{right=0px width=75% blur=150px}
 
 ::hero
 ---
 announcement:
-  title: '1.0.0 release'
-actions:
-  - name: Get Started
-    to: /getting-started/installation
-    leftIcon: 'lucide:cable'
-  - name: Integration
-    variant: ghost
-    to: /integration/integration/overview
-    leftIcon: 'lucide:plug'
-  - name: Shopify Configuration
-    variant: ghost
-    to: /configuration/configuration/shopify-setup
-    leftIcon: 'lucide:wrench'
+  title: 'Knowledge Centre'
+  icon: 'lucide:book-open'
 ---
 
 #title
-Shopify Native.
+Knowledge Centre.
 
 #description
-The ESW integration with Shopify enables merchants to expand globally, process payments in multiple currencies, accurately calculate duties and taxes, streamline shipping, comply with regulations, and make data-driven optimizations.
+Explore our guides and documentation.
 ::
 
-::card
+<br>
+
+<section class="bg-background text-foreground">
+  <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+    <div class="mr-auto place-self-center lg:col-span-7">
+      <h1 class="max-w-2xl mb-4 text-lg font-semibold tracking-tight leading-none md:text-5xl xl:text-6xl">
+        Shopify Native
+      </h1>
+      <p class="max-w-2xl mb-6 font-light text-muted-foreground lg:mb-8 md:text-lg lg:text-xl">
+        ESW integration with Shopify enables merchants to expand globally, process payments in multiple currencies, accurately calculate duties and taxes, streamline shipping, comply with regulations, and make data-driven optimizations.
+      </p>
+      <a href="/shopify/home" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-primary-foreground bg-primary rounded-lg hover:bg-primary/90 focus:ring-4 focus:ring-primary/30 dark:focus:ring-primary/70">
+        <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+        </svg>
+      </a>
+    </div>
+    <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+      <img src="/Untitled design (1).png" alt="salesforce">
+    </div>
+  </div>
+</section>
+
+
 ---
-img: /Untitled design (1).png
----
-#title
-ESW Shopify integration
 
-#content
-ESW Shopify integration levarages Shopify's native checkout to handle shopper's purchase flow.
-::
----
-
-::card
----
-icon: 'lucide:fold-horizontal'
-icon-size: 26
-horizontal: true
----
-
-#title
-Integration Features Matrix
-
-#description
-Shopify’s *look and feel* with ESW’s international DTC capabilities.
-::
-
-<div class="overflow-x-auto rounded-md border shadow-sm border-border my-8 bg-background">
-  <table class="min-w-full border-collapse">
-    <thead>
-      <tr>
-        <th class="border-b border-border px-4 py-3 text-left text-sm font-semibold text-foreground">Feature</th>
-        <th class="border-b border-border px-4 py-3 text-left text-sm font-semibold text-foreground">Provider</th>
-      </tr>
-    </thead>
-    <tbody class="[&>tr:nth-child(even)]:bg-transparent">
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Browsing</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">Shopify</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Price calculation</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">ESW (embedded as pricing advisor service in Shopify)</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Checkout flow</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">Shopify</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Shipping methods and pricing</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">ESW (embedded as routing service in Shopify checkout)</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Duties &amp; Taxes calculation</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">ESW</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Payment methods</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">ESW (embedded as payment app in Shopify checkout)</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Merchant Of Record</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">ESW (embedded as payment app in Shopify checkout)</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Customer communications</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">Shopify</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Gift cards, coupons, etc.</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">Shopify</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Product restrictions</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">ESW (embedded in Shopify browsing)</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Checkout Languages &amp; translations</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">Shopify</td>
-      </tr>
-      <tr>
-        <td class="px-4 py-3 text-foreground">Returns &amp; tracking languages &amp; translations</td>
-        <td class="px-4 py-3 text-foreground">ESW</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
-
-
-
-
+<section class="bg-background text-foreground">
+  <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+    <div class="mr-auto place-self-center lg:col-span-7">
+      <h1 class="max-w-2xl mb-4 text-lg font-semibold tracking-tight leading-none md:text-5xl xl:text-6xl">
+        Salesforce Commerce Cloud
+      </h1>
+      <p class="max-w-2xl mb-6 font-light text-muted-foreground lg:mb-8 md:text-lg lg:text-xl">
+        ESW cartridge allows you to integrate with the ESW services, such as hosted checkout, local payment methods, and international logistics network.
+      </p>
+      <a href="#" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-primary-foreground bg-primary rounded-lg hover:bg-primary/90 focus:ring-4 focus:ring-primary/30 dark:focus:ring-primary/70">
+        <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+        </svg>
+      </a>
+    </div>
+    <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+      <img src="/Salesforce.jpg" alt="salesforce">
+    </div>
+  </div>
+</section>
