@@ -67,56 +67,47 @@ Explore our guides and documentation.
 
 <!-- Card Grid -->
 <div class="grid grid-cols-1 lg:grid-cols-2 items-center border border-border divide-y lg:divide-y-0 lg:divide-x divide-border rounded-xl bg-background text-foreground">
-  
   <!-- Card 1 -->
-  <a class="group relative z-10 p-4 md:p-6 h-full flex flex-col focus:outline-hidden before:absolute before:inset-0 before:bg-gradient-to-b hover:before:from-transparent hover:before:via-transparent hover:before:to-yellow-300/10 before:via-80% focus:before:to-yellow-300/10 before:-z-1 before:opacity-0 hover:before:opacity-100 focus:before:opacity-100" href="#">
+  <a href="#" class="group relative z-10 p-4 md:p-6 h-full flex flex-col bg-background focus:outline-hidden before:absolute before:inset-0 before:bg-gradient-to-b hover:before:from-transparent hover:before:via-transparent hover:before:to-yellow-300/10 before:via-80% before:-z-1 before:opacity-0 hover:before:opacity-100 focus:before:opacity-100">
     <div class="mb-5">
-      <svg class="shrink-0 size-8" width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Shopify Icon -->
-        <path fill="#95BF46" d="..."/>
-        <path fill="#5E8E3E" d="..."/>
-        <path fill="white" d="..."/>
+      <!-- Shopify SVG -->
+      <svg class="shrink-0 size-8" width="33" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- your <path> elements here -->
       </svg>
 
       <div class="mt-5">
         <p class="font-semibold text-5xl">20%</p>
         <h3 class="mt-5 font-medium text-lg">Rise in E-commerce</h3>
-        <p class="mt-1 text-muted-foreground">
-          In collaboration with Shopify, Preline embarked on a mission to revolutionize the e-commerce experience for a fictitious fashion brand, "StyleAura."
-        </p>
+        <p class="mt-1 text-muted-foreground">In collaboration with Shopify, Preline embarked on a mission to revolutionize the e-commerce experience for a fictitious fashion brand, "StyleAura."</p>
       </div>
     </div>
     <p class="mt-auto">
-      <span class="font-medium text-sm text-yellow-400 pb-1 border-b-2 border-border group-hover:border-yellow-400 group-focus:border-yellow-400 transition focus:outline-hidden">
+      <span class="font-medium text-sm text-yellow-400 pb-1 border-b-2 border-border group-hover:border-yellow-400 group-focus:border-yellow-400 transition">
         Case study
       </span>
     </p>
   </a>
-  
+
   <!-- Card 2 -->
-  <a class="group relative z-10 p-4 md:p-6 h-full flex flex-col focus:outline-hidden before:absolute before:inset-0 before:bg-gradient-to-b hover:before:from-transparent hover:before:via-transparent hover:before:to-yellow-300/10 before:via-80% focus:before:to-yellow-300/10 before:-z-1 before:opacity-0 hover:before:opacity-100 focus:before:opacity-100" href="#">
+  <a href="#" class="group relative z-10 p-4 md:p-6 h-full flex flex-col bg-background focus:outline-hidden before:absolute before:inset-0 before:bg-gradient-to-b hover:before:from-transparent hover:before:via-transparent hover:before:to-yellow-300/10 before:via-80% before:-z-1 before:opacity-0 hover:before:opacity-100 focus:before:opacity-100">
     <div class="mb-5">
-      <svg class="shrink-0 size-8" width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- GitLab Icon -->
-        <path fill="#E24329" d="..."/>
-        <path fill="#FC6D26" d="..."/>
-        <path fill="#FCA326" d="..."/>
-        <path fill="#FC6D26" d="..."/>
+      <!-- GitLab SVG -->
+      <svg class="shrink-0 size-8" width="33" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- your <path> elements here -->
       </svg>
 
       <div class="mt-5">
         <p class="font-semibold text-5xl">12%</p>
         <h3 class="mt-5 font-medium text-lg">Streamlining Development</h3>
-        <p class="mt-1 text-muted-foreground">
-          With the goal of accelerating project delivery and enhancing collaboration among development teams, Preline leveraged GitLab’s tools and Preline's expertise.
-        </p>
+        <p class="mt-1 text-muted-foreground">With the goal of accelerating project delivery and enhancing collaboration among development teams, Preline leveraged GitLab’s suite of tools.</p>
       </div>
     </div>
     <p class="mt-auto">
-      <span class="font-medium text-sm text-yellow-400 pb-1 border-b-2 border-border group-hover:border-yellow-400 group-focus:border-yellow-400 transition focus:outline-hidden">
+      <span class="font-medium text-sm text-yellow-400 pb-1 border-b-2 border-border group-hover:border-yellow-400 group-focus:border-yellow-400 transition">
         Case study
       </span>
     </p>
   </a>
 </div>
 <!-- End Card Grid -->
+
