@@ -36,7 +36,7 @@ Explore our guides and documentation.
       </a>
     </div>
     <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-      <img src="/setup-shopify-store.png" alt="mockup">
+      <img src="/Untitled design (1).png" alt="mockup">
     </div>
   </div>
 </section>
