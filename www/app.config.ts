@@ -41,20 +41,15 @@ export default defineAppConfig({
       nav: [{
         title: 'Docs',
         links: [{
-          title: 'Getting Started',
-          to: '/getting-started',
+          title: 'Shopify',
+          to: '/shopify/home',
           description: 'Install the ESW Shopify Apps.',
-          icon: 'lucide:rocket',
+          icon: 'lucide:shopping-bag',
         }, {
-          title: 'Integration',
-          to: '/integration/integration/overview',
-          description: 'Integrate Shopify with ESW services',
-          icon: 'lucide:code-xml',
-        }, {
-          title: 'Configuration',
-          to: '/configuration/configuration/shopify-setup',
-          description: 'Tailor your store for customers in a particular country or region.',
-          icon: 'lucide:monitor-cog',
+          title: 'Salesforce Commerce Cloud',
+          to: '/integration/integration/overview.md',
+          description: 'Integrate SFCC with ESW services',
+          icon: 'lucide:cloud', 
         }, {
           title: 'APIs',
           to: '/apis/customs-catalog-api/overview',
