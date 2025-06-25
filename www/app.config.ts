@@ -48,7 +48,7 @@ export default defineAppConfig({
         }, {
           title: 'Salesforce Commerce Cloud',
           to: '/integration/integration/overview.md',
-          description: 'Integrate SFCC with ESW services',
+          description: 'Integrate with ESW services',
           icon: 'lucide:cloud', 
         }, {
           title: 'APIs',
