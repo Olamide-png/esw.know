@@ -1,7 +1,7 @@
 ---
 title: Home
+navigation: false
 fullpage: true
-icon: lucide:hand-helping
 ---
 
 ::hero
