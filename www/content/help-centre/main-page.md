@@ -29,7 +29,7 @@ Explore our guides and documentation.
       <p class="max-w-2xl mb-6 font-light text-muted-foreground lg:mb-8 md:text-lg lg:text-xl">
         ESW integration with Shopify enables merchants to expand globally, process payments in multiple currencies, accurately calculate duties and taxes, streamline shipping, comply with regulations, and make data-driven optimizations.
       </p>
-      <a href="/shopify/index" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-primary-foreground bg-primary rounded-lg hover:bg-primary/90 focus:ring-4 focus:ring-primary/30 dark:focus:ring-primary/70">
+      <a href="/shopify/home" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-primary-foreground bg-primary rounded-lg hover:bg-primary/90 focus:ring-4 focus:ring-primary/30 dark:focus:ring-primary/70">
         <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
         </svg>
