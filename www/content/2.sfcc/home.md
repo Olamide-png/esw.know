@@ -92,15 +92,15 @@ The cartridge enables you to configure shipping method pricing, override price b
 
   <div>
         <div class="relative flex items-center justify-center mx-auto">
-  <svg class="lucide w-9 h-9 text-blue-600 dark:text-blue-400" data-lucide="globe"></svg>
-</div>
+          <svg class="lucide w-9 h-9 text-blue-600 dark:text-blue-400" data-lucide="globe"></svg>
+        </div>
         <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Localized Experience</h3>
         <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Supports welcome mat, header/footer widgets, and GEO IP detection for personalized international shopper experiences.</p>
       </div>
 
   <div>
         <div class="relative flex items-center justify-center mx-auto">
-          <i class="lucide lucide-dollar-sign w-9 h-9 text-green-600 dark:text-green-400"></i>
+          <svg class="lucide w-9 h-9 text-green-600 dark:text-green-400" data-lucide="dollar-sign"></svg>
         </div>
         <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Localized Pricing</h3>
         <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Integrated with ESW’s Pricing Advisor to generate accurate, localized prices including FX, duties, taxes, and uplifts.</p>
@@ -108,7 +108,7 @@ The cartridge enables you to configure shipping method pricing, override price b
 
   <div>
         <div class="relative flex items-center justify-center mx-auto">
-          <i class="lucide lucide-book-open w-9 h-9 text-purple-600 dark:text-purple-400"></i>
+          <svg class="lucide w-9 h-9 text-purple-600 dark:text-purple-400" data-lucide="book-open"></svg>
         </div>
         <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Price Book Management</h3>
         <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Supports master price books and localized variations to streamline global pricing strategies.</p>
@@ -116,7 +116,7 @@ The cartridge enables you to configure shipping method pricing, override price b
 
   <div>
         <div class="relative flex items-center justify-center mx-auto">
-          <i class="lucide lucide-percent w-9 h-9 text-yellow-500 dark:text-yellow-400"></i>
+          <svg class="lucide w-9 h-9 text-yellow-500 dark:text-yellow-400" data-lucide="percent"></svg>
         </div>
         <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Promotions in Local Currency</h3>
         <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Enable country-specific promotions in shopper currency beyond SFCC’s default settings.</p>
@@ -124,7 +124,7 @@ The cartridge enables you to configure shipping method pricing, override price b
 
   <div>
         <div class="relative flex items-center justify-center mx-auto">
-          <i class="lucide lucide-package w-9 h-9 text-rose-600 dark:text-rose-400"></i>
+          <svg class="lucide w-9 h-9 text-rose-600 dark:text-rose-400" data-lucide="package"></svg>
         </div>
         <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Shipping & Sync</h3>
         <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Configure shipping overrides, sync catalog and ASN data automatically using Catalog 2.0 and Package API.</p>
@@ -132,7 +132,7 @@ The cartridge enables you to configure shipping method pricing, override price b
 
   <div>
         <div class="relative flex items-center justify-center mx-auto">
-          <i class="lucide lucide-shield-ban w-9 h-9 text-lime-600 dark:text-lime-400"></i>
+          <svg class="lucide w-9 h-9 text-lime-600 dark:text-lime-400" data-lucide="shield-ban"></svg>
         </div>
         <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Product Controls</h3>
         <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Restrict product visibility by country and control catalog exposure by region.</p>
@@ -140,4 +140,5 @@ The cartridge enables you to configure shipping method pricing, override price b
     </div>
   </div>
 </section>
+
 
