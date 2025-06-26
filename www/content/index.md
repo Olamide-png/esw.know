@@ -24,7 +24,7 @@ Explore our guides and documentation.
   ::card
   ---
   to: shopify/home
-  target: _blank
+  target: _self
   img: /Untitled design (2).png
   ---
   #title
@@ -37,7 +37,7 @@ Explore our guides and documentation.
   ::card
   ---
   to: shopify/home.md
-  target: _blank
+  target: _self
   img: /Salesforce.jpg
   ---
   #title
