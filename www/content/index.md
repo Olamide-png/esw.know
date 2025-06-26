@@ -67,47 +67,6 @@ Explore our guides and documentation.
 </section>
 
 
-<section class="py-24 relative bg-white dark:bg-neutral-950">
-  <div class="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
-    <div class="w-full flex-col justify-start items-center lg:gap-11 gap-8 inline-flex">
-      <div class="w-full flex-col justify-start items-center gap-2.5 flex">
-        <h2 class="text-center text-neutral-900 dark:text-neutral-100 text-5xl font-bold font-manrope leading-tight">Integration with ESW</h2>
-        <p class="max-w-4xl mx-auto text-center text-neutral-500 dark:text-neutral-400 text-lg font-normal leading-8">
-          Apps and Extensions.
-        </p>
-      </div>
 
-  <!-- Centered Grid for 2 Cards -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 justify-center gap-8">
-        
-  <!-- Shopify Card -->
-  <div class="w-full max-w-sm px-6 py-8 rounded-2xl border border-neutral-200 dark:border-neutral-700 hover:border-indigo-600 transition-all duration-700 ease-in-out bg-white dark:bg-neutral-900 shadow-sm mx-auto">
-          <div class="flex-col justify-start items-center gap-3.5 inline-flex">
-            <a href="">
-              <img src="https://img.icons8.com/?size=100&id=BRIdulMG66MK&format=png&color=000000" alt="Shopify Icon" class="w-14 h-14" />
-            </a>
-            <h4 class="text-center text-neutral-900 dark:text-neutral-100 text-xl font-bold leading-8">Shopify</h4>
-            <p class="text-center text-neutral-500 dark:text-neutral-400 text-lg font-normal leading-snug">
-              ESW Shopify Integration leverages Shopify’s native checkout to handle the shopper purchase flow
-            </p>
-          </div>
-        </div>
-
-  <!-- SFCC Card -->
-  <div class="w-full max-w-sm px-6 py-8 rounded-2xl border border-neutral-200 dark:border-neutral-700 hover:border-indigo-600 transition-all duration-700 ease-in-out bg-white dark:bg-neutral-900 shadow-sm mx-auto">
-          <div class="flex-col justify-start items-center gap-3.5 inline-flex">
-            <a href="" class="w-14 h-14 flex items-center justify-center">
-              <img src="https://img.icons8.com/?size=100&id=38804&format=png&color=000000" alt="SFCC Icon" class="w-14 h-14" />
-            </a>
-            <h4 class="text-center text-neutral-900 dark:text-neutral-100 text-xl font-bold leading-8">Salesforce Commerce Cloud</h4>
-            <p class="text-center text-neutral-500 dark:text-neutral-400 text-lg font-normal leading-snug">
-              Configure shipping method prices, override price books, enable or disable countries, languages
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 
