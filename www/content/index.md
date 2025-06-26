@@ -65,3 +65,43 @@ Explore our guides and documentation.
         </div>
     </div>
 </section>
+
+
+<section class="py-24 relative">
+  <div class="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
+    <div class="w-full flex-col justify-start items-center lg:gap-11 gap-8 inline-flex">
+      <div class="w-full flex-col justify-start items-center gap-2.5 flex">
+        <h2 class="text-center text-gray-900 text-3xl font-bold font-manrope leading-normal">Integrations</h2>
+        <p class="max-w-4xl mx-auto text-center text-gray-500 text-lg font-normal leading-8">
+          Apps and Extensions.
+        </p>
+      </div>
+      <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 justify-start items-start gap-8">
+        
+  <!-- Spotify Card -->
+  <div class="w-full px-6 py-8 rounded-2xl border border-gray-200 hover:border-indigo-600 transition-all duration-700 ease-in-out justify-center items-center gap-2.5 flex">
+          <div class="flex-col justify-start items-center gap-3.5 inline-flex">
+            <a href="">
+              <img src="https://img.icons8.com/?size=100&id=BRIdulMG66MK&format=png&color=000000" alt="Shopify Icon" class="w-10 h-10" />
+            </a>
+            <h4 class="text-center text-gray-900 text-lg font-semibold leading-8">Shopify</h4>
+            <p class="text-center text-gray-500 text-sm font-normal leading-snug">ESW Shopify Integration leverages Shopify’s native checkout to handle the shopper 
+purchase flow</p>
+          </div>
+        </div>
+
+  <!-- Storybook Card -->
+  <div class="w-full px-6 py-8 rounded-2xl border border-gray-200 hover:border-indigo-600 transition-all duration-700 ease-in-out justify-center items-center gap-2.5 flex">
+          <div class="flex-col justify-start items-center gap-3.5 inline-flex">
+            <a href="" class="w-10 h-10 flex items-center justify-center">
+              <img src="/icons/shopify.svg" alt="Shopify Icon" class="w-10 h-10" />
+            </a>
+            <h4 class="text-center text-gray-900 text-lg font-semibold leading-8">Saleforce Commerce Cloud</h4>
+            <p class="text-center text-gray-500 text-sm font-normal leading-snug">Self-manage site configuration, including the welcome mat configuration, landing page, country & currency widgets, and product prices</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
