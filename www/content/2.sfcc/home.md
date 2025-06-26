@@ -32,7 +32,7 @@ The ESW cartridge enables seamless integration with ESW services, including host
 img: /Salesforce.jpg
 ---
 #title
-SFCC
+Salesforce Commerce Cloud (SFCC)
 
 #content
 Self-manage site configuration, including the welcome mat configuration, landing page, country & currency widgets, and product prices.
