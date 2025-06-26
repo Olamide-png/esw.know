@@ -22,8 +22,8 @@ Explore our guides and documentation.
 ::card-group
   ::card
   ---
-  to: shopify/home
-  target: _blank
+  to: /shopify/home
+  target: _self
   img: /Untitled design (1).png
   ---
   #title
@@ -35,7 +35,7 @@ Explore our guides and documentation.
 
   ::card
   ---
-  to: shopify/home.md
+  to: /shopify/home.md
   target: _self
   img: /Salesforce (1).png
   ---
