@@ -86,59 +86,55 @@ The cartridge enables you to configure shipping method pricing, override price b
   </details>
 </section>
 
-<section class="py-10 bg-white dark:bg-neutral-950 sm:py-16 lg:py-24">
-  <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 gap-12 text-center sm:grid-cols-2 md:grid-cols-3 lg:gap-y-16">
+::card-group{cols=3}
+  ::card{class="bg-blue-50 dark:bg-blue-950"}
+  ---
+  title: Localized Experience
+  icon: lucide:globe
+  ---
+  Supports welcome mat, header/footer widgets, and GEO IP detection for personalized international shopper experiences.
+  ::
 
-  <div>
-        <div class="relative flex items-center justify-center mx-auto">
-          <svg class="lucide w-9 h-9 text-blue-600 dark:text-blue-400" data-lucide="globe"></svg>
-        </div>
-        <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Localized Experience</h3>
-        <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Supports welcome mat, header/footer widgets, and GEO IP detection for personalized international shopper experiences.</p>
-      </div>
+  ::card{class="bg-green-50 dark:bg-green-950"}
+  ---
+  title: Localized Pricing
+  icon: lucide:dollar-sign
+  ---
+  Integrated with ESW’s Pricing Advisor to generate accurate, localized prices including FX, duties, taxes, and uplifts.
+  ::
 
-  <div>
-        <div class="relative flex items-center justify-center mx-auto">
-          <svg class="lucide w-9 h-9 text-green-600 dark:text-green-400" data-lucide="dollar-sign"></svg>
-        </div>
-        <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Localized Pricing</h3>
-        <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Integrated with ESW’s Pricing Advisor to generate accurate, localized prices including FX, duties, taxes, and uplifts.</p>
-      </div>
+  ::card{class="bg-purple-50 dark:bg-purple-950"}
+  ---
+  title: Price Book Management
+  icon: lucide:book-open
+  ---
+  Supports master price books and localized variations to streamline global pricing strategies.
+  ::
 
-  <div>
-        <div class="relative flex items-center justify-center mx-auto">
-          <svg class="lucide w-9 h-9 text-purple-600 dark:text-purple-400" data-lucide="book-open"></svg>
-        </div>
-        <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Price Book Management</h3>
-        <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Supports master price books and localized variations to streamline global pricing strategies.</p>
-      </div>
+  ::card{class="bg-yellow-50 dark:bg-yellow-950"}
+  ---
+  title: Promotions in Local Currency
+  icon: lucide:percent
+  ---
+  Enable country-specific promotions in shopper currency beyond SFCC’s default settings.
+  ::
 
-  <div>
-        <div class="relative flex items-center justify-center mx-auto">
-          <svg class="lucide w-9 h-9 text-yellow-500 dark:text-yellow-400" data-lucide="percent"></svg>
-        </div>
-        <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Promotions in Local Currency</h3>
-        <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Enable country-specific promotions in shopper currency beyond SFCC’s default settings.</p>
-      </div>
+  ::card{class="bg-rose-50 dark:bg-rose-950"}
+  ---
+  title: Shipping & Sync
+  icon: lucide:package
+  ---
+  Configure shipping overrides, sync catalog and ASN data automatically using Catalog 2.0 and Package API.
+  ::
 
-  <div>
-        <div class="relative flex items-center justify-center mx-auto">
-          <svg class="lucide w-9 h-9 text-rose-600 dark:text-rose-400" data-lucide="package"></svg>
-        </div>
-        <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Shipping & Sync</h3>
-        <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Configure shipping overrides, sync catalog and ASN data automatically using Catalog 2.0 and Package API.</p>
-      </div>
+  ::card{class="bg-lime-50 dark:bg-lime-950"}
+  ---
+  title: Product Controls
+  icon: lucide:shield-ban
+  ---
+  Restrict product visibility by country and control catalog exposure by region.
+  ::
+::
 
-  <div>
-        <div class="relative flex items-center justify-center mx-auto">
-          <svg class="lucide w-9 h-9 text-lime-600 dark:text-lime-400" data-lucide="shield-ban"></svg>
-        </div>
-        <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Product Controls</h3>
-        <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Restrict product visibility by country and control catalog exposure by region.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 
