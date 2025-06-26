@@ -35,7 +35,7 @@ Explore our guides and documentation.
 
   ::card
   ---
-  to: /shopify/home.md
+  to: /sfcc/home
   target: _self
   img: /Salesforce (1).png
   ---
