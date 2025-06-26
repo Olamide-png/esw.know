@@ -65,6 +65,7 @@ Explore our guides and documentation.
   </div>
 </section>
 
+
 <section class="py-10 bg-gray-50 sm:py-16 lg:py-24">
     <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div class="max-w-2xl mx-auto text-center">
@@ -72,7 +73,7 @@ Explore our guides and documentation.
             <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
         </div>
 
-        <div class="grid grid-cols-1 gap-6 mt-12 lg:mt-16 xl:gap-10 sm:grid-cols-2 lg:grid-cols-3">
+  <div class="grid grid-cols-1 gap-6 mt-12 lg:mt-16 xl:gap-10 sm:grid-cols-2 lg:grid-cols-3">
             <div class="overflow-hidden bg-white rounded shadow">
                 <div class="p-8">
                     <div class="flex items-center">
@@ -89,7 +90,7 @@ Explore our guides and documentation.
                 </div>
             </div>
 
-            <div class="overflow-hidden bg-white rounded shadow">
+  <div class="overflow-hidden bg-white rounded shadow">
                 <div class="p-8">
                     <div class="flex items-center">
                         <img class="flex-shrink-0 w-12 h-auto" src="https://cdn.rareblocks.xyz/collection/celebration/images/integration/3/slack-logo.png" alt="" />
@@ -105,7 +106,7 @@ Explore our guides and documentation.
                 </div>
             </div>
 
-            <div class="overflow-hidden bg-white rounded shadow">
+  <div class="overflow-hidden bg-white rounded shadow">
                 <div class="p-8">
                     <div class="flex items-center">
                         <img class="flex-shrink-0 w-12 h-auto" src="https://cdn.rareblocks.xyz/collection/celebration/images/integration/3/shopify-logo.png" alt="" />
@@ -121,7 +122,7 @@ Explore our guides and documentation.
                 </div>
             </div>
 
-            <div class="overflow-hidden bg-white rounded shadow">
+  <div class="overflow-hidden bg-white rounded shadow">
                 <div class="p-8">
                     <div class="flex items-center">
                         <img class="flex-shrink-0 w-12 h-auto" src="https://cdn.rareblocks.xyz/collection/celebration/images/integration/3/intercom-logo.png" alt="" />
@@ -137,7 +138,7 @@ Explore our guides and documentation.
                 </div>
             </div>
 
-            <div class="overflow-hidden bg-white rounded shadow">
+  <div class="overflow-hidden bg-white rounded shadow">
                 <div class="p-8">
                     <div class="flex items-center">
                         <img class="flex-shrink-0 w-12 h-auto" src="https://cdn.rareblocks.xyz/collection/celebration/images/integration/3/twitter-logo.png" alt="" />
@@ -153,7 +154,7 @@ Explore our guides and documentation.
                 </div>
             </div>
 
-            <div class="overflow-hidden bg-white rounded shadow">
+  <div class="overflow-hidden bg-white rounded shadow">
                 <div class="p-8">
                     <div class="flex items-center">
                         <img class="flex-shrink-0 w-12 h-auto" src="https://cdn.rareblocks.xyz/collection/celebration/images/integration/3/sketch-logo.png" alt="" />
@@ -170,7 +171,7 @@ Explore our guides and documentation.
             </div>
         </div>
 
-        <div class="mt-12 text-center">
+  <div class="mt-12 text-center">
             <a href="#" title="" class="inline-flex p-3 font-medium text-blue-600 transition-all duration-200 hover:text-blue-700 focus:text-blue-700 hover:underline"> Check all 1,593 applications </a>
         </div>
     </div>
