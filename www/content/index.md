@@ -25,7 +25,7 @@ Explore our guides and documentation.
   ---
   to: shopify/home
   target: _blank
-  img: /Untitled design (2).png
+  img: /Untitled design (1).png
   ---
   #title
   Shopify Native
@@ -37,8 +37,8 @@ Explore our guides and documentation.
   ::card
   ---
   to: shopify/home.md
-  target: _blank
-  img: /Salesforce.jpg
+  target: _self
+  img: /Salesforce.png
   ---
   #title
   Salesforce Commerce Cloud
