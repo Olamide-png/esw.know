@@ -58,7 +58,7 @@ Additionally, the cartridge allows you to configure shipping method pricing, ove
       </svg>
     </summary>
     <div class="mt-4 space-y-4 text-base text-neutral-700 dark:text-neutral-300">
-      <p><strong>Localized Experience:</strong> The cartridge supports features like the welcome mat and header/footer widgets, powered by GEO IP detection to create a tailored experience for international shoppers. It also supports multiple currencies per country or locale.</p>
+      <p><strong>Localized Experience:</strong> The cartridge supports features such as the welcome mat and header/footer widgets, powered by GEO IP detection to create a tailored experience for international shoppers. It also supports multiple currencies per country or locale.</p>
       <p><strong>IP Geolocation:</strong> Automatically determines the shopper's location. When enabled, the shopper’s country is preselected, and users can adjust the shipping country, language, and currency via the welcome mat.</p>
       <p><strong>Localized Prices:</strong> Integrated with ESW’s Pricing Advisor, allowing you to define product pricing across markets with FX rates, uplifts, duties, and taxes included.</p>
       <p><strong>Prices Display:</strong> Supports displaying prices inclusive or exclusive of duties and taxes to help improve conversion rates.</p>
