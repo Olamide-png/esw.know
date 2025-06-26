@@ -81,10 +81,10 @@ Explore our guides and documentation.
   <div class="grid grid-cols-1 sm:grid-cols-2 justify-center gap-8">
         
   <!-- Shopify Card -->
-  <div class="w-full px-6 py-8 rounded-2xl border border-neutral-200 dark:border-neutral-700 hover:border-indigo-600 transition-all duration-700 ease-in-out bg-white dark:bg-neutral-900 shadow-sm">
+  <div class="w-full max-w-sm px-6 py-8 rounded-2xl border border-neutral-200 dark:border-neutral-700 hover:border-indigo-600 transition-all duration-700 ease-in-out bg-white dark:bg-neutral-900 shadow-sm mx-auto">
           <div class="flex-col justify-start items-center gap-3.5 inline-flex">
             <a href="">
-              <img src="https://img.icons8.com/?size=100&id=BRIdulMG66MK&format=png&color=000000" alt="Shopify Icon" class="w-10 h-10 dark:invert" />
+              <img src="https://img.icons8.com/?size=100&id=BRIdulMG66MK&format=png&color=000000" alt="Shopify Icon" class="w-14 h-14" />
             </a>
             <h4 class="text-center text-neutral-900 dark:text-neutral-100 text-lg font-semibold leading-8">Shopify</h4>
             <p class="text-center text-neutral-500 dark:text-neutral-400 text-sm font-normal leading-snug">
@@ -94,10 +94,10 @@ Explore our guides and documentation.
         </div>
 
   <!-- SFCC Card -->
-  <div class="w-full px-6 py-8 rounded-2xl border border-neutral-200 dark:border-neutral-700 hover:border-indigo-600 transition-all duration-700 ease-in-out bg-white dark:bg-neutral-900 shadow-sm">
+  <div class="w-full max-w-sm px-6 py-8 rounded-2xl border border-neutral-200 dark:border-neutral-700 hover:border-indigo-600 transition-all duration-700 ease-in-out bg-white dark:bg-neutral-900 shadow-sm mx-auto">
           <div class="flex-col justify-start items-center gap-3.5 inline-flex">
-            <a href="" class="w-10 h-10 flex items-center justify-center">
-              <img src="https://img.icons8.com/?size=100&id=38804&format=png&color=000000" alt="SFCC Icon" class="w-10 h-10 dark:invert" />
+            <a href="" class="w-14 h-14 flex items-center justify-center">
+              <img src="https://img.icons8.com/?size=100&id=38804&format=png&color=000000" alt="SFCC Icon" class="w-14 h-14" />
             </a>
             <h4 class="text-center text-neutral-900 dark:text-neutral-100 text-lg font-semibold leading-8">Salesforce Commerce Cloud</h4>
             <p class="text-center text-neutral-500 dark:text-neutral-400 text-sm font-normal leading-snug">
@@ -109,4 +109,5 @@ Explore our guides and documentation.
     </div>
   </div>
 </section>
+
 
