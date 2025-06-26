@@ -38,8 +38,7 @@ SFCC
 Self-manage site configuration, including the welcome mat configuration, landing page, country & currency widgets, and product prices.
 ::
 
----
-
+<br>
 
 ::card
 ---
