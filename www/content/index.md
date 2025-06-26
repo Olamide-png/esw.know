@@ -68,62 +68,28 @@ Explore our guides and documentation.
 
 ---
 
-<section class="py-10 bg-background text-foreground sm:py-16 lg:py-24">
-  <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-    <div class="max-w-2xl mx-auto text-center">
-      <h2 class="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">Integrate with apps</h2>
-      <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-muted-foreground">
-        Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.
-      </p>
-    </div>
+::card-group
+  ::card
+  ---
+  img: /og-nuxt.png
+  ---
+  #title
+  Image Card
 
-  <div class="grid grid-cols-1 gap-6 mt-12 lg:mt-16 xl:gap-10 sm:grid-cols-2 lg:grid-cols-3">
-      <!-- Slack Card -->
-      <div class="overflow-hidden rounded shadow bg-card text-card-foreground">
-        <div class="p-8">
-          <div class="flex items-center">
-            <img class="flex-shrink-0 w-12 h-auto" src="https://cdn.rareblocks.xyz/collection/celebration/images/integration/3/slack-logo.png" alt="Slack Logo" />
-            <div class="ml-5 mr-auto">
-              <p class="text-xl font-semibold">Slack</p>
-              <p class="mt-px text-sm text-muted-foreground">Direct Integration</p>
-            </div>
-            <svg class="block w-6 h-6 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </div>
-          <p class="text-base leading-relaxed text-muted-foreground mt-7">
-            Lorem ipsum dolor sit amet, consectetur adipis cing elit, sed do eiusmod tempor incididunt ut labore et dolore.
-          </p>
-        </div>
-      </div>
+  #content
+  Beautifully designed **Nuxt Content** template with **shadcn-vue**. _Customizable. Compatible. Open Source._
+  ::
 
-  <!-- Shopify Card -->
-  <div class="overflow-hidden rounded shadow bg-card text-card-foreground">
-        <div class="p-8">
-          <div class="flex items-center">
-            <img class="flex-shrink-0 w-12 h-auto" src="https://cdn.rareblocks.xyz/collection/celebration/images/integration/3/shopify-logo.png" alt="Shopify Logo" />
-            <div class="ml-5 mr-auto">
-              <p class="text-xl font-semibold">Shopify</p>
-              <p class="mt-px text-sm text-muted-foreground">Direct Integration</p>
-            </div>
-            <svg class="hidden w-5 h-5 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </div>
-          <p class="text-base leading-relaxed text-muted-foreground mt-7">
-            Lorem ipsum dolor sit amet, consectetur adipis cing elit, sed do eiusmod tempor incididunt ut labore et dolore.
-          </p>
-        </div>
-      </div>
-    </div>
+  ::card
+  ---
+  img: /og-nuxt.png
+  ---
+  #title
+  Image Card
 
-  <div class="mt-12 text-center">
-      <a href="#" title="" class="inline-flex p-3 font-medium text-primary hover:text-primary/80 hover:underline transition-all duration-200">
-        Check all 1,593 applications
-      </a>
-    </div>
-  </div>
-</section>
-
+  #content
+  Beautifully designed **Nuxt Content** template with **shadcn-vue**. _Customizable. Compatible. Open Source._
+  ::
+::
 
 
