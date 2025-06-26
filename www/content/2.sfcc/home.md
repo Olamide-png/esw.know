@@ -55,7 +55,7 @@ The cartridge enables you to configure shipping method pricing, override price b
 ::
 
 ::card-group{cols=3}
-  ::card{class="bg-blue-50 dark:bg-blue-950"}
+  ::card{variant="blue"}
   ---
   title: Localized Experience
   icon: lucide:globe
