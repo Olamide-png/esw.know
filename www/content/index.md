@@ -97,7 +97,7 @@ Explore our guides and documentation.
         </div>
       </div>
 
-      <!-- Shopify Card -->
+  <!-- Shopify Card -->
   <div class="overflow-hidden rounded shadow bg-card text-card-foreground">
         <div class="p-8">
           <div class="flex items-center">
