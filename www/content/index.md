@@ -67,41 +67,46 @@ Explore our guides and documentation.
 </section>
 
 
-<section class="py-24 relative">
+<section class="py-24 relative bg-white dark:bg-neutral-950">
   <div class="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
     <div class="w-full flex-col justify-start items-center lg:gap-11 gap-8 inline-flex">
       <div class="w-full flex-col justify-start items-center gap-2.5 flex">
-        <h2 class="text-center text-gray-900 text-3xl font-bold font-manrope leading-normal">Integrations</h2>
-        <p class="max-w-4xl mx-auto text-center text-gray-500 text-lg font-normal leading-8">
+        <h2 class="text-center text-neutral-900 dark:text-neutral-100 text-3xl font-bold font-manrope leading-normal">Integrations</h2>
+        <p class="max-w-4xl mx-auto text-center text-neutral-500 dark:text-neutral-400 text-lg font-normal leading-8">
           Apps and Extensions.
         </p>
       </div>
-      <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 justify-start items-start gap-8">
+
+  <!-- Centered Grid for 2 Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 justify-center gap-8">
         
-  <!-- Spotify Card -->
-  <div class="w-full px-6 py-8 rounded-2xl border border-gray-200 hover:border-indigo-600 transition-all duration-700 ease-in-out justify-center items-center gap-2.5 flex">
+  <!-- Shopify Card -->
+  <div class="w-full px-6 py-8 rounded-2xl border border-neutral-200 dark:border-neutral-700 hover:border-indigo-600 transition-all duration-700 ease-in-out bg-white dark:bg-neutral-900 shadow-sm">
           <div class="flex-col justify-start items-center gap-3.5 inline-flex">
             <a href="">
-              <img src="https://img.icons8.com/?size=100&id=BRIdulMG66MK&format=png&color=000000" alt="Shopify Icon" class="w-10 h-10" />
+              <img src="https://img.icons8.com/?size=100&id=BRIdulMG66MK&format=png&color=000000" alt="Shopify Icon" class="w-10 h-10 dark:invert" />
             </a>
-            <h4 class="text-center text-gray-900 text-lg font-semibold leading-8">Shopify</h4>
-            <p class="text-center text-gray-500 text-sm font-normal leading-snug">ESW Shopify Integration leverages Shopify’s native checkout to handle the shopper 
-purchase flow</p>
+            <h4 class="text-center text-neutral-900 dark:text-neutral-100 text-lg font-semibold leading-8">Shopify</h4>
+            <p class="text-center text-neutral-500 dark:text-neutral-400 text-sm font-normal leading-snug">
+              ESW Shopify Integration leverages Shopify’s native checkout to handle the shopper purchase flow
+            </p>
           </div>
         </div>
 
-  <!-- Storybook Card -->
-  <div class="w-full px-6 py-8 rounded-2xl border border-gray-200 hover:border-indigo-600 transition-all duration-700 ease-in-out justify-center items-center gap-2.5 flex">
+  <!-- SFCC Card -->
+  <div class="w-full px-6 py-8 rounded-2xl border border-neutral-200 dark:border-neutral-700 hover:border-indigo-600 transition-all duration-700 ease-in-out bg-white dark:bg-neutral-900 shadow-sm">
           <div class="flex-col justify-start items-center gap-3.5 inline-flex">
             <a href="" class="w-10 h-10 flex items-center justify-center">
-              <img src="https://img.icons8.com/?size=100&id=38804&format=png&color=000000" alt="Shopify Icon" class="w-10 h-10" />
+              <img src="https://img.icons8.com/?size=100&id=38804&format=png&color=000000" alt="SFCC Icon" class="w-10 h-10 dark:invert" />
             </a>
-            <h4 class="text-center text-gray-900 text-lg font-semibold leading-8">Saleforce Commerce Cloud</h4>
-            <p class="text-center text-gray-500 text-sm font-normal leading-snug">Self-manage site configuration, including the welcome mat configuration, landing page, country & currency widgets, and product prices</p>
+            <h4 class="text-center text-neutral-900 dark:text-neutral-100 text-lg font-semibold leading-8">Salesforce Commerce Cloud</h4>
+            <p class="text-center text-neutral-500 dark:text-neutral-400 text-sm font-normal leading-snug">
+              Configure shipping method prices, override price books, enable or disable countries, languages
+            </p>
           </div>
         </div>
-
-  </div>
+      </div>
     </div>
   </div>
 </section>
+
