@@ -105,4 +105,13 @@ The cartridge enables you to configure shipping method pricing, override price b
 ::
 
 
+<div class="bg-blue-50 dark:bg-blue-950 rounded-md p-4">
+  ::card
+  ---
+  title: Localized Experience
+  icon: lucide:globe
+  ---
+  Description...
+  ::
+</div>
 
