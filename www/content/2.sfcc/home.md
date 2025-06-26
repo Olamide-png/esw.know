@@ -44,15 +44,15 @@ Self-manage site configuration, including the welcome mat configuration, landing
 ::card
 ---
 icon: 'lucide:videotape'
-icon-size: 26
+icon-size: 36
 horizontal: true
 ---
 
 #title
-SFCC – ESW cartridge
+SFCC ESW cartridge
 
 #description
-The Salesforce Commerce Cloud (SFCC) – ESW cartridge enables integration with ESW’s services, including hosted checkout, local payment methods, and a global logistics network. It also provides developers with tools to manage site configurations independently—such as the welcome mat, landing page, country and currency selectors, and product pricing. Additionally, the cartridge allows you to configure shipping method pricing, override price books, enable or disable specific countries, languages, and currencies, and manage a range of global preferences.
+The cartridge allows you to configure shipping method pricing, override price books, enable or disable specific countries, languages, and currencies, and manage a range of global preferences.
 ::
 
 <br>
