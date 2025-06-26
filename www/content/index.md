@@ -71,6 +71,8 @@ Explore our guides and documentation.
 ::card-group
   ::card
   ---
+  to: https://github.com/ZTL-UwU/shadcn-docs-nuxt
+  target: _blank
   img: /og-nuxt.png
   ---
   #title
