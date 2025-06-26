@@ -94,14 +94,14 @@ purchase flow</p>
   <div class="w-full px-6 py-8 rounded-2xl border border-gray-200 hover:border-indigo-600 transition-all duration-700 ease-in-out justify-center items-center gap-2.5 flex">
           <div class="flex-col justify-start items-center gap-3.5 inline-flex">
             <a href="" class="w-10 h-10 flex items-center justify-center">
-              <img src="/icons/shopify.svg" alt="Shopify Icon" class="w-10 h-10" />
+              <img src="https://img.icons8.com/?size=100&id=38804&format=png&color=000000" alt="Shopify Icon" class="w-10 h-10" />
             </a>
             <h4 class="text-center text-gray-900 text-lg font-semibold leading-8">Saleforce Commerce Cloud</h4>
             <p class="text-center text-gray-500 text-sm font-normal leading-snug">Self-manage site configuration, including the welcome mat configuration, landing page, country & currency widgets, and product prices</p>
           </div>
         </div>
 
-      </div>
+  </div>
     </div>
   </div>
 </section>
