@@ -92,12 +92,7 @@ The cartridge enables you to configure shipping method pricing, override price b
 
   <div>
         <div class="relative flex items-center justify-center mx-auto">
-          <svg class="text-blue-100 dark:text-blue-950" width="72" height="75" viewBox="0 0 72 75" fill="currentColor">
-            <path d="M63.6911 28.8569C68.0911 48.8121 74.6037 61.2674 53.2349 65.9792C31.8661 70.6909 11.6224 61.2632 7.22232 41.308C2.82229 21.3528 3.6607 12.3967 25.0295 7.68503C46.3982 2.97331 59.2911 8.90171 63.6911 28.8569Z" />
-          </svg>
-          <svg class="absolute text-blue-600 dark:text-blue-400 w-9 h-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3M3 15.364a13.993 13.993 0 011-4.364 8 8 0 0112.131-6.93" />
-          </svg>
+          <i class="lucide lucide-globe w-9 h-9 text-blue-600 dark:text-blue-400"></i>
         </div>
         <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Localized Experience</h3>
         <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Supports welcome mat, header/footer widgets, and GEO IP detection for personalized international shopper experiences.</p>
@@ -105,12 +100,7 @@ The cartridge enables you to configure shipping method pricing, override price b
 
   <div>
         <div class="relative flex items-center justify-center mx-auto">
-          <svg class="text-green-100 dark:text-green-950" width="66" height="68" viewBox="0 0 66 68" fill="currentColor">
-            <path d="M65.5 30C65.5 50.4345 46.4345 68 26 68C5.56546 68 0 50.4345 0 30C0 9.56546 12.5655 0 33 0C53.4345 0 65.5 9.56546 65.5 30Z" />
-          </svg>
-          <svg class="absolute text-green-600 dark:text-green-400 w-9 h-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9 9 0 0012 21a9 9 0 008.354-5.646z" />
-          </svg>
+          <i class="lucide lucide-dollar-sign w-9 h-9 text-green-600 dark:text-green-400"></i>
         </div>
         <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Localized Pricing</h3>
         <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Integrated with ESW’s Pricing Advisor to generate accurate, localized prices including FX, duties, taxes, and uplifts.</p>
@@ -118,12 +108,7 @@ The cartridge enables you to configure shipping method pricing, override price b
 
   <div>
         <div class="relative flex items-center justify-center mx-auto">
-          <svg class="text-purple-100 dark:text-purple-950" width="66" height="68" viewBox="0 0 66 68" fill="currentColor">
-            <path d="M65.5 30C65.5 50.4345 46.4345 68 26 68C5.56546 68 0 50.4345 0 30C0 9.56546 12.5655 0 33 0C53.4345 0 65.5 9.56546 65.5 30Z" />
-          </svg>
-          <svg class="absolute text-purple-600 dark:text-purple-400 w-9 h-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 15.364A13.993 13.993 0 004 11c0-1.457.39-2.823 1.07-4" />
-          </svg>
+          <i class="lucide lucide-book-open w-9 h-9 text-purple-600 dark:text-purple-400"></i>
         </div>
         <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Price Book Management</h3>
         <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Supports master price books and localized variations to streamline global pricing strategies.</p>
@@ -131,12 +116,7 @@ The cartridge enables you to configure shipping method pricing, override price b
 
   <div>
         <div class="relative flex items-center justify-center mx-auto">
-          <svg class="text-yellow-100 dark:text-yellow-950" width="78" height="78" viewBox="0 0 78 78" fill="currentColor">
-            <path d="M8.5 28C4.1 47.9554 14.13 66.7885 35.5 71.5C56.87 76.21 68.1 58.4553 72.5 38.5C76.9 18.5449 68.37 12.711 47 7.99931C25.63 3.28759 12.9 8.04499 8.5 28Z" />
-          </svg>
-          <svg class="absolute text-yellow-500 dark:text-yellow-400 w-9 h-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 11c0 3.5-1 6.8-2.75 9.57" />
-          </svg>
+          <i class="lucide lucide-percent w-9 h-9 text-yellow-500 dark:text-yellow-400"></i>
         </div>
         <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Promotions in Local Currency</h3>
         <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Enable country-specific promotions in shopper currency beyond SFCC’s default settings.</p>
@@ -144,12 +124,7 @@ The cartridge enables you to configure shipping method pricing, override price b
 
   <div>
         <div class="relative flex items-center justify-center mx-auto">
-          <svg class="text-rose-100 dark:text-rose-950" width="72" height="75" viewBox="0 0 72 75" fill="currentColor">
-            <path d="M63.7 28.86C68.1 48.81 74.6 61.27 53.23 65.98C31.87 70.69 11.62 61.26 7.22 41.31C2.82 21.35 3.66 12.4 25.03 7.69C46.4 2.97 59.29 8.9 63.7 28.86Z" />
-          </svg>
-          <svg class="absolute text-rose-600 dark:text-rose-400 w-9 h-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
+          <i class="lucide lucide-package w-9 h-9 text-rose-600 dark:text-rose-400"></i>
         </div>
         <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Shipping & Sync</h3>
         <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Configure shipping overrides, sync catalog and ASN data automatically using Catalog 2.0 and Package API.</p>
@@ -157,17 +132,12 @@ The cartridge enables you to configure shipping method pricing, override price b
 
   <div>
         <div class="relative flex items-center justify-center mx-auto">
-          <svg class="text-lime-100 dark:text-lime-950" width="62" height="65" viewBox="0 0 62 65" fill="currentColor">
-            <path d="M0 13.03C0 33.46 8.07 64.03 28.5 64.03C48.93 64.03 62 50.46 62 30.03C62 9.59 59.43 4.03 39 4.03C18.57 4.03 0 -7.41 0 13.03Z" />
-          </svg>
-          <svg class="absolute text-lime-600 dark:text-lime-400 w-9 h-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
+          <i class="lucide lucide-shield-ban w-9 h-9 text-lime-600 dark:text-lime-400"></i>
         </div>
         <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Product Controls</h3>
         <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Restrict product visibility by country and control catalog exposure by region.</p>
       </div>
-
     </div>
   </div>
 </section>
+
