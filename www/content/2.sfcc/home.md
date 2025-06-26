@@ -43,6 +43,7 @@ The Salesforce Commerce Cloud (SFCC) – ESW cartridge enables integration with 
 
 Additionally, the cartridge allows you to configure shipping method pricing, override price books, enable or disable specific countries, languages, and currencies, and manage a range of global preferences.
 
+<br>
 
 <!-- Enhanced Accordion with dark mode + larger font -->
 <section class="w-full bg-white dark:bg-neutral-900 divide-y divide-neutral-200 dark:divide-neutral-700 rounded shadow-md shadow-neutral-200 dark:shadow-neutral-800">
