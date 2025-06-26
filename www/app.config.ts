@@ -42,7 +42,7 @@ export default defineAppConfig({
         title: 'Docs',
         links: [{
           title: 'Shopify',
-          to: '/shopify/home',
+          to: '/shopify/installation/payments-app',
           description: 'Install the ESW Shopify Apps.',
           icon: 'lucide:shopping-bag',
         }, {
