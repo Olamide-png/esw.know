@@ -48,7 +48,7 @@ horizontal: true
 ---
 
 #title
-SFCC ESW cartridge
+SFCC ESW Cartridge
 
 #description
 The cartridge enables you to configure shipping method pricing, override price books, enable or disable specific countries, languages, and currencies, and manage a range of global preferences.
