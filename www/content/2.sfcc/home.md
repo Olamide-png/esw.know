@@ -92,8 +92,8 @@ The cartridge enables you to configure shipping method pricing, override price b
 
   <div>
         <div class="relative flex items-center justify-center mx-auto">
-          <i class="lucide lucide-globe w-9 h-9 text-blue-600 dark:text-blue-400"></i>
-        </div>
+  <svg class="lucide w-9 h-9 text-blue-600 dark:text-blue-400" data-lucide="globe"></svg>
+</div>
         <h3 class="mt-8 text-lg font-semibold text-neutral-900 dark:text-white">Localized Experience</h3>
         <p class="mt-4 text-base text-neutral-600 dark:text-neutral-400">Supports welcome mat, header/footer widgets, and GEO IP detection for personalized international shopper experiences.</p>
       </div>
