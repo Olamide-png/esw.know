@@ -36,6 +36,8 @@ Explore our guides and documentation.
 
   ::card
   ---
+  to: shopify/home.md
+  target: _blank
   img: /Salesforce.jpg
   ---
   #title
