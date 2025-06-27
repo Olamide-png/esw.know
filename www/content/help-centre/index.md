@@ -26,7 +26,7 @@ Common queries and help documentation.
 
 ::card
 ---
-img: /istockphoto-1205023112-612x612_Nero_AI_Image_Upscaler_Business.jpeg
+img: /flat-colored-architect-composition-woman-architect-front-her-layout-her-attributes-create-project-present-it-client-vector-illustration_1284-69384.avif
 ---
 #title
 ESW Help Centre
