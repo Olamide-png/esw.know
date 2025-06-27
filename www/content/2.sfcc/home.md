@@ -105,7 +105,12 @@ Enables you to configure shipping method pricing, override price books, enable o
 ::
 
 
-# Supported Versions
+<section class="py-10 sm:py-16 lg:py-24">
+  <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Supported Versions</h2>
+      <p class="max-w-md mx-auto mt-4 text-base leading-relaxed text-gray-600">ESW SFCC plugin compatibility with SiteGenesis and SFRA environments.</p>
+    </div>
 
 <section class="py-10 sm:py-16 lg:py-24">
   <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
@@ -125,8 +130,13 @@ Enables you to configure shipping method pricing, override price books, enable o
             <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-semibold text-white bg-gray-600 rounded-md">Pipelines†</span>
           </div>
           <p class="mt-6 text-base leading-relaxed text-gray-800 dark:text-gray-200">
-            ESW supports SFRA up to version <strong>6.2</strong> and compatibility mode versions ≤ <strong>22.7</strong>. Backwards compatibility is maintained to <strong>SFRA v4.4.0</strong>.
-          </p>
+  ESW supports SFRA up to version <code class="font-JetBrains Mono text-sm px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">6.2</code>
+  and compatibility mode versions ≤ 
+  <code class="font-mono text-sm px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">22.7</code>.
+  Backwards compatibility is maintained to 
+  <code class="font-mono text-sm px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">SFRA v4.4.0</code>.
+</p>
+
           <p class="mt-4 text-base text-gray-700 dark:text-gray-300">
             <strong>Site Genesis / Controllers:</strong> ESW supports the latest standard controller-based Site Genesis versions.
           </p>
