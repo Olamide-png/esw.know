@@ -62,6 +62,11 @@ export default {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      boxShadow: {
+        outer: '0 2px 10px hsl(var(--shadow))',
+        inner: 'inset 0 2px 10px hsl(var(--shadow))',
+        custom: '0 1px 3px hsl(var(--shadow))',
+      },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
