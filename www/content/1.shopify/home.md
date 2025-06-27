@@ -43,90 +43,15 @@ ESW Shopify integration levarages Shopify's native checkout to handle shopper's 
 ::
 ---
 
-::card
----
-icon: 'lucide:fold-horizontal'
-icon-size: 26
-horizontal: true
----
 
-#title
-Integration Features Matrix
-
-#description
-Shopify’s *look and feel* with ESW’s international DTC capabilities.
-::
-
-<div class="overflow-x-auto rounded-md border shadow-sm border-border my-8 bg-background">
-  <table class="min-w-full border-collapse">
-    <thead>
-      <tr>
-        <th class="border-b border-border px-4 py-3 text-left text-sm font-semibold text-foreground">Feature</th>
-        <th class="border-b border-border px-4 py-3 text-left text-sm font-semibold text-foreground">Provider</th>
-      </tr>
-    </thead>
-    <tbody class="[&>tr:nth-child(even)]:bg-transparent">
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Browsing</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">Shopify</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Price calculation</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">ESW (embedded as pricing advisor service in Shopify)</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Checkout flow</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">Shopify</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Shipping methods and pricing</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">ESW (embedded as routing service in Shopify checkout)</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Duties &amp; Taxes calculation</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">ESW</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Payment methods</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">ESW (embedded as payment app in Shopify checkout)</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Merchant Of Record</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">ESW (embedded as payment app in Shopify checkout)</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Customer communications</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">Shopify</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Gift cards, coupons, etc.</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">Shopify</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Product restrictions</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">ESW (embedded in Shopify browsing)</td>
-      </tr>
-      <tr>
-        <td class="border-b border-border px-4 py-3 text-foreground">Checkout Languages &amp; translations</td>
-        <td class="border-b border-border px-4 py-3 text-foreground">Shopify</td>
-      </tr>
-      <tr>
-        <td class="px-4 py-3 text-foreground">Returns &amp; tracking languages &amp; translations</td>
-        <td class="px-4 py-3 text-foreground">ESW</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
-
-
-<div class="px-4 py-8">
+<div class="px-4 py-8 bg-white dark:bg-neutral-900">
   <div class="max-w-4xl mx-auto">
     <div class="text-center">
-      <h2 class="text-slate-900 text-4xl font-bold mb-4">Shopify vs ESW Responsibilities</h2>
-      <p class="text-[15px] text-slate-600">A side-by-side comparison of the commerce functions handled by Shopify and ESW.</p>
+      <h2 class="text-slate-900 dark:text-white text-4xl font-bold mb-4">Integration Features Matrix</h2>
+      <p class="text-[15px] text-slate-600 dark:text-slate-300">A side-by-side of the integration features handled by Shopify and ESW.</p>
     </div>
+  </div>
+</div>
 
   <div class="grid md:grid-cols-2 items-center gap-y-6 mt-12 max-md:max-w-md max-md:mx-auto">
       <!-- Shopify Card -->
