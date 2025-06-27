@@ -29,7 +29,7 @@ The ESW cartridge enables seamless integration with ESW services, including host
 
 ::card
 ---
-img: /Salesforce.jpg
+img: /Salesforce.jpeg
 ---
 #title
 Salesforce Commerce Cloud (SFCC)
