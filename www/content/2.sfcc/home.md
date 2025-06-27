@@ -117,6 +117,9 @@ Enables you to configure shipping method pricing, override price books, enable o
     </div>
   </div>
 
+::alert{type="secondary" icon="lucide:store"}
+  **Partner profile:** Check out the [SFCC-ESW partner marketplace](https://appexchange.salesforce.com/appxListingDetail?listingId=2d468409-b59d-485a-8b1f-98c2c1ab01e9).
+::
 
 <section class="py-10 sm:py-16 lg:py-24">
   <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
@@ -198,7 +201,14 @@ Enables you to configure shipping method pricing, override price books, enable o
   </div>
 </section>
 
-::alert{type="secondary" icon="lucide:store"}
-  **Partner profile:** View the [SFCC-ESW partner marketplace](https://appexchange.salesforce.com/appxListingDetail?listingId=2d468409-b59d-485a-8b1f-98c2c1ab01e9).
-::
 
+  <div class="relative max-w-xs border border-solid border-gray-200 rounded-2xl transition-all duration-500 ">
+                <div class="block overflow-hidden">
+                <img src="https://pagedone.io/asset/uploads/1695365240.png" alt="Card image" />
+                </div>
+                <div class="p-4">
+                <h4 class="text-base font-semibold text-gray-900 mb-2 capitalize transition-all duration-500 ">Fast Transaction</h4>
+                <p class="text-sm font-normal text-gray-500 transition-all duration-500 leading-5 mb-5"> Provides faster transaction, so money arrives in realtime </p>
+                <button class="bg-indigo-600 shadow-sm rounded-full py-2 px-5 text-xs text-white font-semibold">Read More</button>
+                </div>
+                </div>
