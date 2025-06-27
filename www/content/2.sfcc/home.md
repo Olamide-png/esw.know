@@ -48,7 +48,7 @@ horizontal: true
 ---
 
 #title
-SFCC ESW Cartridge
+SFCC-ESW Cartridge
 
 #description
 Enables you to configure shipping method pricing, override price books, enable or disable specific countries, languages, and currencies, and manage a range of global preferences.
@@ -112,7 +112,7 @@ Enables you to configure shipping method pricing, override price books, enable o
         Supported Versions
       </h2>
       <p class="max-w-md mx-auto mt-4 text-base leading-relaxed text-gray-700 dark:text-gray-300">
-        ESW SFCC plugin compatibility with SiteGenesis and SFRA environments.
+        ESW-SFCC plugin compatibility with SiteGenesis and SFRA environments.
       </p>
     </div>
   </div>
