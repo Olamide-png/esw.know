@@ -9,7 +9,7 @@ navigation: false
 ::hero
 ---
 announcement:
-  title: '1.0.0 release'
+  title: 'Shopify'
 actions:
   - name: Get Started
     to: /shopify/installation

@@ -42,7 +42,7 @@ Self-manage site configuration, including the welcome mat configuration, landing
 
 ::card
 ---
-icon: 'lucide:videotape'
+icon: 'lucide:unplug'
 icon-size: 30
 horizontal: true
 ---
