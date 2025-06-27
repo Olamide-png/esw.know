@@ -12,7 +12,7 @@ announcement:
   title: 'SFCC'
 actions:
   - name: Quick Start Guide
-    to: /sfcc/getting-started.md
+    to: /sfcc/getting-started/storefront-components
     leftIcon: 'lucide:footprints'
   - name: Documentation
     variant: ghost
