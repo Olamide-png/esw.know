@@ -110,3 +110,71 @@ prevNext: false
   </details>
 </section>
 <!-- End Icon accordion -->
+
+
+
+<!-- Component: Basic lg sized tab with leading icon -->
+<section class="max-w-full" aria-multiselectable="false">
+  <ul class="flex items-center border-b border-slate-200" role="tablist">
+    <li role="presentation">
+      <button class="inline-flex items-center justify-center w-full h-12 gap-2 px-6 -mb-px text-sm font-medium tracking-wide transition duration-300 border-b-2 rounded-t focus-visible:outline-none whitespace-nowrap border-emerald-500 hover:border-emerald-600 focus:border-emerald-700 text-emerald-500 hover:text-emerald-600 focus:text-emerald-700 hover:bg-emerald-50 focus:bg-emerald-50 disabled:cursor-not-allowed disabled:border-slate-500 stroke-emerald-500 hover:stroke-emerald-600 focus:stroke-emerald-700" id="tab-label-1ai" role="tab" aria-setsize="3" aria-posinset="1" tabindex="0" aria-controls="tab-panel-1ai" aria-selected="true">
+        <span class="order-2 ">Tab 1</span>
+        <span class="relative only:-mx-6">
+          <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-labelledby="title-77a desc-77a">
+            <title id="title-77a">Icon title</title>
+            <desc id="desc-77a">
+              A more detailed description of the icon
+            </desc>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </span>
+      </button>
+    </li>
+    <li role="presentation">
+      <button class="inline-flex items-center justify-center w-full h-12 gap-2 px-6 -mb-px text-sm font-medium tracking-wide transition duration-300 border-b-2 border-transparent rounded-t focus-visible:outline-none justify-self-center hover:border-emerald-500 focus:border-emerald-600 whitespace-nowrap text-slate-700 stroke-slate-700 hover:bg-emerald-50 hover:text-emerald-500 focus:stroke-emerald-600 focus:bg-emerald-50 focus:text-emerald-600 hover:stroke-emerald-600 disabled:cursor-not-allowed disabled:text-slate-500" id="tab-label-2ai" role="tab" aria-setsize="3" aria-posinset="2" tabindex="-1" aria-controls="tab-panel-2ai" aria-selected="false">
+        <span class="order-2 ">Tab 2</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-labelledby="title-77b desc-77b">
+          <title id="title-77b">Icon title</title>
+          <desc id="desc-77b">
+            A more detailed description of the icon
+          </desc>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+        </svg>
+      </button>
+    </li>
+    <li role="presentation">
+      <button class="inline-flex items-center justify-center w-full h-12 gap-2 px-6 -mb-px text-sm font-medium tracking-wide transition duration-300 border-b-2 border-transparent rounded-t focus-visible:outline-none justify-self-center hover:border-emerald-500 focus:border-emerald-600 whitespace-nowrap text-slate-700 stroke-slate-700 hover:bg-emerald-50 hover:text-emerald-500 focus:stroke-emerald-600 focus:bg-emerald-50 focus:text-emerald-600 hover:stroke-emerald-600 disabled:cursor-not-allowed disabled:text-slate-500" id="tab-label-3ai" role="tab" aria-setsize="3" aria-posinset="3" tabindex="-1" aria-controls="tab-panel-3ai" aria-selected="false">
+        <span class="order-2 ">Tab 3</span>
+        <span class="relative only:-mx-6">
+          <svg xmlns="http://www.w3.org/2000/svg" class="hidden w-6 h-6 sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-labelledby="title-77c desc-77c">
+            <title id="title-77c">Icon title</title>
+            <desc id="desc-77c">
+              A more detailed description of the icon
+            </desc>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+          </svg>
+        </span>
+      </button>
+    </li>
+  </ul>
+  <div>
+    <div class="px-6 py-4" id="tab-panel-1ai" aria-hidden="false" role="tabpanel" aria-labelledby="tab-label-1ai" tabindex="-1">
+      <p>
+        What is the recipe for successful achievement? To my mind there are just four essential ingredients: Choose a career you love, give it the best there is in you, seize your opportunities, and be a member of the team.
+      </p>
+    </div>
+    <div class="hidden px-6 py-4" id="tab-panel-2ai" aria-hidden="true" role="tabpanel" aria-labelledby="tab-label-2ai" tabindex="-1">
+      <p>
+        One must be entirely sensitive to the structure of the material that one is handling. One must yield to it in tiny details of execution, perhaps the handling of the surface or grain, and one must master it as a whole.
+      </p>
+
+    </div>
+    <div class="hidden px-6 py-4" id="tab-panel-3ai" aria-hidden="true" role="tabpanel" aria-labelledby="tab-label-3ai" tabindex="-1">
+      <p>
+        Even though there is no certainty that the expected results of our work will manifest, we have to remain committed to our work and duties; because, even if the results are slated to arrive, they cannot do so without the performance of work.
+      </p>
+    </div>
+  </div>
+</section>
+<!-- End Basic lg sized tab with leading icon -->
