@@ -107,7 +107,7 @@ Enables you to configure shipping method pricing, override price books, enable o
 
 # Supported Versions
 
-<section class="py-10 bg-white dark:bg-gray-900 sm:py-16 lg:py-24">
+<section class="py-10 bg-white dark:bg-primary sm:py-16 lg:py-24">
   <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:items-stretch md:grid-cols-2 gap-x-12 lg:gap-x-20 gap-y-10">
       
