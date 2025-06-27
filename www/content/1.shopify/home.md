@@ -1,5 +1,5 @@
 ---
-title: Home
+title: Shopify
 fullpage: true
 navigation: false
 ---

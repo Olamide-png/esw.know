@@ -1,5 +1,5 @@
 ---
-title: Home
+title: SFCC
 fullpage: true
 navigation: false
 ---
