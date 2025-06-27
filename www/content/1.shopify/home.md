@@ -121,5 +121,76 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
 
 
 
+<section class="py-10 bg-white dark:bg-background sm:py-16 lg:py-24">
+  <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <div class="max-w-xl mx-auto text-center">
+      <h2 class="text-4xl font-bold text-black dark:text-white lg:text-5xl sm:text-5xl">Shopify + ESW Responsibilities</h2>
+      <p class="mt-4 text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+        Comparison of key features between Shopify and ESW across the shopper journey.
+      </p>
+    </div>
+
+  <div class="overflow-x-auto rounded-md border border-border shadow-sm mt-12 bg-white dark:bg-background">
+      <table class="min-w-full border-collapse">
+        <thead>
+          <tr>
+            <th class="border-b border-border px-4 py-3 text-left text-sm font-semibold text-foreground">Feature</th>
+            <th class="border-b border-border px-4 py-3 text-left text-sm font-semibold text-foreground">Provider</th>
+          </tr>
+        </thead>
+        <tbody class="[&>tr:nth-child(even)]:bg-gray-50 dark:[&>tr:nth-child(even)]:bg-gray-800/50">
+          <tr>
+            <td class="border-b border-border px-4 py-3 text-foreground">Browsing</td>
+            <td class="border-b border-border px-4 py-3 text-foreground">Shopify</td>
+          </tr>
+          <tr>
+            <td class="border-b border-border px-4 py-3 text-foreground">Price calculation</td>
+            <td class="border-b border-border px-4 py-3 text-foreground">ESW (embedded as pricing advisor service in Shopify)</td>
+          </tr>
+          <tr>
+            <td class="border-b border-border px-4 py-3 text-foreground">Checkout flow</td>
+            <td class="border-b border-border px-4 py-3 text-foreground">Shopify</td>
+          </tr>
+          <tr>
+            <td class="border-b border-border px-4 py-3 text-foreground">Shipping methods and pricing</td>
+            <td class="border-b border-border px-4 py-3 text-foreground">ESW (embedded as routing service in Shopify checkout)</td>
+          </tr>
+          <tr>
+            <td class="border-b border-border px-4 py-3 text-foreground">Duties &amp; Taxes calculation</td>
+            <td class="border-b border-border px-4 py-3 text-foreground">ESW</td>
+          </tr>
+          <tr>
+            <td class="border-b border-border px-4 py-3 text-foreground">Payment methods</td>
+            <td class="border-b border-border px-4 py-3 text-foreground">ESW (embedded as payment app in Shopify checkout)</td>
+          </tr>
+          <tr>
+            <td class="border-b border-border px-4 py-3 text-foreground">Merchant Of Record</td>
+            <td class="border-b border-border px-4 py-3 text-foreground">ESW (embedded as payment app in Shopify checkout)</td>
+          </tr>
+          <tr>
+            <td class="border-b border-border px-4 py-3 text-foreground">Customer communications</td>
+            <td class="border-b border-border px-4 py-3 text-foreground">Shopify</td>
+          </tr>
+          <tr>
+            <td class="border-b border-border px-4 py-3 text-foreground">Gift cards, coupons, etc.</td>
+            <td class="border-b border-border px-4 py-3 text-foreground">Shopify</td>
+          </tr>
+          <tr>
+            <td class="border-b border-border px-4 py-3 text-foreground">Product restrictions</td>
+            <td class="border-b border-border px-4 py-3 text-foreground">ESW (embedded in Shopify browsing)</td>
+          </tr>
+          <tr>
+            <td class="border-b border-border px-4 py-3 text-foreground">Checkout Languages &amp; translations</td>
+            <td class="border-b border-border px-4 py-3 text-foreground">Shopify</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-foreground">Returns &amp; tracking languages &amp; translations</td>
+            <td class="px-4 py-3 text-foreground">ESW</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
 
