@@ -48,7 +48,7 @@ ESW Shopify integration levarages Shopify's native checkout to handle shopper's 
   <div class="max-w-4xl mx-auto">
     <div class="text-center">
       <h2 class="text-slate-900 dark:text-white text-4xl font-bold mb-4">Integration Features Matrix</h2>
-      <p class="text-[15px] text-slate-600 dark:text-slate-300">A side-by-side of the integration features handled by Shopify and ESW.</p>
+      <p class="text-[15px] text-slate-600 dark:text-slate-300">A side-by-side comparison of the integration features handled by Shopify and ESW.</p>
     </div>
   </div>
 </div>
