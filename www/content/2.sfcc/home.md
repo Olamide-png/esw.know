@@ -130,13 +130,12 @@ Enables you to configure shipping method pricing, override price books, enable o
             <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-semibold text-white bg-gray-600 rounded-md">Pipelines†</span>
           </div>
           <p class="mt-6 text-base leading-relaxed text-gray-800 dark:text-gray-200">
-  ESW supports SFRA up to version <code class="font-JetBrains Mono text-sm px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">6.2</code>
+            ESW supports SFRA up to version <code class="font-JetBrains Mono text-sm px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">6.2</code>
   and compatibility mode versions ≤ 
   <code class="font-mono text-sm px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">22.7</code>.
   Backwards compatibility is maintained to 
   <code class="font-mono text-sm px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">SFRA v4.4.0</code>.
-</p>
-
+          </p>
           <p class="mt-4 text-base text-gray-700 dark:text-gray-300">
             <strong>Site Genesis / Controllers:</strong> ESW supports the latest standard controller-based Site Genesis versions.
           </p>
