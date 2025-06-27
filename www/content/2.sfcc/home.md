@@ -210,6 +210,6 @@ img: /image-20220124-095541_Nero_AI_Image_Upscaler_Business.png
 Roadmap
 
 #content
-Roadmap of the SFCC-ESW supported services
+SFCC-ESW supported services
 ::
 
