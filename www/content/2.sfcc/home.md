@@ -202,13 +202,22 @@ Enables you to configure shipping method pricing, override price books, enable o
 </section>
 
 
-  <div class="relative max-w-xs border border-solid border-gray-200 rounded-2xl transition-all duration-500 ">
-                <div class="block overflow-hidden">
-                <img src="https://pagedone.io/asset/uploads/1695365240.png" alt="Card image" />
-                </div>
-                <div class="p-4">
-                <h4 class="text-base font-semibold text-gray-900 mb-2 capitalize transition-all duration-500 ">Fast Transaction</h4>
-                <p class="text-sm font-normal text-gray-500 transition-all duration-500 leading-5 mb-5"> Provides faster transaction, so money arrives in realtime </p>
-                <button class="bg-indigo-600 shadow-sm rounded-full py-2 px-5 text-xs text-white font-semibold">Read More</button>
-                </div>
-                </div>
+<div class="flex justify-center">
+  <div class="relative max-w-xs border border-solid border-gray-200 dark:border-gray-700 rounded-2xl transition-all duration-500 bg-white dark:bg-gray-900">
+    <div class="block overflow-hidden">
+      <img src="/image-20220124-095541_Nero_AI_Image_Upscaler_Business.png" alt="Card image" />
+    </div>
+    <div class="p-4 text-center">
+      <h4 class="text-base font-semibold text-gray-900 dark:text-white mb-2 capitalize transition-all duration-500">
+        Fast Transaction
+      </h4>
+      <p class="text-sm font-normal text-gray-600 dark:text-gray-300 transition-all duration-500 leading-5 mb-5">
+        Provides faster transaction, so money arrives in realtime
+      </p>
+      <button class="bg-indigo-600 shadow-sm rounded-full py-2 px-5 text-xs text-white font-semibold">
+        Read More
+      </button>
+    </div>
+  </div>
+</div>
+
