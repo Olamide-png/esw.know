@@ -131,12 +131,12 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
     </div>
 
   <!-- lg+ table layout -->
-  <div class="hidden mt-16 lg:block">
+  <div class="hidden mt-16 lg:block shadow-lg rounded-xl border border-border overflow-hidden">
       <table class="w-full">
         <thead>
           <tr>
-            <th class="py-8 pr-4 text-left text-sm font-semibold text-gray-700 dark:text-white">Feature</th>
-            <th class="px-4 py-8 text-center">
+            <th class="py-8 pr-4 text-left text-sm font-semibold text-gray-800 dark:text-white bg-inherit">Feature</th>
+            <th class="px-4 py-8 text-center bg-inherit">
               <span class="text-base font-medium text-blue-600">Shopify</span>
             </th>
             <th class="px-4 py-8 text-center bg-gray-900 rounded-t-xl">
@@ -146,53 +146,53 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
         </thead>
         <tbody>
           <tr>
-            <td class="py-4 pr-4 font-medium border-b border-gray-200">Browsing</td>
-            <td class="px-4 py-4 text-center border-b border-gray-200">✓</td>
+            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Browsing</td>
+            <td class="px-4 py-4 text-center border-b border-border text-foreground">✓</td>
             <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">Product Restrictions</td>
           </tr>
           <tr>
-            <td class="py-4 pr-4 font-medium border-b border-gray-200">Price Calculation</td>
-            <td class="px-4 py-4 text-center border-b border-gray-200">-</td>
+            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Price Calculation</td>
+            <td class="px-4 py-4 text-center border-b border-border text-foreground">–</td>
             <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">Pricing Advisor</td>
           </tr>
           <tr>
-            <td class="py-4 pr-4 font-medium border-b border-gray-200">Checkout Flow</td>
-            <td class="px-4 py-4 text-center border-b border-gray-200">✓</td>
+            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Checkout Flow</td>
+            <td class="px-4 py-4 text-center border-b border-border text-foreground">✓</td>
             <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">Integrated</td>
           </tr>
           <tr>
-            <td class="py-4 pr-4 font-medium border-b border-gray-200">Shipping Methods</td>
-            <td class="px-4 py-4 text-center border-b border-gray-200">-</td>
+            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Shipping Methods</td>
+            <td class="px-4 py-4 text-center border-b border-border text-foreground">–</td>
             <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">Routing Service</td>
           </tr>
           <tr>
-            <td class="py-4 pr-4 font-medium border-b border-gray-200">Duties & Taxes</td>
-            <td class="px-4 py-4 text-center border-b border-gray-200">-</td>
+            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Duties & Taxes</td>
+            <td class="px-4 py-4 text-center border-b border-border text-foreground">–</td>
             <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">✓</td>
           </tr>
           <tr>
-            <td class="py-4 pr-4 font-medium border-b border-gray-200">Payment Methods</td>
-            <td class="px-4 py-4 text-center border-b border-gray-200">-</td>
+            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Payment Methods</td>
+            <td class="px-4 py-4 text-center border-b border-border text-foreground">–</td>
             <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">Payment App</td>
           </tr>
           <tr>
-            <td class="py-4 pr-4 font-medium border-b border-gray-200">Merchant of Record</td>
-            <td class="px-4 py-4 text-center border-b border-gray-200">-</td>
+            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Merchant of Record</td>
+            <td class="px-4 py-4 text-center border-b border-border text-foreground">–</td>
             <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">✓</td>
           </tr>
           <tr>
-            <td class="py-4 pr-4 font-medium border-b border-gray-200">Customer Communication</td>
-            <td class="px-4 py-4 text-center border-b border-gray-200">✓</td>
-            <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">-</td>
+            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Customer Communication</td>
+            <td class="px-4 py-4 text-center border-b border-border text-foreground">✓</td>
+            <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">–</td>
           </tr>
           <tr>
-            <td class="py-4 pr-4 font-medium border-b border-gray-200">Gift Cards / Coupons</td>
-            <td class="px-4 py-4 text-center border-b border-gray-200">✓</td>
-            <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">-</td>
+            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Gift Cards / Coupons</td>
+            <td class="px-4 py-4 text-center border-b border-border text-foreground">✓</td>
+            <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">–</td>
           </tr>
           <tr>
-            <td class="py-4 pr-4 font-medium border-b border-gray-200">Translations</td>
-            <td class="px-4 py-4 text-center border-b border-gray-200">✓</td>
+            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Translations</td>
+            <td class="px-4 py-4 text-center border-b border-border text-foreground">✓</td>
             <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">Returns & Tracking</td>
           </tr>
         </tbody>
@@ -200,6 +200,7 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
     </div>
   </div>
 </section>
+
 
 
 
