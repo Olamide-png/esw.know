@@ -112,19 +112,5 @@ Enables you to configure shipping method pricing, override price books, enable o
       <p class="max-w-md mx-auto mt-4 text-base leading-relaxed text-gray-600">ESW SFCC plugin compatibility with SiteGenesis and SFRA environments.</p>
     </div>
 
-  <div class="mt-10 max-w-3xl mx-auto">
-      <ul class="space-y-4 text-base text-gray-700">
-        <li>
-          <strong>SiteGenesis / Controllers:</strong> Supports the latest standard version.
-        </li>
-        <li>
-          <strong>SiteGenesis / Pipelines:</strong> Core ESW controllers can be used for ESW backend functionality such as preOrder request, order confirmation, order cancellation, and inventory validation. The ESW SFCC plugin does not support the SiteGenesis pipeline version directly, but retailers can align custom pipelines with the provided controller patterns.
-        </li>
-        <li>
-          <strong>SFRA Supported Versions:</strong> Fully compatible with SFRA v6.2 and backwards compatibility supported through version 4.4.0, including compatibility mode 22.7 and under.
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
+
 
