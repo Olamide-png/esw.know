@@ -121,85 +121,103 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
 
 
 
-<section class="py-10 bg-white dark:bg-background sm:py-16 lg:py-24">
-  <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-    <div class="max-w-xl mx-auto text-center">
-      <h2 class="text-4xl font-bold text-black dark:text-white lg:text-5xl sm:text-5xl">Shopify vs ESW Responsibilities</h2>
-      <p class="mt-4 text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-        Comparison of key features managed by Shopify vs ESW within the embedded experience.
-      </p>
+<div class="px-4 py-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center">
+      <h2 class="text-slate-900 text-4xl font-bold mb-4">Shopify vs ESW Responsibilities</h2>
+      <p class="text-[15px] text-slate-600">A side-by-side comparison of the commerce functions handled by Shopify and ESW.</p>
     </div>
 
-  <!-- lg+ table layout -->
-  <div class="hidden mt-16 lg:block shadow-lg rounded-xl border border-border overflow-hidden">
-      <table class="w-full">
-        <thead>
-          <tr>
-            <th class="py-8 pr-4 text-left text-sm font-semibold text-gray-800 dark:text-white bg-inherit">Feature</th>
-            <th class="px-4 py-8 text-center bg-inherit">
-              <span class="text-base font-medium text-blue-600">Shopify</span>
-            </th>
-            <th class="px-4 py-8 text-center bg-gray-900 rounded-t-xl">
-              <span class="px-4 py-2 text-base font-medium text-white bg-blue-600 rounded-full">ESW</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Browsing</td>
-            <td class="px-4 py-4 text-center border-b border-border text-foreground">✓</td>
-            <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">Product Restrictions</td>
-          </tr>
-          <tr>
-            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Price Calculation</td>
-            <td class="px-4 py-4 text-center border-b border-border text-foreground">–</td>
-            <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">Pricing Advisor</td>
-          </tr>
-          <tr>
-            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Checkout Flow</td>
-            <td class="px-4 py-4 text-center border-b border-border text-foreground">✓</td>
-            <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">Integrated</td>
-          </tr>
-          <tr>
-            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Shipping Methods</td>
-            <td class="px-4 py-4 text-center border-b border-border text-foreground">–</td>
-            <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">Routing Service</td>
-          </tr>
-          <tr>
-            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Duties & Taxes</td>
-            <td class="px-4 py-4 text-center border-b border-border text-foreground">–</td>
-            <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">✓</td>
-          </tr>
-          <tr>
-            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Payment Methods</td>
-            <td class="px-4 py-4 text-center border-b border-border text-foreground">–</td>
-            <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">Payment App</td>
-          </tr>
-          <tr>
-            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Merchant of Record</td>
-            <td class="px-4 py-4 text-center border-b border-border text-foreground">–</td>
-            <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">✓</td>
-          </tr>
-          <tr>
-            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Customer Communication</td>
-            <td class="px-4 py-4 text-center border-b border-border text-foreground">✓</td>
-            <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">–</td>
-          </tr>
-          <tr>
-            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Gift Cards / Coupons</td>
-            <td class="px-4 py-4 text-center border-b border-border text-foreground">✓</td>
-            <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">–</td>
-          </tr>
-          <tr>
-            <td class="py-4 pr-4 font-medium border-b border-border text-gray-800 dark:text-white">Translations</td>
-            <td class="px-4 py-4 text-center border-b border-border text-foreground">✓</td>
-            <td class="px-4 py-4 text-center text-white bg-gray-900 border-b border-white/20">Returns & Tracking</td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="grid md:grid-cols-2 items-center gap-y-6 mt-12 max-md:max-w-md max-md:mx-auto">
+      <!-- Shopify Card -->
+      <div class="bg-white border border-gray-300 shadow-sm md:rounded-tl-3xl md:rounded-bl-3xl max-md:rounded-3xl p-8 sm:p-10">
+        <h3 class="text-slate-900 text-lg font-semibold mb-4">Handled by Shopify</h3>
+        <ul class="space-y-5">
+          <li class="flex items-center text-[15px] text-slate-600 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            Browsing
+          </li>
+          <li class="flex items-center text-[15px] text-slate-600 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            Checkout flow
+          </li>
+          <li class="flex items-center text-[15px] text-slate-600 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            Customer communications
+          </li>
+          <li class="flex items-center text-[15px] text-slate-600 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            Gift cards, coupons, etc.
+          </li>
+          <li class="flex items-center text-[15px] text-slate-600 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            Checkout languages & translations
+          </li>
+        </ul>
+      </div>
+
+  <!-- ESW Card -->
+  <div class="bg-slate-900 border border-gray-900 shadow-2xl rounded-3xl p-8 sm:p-10 relative md:right-1">
+        <h3 class="text-white text-lg font-semibold mb-4">Handled by ESW</h3>
+        <ul class="space-y-5">
+          <li class="flex items-center text-[15px] text-slate-300 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            Price calculation
+          </li>
+          <li class="flex items-center text-[15px] text-slate-300 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            Shipping methods & pricing
+          </li>
+          <li class="flex items-center text-[15px] text-slate-300 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            Duties & taxes calculation
+          </li>
+          <li class="flex items-center text-[15px] text-slate-300 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            Payment methods
+          </li>
+          <li class="flex items-center text-[15px] text-slate-300 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            Merchant of Record
+          </li>
+          <li class="flex items-center text-[15px] text-slate-300 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            Product restrictions
+          </li>
+          <li class="flex items-center text-[15px] text-slate-300 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            Returns & tracking translations
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</section>
+</div>
+
 
 
 
