@@ -7,7 +7,7 @@
       class="flex-1 items-start px-4 md:grid md:gap-6 md:px-8 lg:gap-10"
       :class="[
         config.main.padded && 'container',
-        (page.aside ?? true) && 'md:grid-cols-[250px_minmax(0,1.2fr)] lg:grid-cols-[320px_minmax(0,1.5fr)]',
+        (page.aside ?? true) && 'md:grid-cols-[280px_minmax(0,1.5fr)] lg:grid-cols-[320px_minmax(0,1.8fr)]',
       ]"
     >
       <aside v-if="page.aside ?? true" class="fixed top-[102px] z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] md:w-[250px] lg:w-[320px] shrink-0 overflow-y-auto md:sticky md:top-[60px] md:block">
