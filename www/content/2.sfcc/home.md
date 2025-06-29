@@ -117,7 +117,7 @@ Enables you to configure shipping method pricing, override price books, enable o
     </div>
   </div>
 
-::div{class="text-center" "icon-center"}
+::div{class="text-center"}
 ::alert{type="secondary" icon="lucide:store"}
 **Partner profile:** Check out the [SFCC-ESW partner marketplace](https://appexchange.salesforce.com/appxListingDetail?listingId=2d468409-b59d-485a-8b1f-98c2c1ab01e9).
 ::
