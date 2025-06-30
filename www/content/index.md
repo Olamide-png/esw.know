@@ -125,5 +125,21 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
 
 
 
+::tabs{variant="line"}
+  ::div{label="Preview"}
+  <div class="border flex min-h-[200px] w-full justify-center p-10 items-center rounded-lg shadow-xs">
+    <span class="inline-flex items-center rounded-md bg-blue-100 px-2.5 py-0.5 text-sm font-medium text-blue-800 ring-1 ring-inset ring-blue-700/10 dark:bg-blue-900 dark:text-blue-100">
+      Badge
+    </span>
+  </div>
+  ::
+
+  ::div{label="Code"}
+  ```tsx
+  import { Badge } from "@/components/ui/badge"
+
+  export function BadgeDemo() {
+    return <Badge>Badge</Badge>
+  }
 
 
