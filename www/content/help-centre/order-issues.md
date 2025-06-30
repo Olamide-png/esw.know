@@ -89,3 +89,11 @@ fullpage: true
 </div>
 
 
+::tabs{variant="line"}
+  ::div{label="Header" icon="lucide:app-window"}
+    
+  ::
+  ::div{label="Footer" icon="lucide:dock"}
+    
+  ::
+::
