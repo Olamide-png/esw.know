@@ -143,3 +143,104 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
   }
 
 
+::tabs{variant="line"}
+  ::div{label="Landing Page Settings"}
+  <h2 class="text-3xl font-bold text-gray-500 mb-2 text-center">Configure Landing Page Settings</h2>
+
+  <div class="mt-6 pt-12">
+    <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border">
+      <div class="mx-auto grid grid-cols-1 gap-8 overflow-hidden lg:mx-0 lg:grid-cols-3">
+        <div>
+          <time datetime="August 2021" class="flex items-center text-sm font-semibold leading-6 text-orange-600 dark:text-orange-400">
+            <svg viewBox="0 0 4 4" class="mr-4 h-1 w-1 flex-none" aria-hidden="true">
+              <circle cx="2" cy="2" r="2" fill="currentColor"></circle>
+            </svg>
+            Navigate
+            <div class="absolute -ml-2 h-px w-screen -translate-x-full bg-gray-900/10 dark:bg-gray-500"></div>
+          </time>
+          <p class="mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900 dark:text-white">
+            Custom Preferences Settings
+          </p>
+          <p class="mt-1 text-md leading-7 text-gray-500 dark:text-gray-300">
+            Merchant Tools &gt; Site Preferences &gt; Custom Preferences settings
+          </p>
+        </div>
+
+        <div>
+          <time datetime="December 2021" class="flex items-center text-sm font-semibold leading-6 text-orange-600 dark:text-orange-400">
+            <svg viewBox="0 0 4 4" class="mr-4 h-1 w-1 flex-none" aria-hidden="true">
+              <circle cx="2" cy="2" r="2" fill="currentColor"></circle>
+            </svg>
+            Click link
+            <div class="absolute -ml-2 h-px w-screen -translate-x-full bg-gray-900/10 dark:bg-gray-500"></div>
+          </time>
+          <p class="mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900 dark:text-white">
+            ESW Retailer Display Configuration
+          </p>
+          <p class="mt-1 text-md leading-7 text-gray-500 dark:text-gray-300">
+            Click on the ESW Retailer Display Configuration link.
+          </p>
+        </div>
+
+        <div>
+          <time datetime="February 2022" class="flex items-center text-sm font-semibold leading-6 text-orange-600 dark:text-orange-400">
+            <svg viewBox="0 0 4 4" class="mr-4 h-1 w-1 flex-none" aria-hidden="true">
+              <circle cx="2" cy="2" r="2" fill="currentColor"></circle>
+            </svg>
+            Configure
+            <div class="absolute -ml-2 h-px w-screen -translate-x-full bg-gray-900/10 dark:bg-gray-500"></div>
+          </time>
+          <p class="mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900 dark:text-white">
+            ESW Retailer Display Configuration
+          </p>
+          <p class="mt-1 text-md leading-7 text-gray-500 dark:text-gray-300">
+            Configure the landing page-related custom preferences.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  ::
+
+  ::div{label="Welcome Mat Content"}
+  <h2 class="text-3xl font-bold text-gray-500 mb-2 text-center">Configure Welcome Mat Landing Page Content</h2>
+
+  <div class="mt-6 pt-12">
+    <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border">
+      <div class="mx-auto grid grid-cols-1 gap-8 overflow-hidden lg:mx-0 lg:grid-cols-2">
+        <div>
+          <time datetime="August 2021" class="flex items-center text-sm font-semibold leading-6 text-orange-600 dark:text-orange-400">
+            <svg viewBox="0 0 4 4" class="mr-4 h-1 w-1 flex-none" aria-hidden="true">
+              <circle cx="2" cy="2" r="2" fill="currentColor"></circle>
+            </svg>
+            Navigate
+            <div class="absolute -ml-2 h-px w-screen -translate-x-full bg-gray-900/10 dark:bg-gray-500"></div>
+          </time>
+          <p class="mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900 dark:text-white">
+            Content Slot Settings
+          </p>
+          <p class="mt-1 text-md leading-7 text-gray-500 dark:text-gray-300">
+            Online Marketing &gt; Content Slots settings
+          </p>
+        </div>
+
+        <div>
+          <time datetime="December 2021" class="flex items-center text-sm font-semibold leading-6 text-orange-600 dark:text-orange-400">
+            <svg viewBox="0 0 4 4" class="mr-4 h-1 w-1 flex-none" aria-hidden="true">
+              <circle cx="2" cy="2" r="2" fill="currentColor"></circle>
+            </svg>
+            Configure
+            <div class="absolute -ml-2 h-px w-screen -translate-x-full bg-gray-900/10 dark:bg-gray-500"></div>
+          </time>
+          <p class="mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900 dark:text-white">
+            Content Slot Configurations
+          </p>
+          <p class="mt-1 text-md leading-7 text-gray-500 dark:text-gray-300">
+            Make the necessary <code class="px-1 py-0.5 rounded bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-100 text-xs font-mono">eswLandingContent</code> content slot configurations.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  ::
+::
