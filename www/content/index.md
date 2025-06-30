@@ -307,7 +307,7 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
 
   ::div{label="Configure Welcome Mat to Display an Alert"}
 
-  ![Lifted Image](/Welcome mat 2.png){lifted}
+  <img src="/Welcome mat 2.png" alt="Welcome Mat Image" class="w-1/2 rounded-md" />
 
   1. Go to the **Online Marketing > Content Slots** settings.  
   2. Perform the `eswGeoIpChangeWarning` content slot configuration. The steps can be found here.
@@ -317,17 +317,4 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
   ::
   ::
 
-::
-
-
-::card
----
-img: /Welcome mat 2.png
-imgClass: w-1/2
----
-#title
-Image Card
-
-#content
-Beautifully designed **Nuxt Content** template with **shadcn-vue**. _Customizable. Compatible. Open Source._
 ::
