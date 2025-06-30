@@ -106,6 +106,14 @@ Enables you to configure shipping method pricing, override price books, enable o
 
 <br>
 
+::div{class="text-center"}
+::alert{type="secondary" icon="lucide:store"}
+**Partner profile:** Check out the [SFCC-ESW partner marketplace](https://appexchange.salesforce.com/appxListingDetail?listingId=2d468409-b59d-485a-8b1f-98c2c1ab01e9).
+::
+::
+
+<br>
+
   <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
     <div class="max-w-2xl mx-auto text-center">
       <h2 class="text-3xl font-bold leading-tight text-gray-900 dark:text-white sm:text-4xl lg:text-5xl">
@@ -119,11 +127,7 @@ Enables you to configure shipping method pricing, override price books, enable o
 
 <br>
 
-::div{class="text-center"}
-::alert{type="secondary" icon="lucide:store"}
-**Partner profile:** Check out the [SFCC-ESW partner marketplace](https://appexchange.salesforce.com/appxListingDetail?listingId=2d468409-b59d-485a-8b1f-98c2c1ab01e9).
-::
-::
+
 
 
 <section class="py-10 sm:py-16 lg:py-24">
