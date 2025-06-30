@@ -63,7 +63,7 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       boxShadow: {
-        outer: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+        outer: '0 2px 10px hsl(var(--shadow))',
         inner: 'inset 0 2px 10px hsl(var(--shadow))',
         custom: '0 1px 3px hsl(var(--shadow))',
       },
