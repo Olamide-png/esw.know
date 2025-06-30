@@ -21,15 +21,15 @@ fullpage: true
         <!-- Title & Description -->
         <div class="space-y-2 md:space-y-4">
           <h2 class="font-bold text-3xl lg:text-4xl text-gray-800 dark:text-neutral-200">
-            Configure Welcome Mat to Display an Alert for Returning Shoppers
+            Configure Welcome Mat to show an Alert to Returning Shoppers
           </h2>
           <p class="text-gray-500 dark:text-white">
-            The welcome mat can be configured to display an alert for returning shoppers who are traveling or accessing the storefront from a different country.
+            The welcome mat can be configured to show an alert to returning shoppers who are traveling or accessing the storefront from a different country.
             To enable this, set the custom preference value to
             <code class="px-1 py-0.5 rounded bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-100 text-xs font-JetBrains Mono">True</code>.
             When the preference is set to
             <code class="px-1 py-0.5 rounded bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-100 text-xs font-JetBrains Mono">True</code>,
-            the welcome mat will display an alert to returning shoppers. Shoppers can then use the links in the alert to update their shipping country, language, and currency.
+            the welcome mat will show an alert to returning shoppers. Shoppers can then use the links in the alert to update their shipping country, language, and currency.
           </p>
         </div>
 
@@ -45,7 +45,7 @@ fullpage: true
             </div>
             <div class="ms-3">
               <h3 id="hs-welcome-mat-alert" class="text-gray-800 font-semibold dark:text-white">
-                Notice for Returning Shoppers
+                Returning Shopper Alert
               </h3>
               <p class="mt-2 text-sm text-gray-700 dark:text-neutral-400">
                 We noticed that you are currently accessing our website from a different country than your last visit.
