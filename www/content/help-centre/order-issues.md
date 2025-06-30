@@ -106,7 +106,7 @@ Make the necessary `eswLandingContent` content slot configurations.
   <!-- Grid -->
   <div class="md:grid md:grid-cols-2 md:items-center md:gap-12 xl:gap-32">
     <div>
-      <img class="rounded-xl" src="/Welcome mat 2.png" alt="Features Image">
+      <img class="rounded-xl" src="/Screenshot 2025-06-30 154730.png" alt="Features Image">
     </div>
     <!-- End Col -->
 
