@@ -322,15 +322,18 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
 
 
 
-<!-- Features -->
+
+
 <div class="max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 lg:py-4 mx-auto">
   <!-- Grid -->
   <div class="md:grid md:grid-cols-2 md:items-center md:gap-12 xl:gap-32">
+    <!-- Left Column -->
     <div>
-      <img class="rounded-xl w-2/3 mx-auto" src="/Welcome mat 2.png" alt="welcome mat showing alert">
+      <img class="rounded-xl w-2/3 mx-auto" src="/Welcome%20mat%202.png" alt="welcome mat showing alert">
     </div>
-    <!-- End Col -->
+    <!-- End Left Column -->
 
+    <!-- Right Column -->
     <div class="mt-5 sm:mt-10 lg:mt-0">
       <div class="space-y-6 sm:space-y-8">
         <!-- Title -->
@@ -362,7 +365,7 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
             </span>
             <div class="grow">
               <span class="text-sm sm:text-base text-gray-500 dark:text-neutral-500">
-                <strong>Navigate to Online Marketing &gt; Content Slots settings</strong>
+                <span class="font-bold">Navigate to Online Marketing &gt; Content Slots settings</span>
               </span>
             </div>
           </li>
@@ -375,7 +378,7 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
             </span>
             <div class="grow">
               <span class="text-sm sm:text-base text-gray-500 dark:text-neutral-500">
-                <strong>Perform the <code>eswGeoIpChangeWarningcontent</code> slot configuration</strong>
+                <span class="font-bold">Perform the <code>eswGeoIpChangeWarningcontent</code> slot configuration</span>
               </span>
             </div>
           </li>
@@ -383,8 +386,9 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
         <!-- End List -->
       </div>
     </div>
-    <!-- End Col -->
+    <!-- End Right Column -->
   </div>
   <!-- End Grid -->
 </div>
 <!-- End Features -->
+
