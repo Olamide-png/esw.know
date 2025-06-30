@@ -125,10 +125,6 @@ Enables you to configure shipping method pricing, override price books, enable o
     </div>
   </div>
 
-<br>
-
-
-
 
 <section class="py-10 sm:py-16 lg:py-24">
   <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
