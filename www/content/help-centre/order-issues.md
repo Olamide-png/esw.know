@@ -3,6 +3,7 @@ title: "Order Queries"
 description: Common order queries.
 aside: false
 prevNext: false
+fullpage: true
 ---
 
 
@@ -101,7 +102,7 @@ Make the necessary `eswLandingContent` content slot configurations.
 <!-- End Features -->
 
 <!-- Features -->
-<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+<div class="max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 lg:py-4 mx-auto">
   <!-- Grid -->
   <div class="md:grid md:grid-cols-2 md:items-center md:gap-12 xl:gap-32">
     <div>
@@ -116,7 +117,7 @@ Make the necessary `eswLandingContent` content slot configurations.
           <h2 class="font-bold text-3xl lg:text-4xl text-gray-800 dark:text-neutral-200">
             Configure Welcome Mat to Display an Alert for Returning Shoppers
           </h2>
-          <p class="text-gray-500 dark:text-neutral-500">
+          <p class="text-gray-500 dark:text-white">
             The welcome mat can be configured to display an alert for returning shoppers who are traveling or accessing the storefront from a different country. To enable this, set the custom preference value to True.When the preference is set to True, the welcome mat will display the following alert to returning shoppers. Shoppers can then use the links in the alert to update their shipping country, language, and currency.
           </p>
         </div>
@@ -129,7 +130,7 @@ Make the necessary `eswLandingContent` content slot configurations.
               <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             </span>
             <div class="grow">
-              <span class="text-sm sm:text-base text-gray-500 dark:text-neutral-500">
+              <span class="text-sm sm:text-base text-gray-500 dark:text-white">
                 <span class="font-bold">Navigate </span> to the Online Marketing > Content Slots settings.
               </span>
             </div>
@@ -140,8 +141,8 @@ Make the necessary `eswLandingContent` content slot configurations.
               <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             </span>
             <div class="grow">
-              <span class="text-sm sm:text-base text-gray-500 dark:text-neutral-500">
-                Perform the <span class="font-bold">eswGeoIpChangeWarning content slot configuration</span>
+              <span class="text-sm sm:text-base text-gray-500 dark:text-white">
+                Perform the <span class="font-bold">eswGeoIpChangeWarning </span> content slot configuration
               </span>
             </div>
           </li>
