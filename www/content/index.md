@@ -245,3 +245,47 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
   </div>
   ::
 ::
+
+
+<!-- Features -->
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+  <!-- Tab Nav -->
+  <nav class="max-w-6xl mx-auto flex flex-col sm:flex-row gap-y-px sm:gap-y-0 sm:gap-x-4" aria-label="Tabs" role="tablist" aria-orientation="horizontal">
+    <!-- Tab 1 -->
+    <button type="button" class="hs-tab-active:bg-gray-100 hs-tab-active:hover:border-transparent w-full flex flex-col text-start hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 p-3 md:p-5 rounded-xl dark:hs-tab-active:bg-neutral-800 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800 active" id="tabs-with-card-item-1" aria-selected="true" data-hs-tab="#tabs-with-card-1" aria-controls="tabs-with-card-1" role="tab">
+      <svg class="shrink-0 hidden sm:block size-7 hs-tab-active:text-blue-600 text-gray-800 dark:hs-tab-active:text-blue-500 dark:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"/><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"/><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"/><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"/></svg>
+      <span class="sm:mt-5">
+        <span class="hs-tab-active:text-blue-600 block font-semibold text-gray-800 dark:hs-tab-active:text-blue-500 dark:text-neutral-200">All-in-one workspace</span>
+        <span class="hidden lg:block mt-2 text-gray-800 dark:text-neutral-200">Create a business, whether you’ve got a fresh idea.</span>
+      </span>
+    </button>
+
+  <!-- Tab 2 -->
+  <button type="button" class="hs-tab-active:bg-gray-100 hs-tab-active:hover:border-transparent w-full flex flex-col text-start hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 p-3 md:p-5 rounded-xl dark:hs-tab-active:bg-neutral-800 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" id="tabs-with-card-item-2" aria-selected="false" data-hs-tab="#tabs-with-card-2" aria-controls="tabs-with-card-2" role="tab">
+      <svg class="shrink-0 hidden sm:block size-7 hs-tab-active:text-blue-600 text-gray-800 dark:hs-tab-active:text-blue-500 dark:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+      <span class="sm:mt-5">
+        <span class="hs-tab-active:text-blue-600 block font-semibold text-gray-800 dark:hs-tab-active:text-blue-500 dark:text-neutral-200">Automation on a whole new level</span>
+        <span class="hidden lg:block mt-2 text-gray-800 dark:text-neutral-200">Use automation to scale campaigns profitably and save time doing it.</span>
+      </span>
+    </button>
+  </nav>
+  
+  <!-- End Tab Nav -->
+
+  <!-- Tab Content -->
+  <div class="mt-12 md:mt-16">
+    <!-- Tab 1 Content -->
+    <div id="tabs-with-card-1" role="tabpanel" aria-labelledby="tabs-with-card-item-1">
+      <!-- Devices layout for Tab 1 goes here -->
+      <!-- (keep your original Tab 1 content unchanged) -->
+    </div>
+
+  <!-- Tab 2 Content -->
+  <div id="tabs-with-card-2" class="hidden" role="tabpanel" aria-labelledby="tabs-with-card-item-2">
+      <!-- Devices layout for Tab 2 goes here -->
+      <!-- (keep your original Tab 2 content unchanged) -->
+    </div>
+  </div>
+  <!-- End Tab Content -->
+</div>
+<!-- End Features -->
