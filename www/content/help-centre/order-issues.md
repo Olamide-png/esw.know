@@ -105,7 +105,7 @@ Make the necessary `eswLandingContent` content slot configurations.
   <!-- Grid -->
   <div class="md:grid md:grid-cols-2 md:items-center md:gap-12 xl:gap-32">
     <div>
-      <img class="rounded-xl" src="https://images.unsplash.com/photo-1648737963503-1a26da876aca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&h=900&q=80" alt="Features Image">
+      <img class="rounded-xl" src="/Welcome mat 2.png" alt="Features Image">
     </div>
     <!-- End Col -->
 
@@ -114,10 +114,10 @@ Make the necessary `eswLandingContent` content slot configurations.
         <!-- Title -->
         <div class="space-y-2 md:space-y-4">
           <h2 class="font-bold text-3xl lg:text-4xl text-gray-800 dark:text-neutral-200">
-            We tackle the challenges start-ups face
+            Configure Welcome Mat to Display an Alert for Returning Shoppers
           </h2>
           <p class="text-gray-500 dark:text-neutral-500">
-            Besides working with start-up enterprises as a partner for digitalization, we have built enterprise products for common pain points that we have encountered in various products and projects.
+            The welcome mat can be configured to display an alert for returning shoppers who are traveling or accessing the storefront from a different country. To enable this, set the custom preference value to True.When the preference is set to True, the welcome mat will display the following alert to returning shoppers. Shoppers can then use the links in the alert to update their shipping country, language, and currency.
           </p>
         </div>
         <!-- End Title -->
@@ -130,7 +130,7 @@ Make the necessary `eswLandingContent` content slot configurations.
             </span>
             <div class="grow">
               <span class="text-sm sm:text-base text-gray-500 dark:text-neutral-500">
-                <span class="font-bold">Easy & fast</span> designing
+                <span class="font-bold">Navigate </span> to the Online Marketing > Content Slots settings.
               </span>
             </div>
           </li>
@@ -141,18 +141,7 @@ Make the necessary `eswLandingContent` content slot configurations.
             </span>
             <div class="grow">
               <span class="text-sm sm:text-base text-gray-500 dark:text-neutral-500">
-                Powerful <span class="font-bold">features</span>
-              </span>
-            </div>
-          </li>
-
-  <li class="flex gap-x-3">
-            <span class="mt-0.5 size-5 flex justify-center items-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
-              <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
-            <div class="grow">
-              <span class="text-sm sm:text-base text-gray-500 dark:text-neutral-500">
-                User Experience Design
+                Perform the <span class="font-bold">eswGeoIpChangeWarning content slot configuration</span>
               </span>
             </div>
           </li>
