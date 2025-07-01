@@ -139,7 +139,7 @@ fullpage: true
                Calculated pricing model
              </h2>
           <p class="mt-1 text-gray-600 dark:text-neutral-400">
-              When the <code class="px-1 py-0.5 rounded bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-100 text-xs font-JetBrains Mono">geo-IP custom preference</code> is enabled, the welcome mat is skipped, and the shopper's country is automatically set based on their geolocation.
+              When a country uses a calculated pricing model, the currency selector remains enabled, but the default currency from the <code class="px-1 py-0.5 rounded bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-100 text-xs font-JetBrains Mono">ESW Countries</code>custom object will still be pre-selected.
             </p>
           </p>
             </div>
@@ -155,9 +155,9 @@ fullpage: true
              <h2 class="font-bold text-lg lg:text-2xl text-gray-800 dark:text-neutral-200">
                Fixed pricing model
              </h2>
-          <p class="text-gray-600 dark:text-neutral-400">
-            When a country with a fixed pricing model is selected, the currency selector will be disabled, and the default currency from the ESW Countriescustom object will be automatically applied.
-          </p>
+          <p class="mt-1 text-gray-600 dark:text-neutral-400">
+              When a country with a fixed pricing model is selected, the currency selector will be disabled, and the default currency from the <code class="px-1 py-0.5 rounded bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-100 text-xs font-JetBrains Mono">ESW Countries</code>custom object will be automatically applied.
+            </p>
             </div>
           </li>
         </ul>
