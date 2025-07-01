@@ -102,10 +102,10 @@ fullpage: true
       <div class="space-y-6 sm:space-y-8">
         <!-- Title -->
         <div class="space-y-2 md:space-y-4">
-          <h2 class="font-bold text-3xl lg:text-4xl text-gray-800">
-            We tackle the challenges start-ups face
+          <h2 class="font-bold text-3xl lg:text-4xl text-gray-800 dark:text-neutral-200">
+            Welcome Mat
           </h2>
-          <p class="text-gray-500">
+          <p class="text-gray-600 dark:text-neutral-400">
             Besides working with start-up enterprises as a partner for digitalization, we have built enterprise products for common pain points that we have encountered in various products and projects.
           </p>
         </div>
@@ -119,7 +119,7 @@ fullpage: true
               </svg>
             </span>
             <div class="grow">
-              <h2 class="font-bold text-lg lg:text-2xl text-gray-800">
+              <h2 class="font-bold text-lg lg:text-2xl text-gray-800 dark:text-neutral-200">
                Geo-IP custom preference
              </h2>
           <p class="mt-1 text-gray-600 dark:text-neutral-400">
@@ -135,7 +135,7 @@ fullpage: true
               </svg>
             </span>
             <div class="grow">
-             <h2 class="font-bold text-lg lg:text-2xl text-gray-800">
+             <h2 class="font-bold text-lg lg:text-2xl text-gray-800 dark:text-neutral-200">
                Calculated pricing model
              </h2>
           <p class="mt-1 text-gray-600 dark:text-neutral-400">
@@ -152,10 +152,10 @@ fullpage: true
               </svg>
             </span>
             <div class="grow">
-             <h2 class="font-bold text-lg lg:text-2xl text-gray-800">
+             <h2 class="font-bold text-lg lg:text-2xl text-gray-800 dark:text-neutral-200">
                Fixed pricing model
              </h2>
-          <p class="text-gray-500">
+          <p class="text-gray-600 dark:text-neutral-400">
             When a country with a fixed pricing model is selected, the currency selector will be disabled, and the default currency from the ESW Countriescustom object will be automatically applied.
           </p>
             </div>
