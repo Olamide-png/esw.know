@@ -91,20 +91,7 @@ fullpage: true
 
 <!-- Features -->
 
-  <div class="mt-5 sm:mt-10 lg:mt-0">
-      <div class="space-y-6 sm:space-y-8">
-        <!-- Title -->
-        <div class="space-y-2 md:space-y-4">
-          <h2 class="font-bold text-3xl lg:text-4xl text-gray-800 dark:text-neutral-200">
-            Welcome Mat
-          </h2>
-          <p class="text-gray-600 dark:text-neutral-400">
-            Besides working with start-up enterprises as a partner for digitalization, we have built enterprise products for common pain points that we have encountered in various products and projects.
-          </p>
-        </div>
-        <!-- End Title -->
 
-  <!-- List -->
   <li class="flex gap-x-3">
             <span class="mt-0.5 size-5 flex justify-center items-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-800/30 dark:text-blue-500">
               <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -112,9 +99,6 @@ fullpage: true
               </svg>
             </span>
             <div class="grow">
-              <h2 class="font-bold text-lg lg:text-2xl text-gray-800 dark:text-neutral-200">
-               Geo-IP custom preference
-             </h2>
           <p class="mt-1 text-gray-600 dark:text-neutral-400">
               When the <code class="px-1 py-0.5 rounded bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-100 text-xs font-JetBrains Mono">geo-IP custom preference</code> is enabled, the welcome mat is skipped, and the shopper's country is automatically set based on their geolocation.
             </p>
