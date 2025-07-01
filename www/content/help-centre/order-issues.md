@@ -13,7 +13,7 @@ fullpage: true
   <div class="md:grid md:grid-cols-2 md:items-center md:gap-12 xl:gap-32">
     <!-- Left Column -->
     <div>
-      <img class="rounded-xl" src="/Screenshot 2025-06-30 154730.png" alt="Features Image">
+      <img class="rounded-xl" src="/Screenshot 2025-06-30 182129.png" alt="Features Image">
     </div>
 
   <div class="mt-5 sm:mt-10 lg:mt-0">
