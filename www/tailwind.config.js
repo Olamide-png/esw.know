@@ -65,7 +65,10 @@ export default {
       boxShadow: {
         outer: '0 4px 12px hsl(var(--shadow) / 0.15)',     // Medium blur + alpha
         inner: 'inset 0 1px 4px hsl(var(--shadow) / 0.1)', // Inner with light opacity
-        custom: '0 2px 6px hsl(var(--shadow) / 0.12)',     // Subtle elevation
+        custom: '0 2px 6px hsl(var(--shadow) / 0.12)',
+        key: '0 2px 0 hsl(var(--shadow) / 0.15)',
+        keyPressed: 'inset 0 2px 4px hsl(var(--shadow) / 0.25)',
+        key3D: 'inset 0 1px 0 hsl(var(--shadow-light) / 0.4), 0 2px 0 hsl(var(--shadow) / 0.12)',     // Subtle elevation
       },
       keyframes: {
         'accordion-down': {
