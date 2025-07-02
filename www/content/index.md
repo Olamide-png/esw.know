@@ -441,7 +441,7 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
         </svg> <span class="text-gray-950 font-medium text-sm"> accelerated times </span> </div>
       </div>
      </div>
-     <div class="h-full md:order-first"> <img src="https://i.pinimg.com/564x/59/41/a0/5941a02c048f6226031a0487451c2651.jpg" alt="#_" class=" bg-gray-200 shadow-box shadow-gray-500/30 overflow-hidden aspect-square  w-full h-full object-cover object-center"> </div>
+     <div class="h-full md:order-first"> <img src="/1152442a16f59952c1b22fe62b88e225 (1).png" alt="#_" class=" bg-gray-200 shadow-box shadow-gray-500/30 overflow-hidden aspect-square  w-full h-full object-cover object-center"> </div>
     </div>
     <div class="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-24 items-center md:flex-row-reverse">
      <div> <span class="text-gray-600  uppercase text-xs font-medium "> Just because we can </span>
@@ -491,7 +491,7 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
         </svg> <span class="text-gray-950 font-medium text-sm"> Faster Processing Times </span> </div>
       </div>
      </div>
-     <div class="h-full "> <img src="https://i.pinimg.com/564x/4e/a7/ff/4ea7ff230ad9f3bc1c30b1b6cbaccad3.jpg" alt="#_" class=" bg-gray-200 shadow-box shadow-gray-500/30 overflow-hidden aspect-square  w-full h-full object-cover object-center"> </div>
+     <div class="h-full "> <img src="/1152442a16f59952c1b22fe62b88e225 (1).png" alt="#_" class=" bg-gray-200 shadow-box shadow-gray-500/30 overflow-hidden aspect-square  w-full h-full object-cover object-center"> </div>
     </div>
    </div> <!-- Emds component -->
    <!-- Starts links to tutorial -->
