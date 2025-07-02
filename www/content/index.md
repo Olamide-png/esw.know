@@ -427,7 +427,7 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
             </svg>
             <p class="text-sm leading-6 text-gray-600">
               <span class="font-semibold text-gray-900">Enable Landing Page</span>
-              – Show or hide the ESW Welcome Landing Page on your storefront.
+              Show or hide the ESW Welcome Landing Page on your storefront.
             </p>
           </li>
 
@@ -437,7 +437,7 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
             </svg>
             <p class="text-sm leading-6 text-gray-600">
               <span class="font-semibold text-gray-900">Country Selector</span>
-              – Allow shoppers to choose their shipping country on the landing page.
+               Allow shoppers to choose their shipping country on the landing page.
             </p>
           </li>
 
@@ -447,7 +447,7 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
             </svg>
             <p class="text-sm leading-6 text-gray-600">
               <span class="font-semibold text-gray-900">Currency Selector</span>
-              – Toggle the visibility of the currency dropdown for user selection.
+               Toggle the visibility of the currency dropdown for user selection.
             </p>
           </li>
 
@@ -457,7 +457,7 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
             </svg>
             <p class="text-sm leading-6 text-gray-600">
               <span class="font-semibold text-gray-900">Language Selector</span>
-              – Display or hide language options on the landing interface.
+               Display or hide language options on the landing interface.
             </p>
           </li>
 
@@ -467,7 +467,7 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
             </svg>
             <p class="text-sm leading-6 text-gray-600">
               <span class="font-semibold text-gray-900">Landing Page Bar</span>
-              – Toggle a contextual bar at the top of the landing page.
+               Toggle a contextual bar at the top of the landing page.
             </p>
           </li>
 
@@ -477,7 +477,7 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
             </svg>
             <p class="text-sm leading-6 text-gray-600">
               <span class="font-semibold text-gray-900">Header Bar</span>
-              – Show or hide the ESW bar at the top of your site’s header.
+               Show or hide the ESW bar at the top of your site’s header.
             </p>
           </li>
 
@@ -487,7 +487,7 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
             </svg>
             <p class="text-sm leading-6 text-gray-600">
               <span class="font-semibold text-gray-900">Footer Bar</span>
-              – Control the display of the ESW footer bar across all pages.
+                Control the display of the ESW footer bar across all pages.
             </p>
           </li>
         </ul>
