@@ -221,7 +221,7 @@ fullpage: true
             </p>
           </div>
           
-          <div class="mb-8 sm:mb-12">
+  <div class="mb-8 sm:mb-12">
   <img src="/salesforcestep2.png" alt="Product Development Visual" class="w-full h-auto rounded-xl object-cover" />
 </div><!-- End Right Content -->
         </div>
