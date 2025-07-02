@@ -192,9 +192,9 @@ fullpage: true
       <div class="flex flex-wrap items-center -mx-5">
         <div class="w-full lg:w-1/2 px-5 mb-20 lg:mb-0">
           <div class="max-w-md">
-            <span class="text-lg font-bold text-blue-600 dark:text-blue-400">Getting Started</span>
-            <h2 class="mt-12 mb-10 text-5xl font-extrabold leading-tight text-gray-800 dark:text-gray-200">Launch Your Journey with Ease</h2>
-            <p class="mb-16 text-lg text-gray-600 dark:text-gray-400">Download our free mobile app and start building today!</p>
+            <span class="text-lg font-bold text-blue-600 dark:text-blue-400">Configure Storefront Components</span>
+            <h2 class="mt-12 mb-10 text-5xl font-extrabold leading-tight text-gray-800 dark:text-gray-200">Online Marketing > Content Slots</h2>
+            <p class="mb-16 text-lg text-gray-600 dark:text-gray-400">After the site data is imported, two content slots are automatically added—one for the welcome landing page and another for the landing page content. Use the steps below to verify and configure these content slots.</p>
             <a class="inline-block px-12 py-4 text-white font-bold bg-blue-600 hover:bg-blue-700 rounded-full shadow-lg transition duration-200" href="#">Get Started</a>
           </div>
         </div>
@@ -214,22 +214,13 @@ fullpage: true
     <span class="flex justify-center items-center w-14 h-14 bg-blue-200/50 dark:bg-blue-600/30 text-lg font-bold rounded-full text-blue-600 dark:text-blue-300">2</span>
   </div>
   <div class="max-full">
-     <h3 class="mb-2 text-lg font-bold text-gray-700 dark:text-gray-300">Enter esw  in the search box  
-    Two content slots appear in the search result.  
-    Tailor tools and settings to fit your needs and preferences.</h3>
+     <h3 class="mb-2 text-lg font-bold text-gray-700 dark:text-gray-300">Enter esw  in the search box</h3>
+     <p class="text-lg text-gray-500 dark:text-gray-400">Two content slots appear in the search result.  
+    Tailor tools and settings to fit your needs and preferences.</p>
 
-<img class="w-full h-auto rounded-xl" src="/Screenshot 2025-06-30 182129.png" alt="Features Image">
+<img class="w-full h-auto rounded-xl" src="/salesforce9.png" alt="Features Image">
   </div>
 </li>
-  <li class="flex pb-10 border-b border-gray-200 dark:border-gray-700">
-              <div class="mr-8">
-                <span class="flex justify-center items-center w-14 h-14 bg-blue-200/50 dark:bg-blue-600/30 text-lg font-bold rounded-full text-blue-600 dark:text-blue-300">3</span>
-              </div>
-              <div class="max-full">
-                <h3 class="mb-2 text-lg font-bold text-gray-700 dark:text-gray-300">Collaborate with Your Team</h3>
-                <p class="text-lg text-gray-500 dark:text-gray-400">Seamlessly work together, sharing insights and tools for better productivity.</p>
-              </div>
-            </li>
           </ul>
         </div>
       </div>
