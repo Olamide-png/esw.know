@@ -18,7 +18,7 @@ fullpage: true
   <div class="mt-5 lg:mt-16 grid lg:grid-cols-3 gap-8 lg:gap-12">
     <div class="lg:col-span-1">
       <h2 class="font-bold text-2xl md:text-3xl text-gray-800 dark:text-neutral-200">
-        ESW Retailer Display Configuration Site Preferences
+        ESW Retailer Display Configuration Site Preferences.
       </h2>
       <p class="mt-2 md:mt-4 text-gray-800 dark:text-neutral-500">
         You can use custom preferences to manage ESW retailer display configurations. This group enables or disables the functionality at the site level for the landing page, header, and footer.
