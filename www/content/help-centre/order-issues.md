@@ -214,16 +214,22 @@ fullpage: true
     <span class="flex justify-center items-center w-14 h-14 bg-blue-200/50 dark:bg-blue-600/30 text-lg font-bold rounded-full text-blue-600 dark:text-blue-300">2</span>
   </div>
   <div class="max-w-xs">
-    <h3 class="mb-2 text-lg font-bold text-gray-700 dark:text-gray-300">
-      Enter esw  in the search box. Two content slots appear in the search result
-    </h3>
-    <p class="text-lg text-gray-500 dark:text-gray-400">
-      Tailor tools and settings to fit your needs and preferences.
-    </p>
-    <img class="w-full mt-4 object-cover rounded-xl" src="https://images.unsplash.com/photo-1624571409412-1f253e1ecc89?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80" alt="Features Image">
+    ### Enter esw  in the search box  
+    Two content slots appear in the search result.  
+    Tailor tools and settings to fit your needs and preferences.
+
+    ::card
+    ---
+    img: /og-nuxt.png
+    ---
+    #title
+    Image Card
+
+    #content
+    Beautifully designed **Nuxt Content** template with **shadcn-vue**. _Customizable. Compatible. Open Source._
+    ::
   </div>
 </li>
-
   <li class="flex pb-10 border-b border-gray-200 dark:border-gray-700">
               <div class="mr-8">
                 <span class="flex justify-center items-center w-14 h-14 bg-blue-200/50 dark:bg-blue-600/30 text-lg font-bold rounded-full text-blue-600 dark:text-blue-300">3</span>
