@@ -438,3 +438,83 @@ fullpage: true
         </ul>
     </div>
 </div>
+
+
+<br>
+
+<h2 class="text-3xl font-bold text-gray-800 dark:text-neutral-200 mb-2 text-center">Configure Welcome Message</h2>
+
+### Merchant Tools > Online Marketing > Content Slots
+
+Follow these steps to configure Welcome Message
+
+::steps
+  ### :smart-icon{name="lucide:mouse-pointer-click" size=35} Click on the Welcome Message 
+
+  Click on the Welcome Message under **ID**
+
+  ### :smart-icon{name="lucide:code" size=35} Add title
+
+  Add the title in HTML attribute
+
+  ::card-group{:cols="1"}
+    ::card
+    ---
+    img: /image-20220124-102929.png
+    ---
+    #title
+    Welcome Message
+
+    #content
+    Add the title in the HTML attribute
+    ::
+  ::
+
+  ### :smart-icon{name="lucide:mouse" size=35} Click Apply
+
+  Click **Apply** to save changes   
+::
+
+<br>
+
+<h2 class="text-3xl font-bold text-gray-800 dark:text-neutral-200 mb-2 text-center">Configure Landing Page Content</h2>
+
+Follow the following steps to configure landing page content
+
+::steps
+  ### :smart-icon{name="lucide:mouse-pointer-click" size=35} Verify content slots 
+
+  Click the Landing Page Content ID
+
+  ::card-group{:cols="1"}
+    ::card
+    ---
+    img: /image-20220124-103122.png
+    ---
+    #title
+    Landing Page Content
+
+    #content
+    Content ID
+    ::
+  ::  
+
+  ### :smart-icon{name="lucide:code" size=35} Add title
+
+  Add the title in HTML attribute under Slot Content tab
+
+  ::card-group{:cols="1"}
+    ::card
+    ---
+    img: /image-20220124-103128.png
+    ---
+    #title
+    Landing Page Content
+
+    #content
+    Add the title in the HTML attribute
+    ::
+  ::  
+::
+
+<br>
