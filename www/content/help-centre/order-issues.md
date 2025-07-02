@@ -218,16 +218,7 @@ fullpage: true
     Two content slots appear in the search result.  
     Tailor tools and settings to fit your needs and preferences.</h3>
 
-    ::card
-    ---
-    img: /image-20220124-103128.png
-    ---
-    #title
-    Image Card
-
-    #content
-    Beautifully designed **Nuxt Content** template with **shadcn-vue**. _Customizable. Compatible. Open Source._
-    ::
+<img class="w-full h-auto rounded-xl" src="/Screenshot 2025-06-30 182129.png" alt="Features Image">
   </div>
 </li>
   <li class="flex pb-10 border-b border-gray-200 dark:border-gray-700">
