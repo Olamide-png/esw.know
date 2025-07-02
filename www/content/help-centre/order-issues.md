@@ -188,7 +188,7 @@ fullpage: true
 
 <section class="py-20 overflow-hidden bg-gray-100 dark:bg-gray-800">
   <div class="container px-4 mx-auto">
-    <div class="max-w-5xl mx-auto">
+    <div class="max-full mx-auto">
       <div class="flex flex-wrap items-center -mx-5">
         <div class="w-full lg:w-1/2 px-5 mb-20 lg:mb-0">
           <div class="max-w-md">
