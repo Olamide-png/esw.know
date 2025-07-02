@@ -215,17 +215,14 @@ fullpage: true
 
   <!-- Right Content -->
   <div class="grow pt-0.5 pb-8 sm:pb-12">
-  <p class="text-sm lg:text-base text-neutral-400">
-    <span class="text-white">Product Development and Testing:</span>
-    Develop digital products or services that address the needs and preferences of your target audience.
-  </p>
-
-  <!-- ✅ Image placed here, inside the grow div -->
-  <div class="mt-4">
-    <img src="/salesforcestep2.png" alt="Product Development Visual" class="w-full h-auto rounded-xl object-cover" />
-  </div>
-</div>
-        <!-- End Item -->
+            <p class="text-sm md:text-base text-neutral-400">
+              <span class="text-white">Marketing and Promotion:</span>
+              Develop a comprehensive marketing strategy to promote your digital products or services.
+            </p>
+          </div>
+          <!-- End Right Content -->
+        </div>
+        <!-- End
 
   <!-- Item -->
   <div class="flex gap-x-5 ms-1">
