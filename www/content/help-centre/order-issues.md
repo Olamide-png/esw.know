@@ -203,29 +203,29 @@ fullpage: true
 
   <!-- Item -->
   <div class="flex gap-x-5 ms-1">
-          <!-- Icon -->
-          <div class="relative last:after:hidden after:absolute after:top-8 after:bottom-0 after:start-4 after:w-px after:-translate-x-[0.5px] after:bg-neutral-800">
-            <div class="relative z-10 size-8 flex justify-center items-center">
-              <span class="flex shrink-0 justify-center items-center size-8 border border-neutral-800 text-[#ff0] font-semibold text-xs uppercase rounded-full">
-                2
-              </span>
-            </div>
-          </div>
-          <!-- End Icon -->
+  <!-- Icon -->
+  <div class="relative last:after:hidden after:absolute after:top-8 after:bottom-0 after:start-4 after:w-px after:-translate-x-[0.5px] after:bg-neutral-800">
+    <div class="relative z-10 size-8 flex justify-center items-center">
+      <span class="flex shrink-0 justify-center items-center size-8 border border-neutral-800 text-[#ff0] font-semibold text-xs uppercase rounded-full">
+        2
+      </span>
+    </div>
+  </div>
+  <!-- End Icon -->
 
   <!-- Right Content -->
   <div class="grow pt-0.5 pb-8 sm:pb-12">
-            <p class="text-sm md:text-base text-neutral-400">
-              <span class="text-white">Marketing and Promotion:</span>
-              Develop a comprehensive marketing strategy to promote your digital products or services.
-            </p>
-          </div>
-          
-  <div class="mb-8 sm:mb-12">
-  <img src="/salesforcestep2.png" alt="Product Development Visual" class="w-full h-auto rounded-xl object-cover" />
-</div><!-- End Right Content -->
-        </div>
-        <!-- End
+    <p class="text-sm lg:text-base text-neutral-400">
+      <span class="text-white">Product Development and Testing:</span>
+      Develop digital products or services that address the needs and preferences of your target audience.
+    </p>
+    <div class="mt-4">
+      <img class="rounded-xl w-full max-w-md" src="/salesforce9.png" alt="Step 2 Image">
+    </div>
+  </div>
+  <!-- End Right Content -->
+</div>
+<!-- End Item -->
 
   <!-- Item -->
   <div class="flex gap-x-5 ms-1">
