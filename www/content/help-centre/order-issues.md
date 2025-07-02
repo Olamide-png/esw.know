@@ -204,7 +204,7 @@ fullpage: true
               <div class="mr-8">
                 <span class="flex justify-center items-center w-14 h-14 bg-blue-200/50 dark:bg-blue-600/30 text-lg font-bold rounded-full text-blue-600 dark:text-blue-300">1</span>
               </div>
-              <div class="max-w-full">
+              <div class="max-full">
                 <h3 class="mb-2 text-lg font-bold text-gray-700 dark:text-gray-300">Verify content slots</h3>
                 <p class="text-lg text-gray-500 dark:text-gray-400">Navigate to Merchant Tools > Online Marketing > Content Slots</p>
               </div>
@@ -213,7 +213,7 @@ fullpage: true
   <div class="mr-8">
     <span class="flex justify-center items-center w-14 h-14 bg-blue-200/50 dark:bg-blue-600/30 text-lg font-bold rounded-full text-blue-600 dark:text-blue-300">2</span>
   </div>
-  <div class="max-w-full">
+  <div class="max-full">
      <h3 class="mb-2 text-lg font-bold text-gray-700 dark:text-gray-300">Enter esw  in the search box  
     Two content slots appear in the search result.  
     Tailor tools and settings to fit your needs and preferences.</h3>
@@ -234,7 +234,7 @@ fullpage: true
               <div class="mr-8">
                 <span class="flex justify-center items-center w-14 h-14 bg-blue-200/50 dark:bg-blue-600/30 text-lg font-bold rounded-full text-blue-600 dark:text-blue-300">3</span>
               </div>
-              <div class="max-w-full">
+              <div class="max-full">
                 <h3 class="mb-2 text-lg font-bold text-gray-700 dark:text-gray-300">Collaborate with Your Team</h3>
                 <p class="text-lg text-gray-500 dark:text-gray-400">Seamlessly work together, sharing insights and tools for better productivity.</p>
               </div>
