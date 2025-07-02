@@ -217,7 +217,6 @@ fullpage: true
                 <h3 class="mb-2 text-lg font-bold text-gray-700 dark:text-gray-300">Enter esw  in the search box. Two content slots appear in the search result</h3>
                 <p class="text-lg text-gray-500 dark:text-gray-400">Tailor tools and settings to fit your needs and preferences.</p>
               </div>
-              <div class="max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 lg:py-4 mx-auto">
     <img class="w-full object-cover rounded-xl" src="https://images.unsplash.com/photo-1624571409412-1f253e1ecc89?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80" alt="Features Image">
   </div>
             </li>
