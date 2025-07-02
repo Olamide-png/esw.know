@@ -112,31 +112,6 @@ Enables you to configure shipping method pricing, override price books, enable o
 ::
 ::
 
-<div class="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
-  <div class="border-b border-gray-200 rounded-t-xl py-3 px-4 md:py-4 md:px-5 dark:border-neutral-700">
-    <p class="mt-1 text-sm text-gray-500 dark:text-neutral-500">
-      Partner Marketplace
-    </p>
-  </div>
-  <div class="bg-gray-100 border-b border-gray-200 text-sm text-gray-800 p-4 dark:bg-neutral-800 dark:border-neutral-700 dark:text-white">
-    <span class="font-bold">Partner Profile</span>
-  </div>
-  <div class="p-4 md:p-5">
-    <h3 class="text-lg font-bold text-gray-800 dark:text-white">
-      SFCC-ESW Partner Marketplace
-    </h3>
-    <p class="mt-2 text-gray-500 dark:text-neutral-400">
-       Check out the SFCC-ESW partner marketplace.
-    </p>
-    <a class="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-blue-600 decoration-2 hover:text-blue-700 hover:underline focus:underline focus:outline-hidden focus:text-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-600 dark:focus:text-blue-600" href="https://appexchange.salesforce.com/appxListingDetail?listingId=2d468409-b59d-485a-8b1f-98c2c1ab01e9">
-      ESW Cartridge for B2C Commerce
-      <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m9 18 6-6-6-6"></path>
-      </svg>
-    </a>
-  </div>
-</div>
-
 <br>
 
   <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
