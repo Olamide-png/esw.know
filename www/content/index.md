@@ -422,77 +422,51 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
         </p>
         <ul class="mt-10 *:border-b *:border-gray-100 *:py-6">
           <li class="flex gap-x-3 sm:gap-x-6">
-            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <g id="Complete"><g id="tick"><polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g></g>
+            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
             </svg>
-            <p class="text-sm leading-6 text-gray-600">
-              <span class="font-semibold text-gray-900">Enable Landing Page</span>
-              Show or hide the ESW Welcome Landing Page on your storefront.
-            </p>
+            <p class="text-sm leading-6 text-gray-600"><span class="font-semibold text-gray-900">Enable Landing Page</span> – Show or hide the ESW Welcome Landing Page.</p>
           </li>
-
           <li class="flex gap-x-3 sm:gap-x-6">
-            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <g id="Complete"><g id="tick"><polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g></g>
+            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
             </svg>
-            <p class="text-sm leading-6 text-gray-600">
-              <span class="font-semibold text-gray-900">Country Selector</span>
-               Allow shoppers to choose their shipping country on the landing page.
-            </p>
+            <p class="text-sm leading-6 text-gray-600"><span class="font-semibold text-gray-900">Country Selector</span> – Let shoppers select their shipping country.</p>
           </li>
-
           <li class="flex gap-x-3 sm:gap-x-6">
-            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <g id="Complete"><g id="tick"><polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g></g>
+            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
             </svg>
-            <p class="text-sm leading-6 text-gray-600">
-              <span class="font-semibold text-gray-900">Currency Selector</span>
-               Toggle the visibility of the currency dropdown for user selection.
-            </p>
+            <p class="text-sm leading-6 text-gray-600"><span class="font-semibold text-gray-900">Currency Selector</span> – Toggle visibility of currency dropdown on the landing page.</p>
           </li>
-
           <li class="flex gap-x-3 sm:gap-x-6">
-            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <g id="Complete"><g id="tick"><polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g></g>
+            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
             </svg>
-            <p class="text-sm leading-6 text-gray-600">
-              <span class="font-semibold text-gray-900">Language Selector</span>
-               Display or hide language options on the landing interface.
-            </p>
+            <p class="text-sm leading-6 text-gray-600"><span class="font-semibold text-gray-900">Language Selector</span> – Display or hide language options.</p>
           </li>
-
           <li class="flex gap-x-3 sm:gap-x-6">
-            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <g id="Complete"><g id="tick"><polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g></g>
+            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
             </svg>
-            <p class="text-sm leading-6 text-gray-600">
-              <span class="font-semibold text-gray-900">Landing Page Bar</span>
-               Toggle a contextual bar at the top of the landing page.
-            </p>
+            <p class="text-sm leading-6 text-gray-600"><span class="font-semibold text-gray-900">Landing Page Bar</span> – Enable or disable the top bar on the landing page.</p>
           </li>
-
           <li class="flex gap-x-3 sm:gap-x-6">
-            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <g id="Complete"><g id="tick"><polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g></g>
+            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
             </svg>
-            <p class="text-sm leading-6 text-gray-600">
-              <span class="font-semibold text-gray-900">Header Bar</span>
-               Show or hide the ESW bar at the top of your site’s header.
-            </p>
+            <p class="text-sm leading-6 text-gray-600"><span class="font-semibold text-gray-900">Header Bar</span> – Control visibility of the ESW bar in your site’s header.</p>
           </li>
-
           <li class="flex gap-x-3 sm:gap-x-6">
-            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <g id="Complete"><g id="tick"><polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g></g>
+            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
             </svg>
-            <p class="text-sm leading-6 text-gray-600">
-              <span class="font-semibold text-gray-900">Footer Bar</span>
-                Control the display of the ESW footer bar across all pages.
-            </p>
+            <p class="text-sm leading-6 text-gray-600"><span class="font-semibold text-gray-900">Footer Bar</span> – Control visibility of the ESW bar in your site’s footer.</p>
           </li>
         </ul>
       </div>
     </div>
   </div>
 </div>
+
 
