@@ -394,62 +394,100 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
 <div class="bg-white py-24 sm:py-32">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-4xl text-center">
-      <h2 class="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Pricing plan</h2>
-      <p class="mx-auto mt-6 w-full max-w-2xl text-pretty text-xl leading-8 text-gray-600">Select from best plans, ensuring a perfect match. Need more or less? Customize your subscription for a seamless fit!</p>
+      <h2 class="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Retail Display Configuration</h2>
+      <p class="mx-auto mt-6 w-full max-w-2xl text-pretty text-xl leading-8 text-gray-600">
+        Manage site-level preferences for ESW’s landing page, header, and footer widgets. Activate or hide key display elements with ease, ensuring the right experience for your storefront.
+      </p>
     </div>
+
     <div class="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none lg:items-center lg:gap-x-20 lg:ring-0">
       <div class="p-2 lg:w-full lg:max-w-sm lg:shrink-0 lg:p-0">
         <div class="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:py-16">
           <div class="mx-auto max-w-xs px-8">
-            <p class="text-5xl font-semibold tracking-tight text-gray-900">$49.99</p>
-            <h3 id="package-premium" class="mt-4 text-lg font-medium text-gray-900">Premium package</h3>
+            <p class="text-5xl font-semibold tracking-tight text-gray-900">Site-wide</p>
+            <h3 id="package-premium" class="mt-4 text-lg font-medium text-gray-900">Configuration Bundle</h3>
             <div class="mt-8 h-px bg-gray-900/5"></div>
-            <p class="mt-8 text-sm leading-6 text-gray-600">Empowering your brand with standout visuals that leave an impact</p>
-            <a href="#" aria-describedby="package-premium" class="mt-8 block rounded-md bg-pink-500 px-3 py-2.5 text-center text-base font-medium tracking-tight text-white shadow-sm hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-500">Get started</a>
+            <p class="mt-8 text-sm leading-6 text-gray-600">Toggle visibility for the landing page, header and footer elements – all from one place.</p>
+            <a href="#" aria-describedby="package-premium" class="mt-8 block rounded-md bg-pink-500 px-3 py-2.5 text-center text-base font-medium tracking-tight text-white shadow-sm hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-500">
+              Save Preferences
+            </a>
           </div>
         </div>
       </div>
+
       <div class="-mt-2 p-8 sm:p-10 lg:mt-0 lg:flex-auto lg:p-0">
-        <p class="text-4xl font-semibold tracking-tight text-gray-900">Process</p>
-        <p class="mt-2 text-sm leading-6 text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+        <p class="text-4xl font-semibold tracking-tight text-gray-900">Preferences</p>
+        <p class="mt-2 text-sm leading-6 text-gray-600">
+          After updating any attribute below, be sure to click <strong>Save</strong> to apply the changes to your storefront.
+        </p>
         <ul class="mt-10 *:border-b *:border-gray-100 *:py-6">
-          <li class="flex gap-x-3 first:pt-0 last:border-0 last:pb-0 sm:gap-x-6">
-            <svg class="mt-2 h-5 w-5 flex-none text-primary" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <g id="Complete">
-                <g id="tick">
-                  <polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polyline>
-                </g>
-              </g>
+          <li class="flex gap-x-3 sm:gap-x-6">
+            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <g id="Complete"><g id="tick"><polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g></g>
             </svg>
             <p class="text-sm leading-6 text-gray-600">
-              <span class="font-semibold text-gray-900">Discovery Session</span>
-              – We delve deep into understanding your brand’s core values, goals, and target audience. Our aim is to align your brand’s identity with its visual representation.
+              <span class="font-semibold text-gray-900">Enable Landing Page</span>
+              – Show or hide the ESW Welcome Landing Page on your storefront.
             </p>
           </li>
-          <li class="flex gap-x-3 first:pt-0 last:border-0 last:pb-0 sm:gap-x-6">
+
+          <li class="flex gap-x-3 sm:gap-x-6">
             <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <g id="Complete">
-                <g id="tick">
-                  <polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polyline>
-                </g>
-              </g>
+              <g id="Complete"><g id="tick"><polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g></g>
             </svg>
             <p class="text-sm leading-6 text-gray-600">
-              <span class="font-semibold text-gray-900">Custom Design Concepts</span>
-              – Receive three unique design concepts tailored to your brand, with opportunities for refinement and feedback to ensure the perfect fit.
+              <span class="font-semibold text-gray-900">Country Selector</span>
+              – Allow shoppers to choose their shipping country on the landing page.
             </p>
           </li>
-          <li class="flex gap-x-3 first:pt-0 last:border-0 last:pb-0 sm:gap-x-6">
+
+          <li class="flex gap-x-3 sm:gap-x-6">
             <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <g id="Complete">
-                <g id="tick">
-                  <polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polyline>
-                </g>
-              </g>
+              <g id="Complete"><g id="tick"><polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g></g>
             </svg>
             <p class="text-sm leading-6 text-gray-600">
-              <span class="font-semibold text-gray-900">Deliverables</span>
-              – All final design files will be provided, including various formats suitable for both digital and print use. We ensure your brand assets are ready for immediate implementation.
+              <span class="font-semibold text-gray-900">Currency Selector</span>
+              – Toggle the visibility of the currency dropdown for user selection.
+            </p>
+          </li>
+
+          <li class="flex gap-x-3 sm:gap-x-6">
+            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <g id="Complete"><g id="tick"><polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g></g>
+            </svg>
+            <p class="text-sm leading-6 text-gray-600">
+              <span class="font-semibold text-gray-900">Language Selector</span>
+              – Display or hide language options on the landing interface.
+            </p>
+          </li>
+
+          <li class="flex gap-x-3 sm:gap-x-6">
+            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <g id="Complete"><g id="tick"><polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g></g>
+            </svg>
+            <p class="text-sm leading-6 text-gray-600">
+              <span class="font-semibold text-gray-900">Landing Page Bar</span>
+              – Toggle a contextual bar at the top of the landing page.
+            </p>
+          </li>
+
+          <li class="flex gap-x-3 sm:gap-x-6">
+            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <g id="Complete"><g id="tick"><polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g></g>
+            </svg>
+            <p class="text-sm leading-6 text-gray-600">
+              <span class="font-semibold text-gray-900">Header Bar</span>
+              – Show or hide the ESW bar at the top of your site’s header.
+            </p>
+          </li>
+
+          <li class="flex gap-x-3 sm:gap-x-6">
+            <svg class="mt-2 h-5 w-5 flex-none text-pink-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <g id="Complete"><g id="tick"><polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g></g>
+            </svg>
+            <p class="text-sm leading-6 text-gray-600">
+              <span class="font-semibold text-gray-900">Footer Bar</span>
+              – Control the display of the ESW footer bar across all pages.
             </p>
           </li>
         </ul>
@@ -457,3 +495,4 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
     </div>
   </div>
 </div>
+
