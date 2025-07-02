@@ -164,7 +164,7 @@ fullpage: true
   <!-- Grid -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 lg:items-center">
       <div class="aspect-w-16 aspect-h-9 lg:aspect-none">
-        <img class="w-full object-cover rounded-xl" src="https://images.unsplash.com/photo-1587614203976-365c74645e83?q=80&w=480&h=600&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Features Image">
+        <img class="w-full object-cover rounded-xl" src="/salesforce9.png" alt="Features Image">
       </div>
       <!-- End Col -->
 
@@ -215,13 +215,16 @@ fullpage: true
 
   <!-- Right Content -->
   <div class="grow pt-0.5 pb-8 sm:pb-12">
-            <p class="text-sm lg:text-base text-neutral-400">
-              <span class="text-white">Product Development and Testing:</span>
-              Develop digital products or services that address the needs and preferences of your target audience.
-            </p>
-          </div>
-          <!-- End Right Content -->
-        </div>
+  <p class="text-sm lg:text-base text-neutral-400">
+    <span class="text-white">Product Development and Testing:</span>
+    Develop digital products or services that address the needs and preferences of your target audience.
+  </p>
+
+  <!-- ✅ Image placed here, inside the grow div -->
+  <div class="mt-4">
+    <img src="/salesforcestep2.png" alt="Product Development Visual" class="w-full h-auto rounded-xl object-cover" />
+  </div>
+</div>
         <!-- End Item -->
 
   <!-- Item -->
