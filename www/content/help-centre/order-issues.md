@@ -218,7 +218,7 @@ fullpage: true
      <p class="text-lg text-gray-500 dark:text-gray-400">Two content slots appear in the search result.  
     Tailor tools and settings to fit your needs and preferences.</p>
 
-<img class="w-full h-auto scale-50 hover:scale-100 ease-in duration-500 rounded-xl" src="/salesforce9.png" alt="Features Image">
+<img class="w-full h-auto scale-100 hover:scale-200 ease-in duration-500 rounded-xl" src="/salesforce9.png" alt="Features Image">
   </div>
 </li>
           </ul>
