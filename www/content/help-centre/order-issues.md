@@ -257,6 +257,7 @@ fullpage: true
                     </div>
                     <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Create a free account</h3>
                     <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+                    <img class="w-full h-auto rounded-xl" src="/Screenshot 2025-06-30 182129.png" alt="Features Image">
                 </div>
 
   <div>
