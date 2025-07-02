@@ -396,23 +396,23 @@ Shopify’s *look and feel* with ESW’s international DTC capabilities.
   <div class="flex flex-col ">
    <div class="prose text-gray-500 prose-sm prose-headings:font-normal prose-headings:text-xl">
     <div>
-     <h1>Simplified markup</h1>
+     <h2>ESW Retailer Display Configuration</h2>
      <p class="text-balance">
-      See the code for this page to see how you can use Astro to simplify your markup.
+      Use custom preferences to manage ESW retailer display configurations.
      </p>
     </div>
    </div> <!-- Starts component -->
    <div class="mt-6 border-t pt-12">
     <div class="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-24 items-center ">
-     <div> <span class="text-gray-600  uppercase text-xs font-medium "> Because why not </span>
-      <p class="text-4xl mt-8 tracking-tighter font-semibold text-gray-700 text-balance"> Innovative financial solutions for every situation </p>
-      <p class="text-sm  mt-4 text-gray-700 text-balance"> Discover a variety of tools, services, and expert guidance tailored to your unique financial needs. </p>
+     <div> <span class="text-gray-600  uppercase text-xs font-medium "> This group enables or disables the functionality at the site level for the landing page, header, and footer. </span>
+      <p class="text-4xl mt-8 tracking-tighter font-semibold text-gray-700 text-balance"> Site Preferences </p>
+      <p class="text-sm  mt-4 text-gray-700 text-balance"> After adding or updating any value on the attributes, click Save to apply the changes. </p>
       <div class="mt-6 text-xs font-medium grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-2 text-gray-950">
        <div class="inline-flex items-center gap-2  text-xs text-gray-700"> <svg class="icon icon-tabler text-gray-700 size-4 icon-tabler-360" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
          <path d="M17 15.328c2.414 -.718 4 -1.94 4 -3.328c0 -2.21 -4.03 -4 -9 -4s-9 1.79 -9 4s4.03 4 9 4"></path>
          <path d="M9 13l3 3l-3 3"></path>
-        </svg> <span class="text-gray-950 font-medium text-sm"> Clear data visibility </span> </div>
+        </svg> <span class="text-gray-950 font-medium text-sm"> ESW Enable Landing Page: </span>  Select to show or hide the Welcome Landing Page at the storefront end. </div>
        <div class="inline-flex items-center gap-2  text-xs text-gray-700"> <svg class="icon icon-tabler text-gray-700 size-4 icon-tabler-antenna-bars-3" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
          <path d="M6 18l0 -3"></path>
