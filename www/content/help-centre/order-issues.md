@@ -214,13 +214,13 @@ fullpage: true
     <span class="flex justify-center items-center w-14 h-14 bg-blue-200/50 dark:bg-blue-600/30 text-lg font-bold rounded-full text-blue-600 dark:text-blue-300">2</span>
   </div>
   <div class="max-w-xs">
-    ### Enter esw  in the search box  
+     <h3 class="mb-2 text-lg font-bold text-gray-700 dark:text-gray-300">Enter esw  in the search box  
     Two content slots appear in the search result.  
-    Tailor tools and settings to fit your needs and preferences.
+    Tailor tools and settings to fit your needs and preferences.</h3>
 
     ::card
     ---
-    img: /og-nuxt.png
+    img: /image-20220124-103128.png
     ---
     #title
     Image Card
