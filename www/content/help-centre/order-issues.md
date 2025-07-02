@@ -232,8 +232,8 @@ fullpage: true
 <section class="py-10 bg-white sm:py-16 lg:py-24">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto text-center">
-            <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">How does it work?</h2>
-            <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
+            <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Configure Storefront Components</h2>
+            <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">After the site data is imported, two content slots are automatically added—one for the welcome landing page and another for the landing page content.</p>
         </div>
 
   <div class="relative mt-12 lg:mt-20">
@@ -246,25 +246,26 @@ fullpage: true
                     <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
                         <span class="text-xl font-semibold text-gray-700"> 1 </span>
                     </div>
-                    <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Create a free account</h3>
-                    <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
-                    <img class="w-full h-auto rounded-xl" src="/Screenshot 2025-06-30 182129.png" alt="Features Image">
+                    <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Verify content slots</h3>
+                    <p class="mt-4 text-base text-gray-600">Navigate to Merchant Tools > Online Marketing > Content Slots</p>
+                    <img class="w-full h-auto rounded-xl" src="//salesforce9.png" alt="Features Image">
                 </div>
 
   <div>
                     <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
                         <span class="text-xl font-semibold text-gray-700"> 2 </span>
                     </div>
-                    <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Build your website</h3>
-                    <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+                    <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Enter esw  in the search box</h3>
+                    <p class="mt-4 text-base text-gray-600">Two content slots appear in the search result. </p>
+                    <img class="w-full h-auto rounded-xl" src="//salesforcestep2.png" alt="Features Image">
                 </div>
 
   <div>
                     <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
                         <span class="text-xl font-semibold text-gray-700"> 3 </span>
                     </div>
-                    <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Release & Launch</h3>
-                    <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+                    <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Configure</h3>
+                    <p class="mt-4 text-base text-gray-600">Tailor tools and settings to fit your needs and preferences.</p>
                 </div>
             </div>
         </div>
