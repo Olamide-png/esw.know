@@ -716,7 +716,6 @@ Follow the following steps to configure landing page content
 <!-- Features -->
 <div class="max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 lg:py-4 mx-auto">
   <div class="aspect-w-16 aspect-h-7">
-    <img class="w-full object-cover rounded-xl" src="/AdobeStock_625824279.jpg" alt="Configuration Image">
   </div>
 
   <!-- Grid -->
@@ -842,7 +841,19 @@ Follow the following steps to configure landing page content
           </div>
         </div>
 
-      </div>
+   <!-- Icon Block -->
+  <div class="flex gap-x-5">
+  <svg class="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500" ...><!-- icon --></svg>
+  <div class="grow">
+    <h3 class="text-lg font-semibold text-gray-800 dark:text-white">ESW Client Secret</h3>
+    <p class="mt-1 text-gray-600 dark:text-neutral-400">
+      Stores the secret key used along with the client ID for secure authorization requests.
+    </p>
+  </div>
+</div>
+     
+
+</div>
     </div>
     <!-- End Col -->
   </div>
