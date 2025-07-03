@@ -243,21 +243,19 @@ fullpage: true
 
   <div class="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-3 gap-x-12">
                 <div>
-                    <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
-                        <span class="text-xl font-semibold text-gray-700"> 1 </span>
-                    </div>
-                    <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Verify content slots</h3>
-                    <p class="mt-4 text-base text-gray-600">Navigate to Merchant Tools > Online Marketing > Content Slots</p>
-                    <img class="w-full h-auto rounded-xl" src="//salesforce9.png" alt="Features Image">
+                    <div class="m-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-50">
+                <span class="font-bold text-xl text-green-600">1</span>
+            </div>
+                    <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Navigate</h3>
+                    <p class="mt-4 text-base text-gray-600">Merchant Tools > Site Preferences > Custom Preferences settings.</p>
                 </div>
 
   <div>
                     <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
                         <span class="text-xl font-semibold text-gray-700"> 2 </span>
                     </div>
-                    <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Enter esw  in the search box</h3>
-                    <p class="mt-4 text-base text-gray-600">Two content slots appear in the search result. </p>
-                    <img class="w-full h-auto rounded-xl" src="//salesforcestep2.png" alt="Features Image">
+                    <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Clink Link</h3>
+                    <p class="mt-4 text-base text-gray-600">Click on the ESW Retailer Display Configuration link. </p>
                 </div>
 
   <div>
@@ -265,7 +263,7 @@ fullpage: true
                         <span class="text-xl font-semibold text-gray-700"> 3 </span>
                     </div>
                     <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Configure</h3>
-                    <p class="mt-4 text-base text-gray-600">Tailor tools and settings to fit your needs and preferences.</p>
+                    <p class="mt-4 text-base text-gray-600">Configure the landing page-related custom preferences.</p>
                 </div>
             </div>
         </div>
