@@ -863,16 +863,63 @@ Follow the following steps to configure landing page content
 
   
 
-<div class="relative m-16">
-        <button class="absolute py-1 px-3 -left-8 -top-2 -rotate-[10deg] border border-black black_border bg-[#7e22ce] text-white font-bold">
-        ALERT!
-    </button>
-
-  <div class="purple_border p-8 border border-black">
-            The
-            <span class="font-mono text-purple-700 font-bold">message</span>
-            variable is a Laravel reserved word
-            within this email context,
-            so you should avoid using that as a field handle if you intend on using the email feature.
+<div class="relative max-w-sm">
+    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-green-500 rounded-lg"></span>
+    <div class="relative h-full p-3 bg-white border-2 border-green-500 rounded-lg">
+        <div class="flex items-center -mt-1">
+            <svg class="w-8 h-8 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                fill="currentColor" aria-hidden="true">
+                <path
+                    d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z">
+                </path>
+            </svg>
+            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">New content, more engagement</h3>
         </div>
+        <p class="my-2 text-gray-600">
+            Our AI will help you create engaging content that resonates
+            with your audience.
+        </p>
     </div>
+</div>
+
+
+<section class="py-24 relative">
+  <div class="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
+    <div class="w-full flex-col justify-start items-center lg:gap-11 gap-8 inline-flex">
+      <div class="w-full flex-col justify-start items-center gap-2.5 flex">
+        <h2 class="text-center text-gray-900 text-3xl font-bold font-manrope leading-normal">Integrations</h2>
+        <p class="max-w-4xl mx-auto text-center text-gray-500 text-lg font-normal leading-8">
+          Integrations refer to the process of combining different software systems or components to work together seamlessly. This involves connecting various applications.
+        </p>
+      </div>
+
+  <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 justify-start items-start gap-8">
+        <!-- Slack -->
+        <div class="w-full px-6 py-8 rounded-2xl border border-gray-200 hover:border-indigo-600 transition-all duration-700 ease-in-out justify-center items-center gap-2.5 flex">
+          <div class="flex-col justify-start items-center gap-3.5 inline-flex">
+            <a href="">
+              <!-- Slack icon SVG here -->
+            </a>
+            <h4 class="text-center text-gray-900 text-lg font-semibold leading-8">Slack</h4>
+            <p class="text-center text-gray-500 text-sm font-normal leading-snug">
+              Slack is a cloud-based collaboration platform designed to facilitate communication
+            </p>
+          </div>
+        </div>
+
+  <!-- GitLab -->
+  <div class="w-full px-6 py-8 rounded-2xl border border-gray-200 hover:border-indigo-600 transition-all duration-700 ease-in-out justify-center items-center gap-2.5 flex">
+          <div class="flex-col justify-start items-center gap-3.5 inline-flex">
+            <a href="">
+              <!-- GitLab icon SVG here -->
+            </a>
+            <h4 class="text-center text-gray-900 text-lg font-semibold leading-8">GitLab</h4>
+            <p class="text-center text-gray-500 text-sm font-normal leading-snug">
+              GitLab is a comprehensive DevOps platform that provides a complete solution for the entire software
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
