@@ -243,8 +243,8 @@ fullpage: true
 
   <div class="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-3 gap-x-12">
                 <div>
-                    <div class="m-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-50">
-                <span class="font-bold text-xl text-green-600">1</span>
+                    <div class="m-auto flex h-16 w-16 mx-auto items-center justify-center rounded-full shadow bg-green-50">
+                <span class="font-semibold text-xl text-green-600">1</span>
             </div>
                     <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Navigate</h3>
                     <p class="mt-4 text-base text-gray-600">Merchant Tools > Site Preferences > Custom Preferences settings.</p>
