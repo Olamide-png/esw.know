@@ -540,8 +540,8 @@ Follow the following steps to configure landing page content
                     The key class here is 'lg:sticky', which applies sticky positioning at the large breakpoint and above.
                  'pb-16 top-0' adds padding at the bottom and positions the sticky element at the top of the viewport when it reaches it during scrolling.
 
-                </div>
--->
+</div>
+
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-32 ">
    <div>
     <div class="lg:sticky lg:pb-16 top-0">
@@ -671,3 +671,129 @@ Follow the following steps to configure landing page content
   </div>
  </div> <!-- Ends links to tutorial -->
 </section>
+
+
+<div class="p-4">
+    <div
+        class="mx-auto flex h-[500px] max-w-[90rem] flex-col justify-center rounded-2xl bg-blue-500 bg-opacity-5 px-4 text-blue-500 dark:bg-opacity-20 md:h-[400px] lg:h-[500px]  relative border-4 border-blue-500">
+        <div class="pointer-events-none absolute left-0 top-0 z-[-1] h-full w-full rounded-xl bg-white dark:bg-black">
+        </div>
+        <span class="mb-8 text-center text-4xl font-bold">ESW General Configuration Site Preferences</span>
+        <ul
+            class="flex flex-wrap text-sm font-medium text-gray-700 dark:text-white sm:text-base md:mx-auto md:max-w-screen-sm">
+            <li class="my-1 flex w-1/2 items-center">
+                <svg class="mr-2 flex-shrink-0 text-blue-500" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                </svg>ESW Module Enabled: This is a mandatory attribute. It enables or disables the ESW Module at the site level.
+            </li>
+            <li class="my-1 flex w-1/2 items-center">
+                <svg class="mr-2 flex-shrink-0 text-blue-500" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                </svg>ESW Allowed Languages: The highlighted values represent languages to be considered as ESW Allowed Languages.
+            </li>
+            <li class="my-1 flex w-1/2 items-center">
+                <svg class="mr-2 flex-shrink-0 text-blue-500" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                </svg>ESW Base Currency: It sets the default/base currency at the site level.
+            </li>
+            <li class="my-1 flex w-1/2 items-center">
+                <svg class="mr-2 flex-shrink-0 text-blue-500" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                </svg>Enable Geo Lookup: This option enables or disables the geo IP lookup. If the geo lookup is enabled, the shopper’s current location is determined when they access the site for the first time. If disabled, the country selectors are preselected with the first options from the selectors.
+            </li>
+            <li class="my-1 flex w-1/2 items-center">
+                <svg class="mr-2 flex-shrink-0 text-blue-500" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                </svg>ESW Retailer Brand Code: This preference indicates the brand code of the current site
+            </li>
+            <li class="my-1 flex w-1/2 items-center">
+                <svg class="mr-2 flex-shrink-0 text-blue-500" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                </svg>ESW Client ID for the Authorization Request: Indicates the client ID.
+            </li>
+            <li class="my-1 flex w-1/2 items-center">
+                <svg class="mr-2 flex-shrink-0 text-blue-500" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                </svg>ESW Client Secret for Authorization Request: Indicates the client secret.
+            </li>
+            <li class="my-1 flex w-1/2 items-center">
+                <svg class="mr-2 flex-shrink-0 text-blue-500" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                </svg>ESW Basic Auth Enabled: This option enables or disables basic authentication. For Sandbox instance, the option uses the storefront basic authentication. if the storefront is protected, then the storefront credentials (username and password) are used for authentication. For the Production instance, the username and password are provided by ESW.
+            </li>
+            <li class="my-1 flex w-1/2 items-center">
+                <svg class="mr-2 flex-shrink-0 text-blue-500" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                </svg>ESW Basic Authentication User: This option stores the basic authentication username
+            </li>
+            <li class="my-1 flex w-1/2 items-center">
+                <svg class="mr-2 flex-shrink-0 text-blue-500" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                </svg>ESW Basic Authentication Password: This option stores the basic authentication password.
+            </li>
+            <li class="my-1 flex w-1/2 items-center">
+                <svg class="mr-2 flex-shrink-0 text-blue-500" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                </svg>ESW Enable Return Prohibition: This option enables or disables the return prohibition feature for the current site
+            </li>
+            <li class="my-1 flex w-1/2 items-center">
+                <svg class="mr-2 flex-shrink-0 text-blue-500" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                </svg>ESW Image Type: This option indicates the Image type to be displayed on checkout. By default, it is set to ‘small’ but retailers can customize it as well.
+            </li>
+            <li class="my-1 flex w-1/2 items-center">
+                <svg class="mr-2 flex-shrink-0 text-blue-500" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                </svg>ESW Country URL Parameter: This value represents the optional parameter name for the country code parameter in the URL.
+            </li>
+            <li class="my-1 flex w-1/2 items-center">
+                <svg class="mr-2 flex-shrink-0 text-blue-500" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                </svg>And many more
+            </li>
+            <li></li>
+        </ul>
+    </div>
+</div>
