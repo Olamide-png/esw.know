@@ -864,20 +864,13 @@ Follow the following steps to configure landing page content
   
 
 <div class="relative max-w-sm">
-    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-green-500 rounded-lg"></span>
-    <div class="relative h-full p-3 bg-white border-2 border-green-500 rounded-lg">
+    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-teal-500 rounded-lg"></span>
+    <div class="relative h-full p-3 bg-white border-2 border-teal-500 rounded-lg">
         <div class="flex items-center -mt-1">
-            <svg class="w-8 h-8 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                fill="currentColor" aria-hidden="true">
-                <path
-                    d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z">
-                </path>
-            </svg>
-            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">New content, more engagement</h3>
+            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">New shopper alert</h3>
         </div>
         <p class="my-2 text-gray-600">
-            Our AI will help you create engaging content that resonates
-            with your audience.
+            We noticed that you are currently accessing our website from a different country than your last visit. To view all the latest products and prices available in your area, please confirm your delivery country. If no changes are required, you can ignore this warning.
         </p>
     </div>
 </div>
