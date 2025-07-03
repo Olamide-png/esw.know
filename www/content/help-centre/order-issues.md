@@ -916,3 +916,15 @@ Follow the following steps to configure landing page content
     </div>
   </div>
 </section>
+
+::button-link{left-icon="lucide:ghost" variant="destructive" href="https://github.com/ZTL-UwU/shadcn-docs-nuxt" blank}
+  Ghost
+::
+
+::button-link{left-icon="lucide:ghost" variant="secondary" href="https://github.com/ZTL-UwU/shadcn-docs-nuxt" blank}
+  Ghost
+::
+
+::button-link{left-icon="lucide:ghost" variant="default" href="https://github.com/ZTL-UwU/shadcn-docs-nuxt" blank}
+  Ghost
+::
