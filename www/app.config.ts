@@ -3,7 +3,7 @@ export default defineAppConfig({
     site: {
       name: 'Knowledge Centre',
       description: 'ESW Knowledge Centre',
-      ogImage: '/hero.png',
+      ogImage: '/Screenshot 2025-07-04 144755.png',
       ogImageComponent: 'ShadcnDocs',
       ogImageColor: 'light',
       umami: {
