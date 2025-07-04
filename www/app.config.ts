@@ -47,9 +47,9 @@ export default defineAppConfig({
           icon: 'lucide:shopping-bag',
         }, {
           title: 'Salesforce Commerce Cloud',
-          to: '/integration/integration/overview.md',
-          description: 'Integrate with ESW services',
-          icon: 'lucide:cloud', 
+          to: '/sfcc-docs/pricing-models',
+          description: 'Integrate with Salesforce Commerce Cloud.',
+          icon: 'lucide:shopping-cart',
         }, {
           title: 'APIs',
           to: '/apis/customs-catalog-api/overview',
