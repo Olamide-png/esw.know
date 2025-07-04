@@ -16,7 +16,7 @@ actions:
     leftIcon: 'lucide:footprints'
   - name: Documentation
     variant: ghost
-    to: /shopify/integration/overview.md
+    to: /sfcc/sfcc-docs/pricing-models
     leftIcon: 'lucide:file-text'
 ---
 
