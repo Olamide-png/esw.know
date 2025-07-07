@@ -929,20 +929,36 @@ Follow the following steps to configure landing page content
   Ghost
 ::
 
+::card
+---
+icon: IconNuxt
+title: A complex card.
 ---
 
-### # Inline
-$E = mc^2$
+Default slot
 
-### # Centered
-When $a \ne 0$, there are two solutions to $(ax^2 + bx + c = 0)$ and they are
-$$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$
+#description
+  ::alert
+    Description slot
+  ::
+::
 
-### # Math Block
-```math
-L = \frac{1}{2} \rho v^2 S C_L
-```
+Inline Components
+:button-link[A button link]{.text-bold}
+<!-- or -->
+:button-link{.text-bold}[A button link]
 
+Span Text
+Hello [World]!
 
+Attributes
+Hello [World]{.text-primary-500}!
 
----
+[Link](#link){.text-primary-500 ref="noopener"}!
+
+**Bold Text**{style="color: tomato"}
+
+`Inline Code`{style="background: [#333](https://github.com/nuxtlabs/vscode-mdc/issues/333)"}
+
+_Italic Text_{#italic_text}
+
