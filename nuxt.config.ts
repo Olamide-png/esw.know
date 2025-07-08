@@ -51,7 +51,7 @@ export default defineNuxtConfig({
         default: 'light-plus',
         dark: 'dracula',
       },
-      preload: ['json', 'js', 'ts', 'html', 'css', 'vue', 'diff', 'shell', 'markdown', 'mdc', 'yaml', 'bash', 'ini', 'dotenv'],
+      preload: ['json', 'js', 'ts', 'html', 'css', 'vue', 'diff', 'shell', 'markdown', 'mdc', 'yaml', 'bash', 'ini', 'dotenv', 'python', 'xml', 'dockerfile', 'docker-compose'],
     },
     navigation: {
       fields: [

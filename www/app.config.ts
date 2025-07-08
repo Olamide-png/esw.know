@@ -144,6 +144,11 @@ export default defineAppConfig({
         'yml': 'vscode-icons:file-type-light-yaml',
         'json': 'vscode-icons:file-type-json',
         'terminal': 'lucide:terminal',
+        'sh': 'vscode-icons:file-type-shellscript',
+        'bash': 'vscode-icons:file-type-shellscript',
+        'dockerfile': 'vscode-icons:file-type-docker',
+        'docker-compose': 'vscode-icons:file-type-docker',
+        'xml': 'vscode-icons:file-type-xml',
       },
     },
     footer: {
