@@ -14,6 +14,10 @@ export default defineAppConfig({
     },
     theme: {
       customizable: true,
+      defaultColor: 'teal',
+      defaultColorLight: 'teal',
+      defaultColorDark: 'teal',
+      mode: 'light',
       color: 'teal',
       radius: 0.5,
     },
