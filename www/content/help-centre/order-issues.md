@@ -710,499 +710,84 @@ Follow the following steps to configure landing page content
   </div>
 </section>
 
-
-<h2 class="mt-1 text-3xl font-bold text-gray-800 dark:text-neutral-200 mb-2 text-center">ESW General Configuration</h2>
-
-<!-- Features -->
-<div class="max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 lg:py-4 mx-auto">
-  <div class="aspect-w-16 aspect-h-7">
-  </div>
-
-  <!-- Grid -->
-  <div class="mt-5 lg:mt-16 grid lg:grid-cols-3 gap-8 lg:gap-12">
-    <div class="lg:col-span-1">
-      <h2 class="font-bold text-2xl md:text-3xl text-gray-800 dark:text-neutral-200">
-        ESW General Configuration Site Preferences
-      </h2>
-      <p class="mt-2 md:mt-4 text-gray-800 dark:text-neutral-500">
-        You can use custom preferences to manage ESW-specific configurations of the cartridge.
-      </p>
-    </div>
-    <!-- End Col -->
-
-  <div class="lg:col-span-2">
-      <div class="grid sm:grid-cols-2 gap-8 md:gap-12">
-
-  <!-- Icon Block -->
-  <div class="flex gap-x-5">
-          <svg class="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500" ...><!-- icon --></svg>
-          <div class="grow">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">ESW Module Enabled</h3>
-            <p class="mt-1 text-gray-600 dark:text-neutral-400">Enables or disables the ESW Module at the site level. This is a mandatory attribute.</p>
+<!-- Slider -->
+<div class="px-4 sm:px-6 lg:px-8 py-10">
+  <div data-hs-carousel='{
+      "loadingClasses": "opacity-0"
+    }' class="relative">
+    <div class="hs-carousel relative overflow-hidden w-full h-120 md:h-[calc(100vh-106px)]  bg-gray-100 rounded-2xl dark:bg-neutral-800">
+      <div class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+        <!-- Item -->
+        <div class="hs-carousel-slide">
+          <div class="h-120 md:h-[calc(100vh-106px)]  flex flex-col bg-[url('https://images.unsplash.com/photo-1615615228002-890bb61cac6e?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center bg-no-repeat">
+            <div class="mt-auto w-2/3 md:max-w-lg ps-5 pb-5 md:ps-10 md:pb-10">
+              <span class="block text-white">Nike React</span>
+              <span class="block text-white text-xl md:text-3xl">Rewriting sport's playbook for billions of athletes</span>
+              <div class="mt-5">
+                <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl bg-white border border-transparent text-black hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" href="#">
+                  Read Case Studies
+                </a>
+              </div>
+            </div>
           </div>
         </div>
+        <!-- End Item -->
 
-  <!-- Icon Block -->
-  <div class="flex gap-x-5">
-          <svg class="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500" ...><!-- icon --></svg>
-          <div class="grow">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">ESW Allowed Languages</h3>
-            <p class="mt-1 text-gray-600 dark:text-neutral-400">Defines which languages are permitted for ESW. Highlighted values represent the allowed languages.</p>
+  <!-- Item -->
+  <div class="hs-carousel-slide">
+          <div class="h-120 md:h-[calc(100vh-106px)]  flex flex-col bg-[url('https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center bg-no-repeat">
+            <div class="mt-auto w-2/3 md:max-w-lg ps-5 pb-5 md:ps-10 md:pb-10">
+              <span class="block text-white">CoolApps</span>
+              <span class="block text-white text-xl md:text-3xl">From mobile apps to gaming consoles</span>
+              <div class="mt-5">
+                <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl bg-white border border-transparent text-black hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" href="#">
+                  Read Case Studies
+                </a>
+              </div>
+            </div>
           </div>
         </div>
+        <!-- End Item -->
 
-  <!-- Icon Block -->
-  <div class="flex gap-x-5">
-          <svg class="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500" ...><!-- icon --></svg>
-          <div class="grow">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">ESW Base Currency</h3>
-            <p class="mt-1 text-gray-600 dark:text-neutral-400">Sets the default base currency at the site level.</p>
+  <!-- Item -->
+  <div class="hs-carousel-slide">
+          <div class="h-120 md:h-[calc(100vh-106px)]  flex flex-col bg-[url('https://images.unsplash.com/photo-1629666451094-8908989cae90?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center bg-no-repeat">
+            <div class="mt-auto w-2/3 md:max-w-lg ps-5 pb-5 md:ps-10 md:pb-10">
+              <span class="block text-white">Grumpy</span>
+              <span class="block text-white text-xl md:text-3xl">Bringing Art to everything</span>
+              <div class="mt-5">
+                <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl bg-white border border-transparent text-black hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" href="#">
+                  Read Case Studies
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-
-  <!-- Icon Block -->
- <div class="flex gap-x-5">
-          <svg class="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500" ...><!-- icon --></svg>
-          <div class="grow">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Enable Geo Lookup</h3>
-            <p class="mt-1 text-gray-600 dark:text-neutral-400">Determines the shopper’s location using Geo IP lookup on their first visit. Defaults to first dropdown options if disabled.</p>
-          </div>
-        </div>
-
-  <!-- Icon Block -->
-  <div class="flex gap-x-5">
-          <svg class="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500" ...><!-- icon --></svg>
-          <div class="grow">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">ESW Retailer Brand Code</h3>
-            <p class="mt-1 text-gray-600 dark:text-neutral-400">Defines the brand code of the current site.</p>
-          </div>
-        </div>
-
-  <!-- Icon Block -->
-  <div class="flex gap-x-5">
-          <svg class="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500" ...><!-- icon --></svg>
-          <div class="grow">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Client ID & Secret</h3>
-            <p class="mt-1 text-gray-600 dark:text-neutral-400">Sets the ESW Client ID and Secret for authorization requests.</p>
-          </div>
-        </div>
-
-  <!-- Icon Block -->
-  <div class="flex gap-x-5">
-          <svg class="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500" ...><!-- icon --></svg>
-          <div class="grow">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">ESW Basic Auth Enabled</h3>
-            <p class="mt-1 text-gray-600 dark:text-neutral-400">Enables basic authentication. Sandbox uses storefront credentials; Production uses ESW-provided credentials.</p>
-          </div>
-        </div>
-
-  <!-- Icon Block -->
-  <div class="flex gap-x-5">
-          <svg class="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500" ...><!-- icon --></svg>
-          <div class="grow">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Basic Auth Credentials</h3>
-            <p class="mt-1 text-gray-600 dark:text-neutral-400">Stores the username and password used for basic authentication.</p>
-          </div>
-        </div>
-
-  <!-- Icon Block -->
-  <div class="flex gap-x-5">
-          <svg class="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500" ...><!-- icon --></svg>
-          <div class="grow">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">ESW Instance Switcher</h3>
-            <p class="mt-1 text-gray-600 dark:text-neutral-400">Select Sandbox or Production mode. Metadata fields are included only in Sandbox mode for preorder auth.</p>
-          </div>
-        </div>
-
-<!-- Icon Block -->
-  <div class="flex gap-x-5">
-          <svg class="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500" ...><!-- icon --></svg>
-          <div class="grow">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Enable Return Prohibition</h3>
-            <p class="mt-1 text-gray-600 dark:text-neutral-400">Controls whether the return prohibition feature is active for the site.</p>
-          </div>
-        </div>
-
-  <!-- Icon Block -->
-  <div class="flex gap-x-5">
-          <svg class="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500" ...><!-- icon --></svg>
-          <div class="grow">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">ESW Image Type</h3>
-            <p class="mt-1 text-gray-600 dark:text-neutral-400">Specifies the image type used at checkout. Default is 'small'.</p>
-          </div>
-        </div>
-
-  <!-- Icon Block -->
-  <div class="flex gap-x-5">
-          <svg class="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500" ...><!-- icon --></svg>
-          <div class="grow">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Country URL Parameter</h3>
-            <p class="mt-1 text-gray-600 dark:text-neutral-400">Sets an optional URL parameter name for the country code.</p>
-          </div>
-        </div>
-
-   <!-- Icon Block -->
-  <div class="flex gap-x-5">
-  <svg class="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500" ...><!-- icon --></svg>
-  <div class="grow">
-    <h3 class="text-lg font-semibold text-gray-800 dark:text-white">ESW Client Secret</h3>
-    <p class="mt-1 text-gray-600 dark:text-neutral-400">
-      Stores the secret key used along with the client ID for secure authorization requests.
-    </p>
-  </div>
-</div>
-     
-
-</div>
-    </div>
-    <!-- End Col -->
-  </div>
-  <!-- End Grid -->
-</div>
-<!-- End Features -->
-
-  
-
-<div class="relative max-w-sm">
-    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-teal-500 rounded-lg"></span>
-    <div class="relative h-full p-3 bg-white border-2 border-teal-500 rounded-lg">
-        <div class="flex items-center -mt-1">
-            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">New shopper alert</h3>
-        </div>
-        <p class="my-2 text-gray-600">
-            We noticed that you are currently accessing our website from a different country than your last visit. To view all the latest products and prices available in your area, please confirm your delivery country. If no changes are required, you can ignore this warning.
-        </p>
-    </div>
-</div>
-
-
-<section class="py-24 relative">
-  <div class="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
-    <div class="w-full flex-col justify-start items-center lg:gap-11 gap-8 inline-flex">
-      <div class="w-full flex-col justify-start items-center gap-2.5 flex">
-        <h2 class="text-center text-gray-900 text-3xl font-bold font-manrope leading-normal">Integrations</h2>
-        <p class="max-w-4xl mx-auto text-center text-gray-500 text-lg font-normal leading-8">
-          Integrations refer to the process of combining different software systems or components to work together seamlessly. This involves connecting various applications.
-        </p>
-      </div>
-
-  <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 justify-start items-start gap-8">
-        <!-- Slack -->
-        <div class="w-full px-6 py-8 rounded-2xl border border-gray-200 hover:border-indigo-600 transition-all duration-700 ease-in-out justify-center items-center gap-2.5 flex">
-          <div class="flex-col justify-start items-center gap-3.5 inline-flex">
-            <a href="">
-              <!-- Slack icon SVG here -->
-            </a>
-            <h4 class="text-center text-gray-900 text-lg font-semibold leading-8">Slack</h4>
-            <p class="text-center text-gray-500 text-sm font-normal leading-snug">
-              Slack is a cloud-based collaboration platform designed to facilitate communication
-            </p>
-          </div>
-        </div>
-
-  <!-- GitLab -->
-  <div class="w-full px-6 py-8 rounded-2xl border border-gray-200 hover:border-indigo-600 transition-all duration-700 ease-in-out justify-center items-center gap-2.5 flex">
-          <div class="flex-col justify-start items-center gap-3.5 inline-flex">
-            <a href="">
-              <!-- GitLab icon SVG here -->
-            </a>
-            <h4 class="text-center text-gray-900 text-lg font-semibold leading-8">GitLab</h4>
-            <p class="text-center text-gray-500 text-sm font-normal leading-snug">
-              GitLab is a comprehensive DevOps platform that provides a complete solution for the entire software
-            </p>
-          </div>
-        </div>
+        <!-- End Item -->
       </div>
     </div>
-  </div>
-</section>
 
-::button-link{left-icon="lucide:ghost" variant="destructive" href="https://github.com/ZTL-UwU/shadcn-docs-nuxt" blank}
-  Ghost
-::
-
-::button-link{left-icon="lucide:ghost" variant="secondary" href="https://github.com/ZTL-UwU/shadcn-docs-nuxt" blank}
-  Ghost
-::
-
-::button-link{left-icon="lucide:ghost" variant="default" href="https://github.com/ZTL-UwU/shadcn-docs-nuxt" blank}
-  Ghost
-::
-
-::card
----
-icon: IconNuxt
-title: A complex card.
----
-
-Default slot
-
-#description
-  ::alert
-    Description slot
-  ::
-::
-
-Inline Components
-:button-link[A button link]{.text-bold}
-<!-- or -->
-:button-link{.text-bold}[A button link]
-
-Span Text
-Hello [World]!
-
-Attributes
-Hello [World]{.text-primary-500}!
-
-[Link](#link){.text-primary-500 ref="noopener"}!
-
-**Bold Text**{style="color: tomato"}
-
-`Inline Code`{style="background: [#333](https://github.com/nuxtlabs/vscode-mdc/issues/333)"}
-
-_Italic Text_{#italic_text}
-
-<script setup lang="ts">
-import type { StepperItem } from '@nuxt/ui'
-
-const items: StepperItem[] = [
-  {
-    title: 'Address',
-    description: 'Add your address here',
-    icon: 'i-lucide-house'
-  }, {
-    title: 'Shipping',
-    description: 'Set your preferred shipping method',
-    icon: 'i-lucide-truck'
-  }, {
-    title: 'Checkout',
-    description: 'Confirm your order'
-  }
-]
-
-const stepper = useTemplateRef('stepper')
-</script>
-
-<template>
-  <div class="w-full">
-    <UStepper ref="stepper" :items="items">
-      <template #content="{ item }">
-        <Placeholder class="aspect-video">
-          {{ item.title }}
-        </Placeholder>
-      </template>
-    </UStepper>
-
-<div class="flex gap-2 justify-between mt-4">
-      <UButton
-        leading-icon="i-lucide-arrow-left"
-        :disabled="!stepper?.hasPrev"
-        @click="stepper?.prev()"
-      >
-        Prev
-      </UButton>
-
-  <UButton
-        trailing-icon="i-lucide-arrow-right"
-        :disabled="!stepper?.hasNext"
-        @click="stepper?.next()"
-      >
-        Next
-      </UButton>
-    </div>
-  </div>
-</template>
-
-<!-- Custom Style -->
-<style>
-.gallery-top .swiper-slide {
-    height: fit-content;
-    margin-right: 0px;
-}
-.swiper-wrapper{  
-  
-}
-.gallery-top .swiper-slide-active {
-  transform: scale(1.1);
-}      
-.swiper-button-prev:after, .swiper-rtl .swiper-button-next:after,
-.swiper-button-next:after, .swiper-rtl .swiper-button-prev:after{
-  content: ' ';
-}
-.swiper-button-next svg, .swiper-button-prev svg{
-  width: 20px;
-  height: 20px;
-}
-.swiper-button-next, .swiper-button-prev{
-  margin-top: 1px;
-}
-.swiper-button-prev, .swiper-rtl .swiper-button-next {
-  left: auto;
-}
-.swiper-button-next, .swiper-rtl .swiper-button-prev {
-  right: 10;
-}
-
-.swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction{
-bottom: var(--swiper-pagination-bottom,px);
-z-index: 10;
-color: transparent;
-left: 14px;
-}
-.swiper-pagination-current{
-color: black;
-}
-.gallery-top .swiper-slide .swiper-box {
-opacity: 0;
-transform: scale(1);
-}
-.gallery-top .swiper-slide-active .swiper-box {
-transform: scale(0.9);
-opacity: 1;
-}
-@media (max-width: 1920px){
-.gallery-top .swiper-slide-active .swiper-box{
-  opacity: 1;
-}
-} 
-</style>
-
-<section class="py-24 ">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 overflow-hidden">
-    <div class="pb-16">
-      <h2 class="w-full text-center text-gray-900 text-4xl font-bold font-manrope leading-loose pb-2.5">Our Gallery</h2>
-      <p class="w-full text-center text-gray-600 text-lg font-normal leading-8">Explore the essence of beauty in our gallery's intimate space.</p>
-    </div>
-  
-<!--Slider Wrapper-->
-<div class="mx-auto w-auto relative">
-    <button id="slider-button-left" class="top-[35%] swiper-button-prev w-11 h-11 p-3 xl:flex hidden shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] items-center justify-center border border-gray-300 rounded-lg group hover:bg-gray-900 transition-all duration-700 ease-in-out">
-      <svg class="text-gray-900 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M12.5002 14.9999L7.50005 9.99973L12.5032 4.99658" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+  <!-- Arrows -->
+  <button type="button" class="hs-carousel-prev hs-carousel-disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-12 h-full text-black hover:bg-white/20 rounded-s-2xl focus:outline-hidden focus:bg-white/20">
+      <span class="text-2xl" aria-hidden="true">
+        <svg class="shrink-0 size-3.5 md:size-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path>
+</svg>
+      </span>
+      <span class="sr-only">Previous</span>
     </button>
-    <div class="swiper-container gallery-top w-full md:w-[1028px] mx-auto xl:overflow-hidden pt-6">
-      <div class="swiper-wrapper w-max mx-auto mb-5 flex gap-3">
-        <div class="swiper-slide max-w-[319px] grid">
-          <img class="grow shrink basis-0 w-full rounded-xl object-cover" src="https://pagedone.io/asset/uploads/1712568734.png" alt="Watch image" />
-          <div class="swiper-box mx-auto relative flex-col justify-center items-center gap-1 flex mt-5">
-            <h5 class="w-full text-center text-gray-900 text-xl font-medium leading-loose">Golden&Sliver Metal Belt Watch </h5>
-            <p class="w-full text-center text-gray-600 text-base font-normal leading-relaxed">a chic and understated accessory for any occasion.</p>
-          </div>
-        </div>      
-        <div class="swiper-slide max-w-[319px] grid">
-          <img class="grow shrink basis-0 w-full rounded-xl object-cover" src="https://pagedone.io/asset/uploads/1712569721.png" alt="Watch image" />
-          <div class="swiper-box mx-auto relative flex-col justify-center items-center gap-1 flex mt-5">
-            <h5 class="w-full text-center text-gray-900 text-xl font-medium leading-loose">Golden Metal Belt Watch </h5>
-            <p class="w-full text-center text-gray-600 text-base font-normal leading-relaxed">a chic and understated accessory for any occasion.</p>
-          </div>
-        </div>
-        <div class="swiper-slide max-w-[319px] grid">
-          <img class="grow shrink basis-0  w-full rounded-xl object-cover" src="https://pagedone.io/asset/uploads/1712568744.png" alt="Watch image" />
-          <div class="swiper-box mx-auto relative flex-col justify-center items-center gap-1 flex mt-5">
-            <h5 class="w-full text-center text-gray-900 text-xl font-medium leading-loose">Sliver Metal Belt Watch </h5>
-            <p class="w-full text-center text-gray-600 text-base font-normal leading-relaxed">a chic and understated accessory for any occasion.</p>
-          </div>
-        </div>
-        <div class="swiper-slide max-w-[319px] grid">
-          <img class="grow shrink basis-0 w-full rounded-xl object-cover" src="https://pagedone.io/asset/uploads/1712568734.png" alt="Watch image" />
-          <div class="swiper-box mx-auto relative flex-col justify-center items-center gap-1 flex mt-5">
-            <h5 class="w-full text-center text-gray-900 text-xl font-medium leading-loose">Golden&Sliver Metal Belt Watch </h5>
-            <p class="w-full text-center text-gray-600 text-base font-normal leading-relaxed">a chic and understated accessory for any occasion.</p>
-          </div>
-        </div>
-        <div class="swiper-slide max-w-[319px] grid">
-          <img class="grow shrink basis-0 w-full rounded-xl object-cover" src="https://pagedone.io/asset/uploads/1712569721.png" alt="Watch image" />
-          <div class="swiper-box mx-auto relative flex-col justify-center items-center gap-1 flex mt-5">
-            <h5 class="w-full text-center text-gray-900 text-xl font-medium leading-loose">Golden Metal Belt Watch </h5>
-            <p class="w-full text-center text-gray-600 text-base font-normal leading-relaxed">a chic and understated accessory for any occasion.</p>
-          </div>
-        </div>
-        <div class="swiper-slide max-w-[319px] grid">
-          <img class="grow shrink basis-0 w-full rounded-xl object-cover" src="https://pagedone.io/asset/uploads/1712568734.png" alt="Watch image" />
-          <div class="swiper-box mx-auto relative flex-col justify-center items-center gap-1 flex mt-5">
-            <h5 class="w-full text-center text-gray-900 text-xl font-medium leading-loose">Golden&Sliver Metal Belt Watch </h5>
-            <p class="w-full text-center text-gray-600 text-base font-normal leading-relaxed">a chic and understated accessory for any occasion.</p>
-          </div>
-        </div>      
-        <div class="swiper-slide max-w-[319px] grid">
-          <img class="grow shrink basis-0 w-full rounded-xl object-cover" src="https://pagedone.io/asset/uploads/1712569721.png" alt="Watch image" />
-          <div class="swiper-box mx-auto relative flex-col justify-center items-center gap-1 flex mt-5">
-            <h5 class="w-full text-center text-gray-900 text-xl font-medium leading-loose">Golden Metal Belt Watch </h5>
-            <p class="w-full text-center text-gray-600 text-base font-normal leading-relaxed">a chic and understated accessory for any occasion.</p>
-          </div>
-        </div>
-        <div class="swiper-slide max-w-[319px] grid">
-          <img class="grow shrink basis-0  w-full rounded-xl object-cover" src="https://pagedone.io/asset/uploads/1712568744.png" alt="Watch image" />
-          <div class="swiper-box mx-auto relative flex-col justify-center items-center gap-1 flex mt-5">
-            <h5 class="w-full text-center text-gray-900 text-xl font-medium leading-loose">Sliver Metal Belt Watch </h5>
-            <p class="w-full text-center text-gray-600 text-base font-normal leading-relaxed">a chic and understated accessory for any occasion.</p>
-          </div>
-        </div>
-        <div class="swiper-slide max-w-[319px] grid">
-          <img class="grow shrink basis-0  w-full rounded-xl object-cover" src="https://pagedone.io/asset/uploads/1712568744.png" alt="Watch image" />
-          <div class="swiper-box mx-auto relative flex-col justify-center items-center gap-1 flex mt-5">
-            <h5 class="w-full text-center text-gray-900 text-xl font-medium leading-loose">Sliver Metal Belt Watch </h5>
-            <p class="w-full text-center text-gray-600 text-base font-normal leading-relaxed">a chic and understated accessory for any occasion.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button id="slider-button-right" class="swiper-button-next top-[35%] xl:flex hidden shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] w-11 h-11 items-center justify-center border border-gray-300 rounded-lg group  transition-all duration-700 ease-in-out hover:bg-gray-900">
-      <svg class="text-gray-900 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M7.50301 4.99637L12.5032 9.99657L7.50006 14.9997" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+
+  <button type="button" class="hs-carousel-next hs-carousel-disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-12 h-full text-black hover:bg-white/20 rounded-e-2xl focus:outline-hidden focus:bg-white/20">
+      <span class="sr-only">Next</span>
+      <span class="text-2xl" aria-hidden="true">
+        <svg class="shrink-0 size-3.5 md:size-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"></path>
+</svg>
+      </span>
     </button>
+    <!-- End Arrows -->
   </div>
 </div>
-</section>
-
-<!-- Initialize Swiper -->
-<script>
-$(document).ready(function() {
-  // Assign some jquery elements we'll need
-  var $swiper = $(".gallery-top");
-  var $bottomSlide = null; // Slide whose content gets 'extracted' and placed
-  // into a fixed position for animation purposes
-  var $bottomSlideContent = null; // Slide content that gets passed between the
-  // panning slide stack and the position 'behind'
-  // the stack, needed for correct animation style
-  var mySwiper = new Swiper(".gallery-top", {
-    spaceBetween: 20,
-    slidesPerView: 3,
-    parallax: true,
-    centeredSlides: true,
-    loop: true,
-    autoplay: true,
-    autoplaySpeed: 20,
-    slideToClickedSlide: true,
-    paginationClickable: true,
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
-    },
-    breakpoints: {
-      1920: {
-        slidesPerView: 3,
-        spaceBetween: 20,
-      },
-      1400: {
-        slidesPerView: 3,
-        spaceBetween: 20,
-        centeredSlides: true
-      },
-      900: {
-        slidesPerView: 3,
-        spaceBetween: 15,
-        centeredSlides: true
-      },
-      200: {
-        slidesPerView: 2,
-        spaceBetween: 15
-      }
-    },
-  });
-});
-</script>
+<!-- End Slider -->
                                             
 
