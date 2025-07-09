@@ -38,7 +38,7 @@ Follow these steps to enable and use this feature:
 
   You can use any valid HTML tag `<div>`{lang="html"} , `<span>`{lang="html"} , `<p>`{lang="html"} , etc.
 
-  ##### :smart-icon{name="braces" size=20} Add Optional Data Attributes for Control
+  ##### :smart-icon{name="lucide:braces" size=20} Add Optional Data Attributes for Control
 
   To override country adjustments or rounding behavior, use the following attributes:
 
@@ -49,7 +49,7 @@ Follow these steps to enable and use this feature:
   `<div data-disable-adjustments="true"</div>`{lang="html"} disables country-specific pricing adjustments. <br>
   `<div data-disable-rounding="true"</div>`{lang="html"} disables rounding rules.
 
-  ##### :smart-icon{name="arrow-left-right" size=20} Post-Conversion Behaviour
+  ##### :smart-icon{name="lucide:arrow-left-right" size=20} Post-Conversion Behaviour
 
    Once the ESW plugin converts the price, an additional class is added
 
