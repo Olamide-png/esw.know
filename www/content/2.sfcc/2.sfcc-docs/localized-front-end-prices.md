@@ -4,9 +4,9 @@ description: Enhance the localized experience for the shopper by converting fron
 icon: 'lucide:receipt-euro'
 ---
 
-The Localized Front-End Prices feature enhances the shopper experience by dynamically converting static front-end prices into localized values based on the shopper's country and currency. These front-end prices are typically found in **content slots**, **assets**, and **promotional call-out messages**. <br>
+The Localized Front-End Prices feature enhances the shopper experience by dynamically converting static front-end prices into localized values based on the shopper's country and currency. These front-end prices are typically found in **content slots/assets**, and **promotional call-out messages**. <br>
 
-With this feature, your **merchandising team** can display fully localized promotional messages and homepage banners without needing to manage separate content per country. This automation not only improves international shopper engagement but also reduces the operational overhead of manual content localization.
+With this feature, your **merchandising team** can display fully localized promotional messages and homepage banners on the storefront without needing to manage separate content per country. This feature not only improves international shopper engagement but also reduces the operational overhead of manual promotions and content localization.
 
 ## Benefits
 
