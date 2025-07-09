@@ -100,3 +100,27 @@ As a result, this feature can be safely used for shipping promotion call-out mes
 
 2. **Fixed Pricing & ESW Non-Supported Countries** <br>
   The price value remains unchanged, but the localized currency symbol is applied to reflect the shopper’s region.
+
+<div class="bg-white dark:bg-neutral-900 p-4 rounded-xl shadow-lg">
+<caption class="caption-center text-base font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+    </caption>
+<img class="w-full h-auto scale-100 hover:scale-140 ease-in duration-500 rounded-xl shadow-lg" src="/image-20210519-101647.png" alt="Features Image">
+</div>
+
+<br>
+
+<div class="bg-white dark:bg-neutral-900 p-4 rounded-xl shadow-lg">
+<caption class="caption-center text-base font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+No Conversion for Fixed Model Pricing and ESW Non-Supported Countries
+    </caption>
+<img class="w-full h-auto scale-100 hover:scale-140 ease-in duration-500 rounded-xl shadow-lg" src="/image-20210519-101706.png" alt="Features Image">
+</div>
+
+<br>
+
+<div class="bg-white dark:bg-neutral-900 p-4 rounded-xl shadow-lg">
+<caption class="caption-center text-base font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+Prices Converted for Dynamic/ Calculated Pricing Countries
+    </caption>
+<img class="w-full h-auto scale-100 hover:scale-140 ease-in duration-500 rounded-xl shadow-lg" src="/image-20210519-101722.png" alt="Features Image">
+</div>
