@@ -31,6 +31,8 @@ Follow these steps to enable and use this feature:
   ##### :smart-icon{name="lucide:file-code" size=20} Use the `esw-price` CSS Class in HTML Elements
 
   In **promotional call-out messages** or **content assets**, wrap hardcoded prices using HTML elements with the `esw-price class`.
+  
+  - Ensure that you incorporate the following HTML mark-up to configure Front-end prices in Promotional Call-out Messages and content assets
 
   ```html [HTML Elements]
   <div class="esw-price">$100</div>
@@ -59,11 +61,42 @@ Follow these steps to enable and use this feature:
    The `esw-price-converted` class can be used for styling or JavaScript hooks after the conversion is complete.
 ::
 
+### Rounding and Adjustment Behavior in Front-End Price Conversion
+
+By default, when using the Localized Front-End Prices feature, both rounding rules and country-specific adjustments are applied to the base currency value (e.g., **$100**) using data from the ESW Pricing Advisor.
+
+#### Controlling Adjustment Behavior with Optional Attributes
+
+If you want to **bypass** rounding or country-specific pricing adjustments, you can do so by adding the following optional data attributes to the HTML element:
+
+`<div data-disable-adjustments="true"</div>`{lang="html"} disables country-specific pricing adjustments. <br>
+`<div data-disable-rounding="true"</div>`{lang="html"} Disables price rounding based on configured rules.
+
+You may also selectively disable just one of the behaviors by setting either attribute accordingly.
+
+### Post-Conversion Markup Behavior
+
+After conversion, the ESW plugin automatically adds the `esw-price-converted` class to the element. This class can be used for **styling**, **tracking**, or **JavaScript-based event handling**.
+
+```html [HTML Example (After Conversion)]
+<div data-disable-adjustments="true" data-disable-rounding="false" class="esw-price esw-price-converted">$100</div>
+```
+
 ### Additional Considerations
 
-- This feature **does not apply** country, shipping method, cost, or shipping-related adjustments.
-- It is ideal for use in shipping promotions, home banners, or static promotional content.
-- Ensure that static prices are configured using the base currency.
-- For:
-  - Calculated Pricing Countries: Conversion is based on ESW Pricing Advisor FX data.
-  - Fixed Pricing or ESW Non-Supported Countries: The value remains unchanged, but the currency symbol is localized.
+- The ESW SFCC Plugin does not apply additional factors such as:
+   - Shipping method
+   - Shipping cost
+   - Country-specific adjustments
+
+As a result, this feature can be safely used for shipping promotion call-out messages and other shipping-related content assets without risk of incorrect price calculation.
+
+- Ensure that prices are configured in the base currency (e.g., USD or EUR).
+
+#### Behavior by Pricing Model
+
+- Dynamic/Calculated Pricing Countries
+  Prices are converted from the base currency to the localized currency using ESW Pricing Advisor data, which includes FX rates, rounding rules, and uplift configurations.
+
+- Fixed Pricing & ESW Non-Supported Countries
+  The price value remains unchanged, but the localized currency symbol is applied to reflect the shopper’s region.
