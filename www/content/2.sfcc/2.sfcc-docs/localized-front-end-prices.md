@@ -46,7 +46,7 @@ Follow these steps to enable and use this feature:
   <div data-disable-adjustments="true" data-disable-rounding="false" class="esw-price">$100</div>
   ```
 
-  `<div data-disable-adjustments="true"</div>`{lang="html"} disables country-specific pricing adjustments.
+  `<div data-disable-adjustments="true"</div>`{lang="html"} disables country-specific pricing adjustments. <br>
   `<div data-disable-rounding="true"</div>`{lang="html"} disables rounding rules.
 
   ##### :smart-icon{name="arrow-left-right" size=20} Post-Conversion Behaviour
@@ -58,3 +58,12 @@ Follow these steps to enable and use this feature:
    ```
    The `esw-price-converted` class can be used for styling or JavaScript hooks after the conversion is complete.
 ::
+
+### Additional Considerations
+
+- This feature **does not apply** country, shipping method, cost, or shipping-related adjustments.
+- It is ideal for use in shipping promotions, home banners, or static promotional content.
+- Ensure that static prices are configured using the base currency.
+- For:
+  - Calculated Pricing Countries: Conversion is based on ESW Pricing Advisor FX data.
+  - Fixed Pricing or ESW Non-Supported Countries: The value remains unchanged, but the currency symbol is localized.
