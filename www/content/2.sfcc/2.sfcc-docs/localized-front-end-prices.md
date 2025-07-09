@@ -61,11 +61,11 @@ Follow these steps to enable and use this feature:
    The `esw-price-converted` class can be used for styling or JavaScript hooks after the conversion is complete.
 ::
 
-### Rounding and Adjustment Behavior in Front-End Price Conversion
+### Rounding and Adjustment Behaviour in Front-End Price Conversion
 
 By default, when using the Localized Front-End Prices feature, both rounding rules and country-specific adjustments are applied to the base currency value (e.g., **$100**) using data from the ESW Pricing Advisor.
 
-#### Controlling Adjustment Behavior with Optional Attributes
+#### Controlling Adjustment Behaviour with Optional Attributes
 
 If you want to **bypass** rounding or country-specific pricing adjustments, you can do so by adding the following optional data attributes to the HTML element:
 
@@ -74,7 +74,7 @@ If you want to **bypass** rounding or country-specific pricing adjustments, you 
 
 You may also selectively disable just one of the behaviors by setting either attribute accordingly.
 
-### Post-Conversion Markup Behavior
+### Post-Conversion Markup Behaviour
 
 After conversion, the ESW plugin automatically adds the `esw-price-converted` class to the element. This class can be used for **styling**, **tracking**, or **JavaScript-based event handling**.
 
@@ -95,8 +95,8 @@ As a result, this feature can be safely used for shipping promotion call-out mes
 
 #### Behavior by Pricing Model
 
-- Dynamic/Calculated Pricing Countries
+1. **Dynamic/Calculated Pricing Countries** <br>
   Prices are converted from the base currency to the localized currency using ESW Pricing Advisor data, which includes FX rates, rounding rules, and uplift configurations.
 
-- Fixed Pricing & ESW Non-Supported Countries
+2. **Fixed Pricing & ESW Non-Supported Countries** <br>
   The price value remains unchanged, but the localized currency symbol is applied to reflect the shopper’s region.
