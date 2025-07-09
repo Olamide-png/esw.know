@@ -1,7 +1,7 @@
 ---
 title: Localized Front-End Prices
 description: Enhance the localized experience for the shopper by converting front-end prices into localized prices.
-icon: 'lucide:percent'
+icon: 'lucide:receipt-euro'
 ---
 
 The Localized Front-End Prices feature enhances the shopper experience by dynamically converting static front-end prices into localized values based on the shopper's country and currency. These front-end prices are typically found in **content slots**, **assets**, and **promotional call-out messages**. <br>
@@ -46,8 +46,8 @@ Follow these steps to enable and use this feature:
   <div data-disable-adjustments="true" data-disable-rounding="false" class="esw-price">$100</div>
   ```
 
-  `data-disable-adjustments="true"`{lang="html"} disables country-specific pricing adjustments.
-  `data-disable-rounding="true"`{lang="html"} disables rounding rules.
+  `<div data-disable-adjustments="true"</div>`{lang="html"} disables country-specific pricing adjustments.
+  `<div data-disable-rounding="true"</div>`{lang="html"} disables rounding rules.
 
   ##### :smart-icon{name="arrow-left-right" size=20} Post-Conversion Behaviour
 
