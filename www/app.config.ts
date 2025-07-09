@@ -51,7 +51,7 @@ export default defineAppConfig({
           icon: 'lucide:shopping-bag',
         }, {
           title: 'Salesforce Commerce Cloud',
-          to: '/sfcc/sfcc-docs/pricing-models',
+          to: '/sfcc/getting-started/abtasty-integration',
           description: 'Integrate with Salesforce Commerce Cloud.',
           icon: 'lucide:shopping-cart',
         }, {
