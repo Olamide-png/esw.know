@@ -16,7 +16,7 @@ actions:
     leftIcon: 'lucide:footprints'
   - name: Documentation
     variant: ghost
-    to: /sfcc/sfcc-docs/pricing-models
+    to: /sfcc/getting-started/abtasty-integration
     leftIcon: 'lucide:file-text'
 ---
 
