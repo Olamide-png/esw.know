@@ -30,7 +30,7 @@ toc: true
               <div class="min-w-0 flex-1 py-0">
                 <div class="text-md text-gray-500">
                   <div>
-                    <h2 class="font-extrabold text-2xl text-center text-gray-900 mr-2">v4.7.1</h2>
+                    <h2 class="font-extrabold text-2xl text-center text-gray-900 dark:text-white mr-2">v4.7.1</h2> <br>
                     <span class="my-0.5 relative inline-flex items-center bg-white rounded-full border border-gray-300 px-3 py-0.5 text-sm">
                       <div class="absolute flex-shrink-0 flex items-center justify-center">
                         <span class="h-1.5 w-1.5 rounded-full bg-green-500" aria-hidden="true"></span>
@@ -73,12 +73,12 @@ toc: true
                       <div class="absolute flex-shrink-0 flex items-center justify-center">
                         <span class="h-1.5 w-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>
                       </div>
-                      <div class="ml-3.5 font-medium text-gray-900 dark:text-white">Enhancements</div>
+                      <div class="ml-3.5 font-medium text-gray-900">Enhancements</div>
                     </a>
                   </div>
                   <span class="whitespace-nowrap text-sm"></span>
                 </div>
-                <div class="mt-2 text-gray-700">
+                <div class="mt-2 text-gray-700 dark:text-white">
                   <ul>
             <li>Default currency code for the selected country is now used if for any reason the esw.currency cookie is set to null.</li>
             <li>New custom attributes are added to support the native Japanese first name and last name, and article-level charges.</li>
