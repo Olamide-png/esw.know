@@ -30,7 +30,7 @@ fullpage: true
                       <div class="absolute flex-shrink-0 flex items-center justify-center">
                         <span class="h-1.5 w-1.5 rounded-full bg-green-500" aria-hidden="true"></span>
                       </div>
-                      <div class="ml-3.5 font-medium text-gray-900">Feature & Supported ESW Integrations
+                      <div class="ml-3.5 font-medium text-gray-900">Features & Supported ESW Integrations
 
 </div>
                     </a>
@@ -40,6 +40,25 @@ fullpage: true
                   <ul>
                     <li>ABTasty integration: Retailers can define and manage their A/B tests and personalization campaigns directly within the AB Tasty platform. Once configured, these tests and campaigns are seamlessly applied to the storefront, enabling dynamic content adjustments and user experience optimizations.</li>
                     <li>Net and Gross site taxation support for ESW orders: ESW cartridge now supports both net and gross site taxation models.</li>
+                  </ul>
+                </div>
+
+<div class="absolute flex-shrink-0 flex items-center justify-center">
+                        <span class="h-1.5 w-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>
+                      </div>
+                      <div class="ml-3.5 font-medium text-gray-900">Enhancements
+
+</div>
+                    </a>
+                  </div>
+                </div>
+                <div class="mt-2 text-gray-700">
+                  <ul>
+                    <li>Default currency code for the selected country is now used if for any reason the esw.currency cookie is set to null.</li>
+                    <li>New custom attributes are added to support the native Japanese first name and last name, and article-level charges.</li>
+                    <li>BM cartridge updated to conditionally display the SFTP or API catalog configuration fields based on the value of feature switch isEswCatalogFeatureEnabled</li>
+                    <li>Job eswRetailerCatalogFeed is updated to sync catalog using Catalog API if feature flag isEswCatalogFeatureEnabled is set to true and to sync catalog data using SFTP when it is set to false.</li>
+                    <li>Implemented backend logic to support cart rebuild functionality in the headless (OCAPI) cartridge.</li>
                   </ul>
                 </div>
               </div>
