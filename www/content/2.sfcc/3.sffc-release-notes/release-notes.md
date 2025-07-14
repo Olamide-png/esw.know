@@ -46,6 +46,9 @@ fullpage: true
         </div>
         <div class="ml-3.5 font-medium text-gray-900">Enhancements
         </div>
+            </div>
+          </div>
+        </div>
         <div class="mt-2 text-gray-700">
           <ul>
             <li>Default currency code for the selected country is now used if for any reason the esw.currency cookie is set to null.</li>
