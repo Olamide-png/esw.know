@@ -2,7 +2,7 @@
 title: Release Notes
 description: What's New
 icon: 'lucide:notebook-pen'
-fullpage: true
+aside: false
 toc: true
 ---
 
