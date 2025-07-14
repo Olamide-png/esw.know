@@ -30,8 +30,8 @@ fullpage: true
               <div class="min-w-0 flex-1 py-0">
                 <div class="text-md text-gray-500">
                   <div>
-                    <a href="#" class="font-medium text-gray-900 mr-2">v4.7.1</a>
-                    <a href="#" class="my-0.5 relative inline-flex items-center bg-white rounded-full border border-gray-300 px-3 py-0.5 text-sm">
+                    <span class="font-medium text-gray-900 mr-2">v4.7.1</span> <br>
+                    <span class="my-0.5 relative inline-flex items-center bg-white rounded-full border border-gray-300 px-3 py-0.5 text-sm">
                       <div class="absolute flex-shrink-0 flex items-center justify-center">
                         <span class="h-1.5 w-1.5 rounded-full bg-green-500" aria-hidden="true"></span>
                       </div>
@@ -40,7 +40,7 @@ fullpage: true
 </div>
                     </a>
                   </div>
-                  <span class="whitespace-nowrap text-sm">What's New</span>
+                  <span class="whitespace-nowrap text-sm"></span>
                 </div>
                 <div class="mt-2 text-gray-700">
                   <ul>
@@ -68,15 +68,15 @@ fullpage: true
               <div class="min-w-0 flex-1 py-0">
                 <div class="text-md text-gray-500">
                   <div>
-                    <a href="#" class="font-medium text-gray-900 mr-2"></a>
-                    <a href="#" class="my-0.5 relative inline-flex items-center bg-white rounded-full border border-gray-300 px-3 py-0.5 text-sm">
+                    <span class="font-medium text-gray-900 mr-2"></span>
+                    <span class="my-0.5 relative inline-flex items-center bg-white rounded-full border border-gray-300 px-3 py-0.5 text-sm">
                       <div class="absolute flex-shrink-0 flex items-center justify-center">
                         <span class="h-1.5 w-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>
                       </div>
                       <div class="ml-3.5 font-medium text-gray-900">Enhancements</div>
                     </a>
                   </div>
-                  <span class="whitespace-nowrap text-sm">General Enhancements</span>
+                  <span class="whitespace-nowrap text-sm"></span>
                 </div>
                 <div class="mt-2 text-gray-700">
                   <ul>
