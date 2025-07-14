@@ -29,7 +29,7 @@ fullpage: true
               <div class="min-w-0 flex-1 py-0">
                 <div class="text-md text-gray-500">
                   <div>
-                    <span class="font-bold text-xl text-gray-900 mr-2">v4.7.1</span> <br>
+                    <h2 class="font-extrabold text-2xl text-gray-900 mr-2">v4.7.1</h2> <br>
                     <span class="my-0.5 relative inline-flex items-center bg-white rounded-full border border-gray-300 px-3 py-0.5 text-sm">
                       <div class="absolute flex-shrink-0 flex items-center justify-center">
                         <span class="h-1.5 w-1.5 rounded-full bg-green-500" aria-hidden="true"></span>
@@ -143,7 +143,7 @@ fullpage: true
                     <span class="font-medium text-gray-900 mr-2"></span>
                     <span class="my-0.5 relative inline-flex items-center bg-white rounded-full border border-gray-300 px-3 py-0.5 text-sm">
                       <div class="absolute flex-shrink-0 flex items-center justify-center">
-                        <span class="h-1.5 w-1.5 rounded-full bg-red-500" aria-hidden="true"></span>
+                        <span class="h-1.5 w-1.5 rounded-full bg-blue-500" aria-hidden="true"></span>
                       </div>
                       <div class="ml-3.5 font-medium text-gray-900">Deprecated</div>
                     </a>
@@ -152,7 +152,7 @@ fullpage: true
                 </div>
                 <div class="mt-2 text-gray-700">
                   <ul>
-            <li>he deprecated httpRequest method is removed from the ESW SFCC Cartridge</li>
+            <li>The deprecated httpRequest method is removed from the ESW SFCC Cartridge</li>
           </ul>
         </li>
       </ul>
