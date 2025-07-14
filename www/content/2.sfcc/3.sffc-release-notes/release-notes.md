@@ -42,7 +42,7 @@ toc: true
                   </div>
                   <span class="whitespace-nowrap text-sm"></span>
                 </div>
-                <div class="mt-2 text-gray-700">
+                <div class="mt-2 text-gray-700 dark:text-neutral-300">
                   <ul>
             <li>ABTasty integration: Retailers can define and manage their A/B tests and personalization campaigns directly within the AB Tasty platform. Once configured, these tests and campaigns are seamlessly applied to the storefront, enabling dynamic content adjustments and user experience optimizations.</li>
             <li>Net and Gross site taxation support for ESW orders: ESW cartridge now supports both net and gross site taxation models.</li>
@@ -73,7 +73,7 @@ toc: true
                       <div class="absolute flex-shrink-0 flex items-center justify-center">
                         <span class="h-1.5 w-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>
                       </div>
-                      <div class="ml-3.5 font-medium text-gray-900">Enhancements</div>
+                      <div class="ml-3.5 font-medium text-gray-900 dark:text-white">Enhancements</div>
                     </a>
                   </div>
                   <span class="whitespace-nowrap text-sm"></span>
@@ -116,7 +116,7 @@ toc: true
                   </div>
                   <span class="whitespace-nowrap text-sm"></span>
                 </div>
-                <div class="mt-2 text-gray-700">
+                <div class="mt-2 text-gray-700 dark:text-white">
                   <ul>
             <li>Resolved an issue where an error occurred during order creation if the shipping method was not set at basket creation for OCAPI.</li>
             <li>Resolved an issue where the default address didn’t show up as the first address on checkout for registered shoppers.</li>
@@ -151,7 +151,7 @@ toc: true
                   </div>
                   <span class="whitespace-nowrap text-sm"></span>
                 </div>
-                <div class="mt-2 text-gray-700">
+                <div class="mt-2 text-gray-700 dark:text-white">
                   <ul>
             <li>The deprecated httpRequest method is removed from the ESW SFCC Cartridge</li>
           </ul>
