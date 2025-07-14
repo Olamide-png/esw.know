@@ -3,7 +3,6 @@ title: Release Notes
 description: What's New
 icon: 'lucide:notebook-pen'
 aside: false
-toc: true
 ---
 
 
