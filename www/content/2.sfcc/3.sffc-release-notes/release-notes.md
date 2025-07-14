@@ -10,8 +10,6 @@ fullpage: true
   <div class="max-w-xl mx-auto p-8">
     <div class="flow-root">
       <ul class="-mb-8">
-
-<li>
           <div class="relative pb-8">
             <span class="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
             <div class="relative flex items-start space-x-3">
@@ -27,7 +25,7 @@ fullpage: true
               <div class="min-w-0 flex-1 py-0">
                 <div class="text-md text-gray-500">
                   <div>
-                    <div class="font-medium text-gray-900 mr-2">v4.7.1</a>
+                    <div class="font-medium text-gray-900 mr-2">v4.7.1</div>
                     <div class="my-0.5 relative inline-flex items-center bg-white rounded-full border border-gray-300 px-3 py-0.5 text-sm">
                       <div class="absolute flex-shrink-0 flex items-center justify-center">
                         <span class="h-1.5 w-1.5 rounded-full bg-green-500" aria-hidden="true"></span>
