@@ -27,8 +27,8 @@ fullpage: true
               <div class="min-w-0 flex-1 py-0">
                 <div class="text-md text-gray-500">
                   <div>
-                    <a href="#" class="font-medium text-gray-900 mr-2">v4.7.1</a>
-                    <a href="#" class="my-0.5 relative inline-flex items-center bg-white rounded-full border border-gray-300 px-3 py-0.5 text-sm">
+                    <div class="font-medium text-gray-900 mr-2">v4.7.1</a>
+                    <div class="my-0.5 relative inline-flex items-center bg-white rounded-full border border-gray-300 px-3 py-0.5 text-sm">
                       <div class="absolute flex-shrink-0 flex items-center justify-center">
                         <span class="h-1.5 w-1.5 rounded-full bg-green-500" aria-hidden="true"></span>
                       </div>
@@ -39,8 +39,10 @@ fullpage: true
                   </div>
                 </div>
                 <div class="mt-2 text-gray-700">
-                  <p> - ABTasty integration: Retailers can define and manage their A/B tests and personalization campaigns directly within the AB Tasty platform. Once configured, these tests and campaigns are seamlessly applied to the storefront, enabling dynamic content adjustments and user experience optimizations.
-                  - Net and Gross site taxation support for ESW orders: ESW cartridge now supports both net and gross site taxation models</p>
+                  <ul>
+                    <li>ABTasty integration: Retailers can define and manage their A/B tests and personalization campaigns directly within the AB Tasty platform. Once configured, these tests and campaigns are seamlessly applied to the storefront, enabling dynamic content adjustments and user experience optimizations.</li>
+                    <li>Net and Gross site taxation support for ESW orders: ESW cartridge now supports both net and gross site taxation models.</li>
+                  </ul>
                 </div>
               </div>
             </div>
