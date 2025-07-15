@@ -150,6 +150,16 @@ export default defineAppConfig({
         'docker-compose': 'vscode-icons:file-type-docker',
         'xml': 'vscode-icons:file-type-xml',
       },
+      imagezoom: {
+        enable: true,
+        class: 'max-w-full',
+        zoomClass: 'max-w-full',
+        zoomStyle: {
+          width: '100%',
+          height: '100%',
+          objectFit: 'contain',
+        },
+      },
     },
     footer: {
       credits: 'FOOTER_CREDIT',
