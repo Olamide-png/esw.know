@@ -4,7 +4,7 @@ description: What's New
 icon: 'lucide:notebook-pen'
 ---
 
-
+## v4.7.1
 
 <!-- component -->
   <div class="max-w-xl mx-auto p-8">
