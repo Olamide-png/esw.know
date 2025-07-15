@@ -34,7 +34,7 @@ icon: 'lucide:notebook-pen'
                   <div>
                     <span class="my-0.5 relative inline-flex items-center bg-white rounded-full border border-gray-300 px-3 py-0.5 text-sm">
                       <div class="absolute flex-shrink-0 flex items-center justify-center">
-                        <span class="h-1.5 w-1.5 rounded-full bg-green-500" aria-hidden="true"></span>
+                        <span class="h-2 w-2 rounded-full bg-green-500" aria-hidden="true"></span>
                       </div>
                       <div class="ml-3.5 font-medium text-gray-900">Features & Supported ESW Integrations
 
@@ -72,7 +72,7 @@ icon: 'lucide:notebook-pen'
                     <span class="font-medium text-gray-900 mr-2"></span>
                     <span class="my-0.5 relative inline-flex items-center bg-white rounded-full border border-gray-300 px-3 py-0.5 text-sm">
                       <div class="absolute flex-shrink-0 flex items-center justify-center">
-                        <span class="h-1.5 w-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>
+                        <span class="h-2 w-2 rounded-full bg-amber-500" aria-hidden="true"></span>
                       </div>
                       <div class="ml-3.5 font-medium text-gray-900">Enhancements</div>
                     </a>
@@ -110,7 +110,7 @@ icon: 'lucide:notebook-pen'
                     <span class="font-medium text-gray-900 mr-2"></span>
                     <span class="my-0.5 relative inline-flex items-center bg-white rounded-full border border-gray-300 px-3 py-0.5 text-sm">
                       <div class="absolute flex-shrink-0 flex items-center justify-center">
-                        <span class="h-1.5 w-1.5 rounded-full bg-red-500" aria-hidden="true"></span>
+                        <span class="h-2 w-2 rounded-full bg-red-500" aria-hidden="true"></span>
                       </div>
                       <div class="ml-3.5 font-medium text-gray-900">Bug Fixes</div>
                     </a>
@@ -145,9 +145,9 @@ icon: 'lucide:notebook-pen'
                     <span class="font-medium text-gray-900 mr-2"></span>
                     <span class="my-0.5 relative inline-flex items-center bg-white rounded-full border border-gray-300 px-3 py-0.5 text-sm">
                       <div class="absolute flex-shrink-0 flex items-center justify-center">
-                        <span class="h-1.5 w-1.5 rounded-full bg-blue-500" aria-hidden="true"></span>
+                        <span class="h-2 w-2 rounded-full bg-indigo-500" aria-hidden="true"></span>
                       </div>
-                      <div class="ml-3.5 font-medium text-gray-900">Deprecated</div>
+                      <div class="ml-3.5 font-medium text-gray-900">Removed</div>
                     </a>
                   </div>
                   <span class="whitespace-nowrap text-sm"></span>
