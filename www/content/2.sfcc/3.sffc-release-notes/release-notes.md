@@ -154,7 +154,7 @@ icon: 'lucide:notebook-pen'
                 </div>
                 <div class="mt-2 text-gray-700 dark:text-white">
                   <ul>
-            <li>The deprecated httpRequest method is removed from the ESW SFCC Cartridge</li>
+            <li>The deprecated `httpRequest` method is removed from the ESW SFCC Cartridge</li>
           </ul>
         </li>
       </ul>
@@ -184,3 +184,7 @@ icon: 'lucide:notebook-pen'
 <br>
 
 ## v4.7.0
+
+<br>
+
+:badge[2025-06-27]{variant="secondary"}
