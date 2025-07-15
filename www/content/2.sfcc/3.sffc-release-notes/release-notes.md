@@ -28,7 +28,6 @@ icon: 'lucide:notebook-pen'
               <div class="min-w-0 flex-1 py-0">
                 <div class="text-md text-gray-500">
                   <div>
-                    <h2 class="font-extrabold text-2xl text-center text-gray-900 dark:text-white mr-2">v4.7.1</h2> <br>
                     <span class="my-0.5 relative inline-flex items-center bg-white rounded-full border border-gray-300 px-3 py-0.5 text-sm">
                       <div class="absolute flex-shrink-0 flex items-center justify-center">
                         <span class="h-1.5 w-1.5 rounded-full bg-green-500" aria-hidden="true"></span>
