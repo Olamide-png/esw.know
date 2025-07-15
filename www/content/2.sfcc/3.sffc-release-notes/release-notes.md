@@ -162,6 +162,8 @@ icon: 'lucide:notebook-pen'
   </div>
 </div>
 
+---
+
 <br>
 
 <div class="text-center">
