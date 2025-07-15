@@ -167,8 +167,7 @@ icon: 'lucide:notebook-pen'
 #### Configuration/System Object Enhancements
 
 - Line Item Custom attributes
-
-ESW Article Charges
+- ESW Article Charges
 
 #### Shipping Address Custom attributes
 
