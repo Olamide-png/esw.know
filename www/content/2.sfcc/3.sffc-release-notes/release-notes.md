@@ -5,6 +5,7 @@ icon: 'lucide:notebook-pen'
 ---
 
 ## v4.7.1
+:badge[Secondary]{variant="2025-07-06"}
 
 <!-- component -->
   <div class="max-w-xl mx-auto p-8">
@@ -157,3 +158,6 @@ icon: 'lucide:notebook-pen'
     </div>
   </div>
 </div>
+
+
+## v4.7.0
