@@ -164,18 +164,18 @@ icon: 'lucide:notebook-pen'
 
 ---
 
-### Configuration/System Object Enhancements
+#### Configuration/System Object Enhancements
 
 - Line Item Custom attributes
 
 ESW Article Charges
 
-### Shipping Address Custom attributes
+#### Shipping Address Custom attributes
 
 - Native First Name for Japanese
 - Native Last Name for Japanes
 
-### Custom Site Preferences - ESW Retailer Display Configuration:
+#### Custom Site Preferences - ESW Retailer Display Configuration:
 
 - ESW AB Tasty Script Path
 
