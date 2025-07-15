@@ -162,7 +162,7 @@ icon: 'lucide:notebook-pen'
   </div>
 </div>
 
----
+<br>
 
 <div class="text-center">
   
@@ -182,6 +182,6 @@ ESW AB Tasty Script Path
 
 </div>
 
-
+<br>
 
 ## v4.7.0
