@@ -12,11 +12,11 @@ announcement:
   title: 'SFCC'
 actions:
   - name: Quick Start Guide
-    to: /sfcc/getting-started/storefront-components
+    to: /sfcc/getting-started-with-sfcc/getting-started/storefront-components
     leftIcon: 'lucide:footprints'
   - name: Documentation
     variant: ghost
-    to: /sfcc/getting-started/abtasty-integration
+    to: /sfcc/getting-started-with-sfcc/ref-infornation/esw-apis-in-the-cartridge
     leftIcon: 'lucide:file-text'
 ---
 
