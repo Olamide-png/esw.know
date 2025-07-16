@@ -1,6 +1,6 @@
 title: configuration
 description: Get started with Salesforce Commerce Cloud (SFCC) and integrate it with ESW.
-icon: lucide:cable
+icon: lucide:file-sliders
 navigation.redirect: /sfcc/configuration/siteGenesis
 
 
