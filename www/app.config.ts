@@ -51,7 +51,7 @@ export default defineAppConfig({
           icon: 'lucide:shopping-bag',
         }, {
           title: 'Salesforce Commerce Cloud',
-          to: '/sfcc/getting-started-with-sfcc/ref-infornation/esw-apis-in-the-cartridge',
+          to: '/sfcc/getting-started-with-sfcc/esw-apis-in-the-cartridge',
           description: 'Integrate with Salesforce Commerce Cloud.',
           icon: 'lucide:shopping-cart',
         }, {

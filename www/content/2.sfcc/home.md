@@ -16,7 +16,7 @@ actions:
     leftIcon: 'lucide:footprints'
   - name: Documentation
     variant: ghost
-    to: /sfcc/getting-started-with-sfcc/ref-infornation/esw-apis-in-the-cartridge
+    to: /sfcc/getting-started-with-sfcc/esw-apis-in-the-cartridge
     leftIcon: 'lucide:file-text'
 ---
 
