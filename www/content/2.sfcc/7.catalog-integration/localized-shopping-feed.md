@@ -64,8 +64,8 @@ Follow these steps to test the localized shopping feed job in your SFCC instance
 - Set up all required configurations.
 
 ::div{class="p-4"}
-  ![No Zooming Image](/e92c739c-365f-4879-beae-aaa7604e2aae (1) (1).png){:zoom="true"}
-  ::
+![No Zooming Image](/e92c739c-365f-4879-beae-aaa7604e2aae (1) (1).png){:zoom="true"}
+::
 
 #### :smart-icon{name="streamline-ultimate-color:server-star-1" size=45} Set Product Attribute Mapping  
 
