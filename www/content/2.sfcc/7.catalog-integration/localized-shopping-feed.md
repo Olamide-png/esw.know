@@ -46,19 +46,19 @@ Follow these steps to test the localized shopping feed job in your SFCC instance
 
 ::steps{:level="4"}
 
-#### :smart-icon{name="twemoji:world-map" size=45} Enable Country-Level Support  
+#### :smart-icon{name="twemoji:world-map" size=55} Enable Country-Level Support  
 
 - Navigate to **Merchant Tools > Custom Objects > ESW_COUNTRIES**
 - Open the relevant country record.
 - Enable the checkbox: **Is Localized Shopping Feed Supported?**
 
 
-#### :smart-icon{name="streamline-ultimate-color:products-gifts" size=45} Enable Product-Level Support  
+#### :smart-icon{name="streamline-ultimate-color:products-gifts" size=55} Enable Product-Level Support  
 
 - Go to the product(s) you wish to include in the feed.
 - Set the following attribute **ESW Localized Shopping Product = true**
 
-#### :smart-icon{name="streamline-ultimate-color:tags-settings" size=45} Configure Feed Settings  
+#### :smart-icon{name="streamline-ultimate-color:tags-settings" size=55} Configure Feed Settings  
 
 - Navigate to **Merchant Tools > Custom Preferences > ESW Localized Shopping Feed Configuration**
 - Set up all required configurations.
@@ -67,7 +67,7 @@ Follow these steps to test the localized shopping feed job in your SFCC instance
 ![No Zooming Image](/e92c739c-365f-4879-beae-aaa7604e2aae (1) (1).png){:zoom="true"}
 ::
 
-#### :smart-icon{name="streamline-ultimate-color:server-star-1" size=45} Set Product Attribute Mapping  
+#### :smart-icon{name="streamline-ultimate-color:server-star-1" size=55} Set Product Attribute Mapping  
 
 - Add the custom field mappings using the following JSON structure:
 
@@ -80,7 +80,7 @@ Follow these steps to test the localized shopping feed job in your SFCC instance
 }
 ```
 
-#### :smart-icon{name="streamline-emojis:robot-face-3" size=45} Run the Feed Job  
+#### :smart-icon{name="streamline-emojis:robot-face-3" size=55} Run the Feed Job  
 
 - Navigate to:  
   **Administration > Jobs**
@@ -88,7 +88,7 @@ Follow these steps to test the localized shopping feed job in your SFCC instance
   **eswLocalizedShoppingFeed**
 
 
-#### :smart-icon{name="streamline-ultimate-color:check-badge" size=45} Validate the Generated Feed  
+#### :smart-icon{name="streamline-ultimate-color:check-badge" size=55} Validate the Generated Feed  
 
 - Navigate to the following path:  
   **/Impex/src/shopping-feeds/**
