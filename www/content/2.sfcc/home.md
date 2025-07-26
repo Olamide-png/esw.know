@@ -42,8 +42,8 @@ Self-manage site configuration, including the welcome mat configuration, landing
 
 ::card
 ---
-icon: 'lucide:unplug'
-icon-size: 30
+icon: 'fxemoji:tapecartridge'
+icon-size: 65
 horizontal: true
 ---
 
@@ -58,7 +58,8 @@ Enables you to configure shipping method pricing, override price books, enable o
   ::card{variant="blue"}
   ---
   title: Localized Experience
-  icon: lucide:globe
+  icon: openmoji:world-map
+  icon-size: 65
   ---
   Supports welcome mat, header/footer widgets, and GEO IP detection for personalized international shopper experiences.
   ::
@@ -66,7 +67,8 @@ Enables you to configure shipping method pricing, override price books, enable o
   ::card{class="bg-green-50 dark:bg-green-950"}
   ---
   title: Localized Pricing
-  icon: lucide:dollar-sign
+  icon: streamline-ultimate-color:wireless-payment-credit-card-dollar
+  icon-size: 65
   ---
   Integrated with ESW’s Pricing Advisor to generate accurate, localized prices including FX, duties, taxes, and uplifts.
   ::
@@ -74,7 +76,8 @@ Enables you to configure shipping method pricing, override price books, enable o
   ::card{class="bg-purple-50 dark:bg-purple-950"}
   ---
   title: Price Book Management
-  icon: lucide:book-open
+  icon: streamline-ultimate-color:monetization-tablet-dollar
+  icon-size: 65
   ---
   Supports master price books and localized variations to streamline global pricing strategies.
   ::
@@ -82,7 +85,8 @@ Enables you to configure shipping method pricing, override price books, enable o
   ::card{class="bg-yellow-50 dark:bg-yellow-950"}
   ---
   title: Promotions in Local Currency
-  icon: lucide:percent
+  icon: streamline-ultimate-color:cash-payment-coin-dollar
+  icon-size: 65
   ---
   Enable country-specific promotions in shopper currency beyond SFCC’s default settings.
   ::
@@ -90,7 +94,8 @@ Enables you to configure shipping method pricing, override price books, enable o
   ::card{class="bg-rose-50 dark:bg-rose-950"}
   ---
   title: Shipping & Sync
-  icon: lucide:package
+  icon: streamline-ultimate-color:delivery-truck-3
+  icon-size: 65
   ---
   Configure shipping overrides, sync catalog and ASN data automatically using Catalog 2.0 and Package API.
   ::
@@ -98,7 +103,8 @@ Enables you to configure shipping method pricing, override price books, enable o
   ::card{class="bg-lime-50 dark:bg-lime-950"}
   ---
   title: Product Controls
-  icon: lucide:shield-ban
+  icon: streamline-ultimate-color:shield-globe
+  icon-size: 65
   ---
   Restrict product visibility by country and control catalog exposure by region.
   ::
