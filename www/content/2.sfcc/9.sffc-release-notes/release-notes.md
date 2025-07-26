@@ -181,7 +181,7 @@ icon: 'lucide:notebook-pen'
 
 - ESW AB Tasty Script Path
 
-<br>
+---
 
 ## v4.7.0
 
