@@ -85,40 +85,16 @@ Common Queries
   ::div{label="PostgreSQL" icon="lucide:database"}
   
 
-  ```ts
-  import { integer, pgTable } from 'drizzle-orm/pg-core';
-
-  export const table = pgTable('table', {
-    int: integer('int')
-  });
-  ```
+  
   ::
-  ::div{label="MySQL"}
+  ::div{label="MySQL" icon="lucide:database}
   
 
-  ```ts
-  import { int, mysqlTable } from 'drizzle-orm/mysql-core';
-
-  const table = mysqlTable('table', {
-    int: int('int')
-  });
-  ```
+  
   ::
-  ::div{label="SQLite"}
+  ::div{label="SQLite" icon="lucide:database}
   
 
-  ```ts
-  import { integer, sqliteTable } from 'drizzle-orm/sqlite-core';
-
-  const table = sqliteTable('table', {
-    id: integer('id')
-  });
-
-  // you can customize integer mode to be number, boolean, timestamp, timestamp_ms
-  integer('id', { mode: 'number' });
-  integer('id', { mode: 'boolean' });
-  integer('id', { mode: 'timestamp_ms' });
-  integer('id', { mode: 'timestamp' }); // Date
-  ```
+  
   ::
 ::
