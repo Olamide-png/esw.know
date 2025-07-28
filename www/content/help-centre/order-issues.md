@@ -17,12 +17,6 @@ actions:
     to: /getting-started
 mobileRight: 'top' # 'top' | 'bottom'
 ---
-
-#title
-Order Issues
-
-#description
-Common Queries
 ::
 
 <div>
