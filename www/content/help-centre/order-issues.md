@@ -28,7 +28,7 @@ Order Issues
 Common Queries
 
 #right
-![order-issues-logo](/online-delivery-service-concept-order-tracking-illustration-vector.jpg)
+<img src="/concept-online-delivery-service-online-order-tracking-home-office-delivery_148553-295.avif" alt="order-issues-logo" style="max-width: 320px; width: 100%; height: auto;" />
 ::
 
 
