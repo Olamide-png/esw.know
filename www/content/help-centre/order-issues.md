@@ -82,17 +82,17 @@ Common Queries
 
 
 ::tabs
-  ::div{label="PostgreSQL" icon="lucide:database"}
+  ::div{label="Tracking an Order" icon="streamline-ultimate-color:delivery-truck-3"}
   
 
   
   ::
-  ::div{label="MySQL" icon="lucide:database"}
+  ::div{label="Missing or Delayed Order" icon="streamline-emojis:package"}
   
 
   
   ::
-  ::div{label="SQLite" icon="lucide:database"}
+  ::div{label="Report Order Discrepancies" icon="streamline-ultimate-color:alarm-bell-ring"}
   
 
   
