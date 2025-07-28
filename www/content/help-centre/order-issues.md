@@ -58,7 +58,7 @@ mobileRight: 'top' # 'top' | 'bottom'
   - Out for Delivery
   - Delivered
 
-  This allows you to easily monitor each stage of your order as it progresses to your delivery address.
+  This allows you to monitor each stage of your order as it progresses to your delivery address.
   ::
   
   ::
