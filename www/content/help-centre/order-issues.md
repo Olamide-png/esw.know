@@ -27,7 +27,7 @@ Order Issues
 Common Queries
 
 #right
-<![logo](/online-delivery-service-concept-order-tracking-tiny-people-are-couriers-and-customers-modern-flat-cartoon-style-illustration-on-white-background-vector.jpg)
+<![logo](/delivery-man-checking-package-address-the-delivery-man-prepares-to-deliver-the-parcel-illustration-vector.jpg)
 ::
 
 
