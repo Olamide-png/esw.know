@@ -47,6 +47,18 @@ mobileRight: 'top' # 'top' | 'bottom'
   </kbd>
 
   #### :smart-icon{name="streamline-ultimate-color:app-window-two" size=50} Confirmation screen
+
+  #### :smart-icon{name="streamline-ultimate-color:delivery-truck-cargo" size=50} Tracking Status
+  
+  The Tracking Portal provides a detailed overview of your order’s journey. In the All Updates section, you can view every event related to your order, including detailed descriptions about its status and location.
+  These events are grouped into four main milestone tracking events, displayed on a progressive roadmap for easy reference:
+  
+  - Shipped
+  - In Transit
+  - Out for Delivery
+  - Delivered
+  
+  This allows you to easily monitor each stage of your order as it progresses to your delivery address.
   ::
   
   ::
@@ -63,19 +75,7 @@ mobileRight: 'top' # 'top' | 'bottom'
 
 
 
-  ::
-
-  #### :smart-icon{name="streamline-ultimate-color:delivery-truck-cargo" size=50} Tracking Status
-  
-  The Tracking Portal provides a detailed overview of your order’s journey. In the All Updates section, you can view every event related to your order, including detailed descriptions about its status and location.
-  These events are grouped into four main milestone tracking events, displayed on a progressive roadmap for easy reference:
-  
-  - Shipped
-  - In Transit
-  - Out for Delivery
-  - Delivered
-  
-  This allows you to easily monitor each stage of your order as it progresses to your delivery address.
+  ::  
 ::
 
 
