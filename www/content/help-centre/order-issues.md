@@ -13,11 +13,11 @@ announcement:
   icon: 'lucide:package-open'
   to: /getting-started
 actions:
-  - name: Get Started
+  - name: Help Center
     to: /getting-started
-  - name: GitHub
+  - name: Knowledge Center
     variant: ghost
-    to: https://github.com/ZTL-UwU/shadcn-docs
+    to: /getting-started
 mobileRight: 'top' # 'top' | 'bottom'
 ---
 
@@ -28,7 +28,7 @@ Order Issues
 Common Queries
 
 #right
-![order-issues-logo](/6629512.webp)
+![order-issues-logo](/online-delivery-service-concept-order-tracking-illustration-vector.jpg)
 ::
 
 
