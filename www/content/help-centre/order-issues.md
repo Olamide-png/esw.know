@@ -9,9 +9,8 @@ toc: true
 ::hero-alt
 ---
 announcement:
-  title: 'Introducing Charts'
+  title: 'Order FAQs'
   icon: 'lucide:package-open'
-  to: /getting-started
 actions:
   - name: Help Center
     to: /getting-started
@@ -28,7 +27,7 @@ Order Issues
 Common Queries
 
 #right
-<img src="/concept-online-delivery-service-online-order-tracking-home-office-delivery_148553-295.avif" alt="order-issues-logo" style="max-width: 320px; width: 100%; height: auto;" />
+<![logo](/pngtree-online-delivery-service-concept-online-order-tracking-png-image_14553559.png)
 ::
 
 
