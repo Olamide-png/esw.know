@@ -35,82 +35,33 @@ fullpage: true
 </div>
 
 
-<section class="text-gray-600 body-font">
-  <div class="container px-5 py-24 mx-auto flex flex-wrap">
-    <div class="flex flex-wrap w-full">
-      <div class="lg:w-2/5 md:w-1/2 md:pr-10 md:py-6">
-        <div class="flex relative pb-12">
-          <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-            <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-          </div>
-          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-</svg>
-            </div>
-          <div class="flex-grow pl-4">
-            <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 1</h2>
-            <p class="leading-relaxed">VHS cornhole pop-up, try-hard 8-bit iceland helvetica. Kinfolk bespoke try-hard cliche palo santo offal.</p>
-          </div>
-        </div>
-        <div class="flex relative pb-12">
-          <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-            <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-          </div>
-          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-</svg>
-          </div>
-          <div class="flex-grow pl-4">
-            <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 2</h2>
-            <p class="leading-relaxed">Vice migas literally kitsch +1 pok pok. Truffaut hot chicken slow-carb health goth, vape typewriter.</p>
-          </div>
-        </div>
-        <div class="flex relative pb-12">
-          <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-            <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-          </div>
-          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-              <circle cx="12" cy="5" r="3"></circle>
-              <path d="M12 22V8M5 12H2a10 10 0 0020 0h-3"></path>
-</svg>
-          </div>
-          <div class="flex-grow pl-4">
-            <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 3</h2>
-            <p class="leading-relaxed">Coloring book nar whal glossier master cleanse umami. Salvia +1 master cleanse blog taiyaki.</p>
-          </div>
-        </div>
-        <div class="flex relative pb-12">
-          <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-            <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
-          </div>
-          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-</svg>
-          </div>
-          <div class="flex-grow pl-4">
-            <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 4</h2>
-            <p class="leading-relaxed">VHS cornhole pop-up, try-hard 8-bit iceland helvetica. Kinfolk bespoke try-hard cliche palo santo offal.</p>
-          </div>
-        </div>
-        <div class="flex relative">
-          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-              <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
-              <path d="M22 4L12 14.01l-3-3"></path>
-</svg>
-          </div>
-          <div class="flex-grow pl-4">
-            <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">FINISH</h2>
-            <p class="leading-relaxed">Pitchfork ugh tattooed scenester echo park gastropub whatever cold-pressed retro.</p>
-          </div>
-        </div>
-      </div>
-      <img class="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12" src="https://dummyimage.com/1200x500" alt="step">
-    </div>
-  </div>
-</section>
+::steps{:level="4"}
+#### :smart-icon{name="streamline-ultimate-color:space-rocket-earth" size=50} Install link
+
+::alert{icon="streamline-sharp-color:link-share-2-flat"}
+Click the install link <a href="https://apps.shopify.com/esw-card-payments" target="_blank" rel="noopener noreferrer">here</a>.
+::
+
+#### :smart-icon{name="streamline-ultimate-color:app-window-text" size=50} Install app
+
+**Click** <kbd class="min-h-7.5 inline-flex justify-center items-center py-1 px-1.5 bg-white border border-gray-200 font-JetBrains Mono text-md text-gray-800 shadow-[0px_2px_0px_0px_rgba(0,0,0,0.08)] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:shadow-[0px_2px_0px_0px_rgba(255,255,255,0.1)] rounded-md">
+    Install App
+  </kbd> at the bottom of the installation screen.
+
+
+#### :smart-icon{name="streamline-ultimate-color:laptop-user" size=50} Contact ESW onboarding manager
+
+Once the app is successfully installed, contact ESW onboarding manager to 
+configure your account, environment, and tenant for your brand. 
+
+#### :smart-icon{name="streamline-ultimate-color:app-window-two" size=50} Confirmation screen
+
+The app communicates readiness with Shopify. You will get a confirmation 
+screen once the tenant has been successfully configured
+
+#### :smart-icon{name="streamline-ultimate-color:e-commerce-apparel" size=50} Activate app
+
+**Click** <kbd class="min-h-7.5 inline-flex justify-center items-center py-1 px-1.5 bg-white border border-gray-200 font-JetBrains Mono text-md text-gray-800 shadow-[0px_2px_0px_0px_rgba(0,0,0,0.08)] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:shadow-[0px_2px_0px_0px_rgba(255,255,255,0.1)] rounded-md">
+    Activate Payment App
+  </kbd>
+::
