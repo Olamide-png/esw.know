@@ -64,7 +64,7 @@ mobileRight: 'top' # 'top' | 'bottom'
   ::
   ::div{label="Missing or Delayed Order" icon="hugeicons:package-out-of-stock"}
 
-  ::collapsible
+  ::collapsible{defaultOpen="true"}
   #title
   **Order is missing**
 
@@ -72,7 +72,7 @@ mobileRight: 'top' # 'top' | 'bottom'
   Tracking updates can be found in the ESW tracking portal. Refer to `Tracking an Order`. Processing and delivery times differ by retailer and destination country. If the tracking information has not updated in `7` days, contact the Customer Service for further assistance.
   ::
 
-  ::collapsible
+  ::collapsible{defaultOpen="true"}
   #title
   **Package is delayed**
 
@@ -85,7 +85,7 @@ mobileRight: 'top' # 'top' | 'bottom'
   If you still need assistance, please contact Customer Service
   ::
 
-  ::collapsible
+  ::collapsible{defaultOpen="true"}
   #title
   **Missing item(s) from order**
 
