@@ -6,6 +6,32 @@ prevNext: false
 toc: true
 ---
 
+::hero-alt
+---
+announcement:
+  title: 'Introducing Charts'
+  icon: 'lucide:package-open'
+  to: /getting-started
+actions:
+  - name: Get Started
+    to: /getting-started
+  - name: GitHub
+    variant: ghost
+    to: https://github.com/ZTL-UwU/shadcn-docs
+mobileRight: 'top' # 'top' | 'bottom'
+---
+
+#title
+Order Issues
+
+#description
+Common Queries
+
+#right
+![order-issues-logo](/6629512.webp)
+::
+
+
 
 ::steps{:level="4"}
 #### :smart-icon{name="streamline-ultimate-color:space-rocket-earth" size=50} Install link
