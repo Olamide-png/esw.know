@@ -27,6 +27,16 @@ Order Issues
 Common Queries
 ::
 
+
+<div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+  <div style="max-width: 800px; width: 100%;">
+    <script async src="https://js.storylane.io/js/v2/storylane.js"></script>
+    <div class="sl-embed" style="position:relative;padding-bottom:56.25%;width:100%;height:0;transform:scale(1)">
+      <iframe loading="lazy" class="sl-demo" src="https://demo.esw.com/demo/qqk5g03mtfbu?embed=inline" name="sl-embed" allow="fullscreen" allowfullscreen style="position:absolute;top:0;left:0;width:100%!important;height:100%!important;border:1px solid rgba(63,95,172,0.35);box-shadow: 0px 0px 18px rgba(26, 19, 72, 0.15);border-radius:10px;box-sizing:border-box;"></iframe>
+    </div>
+  </div>
+</div>
+
 ::tabs
   ::div{label="Tracking an Order" icon="noto:delivery-truck"}
   
@@ -45,12 +55,7 @@ Click the install link <a href="https://apps.shopify.com/esw-card-payments" targ
 
   #### :smart-icon{name="streamline-ultimate-color:app-window-two" size=50} Confirmation screen
 
-  <div>
-  <script async src="https://js.storylane.io/js/v2/storylane.js"></script>
-  <div class="sl-embed" style="position:relative;padding-bottom:56.25%;width:100%;height:0;transform:scale(1)">
-    <iframe loading="lazy" class="sl-demo" src="https://demo.esw.com/demo/qqk5g03mtfbu?embed=inline" name="sl-embed" allow="fullscreen" allowfullscreen style="position:absolute;top:0;left:0;width:100%!important;height:100%!important;border:1px solid rgba(63,95,172,0.35);box-shadow: 0px 0px 18px rgba(26, 19, 72, 0.15);border-radius:10px;box-sizing:border-box;"></iframe>
-  </div>
-</div>
+  
   ::
   ::div{label="Missing or Delayed Order" icon="streamline-emojis:package"}
 
