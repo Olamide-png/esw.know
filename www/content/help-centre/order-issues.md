@@ -58,17 +58,41 @@ mobileRight: 'top' # 'top' | 'bottom'
   - Out for Delivery
   - Delivered
 
-  <br>
-
-  ::alert{type="note" icon="lucide:lightbulb"}
   This allows you to easily monitor each stage of your order as it progresses to your delivery address.
-  ::
-
   ::
   
   ::
   ::div{label="Missing or Delayed Order" icon="hugeicons:package-out-of-stock"}
+
+  ::collapsible
+  #title
+  Order is missing
+
+  #content
+  Tracking updates can be found in the ESW tracking portal. Refer to `Tracking an Order`. Processing and delivery times differ by retailer and destination country. If the tracking information has not updated in `7` days, contact the Customer Service for further assistance.
+  ::
+
+  ::collapsible
+  #title
+  Package is delayed
+
+  #content
+  Your package may experience delays due to factors beyond our control. However, we’ll make every effort to keep you informed throughout the process. 
   
+  - You can review your **order status** anytime via the Tracking Portal.
+  - Check your email inbox for real-time updates on your shipment.
+  
+  If you still need assistance, please contact Customer Service
+  ::
+
+  ::collapsible
+  #title
+  Missing item(s) from order
+
+  #content
+  The missing item may not have been immediately available when your order was packed and will be shipped to you separately.<br>
+  If you need further assistance, reach out to our Customer Service team and we’ll be happy to help.
+  ::
 
   
   ::
