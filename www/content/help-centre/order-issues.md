@@ -66,7 +66,7 @@ mobileRight: 'top' # 'top' | 'bottom'
 
   ::collapsible
   #title
-  Order is missing
+  **Order is missing**
 
   #content
   Tracking updates can be found in the ESW tracking portal. Refer to `Tracking an Order`. Processing and delivery times differ by retailer and destination country. If the tracking information has not updated in `7` days, contact the Customer Service for further assistance.
@@ -74,7 +74,7 @@ mobileRight: 'top' # 'top' | 'bottom'
 
   ::collapsible
   #title
-  Package is delayed
+  **Package is delayed**
 
   #content
   Your package may experience delays due to factors beyond our control. However, we’ll make every effort to keep you informed throughout the process. 
@@ -87,7 +87,7 @@ mobileRight: 'top' # 'top' | 'bottom'
 
   ::collapsible
   #title
-  Missing item(s) from order
+  **Missing item(s) from order**
 
   #content
   The missing item may not have been immediately available when your order was packed and will be shipped to you separately.<br>
