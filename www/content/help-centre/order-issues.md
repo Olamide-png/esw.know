@@ -38,16 +38,16 @@ Common Queries
 </div>
 
 ::tabs
+
   ::div{label="Tracking an Order" icon="noto:delivery-truck"}
-  
   Follow these steps to track an order:
 
   ::steps{:level="4"}
   #### :smart-icon{name="streamline-ultimate-color:space-rocket-earth" size=50} Install link
 
-::alert{icon="streamline-sharp-color:link-share-2-flat"}
-Click the install link <a href="https://apps.shopify.com/esw-card-payments" target="_blank" rel="noopener noreferrer">here</a>.
-::
+  ::alert{icon="streamline-sharp-color:link-share-2-flat"}
+  Click the install link <a href="https://apps.shopify.com/esw-card-payments" target="_blank" rel="noopener noreferrer">here</a>.
+  ::
 
   #### :smart-icon{name="streamline-ultimate-color:app-window-text" size=50} Install app
 
@@ -55,21 +55,17 @@ Click the install link <a href="https://apps.shopify.com/esw-card-payments" targ
 
   #### :smart-icon{name="streamline-ultimate-color:app-window-two" size=50} Confirmation screen
 
-  
   ::
   ::div{label="Missing or Delayed Order" icon="streamline-emojis:package"}
-
-
-  
+  <!-- Add content for missing or delayed order here -->
   ::
   ::div{label="Report Order Discrepancies" icon="streamline-ultimate-color:alarm-bell-ring"}
-  
-
-
-
+  <!-- Add content for reporting order discrepancies here -->
   ::
   ::div{label="Escalation" icon="streamline-ultimate-color:alarm-bell-check-1"}
+  <!-- Add content for escalation here -->
 ::
+
 
 
 
