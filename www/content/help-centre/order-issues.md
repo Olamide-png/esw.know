@@ -57,8 +57,13 @@ mobileRight: 'top' # 'top' | 'bottom'
   - In Transit
   - Out for Delivery
   - Delivered
-  
+
+  <br>
+
+  ::alert{type="note" icon="lucide:lightbulb"}
   This allows you to easily monitor each stage of your order as it progresses to your delivery address.
+  ::
+
   ::
   
   ::
