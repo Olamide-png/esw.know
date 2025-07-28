@@ -28,17 +28,21 @@ Common Queries
 ::
 
 ::tabs
-  ::div{label="Tracking an Order" icon="streamline-ultimate-color:delivery-truck-3"}
+  ::div{label="Tracking an Order" icon="ph:truck-duotone"}
   
   ::steps{:level="4"}
 
-  #### :smart-icon{name="streamline-ultimate-color:space-rocket-earth" size=50} Open the tracking portal
+  #### :smart-icon{name="streamline-ultimate-color:app-window-text" size=50} Tracking portal
 
-  #### :smart-icon{name="streamline-ultimate-color:app-window-text" size=50} Enter your Tracking Number and Email Address
+  Open the tracking portal
 
-  #### :smart-icon{name="streamline-ultimate-color:laptop-user" size=50} Click on `Track`
+  #### :smart-icon{name="streamline-ultimate-color:file-code-edit" size=50} Tracking Number and Email Address
 
-  <kbd class="min-h-7.5 inline-flex justify-center items-center py-1 px-1.5 bg-white border border-gray-200 font-JetBrains Mono text-sm text-gray-800 shadow-[0px_2px_0px_0px_rgba(0,0,0,0.08)] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:shadow-[0px_2px_0px_0px_rgba(255,255,255,0.1)] rounded-md">
+  Enter your Tracking Number and Email Address
+
+  #### :smart-icon{name="streamline-ultimate-color:file-code-check" size=50} `Track`
+
+  Click on <kbd class="min-h-7.5 inline-flex justify-center items-center py-1 px-1.5 bg-white border border-gray-200 font-JetBrains Mono text-sm text-gray-800 shadow-[0px_2px_0px_0px_rgba(0,0,0,0.08)] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:shadow-[0px_2px_0px_0px_rgba(255,255,255,0.1)] rounded-md">
     Track
   </kbd>
 
@@ -46,19 +50,23 @@ Common Queries
   ::
   
   ::
-  ::div{label="Missing or Delayed Order" icon="streamline-emojis:package"}
+  ::div{label="Missing or Delayed Order" icon="hugeicons:package-out-of-stock"}
   
 
   
   ::
-  ::div{label="Report Order Discrepancies" icon="streamline-ultimate-color:alarm-bell-ring"}
+  ::div{label="Report Order Discrepancies" icon="icon-park-twotone:alarm"}
   
 
-  
+  ::
+  ::div{label="Escalation Path" icon="icomoon-free:move-up"}
+
+
+
   ::
 ::
 
-
+<br>
 
 <div>
   <script async src="https://js.storylane.io/js/v2/storylane.js"></script>
