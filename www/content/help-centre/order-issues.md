@@ -39,23 +39,21 @@ Common Queries
 
 <br>
 
-<div style="display: flex; justify-content: center; align-items: center; width: 100%;">
-<div style="max-width: 800px; width: 100%;">
+<div>
   <script async src="https://js.storylane.io/js/v2/storylane.js"></script>
   <div class="sl-embed" style="position:relative;padding-bottom:56.25%;width:100%;height:0;transform:scale(1)">
     <iframe loading="lazy" class="sl-demo" src="https://demo.esw.com/demo/qqk5g03mtfbu?embed=inline" name="sl-embed" allow="fullscreen" allowfullscreen style="position:absolute;top:0;left:0;width:100%!important;height:100%!important;border:1px solid rgba(63,95,172,0.35);box-shadow: 0px 0px 18px rgba(26, 19, 72, 0.15);border-radius:10px;box-sizing:border-box;"></iframe>
   </div>
 </div>
-</div>
 
 ::tabs
 
-  ::div{label="Tracking an Order" icon="noto:delivery-truck"}
+  ::div{label="Tracking an Order" icon="streamline-ultimate-color:delivery-truck-3"}
+
+  Follow these steps to track an order:
 
   ::steps{:level="4"}
 
-  Follow these steps to track an order:
-  
   #### :smart-icon{name="streamline-ultimate-color:space-rocket-earth" size=50} Install link
 
   ::alert{icon="streamline-sharp-color:link-share-2-flat"}
