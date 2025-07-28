@@ -87,12 +87,12 @@ Common Queries
 
   
   ::
-  ::div{label="MySQL" icon="lucide:database}
+  ::div{label="MySQL" icon="lucide:database"}
   
 
   
   ::
-  ::div{label="SQLite" icon="lucide:database}
+  ::div{label="SQLite" icon="lucide:database"}
   
 
   
