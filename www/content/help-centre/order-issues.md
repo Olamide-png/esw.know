@@ -83,7 +83,7 @@ Common Queries
 
 ::tabs
   ::div{label="PostgreSQL" icon="lucide:database"}
-  ### PostgreSQL column types
+  
 
   ```ts
   import { integer, pgTable } from 'drizzle-orm/pg-core';
@@ -94,7 +94,7 @@ Common Queries
   ```
   ::
   ::div{label="MySQL"}
-  ### MySQL column types
+  
 
   ```ts
   import { int, mysqlTable } from 'drizzle-orm/mysql-core';
@@ -105,7 +105,7 @@ Common Queries
   ```
   ::
   ::div{label="SQLite"}
-  ### SQLite column types
+  
 
   ```ts
   import { integer, sqliteTable } from 'drizzle-orm/sqlite-core';
