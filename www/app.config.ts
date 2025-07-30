@@ -67,13 +67,6 @@ export default defineAppConfig({
         showLinkIcon: true,
         description: 'API documentation for ESW services',
         icon: 'lucide:code',
-      }, {
-        title: 'Help Centre',
-        to: '/help-centre',
-        target: '_self',
-        showLinkIcon: false,
-        description: 'Common questions and answers',
-        icon: 'lucide:book-open',
       }],
       links: [
         {
