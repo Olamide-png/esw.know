@@ -107,6 +107,64 @@ mobileRight: 'top' # 'top' | 'bottom'
   ::  
 ::
 
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        'leaf': '#3A5A40',
+        'leaf-light': '#588157',
+        'earth': '#5E4B2E',
+        'moss': '#344E41',
+        'blossom': '#DDA15E',
+        'cream': '#F8F9FA',
+        'text-dark': '#2F3E46',
+      },
+      fontFamily: {
+        'sans': ['"Open Sans"', 'sans-serif'],
+        'display': ['"Libre Baskerville"', 'serif'],
+      },
+      animation: {
+        'float': 'float 6s ease-in-out infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        }
+      }
+    }
+  }
+}
+</script>
+<style>
+.hero-bg {
+  background-image: linear-gradient(rgba(248, 249, 250, 0.7), rgba(248, 249, 250, 0.3)),
+    url('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=2832&q=80');
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.card-shadow { box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+</style>
+
+<nav class="bg-white/90 backdrop-blur-sm fixed w-full z-50 border-b border-leaf/20 shadow-sm">
+  <!-- Navigation Content -->
+  ...
+</nav>
+
+<section class="hero-bg min-h-screen pt-20 flex items-center">
+  <!-- Hero Content -->
+  ...
+</section>
+
+<div class="bg-white py-16">
+  <!-- Plant Benefits Section -->
+  ...
+</div>
 
 <section class="hero-bg min-h-screen pt-20 flex items-center">
   <div class="max-w-7xl mx-auto px-6 py-12 w-full">
