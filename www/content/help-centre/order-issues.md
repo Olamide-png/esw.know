@@ -108,7 +108,74 @@ mobileRight: 'top' # 'top' | 'bottom'
 ::
 
 
-
-
+<!-- Hero Section -->
+  <section class="hero-bg min-h-screen pt-20 flex items-center">
+        <div class="max-w-7xl mx-auto px-6 py-12 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Text content - now with better contrast -->
+                <div class="space-y-8 text-center lg:text-left bg-white/70 p-8 rounded-xl backdrop-blur-sm card-shadow">
+                    <div class="space-y-6">
+                        <h1 class="font-display text-4xl md:text-5xl lg:text-6xl leading-tight text-moss text-shadow">
+                            <span class="block">Nurture Your</span>
+                            <span class="block font-light">Plant Paradise</span>
+                        </h1>
+                        <p class="text-lg text-text-dark/90 max-w-lg mx-auto lg:mx-0">
+                            Discover the joy of gardening with our premium plant selection and expert care guides. Transform your space into a lush oasis.
+                        </p>
+                    </div><div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#" class="px-8 py-3 bg-leaf text-white font-medium rounded-full hover:bg-moss transition-colors shadow-md">
+                            Shop Plants
+                        </a>
+                        <a href="#" class="px-8 py-3 border border-text-dark text-text-dark font-medium rounded-full hover:bg-white transition-colors">
+                            Learn More
+                        </a>
+                    </div>
+                </div><!-- Featured plant card --><div class="relative animate-float">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-xl border border-cream/50 card-shadow">
+                        <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" 
+                             alt="Featured plant"
+                             class="w-full h-80 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-display text-xl text-moss">Monstera Deliciosa</h3>
+                            <p class="text-text-dark/80 mt-1">"The Swiss Cheese Plant"</p>
+                            <div class="mt-4 flex justify-between items-center">
+                                <span class="font-medium text-leaf text-lg">$39.99</span>
+                                <button class="px-4 py-2 bg-blossom text-white rounded-full text-sm font-medium hover:bg-blossom/90 transition-colors">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-4 -right-4 bg-leaf-light text-white px-4 py-2 rounded-full text-sm font-medium shadow">
+                        Popular Choice
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- Plant benefits section --><div class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="font-display text-3xl text-center text-moss mb-12">Why Plants Make Life Better</h2><div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-cream p-8 rounded-xl shadow-md border border-cream/50 text-center hover:shadow-lg transition-shadow">
+                    <div class="w-16 h-16 bg-leaf/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#3A5A40" viewBox="0 0 16 16"><path d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/><path d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl text-moss mb-2">Air Purification</h3>
+                    <p class="text-text-dark/80">Plants naturally filter toxins and release oxygen, improving your indoor air quality.</p>
+                </div><div class="bg-cream p-8 rounded-xl shadow-md border border-cream/50 text-center hover:shadow-lg transition-shadow">
+                    <div class="w-16 h-16 bg-leaf/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#3A5A40" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M8 13A5 5 0 1 1 8 3a5 5 0 0 1 0 10zm0 1A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/><path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl text-moss mb-2">Stress Reduction</h3>
+                    <p class="text-text-dark/80">Caring for plants lowers stress levels and promotes mindfulness.</p>
+                </div><div class="bg-cream p-8 rounded-xl shadow-md border border-cream/50 text-center hover:shadow-lg transition-shadow">
+                    <div class="w-16 h-16 bg-leaf/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#3A5A40" viewBox="0 0 16 16"><path d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl text-moss mb-2">Productivity Boost</h3>
+                    <p class="text-text-dark/80">Greenery in your workspace can increase productivity by up to 15%.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
