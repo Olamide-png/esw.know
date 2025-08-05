@@ -152,19 +152,19 @@ tailwind.config = {
 </style>
 
 <nav class="bg-white/90 backdrop-blur-sm fixed w-full z-50 border-b border-leaf/20 shadow-sm">
-  <!-- Navigation Content -->
-  ...
-</nav>
-
-<section class="hero-bg min-h-screen pt-20 flex items-center">
-  <!-- Hero Content -->
-  ...
-</section>
-
-<div class="bg-white py-16">
-  <!-- Plant Benefits Section -->
-  ...
-</div>
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex justify-between items-center h-20">
+      <a href="#" class="font-display text-2xl text-moss">VERDANT</a>
+      <div class="hidden md:flex space-x-8 items-center">
+        <a href="#" class="text-sm font-medium text-text-dark hover:text-leaf transition-colors">Plants</a>
+        <a href="#" class="text-sm font-medium text-text-dark hover:text-leaf transition-colors">Gardens</a>
+        <a href="#" class="text-sm font-medium text-text-dark hover:text-leaf transition-colors">Care Guide</a>
+        <a href="#" class="text-sm font-medium text-text-dark hover:text-leaf transition-colors">About</a>
+        <a href="#" class="px-4 py-2 bg-leaf text-white rounded-full text-sm font-medium hover:bg-moss transition-colors">Contact</a>
+      </div>
+      <button class="md:hidden p-2 text-text-dark hover:text-leaf transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
+      </button></div></div></nav>
 
 <section class="hero-bg min-h-screen pt-20 flex items-center">
   <div class="max-w-7xl mx-auto px-6 py-12 w-full">
@@ -208,29 +208,21 @@ tailwind.config = {
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <div class="bg-cream p-8 rounded-xl shadow-md border border-cream/50 text-center hover:shadow-lg transition-shadow">
         <div class="w-16 h-16 bg-leaf/10 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#3A5A40" viewBox="0 0 16 16">
-            <path d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
-          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#3A5A40" viewBox="0 0 16 16"><path d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/></svg>
         </div>
         <h3 class="font-display text-xl text-moss mb-2">Air Purification</h3>
         <p class="text-text-dark/80">Plants naturally filter toxins and release oxygen, improving your indoor air quality.</p>
       </div>
       <div class="bg-cream p-8 rounded-xl shadow-md border border-cream/50 text-center hover:shadow-lg transition-shadow">
         <div class="w-16 h-16 bg-leaf/10 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#3A5A40" viewBox="0 0 16 16">
-            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-            <path d="M8 13A5 5 0 1 1 8 3a5 5 0 0 1 0 10zm0 1A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
-            <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>
-          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#3A5A40" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M8 13A5 5 0 1 1 8 3a5 5 0 0 1 0 10zm0 1A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/><path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
         </div>
         <h3 class="font-display text-xl text-moss mb-2">Stress Reduction</h3>
         <p class="text-text-dark/80">Caring for plants lowers stress levels and promotes mindfulness.</p>
       </div>
       <div class="bg-cream p-8 rounded-xl shadow-md border border-cream/50 text-center hover:shadow-lg transition-shadow">
         <div class="w-16 h-16 bg-leaf/10 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#3A5A40" viewBox="0 0 16 16">
-            <path d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
-          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#3A5A40" viewBox="0 0 16 16"><path d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/></svg>
         </div>
         <h3 class="font-display text-xl text-moss mb-2">Productivity Boost</h3>
         <p class="text-text-dark/80">Greenery in your workspace can increase productivity by up to 15%.</p>
@@ -238,5 +230,6 @@ tailwind.config = {
     </div>
   </div>
 </div>
+
 
 
