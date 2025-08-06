@@ -107,128 +107,79 @@ mobileRight: 'top' # 'top' | 'bottom'
   ::  
 ::
 
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        'leaf': '#3A5A40',
-        'leaf-light': '#588157',
-        'earth': '#5E4B2E',
-        'moss': '#344E41',
-        'blossom': '#DDA15E',
-        'cream': '#F8F9FA',
-        'text-dark': '#2F3E46',
-      },
-      fontFamily: {
-        'sans': ['"Open Sans"', 'sans-serif'],
-        'display': ['"Libre Baskerville"', 'serif'],
-      },
-      animation: {
-        'float': 'float 6s ease-in-out infinite',
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
-        }
-      }
-    }
-  }
-}
-</script>
-<style>
-.hero-bg {
-  background-image: linear-gradient(rgba(248, 249, 250, 0.7), rgba(248, 249, 250, 0.3)),
-    url('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=2832&q=80');
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
-}
-.text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-.card-shadow { box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-</style>
+<div class="flex items-center justify-center flex-col sm:flex-row gap-4 p-4 min-h-screen bg-slate-1000 dark:bg-slate-900 ">
+  <a href="#" class="group relative block bg-black rounded-lg overflow-hidden">
+  <img
+    alt=""
+    src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+    class="absolute inset-0 h-full w-full rounded-lg object-cover opacity-75 transition-opacity group-hover:opacity-50"
+  />
 
-<nav class="bg-white/90 backdrop-blur-sm fixed w-full z-50 border-b border-leaf/20 shadow-sm">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="flex justify-between items-center h-20">
-      <a href="#" class="font-display text-2xl text-moss">VERDANT</a>
-      <div class="hidden md:flex space-x-8 items-center">
-        <a href="#" class="text-sm font-medium text-text-dark hover:text-leaf transition-colors">Plants</a>
-        <a href="#" class="text-sm font-medium text-text-dark hover:text-leaf transition-colors">Gardens</a>
-        <a href="#" class="text-sm font-medium text-text-dark hover:text-leaf transition-colors">Care Guide</a>
-        <a href="#" class="text-sm font-medium text-text-dark hover:text-leaf transition-colors">About</a>
-        <a href="#" class="px-4 py-2 bg-leaf text-white rounded-full text-sm font-medium hover:bg-moss transition-colors">Contact</a>
-      </div>
-      <button class="md:hidden p-2 text-text-dark hover:text-leaf transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
-      </button></div></div></nav>
+  <div class="relative p-4 sm:p-6 lg:p-8">
+    <p class="text-sm font-medium tracking-widest text-pink-500 uppercase">Developer</p>
 
-<section class="hero-bg min-h-screen pt-20 flex items-center">
-  <div class="max-w-7xl mx-auto px-6 py-12 w-full">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <div class="space-y-8 text-center lg:text-left bg-white/70 p-8 rounded-xl backdrop-blur-sm card-shadow">
-        <div class="space-y-6">
-          <h1 class="font-display text-4xl md:text-5xl lg:text-6xl leading-tight text-moss text-shadow">
-            <span class="block">Nurture Your</span>
-            <span class="block font-light">Plant Paradise</span>
-          </h1>
-          <p class="text-lg text-text-dark/90 max-w-lg mx-auto lg:mx-0">
-            Discover the joy of gardening with our premium plant selection and expert care guides. Transform your space into a lush oasis.
-          </p>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-          <a href="#" class="px-8 py-3 bg-leaf text-white font-medium rounded-full hover:bg-moss transition-colors shadow-md">Shop Plants</a>
-          <a href="#" class="px-8 py-3 border border-text-dark text-text-dark font-medium rounded-full hover:bg-white transition-colors">Learn More</a>
-        </div>
-      </div>
-      <div class="relative animate-float">
-        <div class="bg-white rounded-2xl overflow-hidden shadow-xl border border-cream/50 card-shadow">
-          <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=1472&q=80" alt="Featured plant" class="w-full h-80 object-cover">
-          <div class="p-6">
-            <h3 class="font-display text-xl text-moss">Monstera Deliciosa</h3>
-            <p class="text-text-dark/80 mt-1">"The Swiss Cheese Plant"</p>
-            <div class="mt-4 flex justify-between items-center">
-              <span class="font-medium text-leaf text-lg">$39.99</span>
-              <button class="px-4 py-2 bg-blossom text-white rounded-full text-sm font-medium hover:bg-blossom/90 transition-colors">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-        <div class="absolute -bottom-4 -right-4 bg-leaf-light text-white px-4 py-2 rounded-full text-sm font-medium shadow">Popular Choice</div>
+  <p class="text-xl font-bold text-white sm:text-2xl">Abdul Baset</p>
+
+  <div class="mt-32 sm:mt-48 lg:mt-64">
+      <div
+        class="translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100"
+      >
+        <p class="text-sm text-white">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis perferendis hic asperiores
+          quibusdam quidem voluptates doloremque reiciendis nostrum harum. Repudiandae?
+        </p>
       </div>
     </div>
   </div>
-</section>
+</a>
+  <a href="#" class="group relative block bg-black rounded-lg overflow-hidden">
+  <img
+    alt=""
+    src="https://images.pexels.com/photos/14653174/pexels-photo-14653174.jpeg"
+    class="absolute inset-0 h-full w-full rounded-lg object-cover opacity-75 transition-opacity group-hover:opacity-50"
+  />
 
-<div class="bg-white py-16">
-  <div class="max-w-7xl mx-auto px-6">
-    <h2 class="font-display text-3xl text-center text-moss mb-12">Why Plants Make Life Better</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-cream p-8 rounded-xl shadow-md border border-cream/50 text-center hover:shadow-lg transition-shadow">
-        <div class="w-16 h-16 bg-leaf/10 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#3A5A40" viewBox="0 0 16 16"><path d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/></svg>
-        </div>
-        <h3 class="font-display text-xl text-moss mb-2">Air Purification</h3>
-        <p class="text-text-dark/80">Plants naturally filter toxins and release oxygen, improving your indoor air quality.</p>
-      </div>
-      <div class="bg-cream p-8 rounded-xl shadow-md border border-cream/50 text-center hover:shadow-lg transition-shadow">
-        <div class="w-16 h-16 bg-leaf/10 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#3A5A40" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M8 13A5 5 0 1 1 8 3a5 5 0 0 1 0 10zm0 1A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/><path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
-        </div>
-        <h3 class="font-display text-xl text-moss mb-2">Stress Reduction</h3>
-        <p class="text-text-dark/80">Caring for plants lowers stress levels and promotes mindfulness.</p>
-      </div>
-      <div class="bg-cream p-8 rounded-xl shadow-md border border-cream/50 text-center hover:shadow-lg transition-shadow">
-        <div class="w-16 h-16 bg-leaf/10 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#3A5A40" viewBox="0 0 16 16"><path d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/></svg>
-        </div>
-        <h3 class="font-display text-xl text-moss mb-2">Productivity Boost</h3>
-        <p class="text-text-dark/80">Greenery in your workspace can increase productivity by up to 15%.</p>
+  <div class="relative p-4 sm:p-6 lg:p-8">
+    <p class="text-sm font-medium tracking-widest text-pink-500 uppercase">Developer</p>
+
+  <p class="text-xl font-bold text-white sm:text-2xl">Tony Wayne</p>
+
+  <div class="mt-32 sm:mt-48 lg:mt-64">
+      <div
+        class="translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100"
+      >
+        <p class="text-sm text-white">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis perferendis hic asperiores
+          quibusdam quidem voluptates doloremque reiciendis nostrum harum. Repudiandae?
+        </p>
       </div>
     </div>
   </div>
+</a>
+  <a href="#" class="group relative block bg-black rounded-lg overflow-hidden">
+  <img
+    alt=""
+    src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
+    class="absolute inset-0 h-full w-full rounded-lg object-cover opacity-75 transition-opacity group-hover:opacity-50"
+  />
+
+  <div class="relative p-4 sm:p-6 lg:p-8">
+    <p class="text-sm font-medium tracking-widest text-pink-500 uppercase">Developer</p>
+
+  <p class="text-xl font-bold text-white sm:text-2xl">Billu Mao</p>
+
+  <div class="mt-32 sm:mt-48 lg:mt-64">
+      <div
+        class="translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100"
+      >
+        <p class="text-sm text-white">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis perferendis hic asperiores
+          quibusdam quidem voluptates doloremque reiciendis nostrum harum. Repudiandae?
+        </p>
+      </div>
+    </div>
+  </div>
+</a>
 </div>
 
 
