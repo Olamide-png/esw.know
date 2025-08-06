@@ -183,7 +183,7 @@ mobileRight: 'top' # 'top' | 'bottom'
 <body class="bg-black min-h-screen flex items-center justify-center overflow-hidden p-4 sm:p-8">
     <!-- Background effects -->
     <div class="fixed inset-0 -z-10">
-        <div class="absolute inset-0 bg-gradient-to-br from-violet-900/20 via-purple-900/20 to-fuchsia-900/20"></div>
+        <div class="absolute inset-0 bg-amber-50"></div>
         <div class="absolute top-1/4 left-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-violet-500/10 rounded-full filter blur-3xl"></div>
         <div class="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-fuchsia-500/10 rounded-full filter blur-3xl"></div>
     </div>
