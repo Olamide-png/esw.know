@@ -8,7 +8,7 @@ toc: false
     <div class="relative w-full h-full bg-cover bg-center flex items-center justify-center bg-cover bg-center p-8 my-8 dui-bg-fixed"
         style="background-image: url('/1banner_0128cc4f-1cf0-4f6d-b488-b040099a2d90_1024x1024.webp');">
         <div
-            class="p-8 bg-gray-300 bg-opacity-50 text-white/75 rounded-xl shadow-lg text-center w-full max-w-full mx-2">
+            class="p-8 bg-gray-300/40 backdrop-blur-md text-white/80 rounded-xl shadow-lg text-center w-full max-w-full mx-2"
             <h1 class="text-4xl font-bold mb-4">Call to Action (CTA)</h1>
             <p class="text-lg mb-8">Jadilah bagian dari komunitas kami dan nikmati manfaat eksklusif.</p>
             <a href="https://github.com/idugeni" target="_blank" rel="noopener noreferrer"
