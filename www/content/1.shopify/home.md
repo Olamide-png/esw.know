@@ -14,14 +14,14 @@ actions:
   - name: Get Started
     to: /shopify/installation
     leftIcon: 'lucide:cable'
+  - name: Shopify Configuration
+    variant: ghost
+    to: /shopify/configuration/configure-new-markets
+    leftIcon: 'lucide:wrench'
   - name: Integration
     variant: ghost
     to: /shopify/integration/overview
     leftIcon: 'lucide:plug'
-  - name: Shopify Configuration
-    variant: ghost
-    to: /shopify/configuration/shopify-setup
-    leftIcon: 'lucide:wrench'
 ---
 
 #title
