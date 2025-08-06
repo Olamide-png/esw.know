@@ -254,95 +254,101 @@ mobileRight: 'top' # 'top' | 'bottom'
     </div>
 
 <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.carousel-item');
-        const indicators = document.querySelectorAll('.bottom-2 button, .bottom-4 button');
-        const progressBar = document.querySelector('.progress-bar');
-        let autoAdvanceTimer;
-        let touchStartX = 0;
-        let touchEndX = 0;
-        const carousel = document.querySelector('.carousel-track');
+document.addEventListener("DOMContentLoaded", () => {
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-item');
+    const indicators = document.querySelectorAll('.carousel-container .absolute.flex button');
+    const progressBar = document.querySelector('.progress-bar');
+    const carousel = document.querySelector('.carousel-track');
+    let autoAdvanceTimer;
+    let touchStartX = 0;
+    let touchEndX = 0;
 
-        // Add touch events for swipe
-        carousel.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
+    // Swipe support
+    carousel.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
 
-        carousel.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, { passive: true });
+    carousel.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
 
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
 
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0) {
-                    nextSlide();
-                } else {
-                    prevSlide();
-                }
+        if (Math.abs(diff) > swipeThreshold) {
+            diff > 0 ? nextSlide() : prevSlide();
+        }
+    }
+
+    // Update slides and indicators
+    function updateSlides() {
+        slides.forEach((slide, index) => {
+            slide.className = 'carousel-item absolute top-0 left-0 w-full h-full';
+            if (index === currentSlide) {
+                slide.classList.add('active');
+            } else if (index === (currentSlide + 1) % slides.length) {
+                slide.classList.add('next');
+            } else if (index === (currentSlide - 1 + slides.length) % slides.length) {
+                slide.classList.add('prev');
+            } else {
+                slide.classList.add('hidden');
             }
-        }
-
-        function updateSlides() {
-            slides.forEach((slide, index) => {
-                slide.className = 'carousel-item absolute top-0 left-0 w-full h-full';
-                if (index === currentSlide) {
-                    slide.classList.add('active');
-                } else if (index === (currentSlide + 1) % slides.length) {
-                    slide.classList.add('next');
-                } else if (index === (currentSlide - 1 + slides.length) % slides.length) {
-                    slide.classList.add('prev');
-                } else {
-                    slide.classList.add('hidden');
-                }
-            });
-
-            // Update indicators
-            indicators.forEach((indicator, index) => {
-                indicator.className = `w-8 sm:w-12 h-1 sm:h-1.5 rounded-full transition-colors ${
-                    index === currentSlide ? 'bg-white/40' : 'bg-white/20'
-                } hover:bg-white/60`;
-            });
-
-            // Update progress bar
-            progressBar.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
-        }
-
-        function resetAutoAdvance() {
-            clearInterval(autoAdvanceTimer);
-            autoAdvanceTimer = setInterval(nextSlide, 5000);
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            updateSlides();
-            resetAutoAdvance();
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            updateSlides();
-            resetAutoAdvance();
-        }
-
-        // Add click handlers to indicators
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                currentSlide = index;
-                updateSlides();
-                resetAutoAdvance();
-            });
         });
 
-        // Initialize auto advance
-        resetAutoAdvance();
+        indicators.forEach((indicator, index) => {
+            indicator.className = `w-8 sm:w-12 h-1 sm:h-1.5 rounded-full transition-colors ${
+                index === currentSlide ? 'bg-white/60' : 'bg-white/20'
+            } hover:bg-white/80`;
+        });
 
-        // Initialize slides
+        // Animate progress bar
+        progressBar.style.transition = 'none'; 
+        progressBar.style.width = '0%'; 
+        setTimeout(() => {
+            progressBar.style.transition = 'width 5s linear';
+            progressBar.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
+        }, 50);
+    }
+
+    function resetAutoAdvance() {
+        clearInterval(autoAdvanceTimer);
+        autoAdvanceTimer = setInterval(nextSlide, 5000);
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
         updateSlides();
-    </script>
+        resetAutoAdvance();
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        updateSlides();
+        resetAutoAdvance();
+    }
+
+    // Indicator clicks
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            currentSlide = index;
+            updateSlides();
+            resetAutoAdvance();
+        });
+    });
+
+    // Initialize
+    resetAutoAdvance();
+    updateSlides();
+
+    // Expose buttons globally
+    window.nextSlide = nextSlide;
+    window.prevSlide = prevSlide;
+});
+</script>
+
 </body>
 </html>
 
