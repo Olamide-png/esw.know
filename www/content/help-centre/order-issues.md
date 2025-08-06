@@ -109,7 +109,7 @@ mobileRight: 'top' # 'top' | 'bottom'
 
 <!-- Background effects -->
   <div class="fixed inset-0 -z-10">
-        <div class="absolute inset-0 bg-amber-50"></div>
+        <div class="absolute inset-0 bg-amber-30"></div>
         <div class="absolute top-1/4 left-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-violet-500/10 rounded-full filter blur-3xl"></div>
         <div class="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-fuchsia-500/10 rounded-full filter blur-3xl"></div>
     </div>
@@ -118,7 +118,7 @@ mobileRight: 'top' # 'top' | 'bottom'
 
 
 <section class="container mx-auto p-10 md:py-20 px-0 md:p-10 md:px-0">
-    <section class="relative px-10 md:p-0 transform duration-500 shadow-2xl">
+    <section class="relative px-10 md:p-0 transform duration-500 shadow-sm">
         <img class="xl:max-w-6xl" src="https://images.pexels.com/photos/5990153/pexels-photo-5990153.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1860" alt="">
         <div class="content bg-white p-2 pt-8 md:p-12 pb-12 lg:max-w-lg w-full lg:absolute top-48 right-5">
             <div class="flex justify-between font-bold text-sm">
