@@ -159,7 +159,7 @@ mobileRight: 'top' # 'top' | 'bottom'
   <a href="#" class="group relative block bg-black rounded-lg overflow-hidden">
   <img
     alt=""
-    src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
+    src="/AdobeStock_474163651.jpg"
     class="absolute inset-0 h-full w-full rounded-lg object-cover opacity-75 transition-opacity group-hover:opacity-50"
   />
 
