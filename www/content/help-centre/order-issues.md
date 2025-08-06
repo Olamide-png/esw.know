@@ -5,33 +5,20 @@ toc: false
 ---
 
 <body class="flex items-center justify-center min-h-screen bg-gray-900">
-    <div class="relative w-full h-full bg-cover bg-center flex items-center justify-center bg-cover bg-center p-8 my-8 dui-bg-fixed"
-        style="background-image: url('/1banner_0128cc4f-1cf0-4f6d-b488-b040099a2d90_1024x1024.webp');">
-        <div
-            class="p-8 bg-gray-300/40 backdrop-blur-md text-white/80 rounded-xl shadow-lg text-center w-full max-w-full mx-2"
-            <h1 class="text-4xl font-bold mb-4">Call to Action (CTA)</h1>
-            <p class="text-lg mb-8">Jadilah bagian dari komunitas kami dan nikmati manfaat eksklusif.</p>
-            <a href="https://github.com/idugeni" target="_blank" rel="noopener noreferrer"
-                class="btn btn-neutral btn-wide">Daftar Sekarang</a>
-        </div>
+  <div 
+    class="relative w-full h-full bg-cover bg-center flex items-center justify-center p-8 my-8 dui-bg-fixed"
+    style="background-image: url('/1banner_0128cc4f-1cf0-4f6d-b488-b040099a2d90_1024x1024.webp');">
+    
+  <div class="p-8 bg-gray-300/40 backdrop-blur-md text-white/80 rounded-xl shadow-lg text-center w-full max-w-full mx-2">
+      <h1 class="text-4xl font-bold mb-4">Call to Action (CTA)</h1>
+      <p class="text-lg mb-8">Jadilah bagian dari komunitas kami dan nikmati manfaat eksklusif.</p>
+      <a href="https://github.com/idugeni" target="_blank" rel="noopener noreferrer"
+         class="btn btn-neutral btn-wide">Daftar Sekarang</a>
     </div>
+    
+  </div>
 </body>
 
-
-::hero-alt
----
-announcement:
-  title: 'Order FAQs'
-  icon: 'lucide:package-open'
-actions:
-  - name: Help Center
-    to: /getting-started
-  - name: Knowledge Center
-    variant: ghost
-    to: /getting-started
-mobileRight: 'top' # 'top' | 'bottom'
----
-::
 
 
 
