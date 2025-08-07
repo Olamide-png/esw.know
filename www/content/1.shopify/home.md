@@ -20,7 +20,7 @@ actions:
     leftIcon: 'lucide:plug'
   - name: Configuration
     variant: ghost
-    to: /shopify/configuration
+    to: /shopify/configuration/configure-new-markets
     leftIcon: 'lucide:wrench'
 ---
 
