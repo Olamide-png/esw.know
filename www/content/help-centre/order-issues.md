@@ -144,16 +144,32 @@ toc: false
 
 
 
-::card
----
-icon: 'lucide:fold-horizontal'
-icon-size: 60
-horizontal: true
----
+::card-group
+  ::card
+  ---
+  icon: 'lucide:fold-horizontal'
+  icon-size: 60
+  horizontal: true
+  ---
 
-#title
-Horizontal Card
+  #title
+  Horizontal Card
 
-#description
-Beautifully designed **Nuxt Content** template with **shadcn-vue**. _Customizable. Compatible. Open Source._
+  #description
+  Beautifully designed **Nuxt Content** template with **shadcn-vue**. _Customizable. Compatible. Open Source._
+  ::
+
+  ::card
+  ---
+  icon: 'lucide:fold-horizontal'
+  icon-size: 60
+  horizontal: true
+  ---
+
+  #title
+  Horizontal Card
+
+  #description
+  Beautifully designed **Nuxt Content** template with **shadcn-vue**. _Customizable. Compatible. Open Source._
+  ::
 ::
