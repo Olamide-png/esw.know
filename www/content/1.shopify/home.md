@@ -12,16 +12,16 @@ announcement:
   title: 'Shopify'
 actions:
   - name: Get Started
+    to: /shopify/getting-started-guide
+    leftIcon: 'lucide:footprints'
+  - name: Apps Installation
+    variant: ghost
     to: /shopify/installation
-    leftIcon: 'lucide:cable'
-  - name: Shopify Configuration
-    variant: ghost
-    to: /shopify/configuration/configure-new-markets
-    leftIcon: 'lucide:wrench'
-  - name: Integration
-    variant: ghost
-    to: /shopify/integration/overview
     leftIcon: 'lucide:plug'
+  - name: Configuration
+    variant: ghost
+    to: /shopify/configuration
+    leftIcon: 'lucide:wrench'
 ---
 
 #title
