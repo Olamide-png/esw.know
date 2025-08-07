@@ -69,7 +69,6 @@ export default {
         key: '0 2px 0 hsl(var(--shadow) / 0.15)',
         keyPressed: 'inset 0 2px 4px hsl(var(--shadow) / 0.25)',
         key3D: 'inset 0 1px 0 hsl(var(--shadow-light) / 0.4), 0 2px 0 hsl(var(--shadow) / 0.12)',
-        shadow: '8px 23px 106px 72px rgba(136, 125, 161, 0.36)',     // Subtle elevation
       },
       keyframes: {
         'accordion-down': {
