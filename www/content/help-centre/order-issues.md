@@ -176,15 +176,11 @@ toc: false
 
 
 
-::button-link{left-icon="lucide:github" variant="secondary" to="https://github.com/ZTL-UwU/shadcn-docs-nuxt" target="_blank"}
-  GitHub
-::
-::button-link{left-icon="lucide:ghost" variant="destructive" href="https://github.com/ZTL-UwU/shadcn-docs-nuxt" blank}
-  Ghost
-::
-::button-link{left-icon="lucide:ghost" variant="link" href="https://github.com/ZTL-UwU/shadcn-docs-nuxt" blank}
-  Ghost
-::
-::button-link{left-icon="lucide:ghost" variant="default" href="https://github.com/ZTL-UwU/shadcn-docs-nuxt" blank}
-  Ghost
-::
+ <div className="relative">
+                <div
+                  className="absolute -inset-2 rounded-lg bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-rose-600 via-neutral-600 to-pink-600 opacity-50 blur-2xl"
+                ></div>
+                <div className="relative flex w-full h-64 items-center justify-center border border-zinc-700 rounded-lg bg-zinc-900 text-slate-300">
+                  Gradient shadow
+                </div>
+              </div>
