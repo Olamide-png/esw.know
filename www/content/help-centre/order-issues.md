@@ -185,3 +185,6 @@ toc: false
 ::button-link{left-icon="lucide:ghost" variant="link" href="https://github.com/ZTL-UwU/shadcn-docs-nuxt" blank}
   Ghost
 ::
+::button-link{left-icon="lucide:ghost" variant="default" href="https://github.com/ZTL-UwU/shadcn-docs-nuxt" blank}
+  Ghost
+::
