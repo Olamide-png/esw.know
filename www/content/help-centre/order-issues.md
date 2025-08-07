@@ -144,24 +144,16 @@ toc: false
 
 
 
-flowchart TD
-    A[Christmas] -->|Get money| B(Go shopping)
-    B --> C{Let me think}
-    C -->|One| D[Laptop]
-    C -->|Two| E[iPhone]
-    C -->|Three| F[fa:fa-car Car]
+::card
+---
+icon: 'lucide:fold-horizontal'
+icon-size: 60
+horizontal: true
+---
 
+#title
+Horizontal Card
 
-
-<div class="w-full overflow-auto">
-  <div class="flex justify-center min-w-full whitespace-nowrap">
-    <a href="https://mermaid.live/edit#pako:eNpVkUFPg0AQhf_KZk6a0IayUJc9mFiqvdTowZPQw6YMLLHskmVJrcB_d6Ex6pxm8t735vB6OOocgUNx0uejFMaSt22miJuHNJGmam0t2gNZLO6HHVpSa4WXgWxudpq0UjdNpcrbq38zmUjS7ycbEisr9TFepWTmXxQOZJvuRWN1c_irvJ31QB7T6lW6-P-KNOiop7QQvBCLozAkEeYAHpSmyoFb06EHNZpaTCf0E5yBlVhjBtytORaiO9kMMjU6rBHqXev6hzS6KyW46FPrrq7JhcVtJUojfi2ocjSJ7pQFvmZzBPAePoHTKFjGPo0jP45WPmNOvAAPwmUQ0jhmdxGlNFwF0ejB1_zUX7I1DQJGmb9mvs_CwAPMK6vN87WGuY3xG_pofHs">
-      <img
-        src="https://mermaid.ink/img/pako:eNpVkUFPg0AQhf_KZk6a0IayUJc9mFiqvdTowZPQw6YMLLHskmVJrcB_d6Ex6pxm8t735vB6OOocgUNx0uejFMaSt22miJuHNJGmam0t2gNZLO6HHVpSa4WXgWxudpq0UjdNpcrbq38zmUjS7ycbEisr9TFepWTmXxQOZJvuRWN1c_irvJ31QB7T6lW6-P-KNOiop7QQvBCLozAkEeYAHpSmyoFb06EHNZpaTCf0E5yBlVhjBtytORaiO9kMMjU6rBHqXev6hzS6KyW46FPrrq7JhcVtJUojfi2ocjSJ7pQFvmZzBPAePoHTKFjGPo0jP45WPmNOvAAPwmUQ0jhmdxGlNFwF0ejB1_zUX7I1DQJGmb9mvs_CwAPMK6vN87WGuY3xG_pofHs?type=png"
-        alt="Mermaid diagram"
-        class="inline-block"
-      >
-    </a>
-  </div>
-</div>
-
+#description
+Beautifully designed **Nuxt Content** template with **shadcn-vue**. _Customizable. Compatible. Open Source._
+::
