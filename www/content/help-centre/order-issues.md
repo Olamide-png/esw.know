@@ -153,10 +153,10 @@ toc: false
   ---
 
   #title
-  Horizontal Card
+  Shopify
 
   #description
-  Beautifully designed **Nuxt Content** template with **shadcn-vue**. _Customizable. Compatible. Open Source._
+  Expand globally, process payments in multiple currencies and more.
   ::
 
   ::card
@@ -167,10 +167,10 @@ toc: false
   ---
 
   #title
-  Horizontal Card
+  Salesforce Commerce Cloud
 
   #description
-  Beautifully designed **Nuxt Content** template with **shadcn-vue**. _Customizable. Compatible. Open Source._
+  Integrate with ESW services, including hosted checkout and more.
   ::
 ::
 
