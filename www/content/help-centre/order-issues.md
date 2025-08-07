@@ -147,8 +147,8 @@ toc: false
 ::card-group
   ::card
   ---
-  icon: 'lucide:fold-horizontal'
-  icon-size: 60
+  icon: 'logos:shopify'
+  icon-size: 70
   horizontal: true
   ---
 
@@ -161,8 +161,8 @@ toc: false
 
   ::card
   ---
-  icon: 'lucide:fold-horizontal'
-  icon-size: 60
+  icon: 'logos:salesforce'
+  icon-size: 70
   horizontal: true
   ---
 
@@ -172,4 +172,16 @@ toc: false
   #description
   Beautifully designed **Nuxt Content** template with **shadcn-vue**. _Customizable. Compatible. Open Source._
   ::
+::
+
+
+
+::button-link{left-icon="lucide:github" variant="secondary" to="https://github.com/ZTL-UwU/shadcn-docs-nuxt" target="_blank"}
+  GitHub
+::
+::button-link{left-icon="lucide:ghost" variant="destructive" href="https://github.com/ZTL-UwU/shadcn-docs-nuxt" blank}
+  Ghost
+::
+::button-link{left-icon="lucide:ghost" variant="link" href="https://github.com/ZTL-UwU/shadcn-docs-nuxt" blank}
+  Ghost
 ::
