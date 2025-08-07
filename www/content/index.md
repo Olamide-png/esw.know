@@ -48,7 +48,7 @@ Explore our guides and documentation.
 ::
 
 
-<h2 class="text-center text-2xl font-bold">Integrate with ESW</h2>
+<h2 class="text-center text-2xl font-bold">Apps and Extensions</h2>
 
 
 ::card-group
@@ -79,6 +79,19 @@ Explore our guides and documentation.
   #description
   Integrate with ESW services, including hosted checkout and more.
   ::
+
+  ::card
+  ---
+  icon: 'logos:adobe-icon'
+  icon-size: 70
+  horizontal: true
+  ---
+
+  #title
+  Adobe Commerce (Magento)
+
+  #description
+  create a seamless international shopping experience with an optimized journey.
 ::
 
 
