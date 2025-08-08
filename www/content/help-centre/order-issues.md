@@ -173,7 +173,7 @@ toc: false
 
  <div className="relative">
                 <div
-                  className="absolute -inset-2 rounded-lg bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-rose-600 via-neutral-600 to-pink-600 opacity-50 blur-2xl"
+                  className="box-shadow 5px 9px 80px 4px rgba(93, 60, 226, 0.66) absolute -inset-2 rounded-lg bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-rose-600 via-neutral-600 to-pink-600 opacity-50 blur-2xl"
                 ></div>
                 <div className="relative flex w-full h-64 items-center justify-center border border-zinc-700 rounded-lg bg-zinc-900 text-slate-300">
                   Gradient shadow
