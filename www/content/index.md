@@ -24,7 +24,7 @@ Explore our guides and documentation.
   ---
   to: /shopify/home
   target: _self
-  img: /Salesforce (1).png
+  img: /Untitled design (1).webp
   ---
   #title
   Shopify Native
@@ -37,7 +37,7 @@ Explore our guides and documentation.
   ---
   to: /sfcc/home
   target: _self
-  img: /Salesforce (1).webp
+  img: /Salesforce (1).png
   ---
   #title
   Salesforce Commerce Cloud
