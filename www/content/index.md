@@ -24,7 +24,7 @@ Explore our guides and documentation.
   ---
   to: /shopify/home
   target: _self
-  img: /Untitled design (1).webp
+  img: /Salesforce (1).png
   ---
   #title
   Shopify Native
