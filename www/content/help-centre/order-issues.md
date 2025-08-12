@@ -324,7 +324,7 @@ toc: false
 
 <script>
 (() => {
-  // Ensure DOM is ready (safe even at end of <body>)
+  // Run after DOM is ready (safe even at end of <body>)
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
@@ -334,38 +334,44 @@ toc: false
   function init() {
     let currentSlide = 0;
     const slides = document.querySelectorAll('.carousel-item');
-    const indicators = document.querySelectorAll('[title^="Go to slide"]'); // robust without markup changes
+    const indicators = document.querySelectorAll('[title^="Go to slide"]');
     const progressBar = document.querySelector('.progress-bar');
     const carousel = document.querySelector('.carousel-track');
     const container = document.querySelector('.carousel-container');
+    const prevBtn = document.querySelector('button[title="Previous slide"]');
+    const nextBtn = document.querySelector('button[title="Next slide"]');
 
-    if (!slides.length || !indicators.length || !progressBar || !carousel || !container) return;
+    if (!slides.length || !carousel || !container) return;
 
     let autoAdvanceTimer;
     let touchStartX = 0;
 
+    // Hook up prev/next buttons (works even with inline onclicks)
+    if (prevBtn) prevBtn.addEventListener('click', () => prevSlide());
+    if (nextBtn) nextBtn.addEventListener('click', () => nextSlide());
+
     // Touch swipe
     carousel.addEventListener('touchstart', e => {
-      if (!e.changedTouches || !e.changedTouches[0]) return;
-      touchStartX = e.changedTouches[0].screenX;
+      if (e.changedTouches && e.changedTouches[0]) {
+        touchStartX = e.changedTouches[0].screenX;
+      }
     }, { passive: true });
 
     carousel.addEventListener('touchend', e => {
-      if (!e.changedTouches || !e.changedTouches[0]) return;
+      if (!(e.changedTouches && e.changedTouches[0])) return;
       const diff = touchStartX - e.changedTouches[0].screenX;
-      const swipeThreshold = 50;
-      if (Math.abs(diff) > swipeThreshold) diff > 0 ? nextSlide() : prevSlide();
+      if (Math.abs(diff) > 50) (diff > 0 ? nextSlide : prevSlide)();
     }, { passive: true });
 
-    // Pause on hover (desktop)
+    // Pause on hover
     container.addEventListener('mouseenter', pauseAutoAdvance);
     container.addEventListener('mouseleave', resetAutoAdvance);
 
-    // Keyboard arrows
-    container.setAttribute('tabindex', '0');
+    // Keyboard support
+    container.tabIndex = 0;
     container.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight') { nextSlide(); e.preventDefault(); }
-      if (e.key === 'ArrowLeft') { prevSlide(); e.preventDefault(); }
+      if (e.key === 'ArrowLeft')  { prevSlide(); e.preventDefault(); }
     });
 
     function updateSlides() {
@@ -382,16 +388,16 @@ toc: false
         }
       });
 
-      // Indicators
+      // Indicators (if present)
       indicators.forEach((indicator, index) => {
-        indicator.className = `w-8 sm:w-12 h-1 sm:h-1.5 rounded-full transition-colors ${
-          index === currentSlide ? 'bg-white/60' : 'bg-white/20'
-        } hover:bg-white/60`;
-        indicator.setAttribute('aria-selected', index === currentSlide ? 'true' : 'false');
+        indicator.className = `w-8 sm:w-12 h-1 sm:h-1.5 rounded-full transition-colors ${index === currentSlide ? 'bg-white/60' : 'bg-white/20'} hover:bg-white/60`;
+        indicator.setAttribute('aria-selected', String(index === currentSlide));
       });
 
-      // Progress
-      progressBar.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
+      // Progress bar (if present)
+      if (progressBar) {
+        progressBar.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
+      }
     }
 
     function pauseAutoAdvance() {
@@ -416,6 +422,10 @@ toc: false
       if (autoAdvanceTimer) resetAutoAdvance();
     }
 
+    // Make prev/next callable by inline onclicks if you keep them
+    window.nextSlide = nextSlide;
+    window.prevSlide = prevSlide;
+
     // Indicators click
     indicators.forEach((indicator, index) => {
       indicator.addEventListener('click', () => {
@@ -431,6 +441,7 @@ toc: false
   }
 })();
 </script>
+
 
 </body>
 </html>
