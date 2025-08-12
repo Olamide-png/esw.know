@@ -435,6 +435,20 @@ toc: false
   <span class="relative inline-flex size-3 rounded-full bg-sky-500"></span>
 </span>
 
-<svg class="size-6 animate-bounce ...">
-  <!-- ... -->
-</svg>
+<div>
+  <button popovertarget="my-popover">Check for updates</button>
+  <div popover id="my-popover" class="opacity-0 starting:open:opacity-0 ...">
+    <!-- ... -->
+  </div>
+</div>
+
+
+<div>
+  <h2>Categories<h2>
+  <ul class="*:rounded-full *:border *:border-sky-100 *:bg-sky-50 *:px-2 *:py-0.5 dark:text-sky-300 dark:*:border-sky-500/15 dark:*:bg-sky-500/10 ...">
+    <li>Sales</li>
+    <li>Marketing</li>
+    <li>SEO</li>
+    <!-- ... -->
+  </ul>
+</div>
