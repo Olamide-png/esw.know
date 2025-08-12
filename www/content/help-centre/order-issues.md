@@ -216,7 +216,7 @@ toc: false
             }
         }
 
-        .carousel-item.hidden {
+        .carousel-item.is-hidden {
             opacity: 0;
             transform: scale(0.8) translateZ(-200px);
         }
@@ -300,7 +300,7 @@ toc: false
                     </div>
                 </div>
 
-  <div class="carousel-item hidden absolute top-0 left-0 w-full h-full">
+  <div class="carousel-item is-hidden absolute top-0 left-0 w-full h-full">
                     <div class="w-full h-full p-4 sm:p-8">
                         <div class="w-full h-full rounded-xl sm:rounded-2xl overflow-hidden relative group">
                             <img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&q=80" alt="Abstract digital art" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
@@ -323,125 +323,110 @@ toc: false
     </div>
 
 <script>
-(() => {
-  // Run after DOM is ready (safe even at end of <body>)
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+(function () {
+  const start = () => {
+    let current = 0;
 
-  function init() {
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.carousel-item');
-    const indicators = document.querySelectorAll('[title^="Go to slide"]');
-    const progressBar = document.querySelector('.progress-bar');
-    const carousel = document.querySelector('.carousel-track');
-    const container = document.querySelector('.carousel-container');
-    const prevBtn = document.querySelector('button[title="Previous slide"]');
-    const nextBtn = document.querySelector('button[title="Next slide"]');
+    const track      = document.querySelector('.carousel-track');
+    const container  = document.querySelector('.carousel-container');
+    const slides     = Array.from(document.querySelectorAll('.carousel-item'));
+    const progress   = document.querySelector('.progress-bar');
+    const prevBtn    = document.querySelector('button[title="Previous slide"]');
+    const nextBtn    = document.querySelector('button[title="Next slide"]');
+    const indicators = Array.from(document.querySelectorAll('[title^="Go to slide"]'));
 
-    if (!slides.length || !carousel || !container) return;
+    if (!track || !container || slides.length === 0) return;
 
-    let autoAdvanceTimer;
+    let timerId = null;
     let touchStartX = 0;
 
-    // Hook up prev/next buttons (works even with inline onclicks)
-    if (prevBtn) prevBtn.addEventListener('click', () => prevSlide());
-    if (nextBtn) nextBtn.addEventListener('click', () => nextSlide());
+    function applyState() {
+      slides.forEach((el, i) => {
+        el.className = 'carousel-item absolute top-0 left-0 w-full h-full';
+        if (i === current) {
+          el.classList.add('active');
+        } else if (i === (current + 1) % slides.length) {
+          el.classList.add('next');
+        } else if (i === (current - 1 + slides.length) % slides.length) {
+          el.classList.add('prev');
+        } else {
+          el.classList.add('is-hidden'); // <— renamed to avoid Tailwind .hidden
+        }
+      });
+
+      indicators.forEach((dot, i) => {
+        dot.className = `w-8 sm:w-12 h-1 sm:h-1.5 rounded-full transition-colors ${i === current ? 'bg-white/60' : 'bg-white/20'} hover:bg-white/60`;
+        dot.setAttribute('aria-selected', i === current ? 'true' : 'false');
+      });
+
+      if (progress) {
+        progress.style.width = `${((current + 1) / slides.length) * 100}%`;
+      }
+    }
+
+    function next() {
+      current = (current + 1) % slides.length;
+      applyState();
+      restart();
+    }
+    function prev() {
+      current = (current - 1 + slides.length) % slides.length;
+      applyState();
+      restart();
+    }
+
+    function restart() {
+      stop();
+      timerId = setInterval(next, 5000);
+    }
+    function stop() {
+      if (timerId) clearInterval(timerId);
+      timerId = null;
+    }
+
+    // Buttons (works even if inline onclicks exist)
+    if (prevBtn) prevBtn.addEventListener('click', prev);
+    if (nextBtn) nextBtn.addEventListener('click', next);
+
+    // Make them available for inline handlers too
+    window.prevSlide = prev;
+    window.nextSlide = next;
+
+    // Indicators
+    indicators.forEach((dot, i) => dot.addEventListener('click', () => { current = i; applyState(); restart(); }));
 
     // Touch swipe
-    carousel.addEventListener('touchstart', e => {
-      if (e.changedTouches && e.changedTouches[0]) {
-        touchStartX = e.changedTouches[0].screenX;
-      }
+    track.addEventListener('touchstart', (e) => { if (e.changedTouches?.[0]) touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+    track.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches?.[0]?.screenX ?? touchStartX;
+      const dx = touchStartX - endX;
+      if (Math.abs(dx) > 50) (dx > 0 ? next : prev)();
     }, { passive: true });
 
-    carousel.addEventListener('touchend', e => {
-      if (!(e.changedTouches && e.changedTouches[0])) return;
-      const diff = touchStartX - e.changedTouches[0].screenX;
-      if (Math.abs(diff) > 50) (diff > 0 ? nextSlide : prevSlide)();
-    }, { passive: true });
-
-    // Pause on hover
-    container.addEventListener('mouseenter', pauseAutoAdvance);
-    container.addEventListener('mouseleave', resetAutoAdvance);
+    // Pause on hover (desktop)
+    container.addEventListener('mouseenter', stop);
+    container.addEventListener('mouseleave', restart);
 
     // Keyboard support
     container.tabIndex = 0;
     container.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') { nextSlide(); e.preventDefault(); }
-      if (e.key === 'ArrowLeft')  { prevSlide(); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { next(); e.preventDefault(); }
+      if (e.key === 'ArrowLeft')  { prev(); e.preventDefault(); }
     });
 
-    function updateSlides() {
-      slides.forEach((slide, index) => {
-        slide.className = 'carousel-item absolute top-0 left-0 w-full h-full';
-        if (index === currentSlide) {
-          slide.classList.add('active');
-        } else if (index === (currentSlide + 1) % slides.length) {
-          slide.classList.add('next');
-        } else if (index === (currentSlide - 1 + slides.length) % slides.length) {
-          slide.classList.add('prev');
-        } else {
-          slide.classList.add('hidden');
-        }
-      });
+    // Go!
+    applyState();
+    restart();
+  };
 
-      // Indicators (if present)
-      indicators.forEach((indicator, index) => {
-        indicator.className = `w-8 sm:w-12 h-1 sm:h-1.5 rounded-full transition-colors ${index === currentSlide ? 'bg-white/60' : 'bg-white/20'} hover:bg-white/60`;
-        indicator.setAttribute('aria-selected', String(index === currentSlide));
-      });
-
-      // Progress bar (if present)
-      if (progressBar) {
-        progressBar.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
-      }
-    }
-
-    function pauseAutoAdvance() {
-      clearInterval(autoAdvanceTimer);
-      autoAdvanceTimer = null;
-    }
-
-    function resetAutoAdvance() {
-      clearInterval(autoAdvanceTimer);
-      autoAdvanceTimer = setInterval(nextSlide, 5000);
-    }
-
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % slides.length;
-      updateSlides();
-      if (autoAdvanceTimer) resetAutoAdvance();
-    }
-
-    function prevSlide() {
-      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-      updateSlides();
-      if (autoAdvanceTimer) resetAutoAdvance();
-    }
-
-    // Make prev/next callable by inline onclicks if you keep them
-    window.nextSlide = nextSlide;
-    window.prevSlide = prevSlide;
-
-    // Indicators click
-    indicators.forEach((indicator, index) => {
-      indicator.addEventListener('click', () => {
-        currentSlide = index;
-        updateSlides();
-        resetAutoAdvance();
-      });
-    });
-
-    // Init
-    updateSlides();
-    resetAutoAdvance();
+  // Ensure DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
   }
 })();
 </script>
-
 
 </body>
 </html>
