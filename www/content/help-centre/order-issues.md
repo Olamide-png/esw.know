@@ -452,3 +452,394 @@ toc: false
     <!-- ... -->
   </ul>
 </div>
+
+
+
+<!-- Country Table (Sortable, Dark Mode, Flags) -->
+<section class="mx-auto max-w-5xl p-4">
+  <div class="rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
+    <div class="flex items-center justify-between gap-3 px-4 py-3 sm:px-6">
+      <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
+        Supported Countries <span id="count" class="text-gray-500 dark:text-gray-400 font-normal"></span>
+      </h2>
+      <!-- (Optional) quick filter; remove if you don't want it -->
+      <label class="relative block">
+        <input
+          id="filterInput"
+          type="text"
+          placeholder="Filter countries or codes…"
+          class="w-56 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:ring-white/10"
+        />
+        <span class="pointer-events-none absolute right-2 top-1.5 text-gray-400 dark:text-gray-500">⌘K</span>
+      </label>
+    </div>
+
+  <div class="overflow-x-auto">
+      <table class="min-w-full table-auto text-left">
+        <thead class="sticky top-0 z-10 bg-gray-50/90 backdrop-blur supports-[backdrop-filter]:bg-gray-50/60 dark:bg-gray-900/80 dark:supports-[backdrop-filter]:bg-gray-900/50">
+          <tr class="text-sm text-gray-600 dark:text-gray-300">
+            <th
+              data-key="name"
+              class="group cursor-pointer select-none px-4 py-3 sm:px-6"
+            >
+              <div class="inline-flex items-center gap-1.5">
+                Country
+                <span class="sort-indicator opacity-40 transition group-hover:opacity-100">↕</span>
+              </div>
+            </th>
+            <th
+              data-key="code"
+              class="group cursor-pointer select-none px-4 py-3 sm:px-6"
+            >
+              <div class="inline-flex items-center gap-1.5">
+                Code
+                <span class="sort-indicator opacity-40 transition group-hover:opacity-100">↕</span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody id="rows" class="divide-y divide-gray-100 dark:divide-gray-800 text-sm"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<script>
+  // --- Data ---------------------------------------------------------------
+  const COUNTRIES = [
+    { code: "AL", name: "Albania" },
+    { code: "DZ", name: "Algeria" },
+    { code: "AD", name: "Andorra" },
+    { code: "AO", name: "Angola" },
+    { code: "AI", name: "Anguilla" },
+    { code: "AG", name: "Antigua and Barbuda" },
+    { code: "AR", name: "Argentina" },
+    { code: "AM", name: "Armenia" },
+    { code: "AW", name: "Aruba" },
+    { code: "AU", name: "Australia" },
+    { code: "AT", name: "Austria" },
+    { code: "AZ", name: "Azerbaijan" },
+    { code: "BS", name: "Bahamas" },
+    { code: "BH", name: "Bahrain" },
+    { code: "BD", name: "Bangladesh" },
+    { code: "BB", name: "Barbados" },
+    { code: "BY", name: "Belarus" },
+    { code: "BE", name: "Belgium" },
+    { code: "BZ", name: "Belize" },
+    { code: "BJ", name: "Benin" },
+    { code: "BM", name: "Bermuda" },
+    { code: "BT", name: "Bhutan" },
+    { code: "BO", name: "Bolivia" },
+    { code: "BQ", name: "Bonaire, Sint Eustatius and Saba (Caribbean Netherlands)" },
+    { code: "BA", name: "Bosnia and Herzegovina" },
+    { code: "BW", name: "Botswana" },
+    { code: "BR", name: "Brazil" },
+    { code: "BN", name: "Brunei" },
+    { code: "BG", name: "Bulgaria" },
+    { code: "BF", name: "Burkina Faso" },
+    { code: "BI", name: "Burundi" },
+    { code: "KH", name: "Cambodia" },
+    { code: "CM", name: "Cameroon" },
+    { code: "CA", name: "Canada" },
+    { code: "CV", name: "Cabo Verde" },
+    { code: "KY", name: "Cayman Islands" },
+    { code: "CF", name: "Central African Republic" },
+    { code: "TD", name: "Chad" },
+    { code: "CL", name: "Chile" },
+    { code: "CN", name: "China" },
+    { code: "CO", name: "Colombia" },
+    { code: "KM", name: "Comoros" },
+    { code: "CG", name: "Congo (Republic of the)" },
+    { code: "CD", name: "Congo (Democratic Republic of the)" },
+    { code: "CK", name: "Cook Islands" },
+    { code: "CR", name: "Costa Rica" },
+    { code: "CI", name: "Côte d’Ivoire" },
+    { code: "HR", name: "Croatia" },
+    { code: "CU", name: "Cuba" },
+    { code: "CW", name: "Curaçao" },
+    { code: "CY", name: "Cyprus" },
+    { code: "CZ", name: "Czechia" },
+    { code: "DK", name: "Denmark" },
+    { code: "DJ", name: "Djibouti" },
+    { code: "DM", name: "Dominica" },
+    { code: "DO", name: "Dominican Republic" },
+    { code: "EC", name: "Ecuador" },
+    { code: "EG", name: "Egypt" },
+    { code: "SV", name: "El Salvador" },
+    { code: "GQ", name: "Equatorial Guinea" },
+    { code: "ER", name: "Eritrea" },
+    { code: "EE", name: "Estonia" },
+    { code: "ET", name: "Ethiopia" },
+    { code: "FK", name: "Falkland Islands" },
+    { code: "FO", name: "Faroe Islands" },
+    { code: "FJ", name: "Fiji" },
+    { code: "FI", name: "Finland" },
+    { code: "FR", name: "France" },
+    { code: "GF", name: "French Guiana" },
+    { code: "PF", name: "French Polynesia" },
+    { code: "GA", name: "Gabon" },
+    { code: "GM", name: "Gambia" },
+    { code: "GE", name: "Georgia" },
+    { code: "DE", name: "Germany" },
+    { code: "GH", name: "Ghana" },
+    { code: "GI", name: "Gibraltar" },
+    { code: "GR", name: "Greece" },
+    { code: "GL", name: "Greenland" },
+    { code: "GD", name: "Grenada" },
+    { code: "GP", name: "Guadeloupe" },
+    { code: "GT", name: "Guatemala" },
+    { code: "GG", name: "Guernsey" },
+    { code: "GN", name: "Guinea" },
+    { code: "GW", name: "Guinea-Bissau" },
+    { code: "GY", name: "Guyana" },
+    { code: "HT", name: "Haiti" },
+    { code: "VA", name: "Holy See (Vatican City)" },
+    { code: "HN", name: "Honduras" },
+    { code: "HK", name: "Hong Kong" },
+    { code: "HU", name: "Hungary" },
+    { code: "IS", name: "Iceland" },
+    { code: "IN", name: "India" },
+    { code: "ID", name: "Indonesia" },
+    { code: "IQ", name: "Iraq" },
+    { code: "IE", name: "Ireland" },
+    { code: "IM", name: "Isle of Man" },
+    { code: "IL", name: "Israel" },
+    { code: "IT", name: "Italy" },
+    { code: "JM", name: "Jamaica" },
+    { code: "JP", name: "Japan" },
+    { code: "JE", name: "Jersey" },
+    { code: "JO", name: "Jordan" },
+    { code: "KZ", name: "Kazakhstan" },
+    { code: "KE", name: "Kenya" },
+    { code: "KP", name: "North Korea" },
+    { code: "KR", name: "South Korea" },
+    { code: "XK", name: "Kosovo" },
+    { code: "KW", name: "Kuwait" },
+    { code: "KG", name: "Kyrgyzstan" },
+    { code: "LA", name: "Laos" },
+    { code: "LV", name: "Latvia" },
+    { code: "LB", name: "Lebanon" },
+    { code: "LS", name: "Lesotho" },
+    { code: "LR", name: "Liberia" },
+    { code: "LY", name: "Libya" },
+    { code: "LI", name: "Liechtenstein" },
+    { code: "LT", name: "Lithuania" },
+    { code: "LU", name: "Luxembourg" },
+    { code: "MO", name: "Macao" },
+    { code: "MK", name: "North Macedonia" },
+    { code: "MG", name: "Madagascar" },
+    { code: "MW", name: "Malawi" },
+    { code: "MY", name: "Malaysia" },
+    { code: "MV", name: "Maldives" },
+    { code: "ML", name: "Mali" },
+    { code: "MT", name: "Malta" },
+    { code: "MQ", name: "Martinique" },
+    { code: "MR", name: "Mauritania" },
+    { code: "MU", name: "Mauritius" },
+    { code: "YT", name: "Mayotte" },
+    { code: "MX", name: "Mexico" },
+    { code: "MD", name: "Moldova" },
+    { code: "MC", name: "Monaco" },
+    { code: "MN", name: "Mongolia" },
+    { code: "ME", name: "Montenegro" },
+    { code: "MS", name: "Montserrat" },
+    { code: "MA", name: "Morocco" },
+    { code: "MZ", name: "Mozambique" },
+    { code: "MM", name: "Myanmar" },
+    { code: "NA", name: "Namibia" },
+    { code: "NP", name: "Nepal" },
+    { code: "NL", name: "Netherlands" },
+    { code: "AN", name: "Netherlands Antilles (deprecated)" },
+    { code: "NC", name: "New Caledonia" },
+    { code: "NZ", name: "New Zealand" },
+    { code: "NI", name: "Nicaragua" },
+    { code: "NE", name: "Niger" },
+    { code: "NG", name: "Nigeria" },
+    { code: "NO", name: "Norway" },
+    { code: "OM", name: "Oman" },
+    { code: "PK", name: "Pakistan" },
+    { code: "PA", name: "Panama" },
+    { code: "PG", name: "Papua New Guinea" },
+    { code: "PY", name: "Paraguay" },
+    { code: "PE", name: "Peru" },
+    { code: "PH", name: "Philippines" },
+    { code: "PL", name: "Poland" },
+    { code: "PT", name: "Portugal" },
+    { code: "QA", name: "Qatar" },
+    { code: "RE", name: "Réunion" },
+    { code: "RO", name: "Romania" },
+    { code: "RU", name: "Russia" },
+    { code: "RW", name: "Rwanda" },
+    { code: "BL", name: "Saint Barthélemy" },
+    { code: "SH", name: "Saint Helena, Ascension and Tristan da Cunha" },
+    { code: "KN", name: "Saint Kitts and Nevis" },
+    { code: "LC", name: "Saint Lucia" },
+    { code: "MF", name: "Saint Martin (French part)" },
+    { code: "VC", name: "Saint Vincent and the Grenadines" },
+    { code: "WS", name: "Samoa" },
+    { code: "SM", name: "San Marino" },
+    { code: "ST", name: "São Tomé and Príncipe" },
+    { code: "SA", name: "Saudi Arabia" },
+    { code: "SN", name: "Senegal" },
+    { code: "RS", name: "Serbia" },
+    { code: "SC", name: "Seychelles" },
+    { code: "SL", name: "Sierra Leone" },
+    { code: "SG", name: "Singapore" },
+    { code: "SX", name: "Sint Maarten (Dutch part)" },
+    { code: "SK", name: "Slovakia" },
+    { code: "SI", name: "Slovenia" },
+    { code: "SB", name: "Solomon Islands" },
+    { code: "SO", name: "Somalia" },
+    { code: "ZA", name: "South Africa" },
+    { code: "ES", name: "Spain" },
+    { code: "LK", name: "Sri Lanka" },
+    { code: "SR", name: "Suriname" },
+    { code: "SZ", name: "Eswatini (formerly Swaziland)" },
+    { code: "SE", name: "Sweden" },
+    { code: "CH", name: "Switzerland" },
+    { code: "TW", name: "Taiwan" },
+    { code: "TJ", name: "Tajikistan" },
+    { code: "TZ", name: "Tanzania" },
+    { code: "TH", name: "Thailand" },
+    { code: "TL", name: "Timor-Leste" },
+    { code: "TG", name: "Togo" },
+    { code: "TO", name: "Tonga" },
+    { code: "TT", name: "Trinidad and Tobago" },
+    { code: "TN", name: "Tunisia" },
+    { code: "TR", name: "Türkiye (Turkey)" },
+    { code: "TC", name: "Turks and Caicos Islands" },
+    { code: "UG", name: "Uganda" },
+    { code: "UA", name: "Ukraine" },
+    { code: "AE", name: "United Arab Emirates" },
+    { code: "GB", name: "United Kingdom" },
+    { code: "US", name: "United States" },
+    { code: "UY", name: "Uruguay" },
+    { code: "UZ", name: "Uzbekistan" },
+    { code: "VU", name: "Vanuatu" },
+    { code: "VE", name: "Venezuela" },
+    { code: "VN", name: "Vietnam" },
+    { code: "VG", name: "Virgin Islands (British)" },
+    { code: "YE", name: "Yemen" },
+    { code: "ZM", name: "Zambia" },
+    { code: "ZW", name: "Zimbabwe" },
+  ];
+
+  // --- Helpers ------------------------------------------------------------
+  const rowsEl = document.getElementById("rows");
+  const countEl = document.getElementById("count");
+  const filterInput = document.getElementById("filterInput");
+
+  const missingOnFlagCDN = new Set(["AN", "XK"]); // known tricky codes
+
+  function flagUrl(code) {
+    return `https://flagcdn.com/${code.toLowerCase()}.svg`;
+  }
+
+  function renderRows(data) {
+    rowsEl.innerHTML = "";
+    data.forEach(({ code, name }, idx) => {
+      const tr = document.createElement("tr");
+      tr.className =
+        (idx % 2 === 0
+          ? "bg-white dark:bg-gray-900"
+          : "bg-gray-50 dark:bg-gray-900/60") +
+        " hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition";
+
+      // cell: country (flag + name)
+      const tdCountry = document.createElement("td");
+      tdCountry.className = "px-4 py-3 sm:px-6";
+      tdCountry.innerHTML = `
+        <div class="flex items-center gap-3">
+          <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+            <img
+              alt="${name} flag"
+              class="h-5 w-7 object-cover"
+              referrerpolicy="no-referrer"
+            />
+          </span>
+          <span class="text-gray-900 dark:text-gray-100">${name}</span>
+        </div>
+      `;
+      const img = tdCountry.querySelector("img");
+      img.src = flagUrl(code);
+      img.addEventListener("error", () => {
+        // Graceful fallback: show a tiny code badge if image is missing
+        const wrapper = img.parentElement;
+        wrapper.innerHTML = `
+          <span title="Flag unavailable" class="text-[10px] font-semibold text-gray-600 dark:text-gray-300">
+            ${code}
+          </span>`;
+      });
+      if (missingOnFlagCDN.has(code)) {
+        // preemptively fallback for known missing codes
+        img.dispatchEvent(new Event("error"));
+      }
+
+      // cell: code
+      const tdCode = document.createElement("td");
+      tdCode.className = "px-4 py-3 sm:px-6";
+      tdCode.innerHTML = `<code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">${code}</code>`;
+
+      tr.appendChild(tdCountry);
+      tr.appendChild(tdCode);
+      rowsEl.appendChild(tr);
+    });
+    countEl.textContent = `(${data.length})`;
+  }
+
+  // --- Sorting ------------------------------------------------------------
+  let sortState = { key: "name", dir: "asc" };
+
+  function sortData(data, key, dir) {
+    const sorted = [...data].sort((a, b) => {
+      const A = a[key], B = b[key];
+      return typeof A === "string"
+        ? A.localeCompare(B, undefined, { sensitivity: "base" })
+        : (A < B ? -1 : A > B ? 1 : 0);
+    });
+    return dir === "desc" ? sorted.reverse() : sorted;
+  }
+
+  function updateSortIndicators() {
+    document.querySelectorAll("th[data-key]").forEach((th) => {
+      const ind = th.querySelector(".sort-indicator");
+      const isActive = th.dataset.key === sortState.key;
+      ind.textContent = isActive ? (sortState.dir === "asc" ? "↑" : "↓") : "↕";
+      ind.classList.toggle("opacity-100", isActive);
+      ind.classList.toggle("opacity-40", !isActive);
+      th.setAttribute("aria-sort", isActive ? sortState.dir : "none");
+    });
+  }
+
+  document.querySelectorAll("th[data-key]").forEach((th) => {
+    th.addEventListener("click", () => {
+      const key = th.dataset.key;
+      sortState = {
+        key,
+        dir: sortState.key === key && sortState.dir === "asc" ? "desc" : "asc",
+      };
+      const view = filterView(COUNTRIES, filterInput?.value || "");
+      renderRows(sortData(view, sortState.key, sortState.dir));
+      updateSortIndicators();
+    });
+  });
+
+  // --- Filtering (optional UX sugar) --------------------------------------
+  function filterView(data, query) {
+    const q = query.trim().toLowerCase();
+    if (!q) return data;
+    return data.filter(
+      (it) =>
+        it.name.toLowerCase().includes(q) || it.code.toLowerCase().includes(q)
+    );
+  }
+
+  filterInput?.addEventListener("input", (e) => {
+    const view = filterView(COUNTRIES, e.target.value);
+    renderRows(sortData(view, sortState.key, sortState.dir));
+  });
+
+  // --- Init ---------------------------------------------------------------
+  renderRows(sortData(COUNTRIES, sortState.key, sortState.dir));
+  updateSortIndicators();
+</script>
