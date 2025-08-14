@@ -455,391 +455,3036 @@ toc: false
 
 
 
-<!-- Country Table (Sortable, Dark Mode, Flags) -->
+<!-- Static Tailwind Table (No JS; Markdown-friendly) -->
 <section class="mx-auto max-w-5xl p-4">
   <div class="rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
     <div class="flex items-center justify-between gap-3 px-4 py-3 sm:px-6">
       <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
-        Supported Countries <span id="count" class="text-gray-500 dark:text-gray-400 font-normal"></span>
+        Supported Countries <span class="text-gray-500 dark:text-gray-400 font-normal">(215)</span>
       </h2>
-      <!-- (Optional) quick filter; remove if you don't want it -->
-      <label class="relative block">
-        <input
-          id="filterInput"
-          type="text"
-          placeholder="Filter countries or codes…"
-          class="w-56 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:ring-white/10"
-        />
-        <span class="pointer-events-none absolute right-2 top-1.5 text-gray-400 dark:text-gray-500">⌘K</span>
-      </label>
     </div>
-
-  <div class="overflow-x-auto">
+    <div class="overflow-x-auto">
       <table class="min-w-full table-auto text-left">
         <thead class="sticky top-0 z-10 bg-gray-50/90 backdrop-blur supports-[backdrop-filter]:bg-gray-50/60 dark:bg-gray-900/80 dark:supports-[backdrop-filter]:bg-gray-900/50">
           <tr class="text-sm text-gray-600 dark:text-gray-300">
-            <th
-              data-key="name"
-              class="group cursor-pointer select-none px-4 py-3 sm:px-6"
-            >
-              <div class="inline-flex items-center gap-1.5">
-                Country
-                <span class="sort-indicator opacity-40 transition group-hover:opacity-100">↕</span>
-              </div>
-            </th>
-            <th
-              data-key="code"
-              class="group cursor-pointer select-none px-4 py-3 sm:px-6"
-            >
-              <div class="inline-flex items-center gap-1.5">
-                Code
-                <span class="sort-indicator opacity-40 transition group-hover:opacity-100">↕</span>
-              </div>
-            </th>
+            <th class="px-4 py-3 sm:px-6">Country</th>
+            <th class="px-4 py-3 sm:px-6">Code</th>
           </tr>
         </thead>
-        <tbody id="rows" class="divide-y divide-gray-100 dark:divide-gray-800 text-sm"></tbody>
+        <tbody class="divide-y divide-gray-100 dark:divide-gray-800 text-sm">
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Albania flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/al.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Albania</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">AL</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Algeria flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/dz.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Algeria</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">DZ</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Andorra flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ad.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Andorra</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">AD</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Angola flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ao.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Angola</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">AO</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Anguilla flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ai.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Anguilla</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">AI</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Antigua and Barbuda flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ag.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Antigua and Barbuda</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">AG</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Argentina flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ar.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Argentina</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">AR</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Armenia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/am.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Armenia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">AM</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Aruba flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/aw.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Aruba</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">AW</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Australia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/au.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Australia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">AU</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Austria flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/at.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Austria</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">AT</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Azerbaijan flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/az.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Azerbaijan</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">AZ</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Bahamas flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/bs.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Bahamas</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BS</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Bahrain flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/bh.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Bahrain</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BH</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Bangladesh flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/bd.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Bangladesh</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BD</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Barbados flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/bb.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Barbados</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BB</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Belarus flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/by.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Belarus</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BY</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Belgium flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/be.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Belgium</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BE</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Belize flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/bz.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Belize</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BZ</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Benin flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/bj.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Benin</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BJ</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Bermuda flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/bm.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Bermuda</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BM</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Bhutan flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/bt.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Bhutan</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BT</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Bolivia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/bo.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Bolivia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BO</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Bonaire, Sint Eustatius and Saba (Caribbean Netherlands) flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/bq.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Bonaire, Sint Eustatius and Saba (Caribbean Netherlands)</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BQ</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Bosnia and Herzegovina flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ba.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Bosnia and Herzegovina</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BA</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Botswana flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/bw.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Botswana</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BW</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Brazil flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/br.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Brazil</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BR</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Brunei flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/bn.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Brunei</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BN</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Bulgaria flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/bg.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Bulgaria</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BG</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Burkina Faso flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/bf.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Burkina Faso</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BF</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Burundi flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/bi.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Burundi</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BI</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Cambodia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/kh.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Cambodia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">KH</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Cameroon flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/cm.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Cameroon</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">CM</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Canada flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ca.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Canada</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">CA</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Cabo Verde flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/cv.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Cabo Verde</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">CV</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Cayman Islands flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ky.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Cayman Islands</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">KY</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Central African Republic flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/cf.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Central African Republic</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">CF</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Chad flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/td.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Chad</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">TD</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Chile flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/cl.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Chile</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">CL</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="China flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/cn.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">China</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">CN</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Colombia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/co.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Colombia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">CO</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Comoros flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/km.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Comoros</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">KM</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Congo (Republic of the) flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/cg.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Congo (Republic of the)</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">CG</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Congo (Democratic Republic of the) flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/cd.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Congo (Democratic Republic of the)</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">CD</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Cook Islands flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ck.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Cook Islands</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">CK</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Costa Rica flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/cr.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Costa Rica</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">CR</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Côte d’Ivoire flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ci.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Côte d’Ivoire</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">CI</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Croatia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/hr.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Croatia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">HR</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Cuba flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/cu.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Cuba</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">CU</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Curaçao flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/cw.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Curaçao</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">CW</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Cyprus flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/cy.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Cyprus</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">CY</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Czechia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/cz.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Czechia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">CZ</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Denmark flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/dk.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Denmark</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">DK</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Djibouti flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/dj.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Djibouti</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">DJ</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Dominica flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/dm.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Dominica</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">DM</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Dominican Republic flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/do.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Dominican Republic</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">DO</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Ecuador flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ec.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Ecuador</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">EC</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Egypt flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/eg.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Egypt</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">EG</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="El Salvador flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/sv.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">El Salvador</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">SV</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Equatorial Guinea flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/gq.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Equatorial Guinea</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">GQ</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Eritrea flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/er.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Eritrea</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">ER</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Estonia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ee.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Estonia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">EE</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Ethiopia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/et.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Ethiopia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">ET</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Falkland Islands flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/fk.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Falkland Islands</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">FK</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Faroe Islands flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/fo.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Faroe Islands</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">FO</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Fiji flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/fj.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Fiji</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">FJ</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Finland flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/fi.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Finland</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">FI</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="France flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/fr.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">France</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">FR</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="French Guiana flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/gf.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">French Guiana</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">GF</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="French Polynesia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/pf.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">French Polynesia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">PF</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Gabon flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ga.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Gabon</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">GA</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Gambia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/gm.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Gambia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">GM</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Georgia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ge.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Georgia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">GE</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Germany flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/de.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Germany</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">DE</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Ghana flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/gh.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Ghana</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">GH</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Gibraltar flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/gi.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Gibraltar</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">GI</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Greece flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/gr.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Greece</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">GR</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Greenland flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/gl.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Greenland</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">GL</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Grenada flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/gd.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Grenada</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">GD</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Guadeloupe flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/gp.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Guadeloupe</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">GP</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Guatemala flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/gt.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Guatemala</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">GT</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Guernsey flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/gg.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Guernsey</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">GG</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Guinea flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/gn.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Guinea</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">GN</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Guinea-Bissau flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/gw.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Guinea-Bissau</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">GW</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Guyana flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/gy.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Guyana</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">GY</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Haiti flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ht.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Haiti</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">HT</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Holy See (Vatican City) flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/va.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Holy See (Vatican City)</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">VA</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Honduras flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/hn.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Honduras</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">HN</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Hong Kong flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/hk.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Hong Kong</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">HK</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Hungary flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/hu.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Hungary</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">HU</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Iceland flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/is.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Iceland</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">IS</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="India flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/in.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">India</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">IN</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Indonesia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/id.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Indonesia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">ID</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Iraq flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/iq.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Iraq</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">IQ</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Ireland flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ie.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Ireland</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">IE</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Isle of Man flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/im.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Isle of Man</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">IM</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Israel flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/il.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Israel</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">IL</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Italy flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/it.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Italy</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">IT</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Jamaica flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/jm.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Jamaica</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">JM</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Japan flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/jp.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Japan</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">JP</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Jersey flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/je.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Jersey</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">JE</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Jordan flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/jo.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Jordan</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">JO</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Kazakhstan flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/kz.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Kazakhstan</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">KZ</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Kenya flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ke.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Kenya</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">KE</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="North Korea flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/kp.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">North Korea</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">KP</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="South Korea flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/kr.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">South Korea</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">KR</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Kosovo flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/xk.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Kosovo</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">XK</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Kuwait flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/kw.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Kuwait</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">KW</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Kyrgyzstan flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/kg.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Kyrgyzstan</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">KG</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Laos flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/la.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Laos</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">LA</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Latvia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/lv.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Latvia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">LV</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Lebanon flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/lb.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Lebanon</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">LB</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Lesotho flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ls.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Lesotho</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">LS</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Liberia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/lr.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Liberia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">LR</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Libya flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ly.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Libya</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">LY</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Liechtenstein flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/li.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Liechtenstein</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">LI</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Lithuania flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/lt.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Lithuania</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">LT</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Luxembourg flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/lu.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Luxembourg</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">LU</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Macao flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/mo.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Macao</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MO</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="North Macedonia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/mk.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">North Macedonia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MK</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Madagascar flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/mg.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Madagascar</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MG</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Malawi flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/mw.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Malawi</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MW</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Malaysia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/my.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Malaysia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MY</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Maldives flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/mv.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Maldives</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MV</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Mali flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ml.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Mali</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">ML</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Malta flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/mt.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Malta</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MT</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Martinique flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/mq.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Martinique</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MQ</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Mauritania flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/mr.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Mauritania</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MR</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Mauritius flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/mu.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Mauritius</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MU</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Mayotte flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/yt.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Mayotte</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">YT</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Mexico flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/mx.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Mexico</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MX</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Moldova flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/md.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Moldova</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MD</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Monaco flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/mc.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Monaco</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MC</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Mongolia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/mn.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Mongolia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MN</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Montenegro flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/me.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Montenegro</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">ME</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Montserrat flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ms.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Montserrat</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MS</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Morocco flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ma.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Morocco</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MA</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Mozambique flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/mz.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Mozambique</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MZ</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Myanmar flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/mm.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Myanmar</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MM</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Namibia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/na.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Namibia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">NA</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Nepal flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/np.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Nepal</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">NP</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Netherlands flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/nl.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Netherlands</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">NL</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Netherlands Antilles (deprecated) flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/an.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Netherlands Antilles (deprecated)</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">AN</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="New Caledonia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/nc.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">New Caledonia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">NC</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="New Zealand flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/nz.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">New Zealand</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">NZ</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Nicaragua flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ni.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Nicaragua</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">NI</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Niger flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ne.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Niger</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">NE</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Nigeria flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ng.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Nigeria</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">NG</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Norway flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/no.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Norway</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">NO</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Oman flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/om.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Oman</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">OM</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Pakistan flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/pk.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Pakistan</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">PK</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Panama flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/pa.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Panama</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">PA</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Papua New Guinea flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/pg.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Papua New Guinea</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">PG</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Paraguay flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/py.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Paraguay</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">PY</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Peru flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/pe.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Peru</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">PE</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Philippines flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ph.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Philippines</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">PH</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Poland flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/pl.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Poland</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">PL</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Portugal flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/pt.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Portugal</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">PT</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Qatar flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/qa.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Qatar</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">QA</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Réunion flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/re.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Réunion</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">RE</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Romania flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ro.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Romania</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">RO</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Russia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ru.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Russia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">RU</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Rwanda flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/rw.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Rwanda</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">RW</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Saint Barthélemy flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/bl.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Saint Barthélemy</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">BL</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Saint Helena, Ascension and Tristan da Cunha flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/sh.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Saint Helena, Ascension and Tristan da Cunha</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">SH</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Saint Kitts and Nevis flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/kn.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Saint Kitts and Nevis</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">KN</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Saint Lucia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/lc.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Saint Lucia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">LC</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Saint Martin (French part) flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/mf.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Saint Martin (French part)</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">MF</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Saint Vincent and the Grenadines flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/vc.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Saint Vincent and the Grenadines</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">VC</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Samoa flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ws.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Samoa</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">WS</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="San Marino flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/sm.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">San Marino</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">SM</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="São Tomé and Príncipe flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/st.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">São Tomé and Príncipe</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">ST</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Saudi Arabia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/sa.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Saudi Arabia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">SA</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Senegal flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/sn.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Senegal</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">SN</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Serbia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/rs.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Serbia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">RS</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Seychelles flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/sc.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Seychelles</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">SC</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Sierra Leone flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/sl.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Sierra Leone</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">SL</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Singapore flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/sg.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Singapore</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">SG</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Sint Maarten (Dutch part) flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/sx.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Sint Maarten (Dutch part)</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">SX</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Slovakia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/sk.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Slovakia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">SK</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Slovenia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/si.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Slovenia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">SI</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Solomon Islands flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/sb.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Solomon Islands</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">SB</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Somalia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/so.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Somalia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">SO</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="South Africa flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/za.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">South Africa</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">ZA</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Spain flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/es.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Spain</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">ES</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Sri Lanka flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/lk.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Sri Lanka</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">LK</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Suriname flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/sr.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Suriname</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">SR</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Eswatini (formerly Swaziland) flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/sz.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Eswatini (formerly Swaziland)</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">SZ</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Sweden flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/se.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Sweden</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">SE</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Switzerland flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ch.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Switzerland</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">CH</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Taiwan flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/tw.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Taiwan</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">TW</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Tajikistan flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/tj.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Tajikistan</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">TJ</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Tanzania flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/tz.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Tanzania</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">TZ</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Thailand flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/th.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Thailand</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">TH</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Timor-Leste flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/tl.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Timor-Leste</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">TL</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Togo flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/tg.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Togo</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">TG</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Tonga flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/to.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Tonga</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">TO</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Trinidad and Tobago flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/tt.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Trinidad and Tobago</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">TT</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Tunisia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/tn.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Tunisia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">TN</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Türkiye (Turkey) flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/tr.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Türkiye (Turkey)</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">TR</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Turks and Caicos Islands flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/tc.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Turks and Caicos Islands</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">TC</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Uganda flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ug.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Uganda</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">UG</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Ukraine flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ua.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Ukraine</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">UA</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="United Arab Emirates flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ae.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">United Arab Emirates</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">AE</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="United Kingdom flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/gb.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">United Kingdom</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">GB</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="United States flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/us.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">United States</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">US</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Uruguay flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/uy.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Uruguay</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">UY</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Uzbekistan flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/uz.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Uzbekistan</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">UZ</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Vanuatu flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/vu.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Vanuatu</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">VU</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Venezuela flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ve.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Venezuela</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">VE</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Vietnam flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/vn.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Vietnam</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">VN</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Virgin Islands (British) flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/vg.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Virgin Islands (British)</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">VG</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Yemen flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/ye.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Yemen</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">YE</code>
+  </td>
+</tr>
+
+<tr class="bg-gray-50 dark:bg-gray-900/60 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Zambia flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/zm.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Zambia</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">ZM</code>
+  </td>
+</tr>
+
+<tr class="bg-white dark:bg-gray-900 hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition">
+  <td class="px-4 py-3 sm:px-6">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
+        <img alt="Zimbabwe flag" class="h-5 w-7 object-cover" src="https://flagcdn.com/zw.svg">
+      </span>
+      <span class="text-gray-900 dark:text-gray-100">Zimbabwe</span>
+    </div>
+  </td>
+  <td class="px-4 py-3 sm:px-6">
+    <code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">ZW</code>
+  </td>
+</tr>
+        </tbody>
       </table>
     </div>
   </div>
 </section>
 
-<script>
-  // --- Data ---------------------------------------------------------------
-  const COUNTRIES = [
-    { code: "AL", name: "Albania" },
-    { code: "DZ", name: "Algeria" },
-    { code: "AD", name: "Andorra" },
-    { code: "AO", name: "Angola" },
-    { code: "AI", name: "Anguilla" },
-    { code: "AG", name: "Antigua and Barbuda" },
-    { code: "AR", name: "Argentina" },
-    { code: "AM", name: "Armenia" },
-    { code: "AW", name: "Aruba" },
-    { code: "AU", name: "Australia" },
-    { code: "AT", name: "Austria" },
-    { code: "AZ", name: "Azerbaijan" },
-    { code: "BS", name: "Bahamas" },
-    { code: "BH", name: "Bahrain" },
-    { code: "BD", name: "Bangladesh" },
-    { code: "BB", name: "Barbados" },
-    { code: "BY", name: "Belarus" },
-    { code: "BE", name: "Belgium" },
-    { code: "BZ", name: "Belize" },
-    { code: "BJ", name: "Benin" },
-    { code: "BM", name: "Bermuda" },
-    { code: "BT", name: "Bhutan" },
-    { code: "BO", name: "Bolivia" },
-    { code: "BQ", name: "Bonaire, Sint Eustatius and Saba (Caribbean Netherlands)" },
-    { code: "BA", name: "Bosnia and Herzegovina" },
-    { code: "BW", name: "Botswana" },
-    { code: "BR", name: "Brazil" },
-    { code: "BN", name: "Brunei" },
-    { code: "BG", name: "Bulgaria" },
-    { code: "BF", name: "Burkina Faso" },
-    { code: "BI", name: "Burundi" },
-    { code: "KH", name: "Cambodia" },
-    { code: "CM", name: "Cameroon" },
-    { code: "CA", name: "Canada" },
-    { code: "CV", name: "Cabo Verde" },
-    { code: "KY", name: "Cayman Islands" },
-    { code: "CF", name: "Central African Republic" },
-    { code: "TD", name: "Chad" },
-    { code: "CL", name: "Chile" },
-    { code: "CN", name: "China" },
-    { code: "CO", name: "Colombia" },
-    { code: "KM", name: "Comoros" },
-    { code: "CG", name: "Congo (Republic of the)" },
-    { code: "CD", name: "Congo (Democratic Republic of the)" },
-    { code: "CK", name: "Cook Islands" },
-    { code: "CR", name: "Costa Rica" },
-    { code: "CI", name: "Côte d’Ivoire" },
-    { code: "HR", name: "Croatia" },
-    { code: "CU", name: "Cuba" },
-    { code: "CW", name: "Curaçao" },
-    { code: "CY", name: "Cyprus" },
-    { code: "CZ", name: "Czechia" },
-    { code: "DK", name: "Denmark" },
-    { code: "DJ", name: "Djibouti" },
-    { code: "DM", name: "Dominica" },
-    { code: "DO", name: "Dominican Republic" },
-    { code: "EC", name: "Ecuador" },
-    { code: "EG", name: "Egypt" },
-    { code: "SV", name: "El Salvador" },
-    { code: "GQ", name: "Equatorial Guinea" },
-    { code: "ER", name: "Eritrea" },
-    { code: "EE", name: "Estonia" },
-    { code: "ET", name: "Ethiopia" },
-    { code: "FK", name: "Falkland Islands" },
-    { code: "FO", name: "Faroe Islands" },
-    { code: "FJ", name: "Fiji" },
-    { code: "FI", name: "Finland" },
-    { code: "FR", name: "France" },
-    { code: "GF", name: "French Guiana" },
-    { code: "PF", name: "French Polynesia" },
-    { code: "GA", name: "Gabon" },
-    { code: "GM", name: "Gambia" },
-    { code: "GE", name: "Georgia" },
-    { code: "DE", name: "Germany" },
-    { code: "GH", name: "Ghana" },
-    { code: "GI", name: "Gibraltar" },
-    { code: "GR", name: "Greece" },
-    { code: "GL", name: "Greenland" },
-    { code: "GD", name: "Grenada" },
-    { code: "GP", name: "Guadeloupe" },
-    { code: "GT", name: "Guatemala" },
-    { code: "GG", name: "Guernsey" },
-    { code: "GN", name: "Guinea" },
-    { code: "GW", name: "Guinea-Bissau" },
-    { code: "GY", name: "Guyana" },
-    { code: "HT", name: "Haiti" },
-    { code: "VA", name: "Holy See (Vatican City)" },
-    { code: "HN", name: "Honduras" },
-    { code: "HK", name: "Hong Kong" },
-    { code: "HU", name: "Hungary" },
-    { code: "IS", name: "Iceland" },
-    { code: "IN", name: "India" },
-    { code: "ID", name: "Indonesia" },
-    { code: "IQ", name: "Iraq" },
-    { code: "IE", name: "Ireland" },
-    { code: "IM", name: "Isle of Man" },
-    { code: "IL", name: "Israel" },
-    { code: "IT", name: "Italy" },
-    { code: "JM", name: "Jamaica" },
-    { code: "JP", name: "Japan" },
-    { code: "JE", name: "Jersey" },
-    { code: "JO", name: "Jordan" },
-    { code: "KZ", name: "Kazakhstan" },
-    { code: "KE", name: "Kenya" },
-    { code: "KP", name: "North Korea" },
-    { code: "KR", name: "South Korea" },
-    { code: "XK", name: "Kosovo" },
-    { code: "KW", name: "Kuwait" },
-    { code: "KG", name: "Kyrgyzstan" },
-    { code: "LA", name: "Laos" },
-    { code: "LV", name: "Latvia" },
-    { code: "LB", name: "Lebanon" },
-    { code: "LS", name: "Lesotho" },
-    { code: "LR", name: "Liberia" },
-    { code: "LY", name: "Libya" },
-    { code: "LI", name: "Liechtenstein" },
-    { code: "LT", name: "Lithuania" },
-    { code: "LU", name: "Luxembourg" },
-    { code: "MO", name: "Macao" },
-    { code: "MK", name: "North Macedonia" },
-    { code: "MG", name: "Madagascar" },
-    { code: "MW", name: "Malawi" },
-    { code: "MY", name: "Malaysia" },
-    { code: "MV", name: "Maldives" },
-    { code: "ML", name: "Mali" },
-    { code: "MT", name: "Malta" },
-    { code: "MQ", name: "Martinique" },
-    { code: "MR", name: "Mauritania" },
-    { code: "MU", name: "Mauritius" },
-    { code: "YT", name: "Mayotte" },
-    { code: "MX", name: "Mexico" },
-    { code: "MD", name: "Moldova" },
-    { code: "MC", name: "Monaco" },
-    { code: "MN", name: "Mongolia" },
-    { code: "ME", name: "Montenegro" },
-    { code: "MS", name: "Montserrat" },
-    { code: "MA", name: "Morocco" },
-    { code: "MZ", name: "Mozambique" },
-    { code: "MM", name: "Myanmar" },
-    { code: "NA", name: "Namibia" },
-    { code: "NP", name: "Nepal" },
-    { code: "NL", name: "Netherlands" },
-    { code: "AN", name: "Netherlands Antilles (deprecated)" },
-    { code: "NC", name: "New Caledonia" },
-    { code: "NZ", name: "New Zealand" },
-    { code: "NI", name: "Nicaragua" },
-    { code: "NE", name: "Niger" },
-    { code: "NG", name: "Nigeria" },
-    { code: "NO", name: "Norway" },
-    { code: "OM", name: "Oman" },
-    { code: "PK", name: "Pakistan" },
-    { code: "PA", name: "Panama" },
-    { code: "PG", name: "Papua New Guinea" },
-    { code: "PY", name: "Paraguay" },
-    { code: "PE", name: "Peru" },
-    { code: "PH", name: "Philippines" },
-    { code: "PL", name: "Poland" },
-    { code: "PT", name: "Portugal" },
-    { code: "QA", name: "Qatar" },
-    { code: "RE", name: "Réunion" },
-    { code: "RO", name: "Romania" },
-    { code: "RU", name: "Russia" },
-    { code: "RW", name: "Rwanda" },
-    { code: "BL", name: "Saint Barthélemy" },
-    { code: "SH", name: "Saint Helena, Ascension and Tristan da Cunha" },
-    { code: "KN", name: "Saint Kitts and Nevis" },
-    { code: "LC", name: "Saint Lucia" },
-    { code: "MF", name: "Saint Martin (French part)" },
-    { code: "VC", name: "Saint Vincent and the Grenadines" },
-    { code: "WS", name: "Samoa" },
-    { code: "SM", name: "San Marino" },
-    { code: "ST", name: "São Tomé and Príncipe" },
-    { code: "SA", name: "Saudi Arabia" },
-    { code: "SN", name: "Senegal" },
-    { code: "RS", name: "Serbia" },
-    { code: "SC", name: "Seychelles" },
-    { code: "SL", name: "Sierra Leone" },
-    { code: "SG", name: "Singapore" },
-    { code: "SX", name: "Sint Maarten (Dutch part)" },
-    { code: "SK", name: "Slovakia" },
-    { code: "SI", name: "Slovenia" },
-    { code: "SB", name: "Solomon Islands" },
-    { code: "SO", name: "Somalia" },
-    { code: "ZA", name: "South Africa" },
-    { code: "ES", name: "Spain" },
-    { code: "LK", name: "Sri Lanka" },
-    { code: "SR", name: "Suriname" },
-    { code: "SZ", name: "Eswatini (formerly Swaziland)" },
-    { code: "SE", name: "Sweden" },
-    { code: "CH", name: "Switzerland" },
-    { code: "TW", name: "Taiwan" },
-    { code: "TJ", name: "Tajikistan" },
-    { code: "TZ", name: "Tanzania" },
-    { code: "TH", name: "Thailand" },
-    { code: "TL", name: "Timor-Leste" },
-    { code: "TG", name: "Togo" },
-    { code: "TO", name: "Tonga" },
-    { code: "TT", name: "Trinidad and Tobago" },
-    { code: "TN", name: "Tunisia" },
-    { code: "TR", name: "Türkiye (Turkey)" },
-    { code: "TC", name: "Turks and Caicos Islands" },
-    { code: "UG", name: "Uganda" },
-    { code: "UA", name: "Ukraine" },
-    { code: "AE", name: "United Arab Emirates" },
-    { code: "GB", name: "United Kingdom" },
-    { code: "US", name: "United States" },
-    { code: "UY", name: "Uruguay" },
-    { code: "UZ", name: "Uzbekistan" },
-    { code: "VU", name: "Vanuatu" },
-    { code: "VE", name: "Venezuela" },
-    { code: "VN", name: "Vietnam" },
-    { code: "VG", name: "Virgin Islands (British)" },
-    { code: "YE", name: "Yemen" },
-    { code: "ZM", name: "Zambia" },
-    { code: "ZW", name: "Zimbabwe" },
-  ];
-
-  // --- Helpers ------------------------------------------------------------
-  const rowsEl = document.getElementById("rows");
-  const countEl = document.getElementById("count");
-  const filterInput = document.getElementById("filterInput");
-
-  const missingOnFlagCDN = new Set(["AN", "XK"]); // known tricky codes
-
-  function flagUrl(code) {
-    return `https://flagcdn.com/${code.toLowerCase()}.svg`;
-  }
-
-  function renderRows(data) {
-    rowsEl.innerHTML = "";
-    data.forEach(({ code, name }, idx) => {
-      const tr = document.createElement("tr");
-      tr.className =
-        (idx % 2 === 0
-          ? "bg-white dark:bg-gray-900"
-          : "bg-gray-50 dark:bg-gray-900/60") +
-        " hover:bg-gray-100/70 dark:hover:bg-gray-800/80 transition";
-
-      // cell: country (flag + name)
-      const tdCountry = document.createElement("td");
-      tdCountry.className = "px-4 py-3 sm:px-6";
-      tdCountry.innerHTML = `
-        <div class="flex items-center gap-3">
-          <span class="inline-flex size-7 items-center justify-center overflow-hidden rounded border border-gray-200 bg-gray-50 ring-1 ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:ring-white/5">
-            <img
-              alt="${name} flag"
-              class="h-5 w-7 object-cover"
-              referrerpolicy="no-referrer"
-            />
-          </span>
-          <span class="text-gray-900 dark:text-gray-100">${name}</span>
-        </div>
-      `;
-      const img = tdCountry.querySelector("img");
-      img.src = flagUrl(code);
-      img.addEventListener("error", () => {
-        // Graceful fallback: show a tiny code badge if image is missing
-        const wrapper = img.parentElement;
-        wrapper.innerHTML = `
-          <span title="Flag unavailable" class="text-[10px] font-semibold text-gray-600 dark:text-gray-300">
-            ${code}
-          </span>`;
-      });
-      if (missingOnFlagCDN.has(code)) {
-        // preemptively fallback for known missing codes
-        img.dispatchEvent(new Event("error"));
-      }
-
-      // cell: code
-      const tdCode = document.createElement("td");
-      tdCode.className = "px-4 py-3 sm:px-6";
-      tdCode.innerHTML = `<code class="rounded bg-gray-100 px-1.5 py-0.5 text-[12px] text-gray-800 dark:bg-gray-800 dark:text-gray-200">${code}</code>`;
-
-      tr.appendChild(tdCountry);
-      tr.appendChild(tdCode);
-      rowsEl.appendChild(tr);
-    });
-    countEl.textContent = `(${data.length})`;
-  }
-
-  // --- Sorting ------------------------------------------------------------
-  let sortState = { key: "name", dir: "asc" };
-
-  function sortData(data, key, dir) {
-    const sorted = [...data].sort((a, b) => {
-      const A = a[key], B = b[key];
-      return typeof A === "string"
-        ? A.localeCompare(B, undefined, { sensitivity: "base" })
-        : (A < B ? -1 : A > B ? 1 : 0);
-    });
-    return dir === "desc" ? sorted.reverse() : sorted;
-  }
-
-  function updateSortIndicators() {
-    document.querySelectorAll("th[data-key]").forEach((th) => {
-      const ind = th.querySelector(".sort-indicator");
-      const isActive = th.dataset.key === sortState.key;
-      ind.textContent = isActive ? (sortState.dir === "asc" ? "↑" : "↓") : "↕";
-      ind.classList.toggle("opacity-100", isActive);
-      ind.classList.toggle("opacity-40", !isActive);
-      th.setAttribute("aria-sort", isActive ? sortState.dir : "none");
-    });
-  }
-
-  document.querySelectorAll("th[data-key]").forEach((th) => {
-    th.addEventListener("click", () => {
-      const key = th.dataset.key;
-      sortState = {
-        key,
-        dir: sortState.key === key && sortState.dir === "asc" ? "desc" : "asc",
-      };
-      const view = filterView(COUNTRIES, filterInput?.value || "");
-      renderRows(sortData(view, sortState.key, sortState.dir));
-      updateSortIndicators();
-    });
-  });
-
-  // --- Filtering (optional UX sugar) --------------------------------------
-  function filterView(data, query) {
-    const q = query.trim().toLowerCase();
-    if (!q) return data;
-    return data.filter(
-      (it) =>
-        it.name.toLowerCase().includes(q) || it.code.toLowerCase().includes(q)
-    );
-  }
-
-  filterInput?.addEventListener("input", (e) => {
-    const view = filterView(COUNTRIES, e.target.value);
-    renderRows(sortData(view, sortState.key, sortState.dir));
-  });
-
-  // --- Init ---------------------------------------------------------------
-  renderRows(sortData(COUNTRIES, sortState.key, sortState.dir));
-  updateSortIndicators();
-</script>
