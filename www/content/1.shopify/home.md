@@ -16,7 +16,7 @@ actions:
     leftIcon: 'lucide:footprints'
   - name: Apps Installation
     variant: ghost
-    to: /shopify/installation
+    to: /shopify/installation/apps
     leftIcon: 'lucide:plug'
   - name: Configuration
     variant: ghost
