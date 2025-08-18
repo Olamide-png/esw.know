@@ -88,7 +88,7 @@ useHead({
     {
       rel: 'icon',
       type: 'image/x-icon',
-      href: '/favicon.ico',
+      href: '/ESW favicon.svg',
     },
   ],
 })
