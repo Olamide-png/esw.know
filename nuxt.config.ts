@@ -49,7 +49,7 @@ export default defineNuxtConfig({
     highlight: {
       theme: {
         default: 'light-plus',
-        dark: 'rose-pine',
+        dark: 'dracula',
       },
       preload: ['json', 'js', 'ts', 'html', 'css', 'vue', 'diff', 'shell', 'markdown', 'mdc', 'yaml', 'bash', 'ini', 'dotenv', 'python', 'xml', 'dockerfile', 'sql', 'graphql', 'csharp', 'java', 'php', 'ruby', 'go', 'rust', 'kotlin', 'swift'],
     },
