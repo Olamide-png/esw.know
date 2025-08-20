@@ -8,7 +8,7 @@
         <span v-if="required" class="text-muted-foreground font-mono text-sm">
           {{ $t(fieldRequiredText) }}
         </span>
-        <span class="text-muted-foreground ml-auto font-mono text-sm">
+        <span v-if="required" class="text-[crimson] font-JetBrains Mono text-md">
           {{ type }}
         </span>
       </div>
