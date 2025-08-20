@@ -5,10 +5,10 @@
         <span class="text-md text-primary font-bold">
           {{ name }}
         </span>
-        <span v-if="required" class="text-[crimson] font-JetBrains Mono text-md">
+        <span v-if="required" class="text-muted-foreground font-mono text-sm">
           {{ $t(fieldRequiredText) }}
         </span>
-        <span v-if="required" class="text-[crimson] font-JetBrains Mono text-md">
+        <span class="text-muted-foreground ml-auto font-mono text-sm">
           {{ type }}
         </span>
       </div>
