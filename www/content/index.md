@@ -37,7 +37,7 @@ Explore our guides and documentation.
   ---
   to: /sfcc/home
   target: _self
-  img: /Salesforce (1).png
+  img: /Salesforce (1).webp
   ---
   #title
   Salesforce Commerce Cloud
