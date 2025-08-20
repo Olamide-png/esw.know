@@ -22,7 +22,6 @@ toc: false
 
 
 <!-- component -->
-<div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
   
   <div class="py-3 sm:max-w-xl sm:mx-auto">
     <div class="bg-white shadow-lg border-gray-100 max-h-80	 border sm:rounded-3xl p-8 flex space-x-8">
