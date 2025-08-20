@@ -47,7 +47,7 @@ toc: false
 
 <div class="py-3 sm:max-w-xl sm:mx-auto">
   <div class="bg-white dark:bg-gray-900 shadow-lg border border-gray-100 dark:border-gray-700 max-h-80 sm:rounded-3xl p-8 flex space-x-8">
-    <div class="h-48 overflow-visible w-1/2">
+    <div class="h-48 overflow-visible">
       <img class="rounded-3xl shadow-lg" src="/e75624a5-265e-4cbf-aa1a-4a244ea5e6bf.webp" alt="">
     </div>
     <div class="flex flex-col w-1/2 space-y-4">
