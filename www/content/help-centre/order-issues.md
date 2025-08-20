@@ -43,7 +43,7 @@ toc: false
 <div class="py-3 sm:max-w-xl sm:mx-auto">
   <div class="bg-white dark:bg-gray-900 shadow-lg border border-gray-100 dark:border-gray-700 max-h-80 sm:rounded-3xl p-8 flex space-x-8">
     <div class="h-48 overflow-visible">
-      <img class="rounded-3xl shadow-lg" src="/e75624a5-265e-4cbf-aa1a-4a244ea5e6bf.webp" alt="">
+      <img class="rounded-3xl shadow-lg" src="/cbf19d3b-c17f-4162-8356-f0f7287e663f.webp" alt="">
     </div>
     <div class="flex flex-col w-1/2 space-y-4">
       <div class="flex justify-between items-start">
