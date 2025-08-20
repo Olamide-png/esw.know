@@ -4,20 +4,16 @@ prevNext: false
 toc: false
 ---
 
-<body class="flex items-center justify-center min-h-screen bg-gray-900">
-  <div 
-    class="relative w-full h-full bg-cover bg-center flex items-center justify-center p-8 my-8 dui-bg-fixed"
-    style="background-image: url('/1banner_0128cc4f-1cf0-4f6d-b488-b040099a2d90_1024x1024.webp');">
-    
+<div 
+  class="relative w-full h-full bg-cover bg-center flex items-center justify-center p-8 my-8 dui-bg-fixed"
+  style="background-image: url('/1banner_0128cc4f-1cf0-4f6d-b488-b040099a2d90_1024x1024.webp');">
   <div class="p-8 bg-gray-300/40 backdrop-blur-md text-gray-900/90 rounded-xl shadow-lg text-center w-full max-w-full mx-2">
-      <h1 class="text-4xl font-bold mb-4">Call to Action (CTA)</h1>
-      <p class="text-lg mb-8">Jadilah bagian dari komunitas kami dan nikmati manfaat eksklusif.</p>
-      <a href="https://github.com/idugeni" target="_blank" rel="noopener noreferrer"
-         class="btn btn-neutral btn-wide">Daftar Sekarang</a>
-    </div>
-    
+    <h1 class="text-4xl font-bold mb-4">Call to Action (CTA)</h1>
+    <p class="text-lg mb-8">Jadilah bagian dari komunitas kami dan nikmati manfaat eksklusif.</p>
+    <a href="https://github.com/idugeni" target="_blank" rel="noopener noreferrer"
+       class="btn btn-neutral btn-wide">Daftar Sekarang</a>
   </div>
-</body>
+</div>
 
 
 
@@ -39,7 +35,6 @@ toc: false
         </div>
           <p class=" text-gray-400 max-h-40 overflow-y-hidden">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         <div class="flex text-2xl font-bold text-a">$83.90</div>
-      </div>
     </div>
   </div>
   
@@ -63,6 +58,20 @@ toc: false
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </p>
       <div class="flex text-2xl font-bold text-gray-900 dark:text-white">$83.90</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- component -->
+<div class="flex flex-col justify-center items-center max-w-sm mx-auto my-8">
+  <div style="background-image: url(https://images.unsplash.com/photo-1539185441755-769473a23570?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80"
+       class="bg-gray-300 h-64 w-full rounded-lg shadow-md bg-cover bg-center"></div>
+  <div class="w-56 md:w-64 bg-white -mt-10 shadow-lg rounded-lg overflow-hidden">
+    <div class="py-2 text-center font-bold uppercase tracking-wide text-gray-800">Nike Revolt</div>
+    <div class="flex items-center justify-between py-2 px-3 bg-gray-400">
+      <h1 class="text-gray-800 font-bold ">$129</h1>
+      <button class=" bg-gray-800 text-xs text-white px-2 py-1 font-semibold rounded uppercase hover:bg-gray-700">Add to cart</button>
     </div>
   </div>
 </div>
