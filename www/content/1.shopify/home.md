@@ -14,7 +14,7 @@ actions:
   - name: Get Started
     to: /shopify/getting-started-guide
     leftIcon: 'lucide:footprints'
-  - name: Apps Installation
+  - name: Installation
     variant: ghost
     to: /shopify/installation/apps
     leftIcon: 'lucide:plug'
@@ -22,6 +22,10 @@ actions:
     variant: ghost
     to: /shopify/configuration/configure-new-markets
     leftIcon: 'lucide:wrench'
+  - name: Integration
+    variant: ghost
+    to: /shopify/integration/overview
+    leftIcon: 'lucide:unplug'
 ---
 
 #title
