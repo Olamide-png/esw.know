@@ -42,33 +42,15 @@ export default defineAppConfig({
         triggerType: 'icon',
         dropdownType: 'select',
       },
-      nav: [{
-        title: 'Docs',
-        links: [{
-          title: 'Shopify',
-          to: '/shopify/getting-started-guide/getting-started',
-          description: 'Install the ESW Shopify Apps.',
-          icon: 'lucide:shopping-bag',
-        }, {
-          title: 'Salesforce Commerce Cloud',
-          to: '/sfcc/getting-started-with-sfcc/esw-apis-in-the-cartridge',
-          description: 'Integrate with Salesforce Commerce Cloud.',
-          icon: 'lucide:shopping-cart',
-        }, {
-          title: 'APIs',
-          to: '/apis/customs-catalog-api/overview',
-          description: 'Explore ESW APIs.',
-          icon: 'lucide:terminal',
-        }],
-      }, {
-        title: 'API References',
-        to: 'https://eswapis.vercel.app',
-        target: '_blank',
-        showLinkIcon: true,
-        description: 'API documentation for ESW services',
-        icon: 'lucide:code',
-      }],
       links: [
+        {
+          title: 'API References',
+          to: 'https://eswapis.vercel.app',
+          target: '_blank',
+          showLinkIcon: true,
+          description: 'API documentation for ESW services',
+          icon: 'lucide:code',
+        },
         {
           icon: 'lucide:log-in',
           title: 'Login',
@@ -79,7 +61,7 @@ export default defineAppConfig({
       useLevel: true,
       collapse: true,
       collapseLevel: 1,
-      folderStyle: 'tree',
+      folderStyle: 'default',
     },
     main: {
       breadCrumb: false,
