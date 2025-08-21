@@ -12,7 +12,7 @@ announcement:
   title: 'Integration Features Matrix'
   to: https://esw-know.vercel.app/#integration-features-matrix
 actions:
-  - name: Get Started
+  - name: Getting Started
     to: /shopify/getting-started-guide
     leftIcon: 'lucide:footprints'
   - name: Installation
