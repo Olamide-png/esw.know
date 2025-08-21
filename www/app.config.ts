@@ -49,7 +49,7 @@ export default defineAppConfig({
           target: '_blank',
           showLinkIcon: true,
           description: 'API documentation for ESW services',
-          icon: 'lucide:code',
+          icon: 'lucide:terminal',
         },
         {
           icon: 'lucide:log-in',
