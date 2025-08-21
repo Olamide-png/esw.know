@@ -79,7 +79,7 @@ export default defineAppConfig({
       useLevel: true,
       collapse: true,
       collapseLevel: 1,
-      folderStyle: 'default',
+      folderStyle: 'tree',
     },
     main: {
       breadCrumb: false,
