@@ -1,7 +1,9 @@
 ---
 title: Shopify
-fullpage: true
+fullpage: false
 navigation: false
+aside: false
+toc: false
 ---
 
 :ellipsis{right=0px width=75% blur=150px}
@@ -39,7 +41,7 @@ The ESW integration with Shopify enables merchants to expand globally, process p
 
 ::card
 ---
-img: <img src="/Untitled design (1).webp" alt="ESW Shopify integration" class="w-32 h-auto mx-auto" />
+img: /Untitled design (1).webp
 ---
 
 #title
