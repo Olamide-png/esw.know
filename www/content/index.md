@@ -11,7 +11,9 @@ toc: false
 ::hero
 ---
 announcement:
-  title: 'ESW Shopify'
+  title: 'Integration Features Matrix'
+  to: https://esw-know.vercel.app/#integration-features-matrix
+  leftIcon: 'lucide:workflow'
 actions:
   - name: Get Started
     to: /shopify/getting-started-guide
