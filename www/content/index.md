@@ -35,7 +35,7 @@ Shopify Native.
 The ESW integration with Shopify enables merchants to expand globally, process payments in multiple currencies, accurately calculate duties and taxes, streamline shipping, comply with regulations, and make data-driven optimizations.
 ::
 
-::card-group{:cols="1"}
+::card-group{:cols="2"}
   ::card
   ---
   img: /Untitled design (1).webp
