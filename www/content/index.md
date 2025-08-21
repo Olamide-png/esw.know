@@ -37,6 +37,9 @@ Shopify Native.
 The ESW integration with Shopify enables merchants to expand globally, process payments in multiple currencies, accurately calculate duties and taxes, streamline shipping, comply with regulations, and make data-driven optimizations.
 ::
 
+::button-link{left-icon="lucide:workflow" variant="secondary" to="https://esw-know.vercel.app/#integration-features-matrix" target="_blank"}
+  Integration Features Matrix
+::
 
 
 ::card
