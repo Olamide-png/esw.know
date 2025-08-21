@@ -6,14 +6,11 @@ aside: false
 toc: false
 ---
 
-:ellipsis{right=0px width=75% blur=150px}
-
 ::hero
 ---
 announcement:
   title: 'Integration Features Matrix'
   to: https://esw-know.vercel.app/#integration-features-matrix
-  leftIcon: 'lucide:workflow'
 actions:
   - name: Get Started
     to: /shopify/getting-started-guide
