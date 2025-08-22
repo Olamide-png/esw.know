@@ -18,7 +18,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Work Sans', 'IBM Plex Sans', 'sans-serif'],
+        sans: ['IBM Plex Sans', 'Geist', 'Work Sans', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {
