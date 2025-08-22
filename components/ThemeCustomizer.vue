@@ -50,7 +50,7 @@
           :class="{ 'border-primary border-2': colorMode.preference === 'light' }"
           @click="colorMode.preference = 'light'"
         >
-          <Icon name="lucide:sun" size="16" />
+          <Icon name="line-md:sun-rising-twotone-loop" size="16" />
           <span class="text-xs capitalize">{{ $t('Light') }}</span>
         </UiButton>
         <UiButton
@@ -59,7 +59,7 @@
           :class="{ 'border-primary border-2': colorMode.preference === 'dark' }"
           @click="colorMode.preference = 'dark'"
         >
-          <Icon name="lucide:moon" size="16" />
+          <Icon name="line-md:moon-rising-twotone-alt-loop" size="16" />
           <span class="text-xs capitalize">{{ $t('Dark') }}</span>
         </UiButton>
         <UiButton
