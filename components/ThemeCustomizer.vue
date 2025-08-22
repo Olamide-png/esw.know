@@ -90,7 +90,7 @@ const allColors: Color[] = [
   'green',
   'orange',
   'red',
-  'teal',
+  'esw',
   'slate',
   'stone',
   'gray',
