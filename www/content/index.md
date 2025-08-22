@@ -11,6 +11,7 @@ toc: false
 announcement:
   title: 'Integration Features Matrix'
   to: https://esw-know.vercel.app/#integration-features-matrix
+  icon: 'streamline-ultimate-color:module-puzzle'
 actions:
   - name: Getting Started
     to: /shopify/getting-started-guide
