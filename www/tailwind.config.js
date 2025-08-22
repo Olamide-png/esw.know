@@ -18,8 +18,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['IBM Plex Sans'],
-        mono: ['JetBrains Mono'],
+        sans: ['Work Sans', 'IBM Plex Sans', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {
         border: 'hsl(var(--border))',
