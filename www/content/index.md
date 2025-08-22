@@ -13,7 +13,7 @@ announcement:
   to: https://esw-know.vercel.app/#integration-features-matrix
   icon: 'streamline-ultimate-color:module-puzzle'
 actions:
-  - name: Getting Started
+  - name: Get Started
     to: /shopify/getting-started-guide
     leftIcon: 'lucide:footprints'
   - name: Installation
