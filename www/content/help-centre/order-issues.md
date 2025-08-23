@@ -124,14 +124,15 @@ toc: false
 
 
 
-[![](https://mermaid.ink/img/pako:eNqFk--L2jAYx_-Vh8iBB1Wq_WUDG1j1xr04NlA2mL0XMU1qME0kTblz6v--tJ6y7TZW-qJp8_k8T75NjojqgiGMuNQvdEuMhVWWK3DX3R0s7UEyKBgXSlihVX35QiWp6znjUFsHLFQBXEiJe0E4D9LUq63RO4Z748UkixKPaqkN7nHOPa6VHbwwUW4t3mhZ_KErGBW1K_Om44wHNLnpijRJ_Piq833_f7rasn2mX6-2gIc8vtlSSgLC_2VT2lRE5uqWxFdmrKBEgiQH3VjorzL4ACu9B6sh09bq6v4yedpfL9tYnu8xxreABoOPp9EJsvVMCroDu2XwqCwzirS5Ou90v3_ugK7niyrrsPEJZm_Yo3JC-ffJs25ycIL5euZWQqiFz2qjiSmEKuGJKFIy846ad1R4gsVxsfz2K-EkXLgU2v7ODrv-nAu36LjoBA_rKaWsrmFjiFsnbamyMR0G7l4sv4AUaveu8kNrgE_9tYvnt6za1HOFPFQaUSBsTcM8VDHXSjtExxbPkUuwYjnC7tHtT9JIm6NcnR22J-q71tWVNLoptwhzIms3avYFsWwuSGlIdXtrmCqYmelGWYRH4aiTIHxErwiH43SYjuJ4koxGaRJNEg8dEE6S4SRM_SiMk3gSJXF09tCPrqo_nCSR209-lMZ-GIdh6iFWCKvN0-WkdQfOQ6SxenlQ9NLn-ScgmyQl?type=png)](https://mermaid.live/edit#pako:eNqFk--L2jAYx_-Vh8iBB1Wq_WUDG1j1xr04NlA2mL0XMU1qME0kTblz6v--tJ6y7TZW-qJp8_k8T75NjojqgiGMuNQvdEuMhVWWK3DX3R0s7UEyKBgXSlihVX35QiWp6znjUFsHLFQBXEiJe0E4D9LUq63RO4Z748UkixKPaqkN7nHOPa6VHbwwUW4t3mhZ_KErGBW1K_Om44wHNLnpijRJ_Piq833_f7rasn2mX6-2gIc8vtlSSgLC_2VT2lRE5uqWxFdmrKBEgiQH3VjorzL4ACu9B6sh09bq6v4yedpfL9tYnu8xxreABoOPp9EJsvVMCroDu2XwqCwzirS5Ou90v3_ugK7niyrrsPEJZm_Yo3JC-ffJs25ycIL5euZWQqiFz2qjiSmEKuGJKFIy846ad1R4gsVxsfz2K-EkXLgU2v7ODrv-nAu36LjoBA_rKaWsrmFjiFsnbamyMR0G7l4sv4AUaveu8kNrgE_9tYvnt6za1HOFPFQaUSBsTcM8VDHXSjtExxbPkUuwYjnC7tHtT9JIm6NcnR22J-q71tWVNLoptwhzIms3avYFsWwuSGlIdXtrmCqYmelGWYRH4aiTIHxErwiH43SYjuJ4koxGaRJNEg8dEE6S4SRM_SiMk3gSJXF09tCPrqo_nCSR209-lMZ-GIdh6iFWCKvN0-WkdQfOQ6SxenlQ9NLn-ScgmyQl)
-
-
- <div className="relative">
-                <div
-                  className="absolute -inset-2 rounded-lg bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-pink-600 via-zinc-600 to-amber-600 opacity-50 blur-2xl shadow-[6px_14px_99px_13px_rgba(63,_46,_240,_0.29)]"
-                ></div>
-                <div className="relative flex w-full h-64 items-center justify-center border border-zinc-700 rounded-lg bg-zinc-900 text-slate-300">
-                  Gradient shadow
-                </div>
-              </div>
+::card
+---
+icon: 'lucide:globe'
+icon-size: 26
+to: /shopify/installation/apps#installation
+target: _self
+class: 'bg-gradient-to-r from-teal-500 to-blue-500 text-white'
+---
+#content
+**Installation Steps** <br>
+Read more
+::
