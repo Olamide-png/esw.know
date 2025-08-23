@@ -2,7 +2,7 @@
   <div
     :class="
       cn(
-        'rounded-lg border border-white/20 bg-gradient-to-r from-primary/70 to-transparent text-white shadow-md backdrop-blur-sm',
+        'rounded-lg border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-transparent shadow-lg backdrop-blur-md text-white',
         props.class,
       )
     "
@@ -19,5 +19,6 @@ const props = defineProps<{
   class?: HTMLAttributes['class'];
 }>();
 </script>
+
 
 
