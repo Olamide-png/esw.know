@@ -2,7 +2,7 @@
   <div
     :class="
       cn(
-        'rounded-lg border bg-card text-card-foreground shadow-md',
+        'rounded-lg border bg-gradient-to-r from-primary to-blue-500 text-card-foreground shadow-md',
         props.class,
       )
     "
