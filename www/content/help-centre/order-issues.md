@@ -130,9 +130,10 @@ icon: 'lucide:globe'
 icon-size: 26
 to: /shopify/installation/apps#installation
 target: _self
-class: 'bg-gradient-to-r from-teal-500 to-blue-500 text-white'
+class: '!bg-gradient-to-r from-teal-500 to-blue-500 text-white'
 ---
 #content
 **Installation Steps** <br>
 Read more
 ::
+
