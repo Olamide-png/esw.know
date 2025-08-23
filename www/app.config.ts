@@ -207,7 +207,7 @@ export default defineAppConfig({
         
       ],
       carbonAds: {
-        enable: true,
+        enable: false,
         disableInDev: true,
         disableInMobile: true,
         fallback: false,
