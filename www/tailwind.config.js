@@ -18,7 +18,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Noto Sans', 'Geist', 'Work Sans', 'sans-serif'],
+        sans: ['Roboto', 'Noto Sans', 'Geist', 'Work Sans', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {
