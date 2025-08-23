@@ -2,7 +2,9 @@
   <div
     :class="
       cn(
-        'rounded-lg border bg-card text-card-foreground shadow-md ring-1 ring-primary/20 shadow-primary/10 hover:shadow-primary/30 transition-shadow',
+        'rounded-lg border bg-card text-card-foreground shadow-lg',
+        // Glow effect only when dark mode is active
+        'dark:ring-1 dark:ring-primary/20 dark:shadow-primary/20 dark:hover:shadow-primary/40 dark:transition-shadow',
         props.class,
       )
     "
@@ -19,6 +21,7 @@ const props = defineProps<{
   class?: HTMLAttributes['class']
 }>()
 </script>
+
 
 
 
