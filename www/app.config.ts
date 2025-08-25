@@ -71,6 +71,7 @@ export default defineAppConfig({
       showTitle: true,
       codeCopyToast: true,
       codeCopyIcon: 'lucide:clipboard',
+      imageZoom: true,
       editLink: {
         enable: false,
         pattern: 'https://github.com/ZTL-UwU/shadcn-docs-nuxt/edit/main/www/content/:path',
