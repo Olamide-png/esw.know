@@ -24,10 +24,6 @@ actions:
     variant: ghost
     to: /shopify/configuration/configure-new-markets
     leftIcon: 'lucide:wrench'
-  - name: Integration
-    variant: ghost
-    to: /shopify/integration/overview
-    leftIcon: 'lucide:unplug'
 ---
 
 #title

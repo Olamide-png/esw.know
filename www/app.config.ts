@@ -66,7 +66,6 @@ export default defineAppConfig({
     main: {
       breadCrumb: false,
       showTitle: true,
-      imageZoom: true,
       codeCopyToast: true,
       codeCopyIcon: 'lucide:clipboard',
       editLink: {
@@ -125,16 +124,6 @@ export default defineAppConfig({
         'dockerfile': 'vscode-icons:file-type-docker',
         'docker-compose': 'vscode-icons:file-type-docker',
         'xml': 'vscode-icons:file-type-xml',
-      },
-      imagezoom: {
-        enable: true,
-        class: 'max-w-full',
-        zoomClass: 'max-w-full',
-        zoomStyle: {
-          width: '100%',
-          height: '100%',
-          objectFit: 'contain',
-        },
       },
     },
     footer: {
