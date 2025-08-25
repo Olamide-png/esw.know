@@ -37,6 +37,9 @@ export default defineNuxtConfig({
     strategy: 'prefix_except_default',
   },
   colorMode: {
+    preference: 'light',
+    fallback: 'light',
+    detectBrowserColorScheme: false,
     classSuffix: '',
     disableTransition: true,
   },
