@@ -1,7 +1,9 @@
 ---
-aside: false
-prevNext: false
-toc: false
+Tile: Order Issues
+description: Troubleshooting common order issues.
+icon: 'lucide:truck-delivery'
+aside: true
+toc: true
 ---
 
 <div 
