@@ -19,6 +19,9 @@ export default defineAppConfig({
       defaultColorDark: 'teal',
       mode: 'light',
       color: 'teal',
+      preference: 'light',
+      fallback: 'light',
+      detectSystemColor: false,
       radius: 0.5,
     },
     banner: {
