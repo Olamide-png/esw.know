@@ -61,6 +61,8 @@ interface DefaultConfig {
   };
   aside: {
     useLevel: boolean;
+    levelStyle: 'aside' | 'header';
+    headerLevelNavAlign: 'start' | 'center' | 'end';
     collapse: boolean;
     collapseLevel: number;
     folderStyle: 'default' | 'tree' | 'group';
@@ -82,6 +84,7 @@ interface DefaultConfig {
     };
     backToTop: boolean;
     pm: ('npm' | 'pnpm' | 'bun' | 'yarn')[];
+    imageZoom: boolean;
     codeIcon: {
       [key: string]: string;
     };
