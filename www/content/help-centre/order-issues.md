@@ -139,3 +139,4 @@ class: '!bg-gradient-to-r from-teal-500 to-blue-500 text-white'
 Read more
 ::
 
+![No Zooming Image](/prose-img/light.png){:zoom="false"}
