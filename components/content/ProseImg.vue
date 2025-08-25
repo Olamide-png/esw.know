@@ -14,36 +14,74 @@
     />
   </DefineTemplate>
 
-  <DialogRoot v-if="enableZoom">
-    <DialogTrigger class="block w-full">
-      <ReuseTemplate />
+  <DialogRoot v-if="enableZoom" v-model:open="open">
+    <!-- Trigger: reuse the exact same image -->
+    <DialogTrigger asChild>
+      <button
+        type="button"
+        class="block w-full"
+        aria-label="Open image in lightbox"
+      >
+        <ReuseTemplate />
+      </button>
     </DialogTrigger>
+
     <DialogPortal>
       <DialogOverlay
-        class="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80"
+        class="fixed inset-0 z-50 bg-black/80
+               data-[state=open]:animate-in data-[state=open]:fade-in-0
+               data-[state=closed]:animate-out data-[state=closed]:fade-out-0"
+        @click="open = false"
       />
       <DialogContent
-        class="p-0 fixed left-1/2 top-1/2 z-50 grid -translate-x-1/2 -translate-y-1/2 gap-4 border bg-background shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-170 data-[state=open]:zoom-in-170 md:rounded-lg"
+        aria-label="Image lightbox"
+        class="fixed left-1/2 top-1/2 z-50 grid p-0 outline-none
+               -translate-x-1/2 -translate-y-1/2
+               data-[state=open]:animate-in data-[state=open]:zoom-in-95 data-[state=open]:fade-in-0
+               data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=closed]:fade-out-0
+               sm:rounded-lg"
       >
-        <DialogClose>
-          <NuxtImg
-            :src="refinedSrc"
-            :alt
-            :width
-            :height
-            class="md:rounded-lg cursor-zoom-out max-w-svw max-h-svh"
-          />
+        <!-- Close on click of the image -->
+        <DialogClose asChild>
+          <button type="button" aria-label="Close lightbox" class="p-0 m-0">
+            <NuxtImg
+              :src="refinedSrc"
+              :alt
+              :width
+              :height
+              class="cursor-zoom-out md:rounded-lg max-w-svw max-h-svh"
+            />
+          </button>
+        </DialogClose>
+
+        <!-- Optional explicit close button (top-right) -->
+        <DialogClose
+          class="absolute right-2 top-2 inline-flex h-9 w-9 items-center justify-center rounded-md
+                 bg-black/60 text-white backdrop-blur hover:bg-black/70 focus:outline-none focus:ring"
+          aria-label="Close"
+        >
+          ✕
         </DialogClose>
       </DialogContent>
     </DialogPortal>
   </DialogRoot>
+
+  <!-- No zoom: render plain image -->
   <ReuseTemplate v-else />
 </template>
 
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue';
-import { DialogClose, DialogContent, DialogOverlay, DialogPortal, DialogRoot, DialogTrigger } from 'reka-ui';
-import { joinURL, withLeadingSlash, withTrailingSlash } from 'ufo';
+import type { HTMLAttributes } from 'vue'
+import { ref, computed } from 'vue'
+import {
+  DialogClose,
+  DialogContent,
+  DialogOverlay,
+  DialogPortal,
+  DialogRoot,
+  DialogTrigger
+} from 'reka-ui'
+import { joinURL, withLeadingSlash, withTrailingSlash } from 'ufo'
 
 const {
   src = '',
@@ -54,31 +92,38 @@ const {
   zoom = undefined,
   class: className = '',
 } = defineProps<{
-  src?: string;
-  alt?: string;
-  width?: string | number;
-  height?: string | number;
-  lifted?: boolean;
-  zoom?: boolean;
-  class?: HTMLAttributes['class'];
-}>();
+  src?: string
+  alt?: string
+  width?: string | number
+  height?: string | number
+  lifted?: boolean
+  zoom?: boolean
+  class?: HTMLAttributes['class']
+}>()
 
-const config = useConfig();
+const config = useConfig()
+const open = ref(false)
 
-const [DefineTemplate, ReuseTemplate] = createReusableTemplate();
+const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
 
 const refinedSrc = computed(() => {
   if (src?.startsWith('/') && !src.startsWith('//')) {
-    const _base = withLeadingSlash(withTrailingSlash(useRuntimeConfig().app.baseURL));
-    if (_base !== '/' && !src.startsWith(_base))
-      return joinURL(_base, src);
+    const _base = withLeadingSlash(withTrailingSlash(useRuntimeConfig().app.baseURL))
+    if (_base !== '/' && !src.startsWith(_base)) return joinURL(_base, src)
   }
-  return src;
-});
+  return src
+})
 
 const enableZoom = computed(() => {
-  if (zoom === undefined)
-    return config.value.main.imageZoom;
-  return zoom;
-});
+  if (zoom === undefined) return config.value.main.imageZoom
+  return zoom
+})
+
+// Optional: lock body scroll while lightbox open
+watch(open, (val) => {
+  if (process.client) {
+    document.documentElement.style.overflow = val ? 'hidden' : ''
+  }
+})
 </script>
+
