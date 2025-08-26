@@ -2,7 +2,7 @@
   <div
     :class="
       cn(
-        'rounded-xl border bg-card text-card-foreground shadow-xl',
+        'rounded-xl border bg-card text-card-foreground shadow-lg',
         // Glow effect only when dark mode is active
         'dark:ring-1 dark:ring-primary/20 dark:shadow-primary/20 dark:hover:shadow-primary/40 dark:transition-shadow',
         props.class,
