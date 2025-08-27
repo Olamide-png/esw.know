@@ -1,3 +1,4 @@
+// nuxt.config.ts
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import tailwindcss from '@tailwindcss/vite';
@@ -107,7 +108,16 @@ export default defineNuxtConfig({
       link: [
         { rel: 'preconnect', href: 'https://eswapis.vercel.app' },
         { rel: 'dns-prefetch', href: 'https://eswapis.vercel.app' }
+      ],
+      script: [
+        {
+          src: 'https://widget.galichat.com/gali-embeded.min.js',
+          defer: true,
+          // 👇 this is the custom attribute the widget needs
+          'chat-hash': 'o8gwxuqqbve3ehvz3gr04v'
+        }
       ]
     }
   }
 });
+
