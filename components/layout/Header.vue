@@ -32,12 +32,8 @@
           </NuxtLinkLocale>
         </div>
 
-        <!-- 👉 Your drop-in widget goes here (right-most) -->
-        <DocsHeaderLinks
-          repo="https://github.com/your-org/your-repo"
-          branch="main"
-          contentDir="content"
-        />
+        <!-- 👉 Ask AI dropdown (right-most) -->
+        <DocsHeaderLinks />
       </div>
     </div>
 
@@ -46,6 +42,7 @@
     </div>
   </header>
 </template>
+
 
 
 <script setup lang="ts">
