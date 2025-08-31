@@ -9,8 +9,8 @@ const route = useRoute()
 const prompt = computed(() => {
   const title = page.value?.title || page.value?.head?.title || 'this page'
   const url = typeof window !== 'undefined' ? `${location.origin}${route.fullPath}` : route.fullPath
-  return `Please review and summarize "${title}" from ${url}.
-List key points, gaps, and concrete improvements for clarity, structure, and DX.`
+  return `Please read and query "${title}" from ${url}.
+So I can ask questions about it.`
 })
 
 const openaiUrl = computed(
@@ -30,7 +30,7 @@ const goClaude = () => window.open(claudeUrl.value, '_blank', 'noopener')
     <UiDropdownMenuTrigger as-child>
       <UiButton variant="ghost" size="sm" class="gap-2">
         <SmartIcon name="lucide:sparkles" :size="16" />
-        <span class="hidden sm:inline">Ask AI</span>
+        <span class="hidden sm:inline">Ask AI about this page</span>
       </UiButton>
     </UiDropdownMenuTrigger>
 
