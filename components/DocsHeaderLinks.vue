@@ -2,36 +2,27 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-const props = withDefaults(defineProps<{
-  askAiUrlBase?: string  // keep for OpenAI; default below
-}>(), {
-  askAiUrlBase: 'https://chat.openai.com/?q='
-})
-
+// Uses your layer's auto-imported useContent()
+const { page } = useContent()
 const route = useRoute()
 
-// Uses your layer's auto-imported composable (no explicit import)
-const { page } = useContent()
-
 const prompt = computed(() => {
-  const title = page.value?.title || page.value?.head?.title || document?.title || 'this page'
-  // Crisp but useful default prompt
-  return `Please review and summarize "${title}" from ${location.origin}${route.fullPath}. 
-List key points, missing sections, and suggest improvements.`
+  const title = page.value?.title || page.value?.head?.title || 'this page'
+  const url = typeof window !== 'undefined' ? `${location.origin}${route.fullPath}` : route.fullPath
+  return `Please review and summarize "${title}" from ${url}.
+List key points, gaps, and concrete improvements for clarity, structure, and DX.`
 })
 
-// Build OpenAI URL with encoded prompt
-const openAiUrl = computed(() => `${props.askAiUrlBase}${encodeURIComponent(prompt.value)}`)
+const openaiUrl = computed(
+  () => `https://chat.openai.com/?q=${encodeURIComponent(prompt.value)}`
+)
 
-// For Anthropic (Claude): open claude.ai/new and copy prompt to clipboard first
-const openClaude = async () => {
-  try {
-    await navigator.clipboard.writeText(prompt.value)
-  } catch (_) {
-    // If clipboard unavailable, we still open Claude
-  }
-  window.open('https://claude.ai/new', '_blank', 'noopener')
-}
+// ✅ Prefill first message in Claude via ?q=
+const claudeUrl = computed(
+  () => `https://claude.ai/new?q=${encodeURIComponent(prompt.value)}`
+)
+
+const goClaude = () => window.open(claudeUrl.value, '_blank', 'noopener')
 </script>
 
 <template>
@@ -49,14 +40,14 @@ const openClaude = async () => {
 
       <!-- OpenAI -->
       <UiDropdownMenuItem as-child>
-        <a :href="openAiUrl" target="_blank" rel="noopener" class="flex items-center gap-2">
+        <a :href="openaiUrl" target="_blank" rel="noopener" class="flex items-center gap-2">
           <SmartIcon name="simple-icons:openai" :size="16" />
           <span>OpenAI (ChatGPT)</span>
         </a>
       </UiDropdownMenuItem>
 
-      <!-- Anthropic (Claude) -->
-      <UiDropdownMenuItem @select.prevent="openClaude">
+      <!-- Anthropic -->
+      <UiDropdownMenuItem @select.prevent="goClaude">
         <div class="flex items-center gap-2">
           <SmartIcon name="simple-icons:anthropic" :size="16" />
           <span>Anthropic (Claude)</span>
@@ -65,6 +56,7 @@ const openClaude = async () => {
     </UiDropdownMenuContent>
   </UiDropdownMenu>
 </template>
+
 
 
 
