@@ -29,6 +29,11 @@
             </UiButton>
           </NuxtLinkLocale>
         </div>
+        <DocsHeaderLinks
+          repo="https://github.com/your-org/your-repo"
+          branch="main"
+          contentDir="content"
+        />
       </div>
     </div>
     <div v-if="showToc" class="lg:hidden">
