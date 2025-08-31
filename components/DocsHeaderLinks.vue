@@ -1,9 +1,8 @@
+<!-- components/DocsHeaderLinks.vue -->
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { queryContent } from '#content' // ✅ correct source (or rely on auto-imports)
 
-// Configurable props
 const props = withDefaults(defineProps<{
   repo: string               // e.g. "https://github.com/your-org/your-repo"
   branch?: string            // e.g. "main"
@@ -17,13 +16,14 @@ const props = withDefaults(defineProps<{
 
 const route = useRoute()
 
-// Get the current page to resolve its on-disk path
-const { data: page } = await queryContent(route.path).findOne()   // ✅ v2 pattern
+// ✅ relies on your layer's auto-imported composable (no imports needed)
+const { page } = useContent()
 
+// Prefer the on-disk path from page; fall back to route path
 const relPath = computed(() =>
   page.value?._file
     ? page.value._file
-    : `${props.contentDir}${route.path.replace(/\/$/, '') || '/index'}.md`
+    : `${props.contentDir}${(route.path.replace(/\/$/, '')) || '/index'}.md`
 )
 
 const viewUrl = computed(() => `${props.repo}/blob/${props.branch}/${relPath.value}`)
@@ -42,5 +42,6 @@ const aiUrl    = computed(() => `${props.askAiUrlBase}${aiPrompt.value}`)
     <a :href="aiUrl"   target="_blank" rel="noopener" class="text-sm underline">Ask AI</a>
   </div>
 </template>
+
 
 
