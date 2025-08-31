@@ -11,8 +11,10 @@
       <LayoutMobileNav />
       <LayoutHeaderLogo v-if="config.header.showTitleInMobile" class="flex md:hidden" />
       <LayoutHeaderNav class="hidden flex-1 lg:flex" />
+
       <div class="flex flex-1 justify-end gap-2">
         <LayoutSearchButton v-if="!config.search.inAside && config.search.style === 'input'" />
+
         <div class="flex">
           <LayoutSearchButton v-if="!config.search.inAside && config.search.style === 'button'" />
           <LangSwitcher v-if="i18nEnabled" />
@@ -30,19 +32,21 @@
           </NuxtLinkLocale>
         </div>
 
+        <!-- 👉 Your drop-in widget goes here (right-most) -->
         <DocsHeaderLinks
-    repo="https://github.com/your-org/your-repo"
-    branch="main"
-    contentDir="content"
-  />
-</div>
+          repo="https://github.com/your-org/your-repo"
+          branch="main"
+          contentDir="content"
+        />
       </div>
     </div>
+
     <div v-if="showToc" class="lg:hidden">
       <LayoutToc is-small />
     </div>
   </header>
 </template>
+
 
 <script setup lang="ts">
 const config = useConfig();
