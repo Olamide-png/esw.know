@@ -30,7 +30,7 @@ const viewUrl = computed(() => `${props.repo}/blob/${props.branch}/${relPath.val
 const rawUrl  = computed(() => `${props.repo}/raw/${props.branch}/${relPath.value}`)
 const editUrl = computed(() => `${props.repo}/edit/${props.branch}/${relPath.value}`)
 
-const aiPrompt = computed(() => encodeURIComponent(`Help me review this doc: ${route.fullPath}`))
+const aiPrompt = computed(() => encodeURIComponent(`Help me read this doc so I can understand it better: ${route.fullPath}`))
 const aiUrl    = computed(() => `${props.askAiUrlBase}${aiPrompt.value}`)
 </script>
 
