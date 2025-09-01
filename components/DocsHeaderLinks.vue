@@ -9,7 +9,7 @@ const route = useRoute()
 const prompt = computed(() => {
   const title = page.value?.title || page.value?.head?.title || 'this page'
   const url = typeof window !== 'undefined' ? `${location.origin}${route.fullPath}` : route.fullPath
-  return `Please read and query "${title}" from ${url}.
+  return `Please read and query "${title}" from ${url}
 So I can ask questions about it.`
 })
 
