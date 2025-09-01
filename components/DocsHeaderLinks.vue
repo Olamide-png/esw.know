@@ -22,6 +22,11 @@ const claudeUrl = computed(
   () => `https://claude.ai/new?q=${encodeURIComponent(prompt.value)}`
 )
 
+// ✅ Prefill Perplexity via /search?q=
+const perplexityUrl = computed(
+  () => `https://www.perplexity.ai/search/?q=${encodeURIComponent(prompt.value)}`
+)
+
 const goClaude = () => window.open(claudeUrl.value, '_blank', 'noopener')
 </script>
 
@@ -53,9 +58,18 @@ const goClaude = () => window.open(claudeUrl.value, '_blank', 'noopener')
           <span>Anthropic (Claude)</span>
         </div>
       </UiDropdownMenuItem>
+
+      <!-- Perplexity -->
+      <UiDropdownMenuItem as-child>
+        <a :href="perplexityUrl" target="_blank" rel="noopener" class="flex items-center gap-2">
+          <SmartIcon name="simple-icons:perplexity" :size="16" />
+          <span>Perplexity</span>
+        </a>
+      </UiDropdownMenuItem>
     </UiDropdownMenuContent>
   </UiDropdownMenu>
 </template>
+
 
 
 
