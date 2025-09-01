@@ -27,6 +27,14 @@ const perplexityUrl = computed(
   () => `https://www.perplexity.ai/search/?q=${encodeURIComponent(prompt.value)}`
 )
 
+// ✅ Gemini (opens app and copies prompt to clipboard for quick paste)
+const geminiUrl = computed(() => 'https://gemini.google.com/app')
+async function goGemini() {
+  if (typeof window === 'undefined') return
+  try { await navigator.clipboard.writeText(prompt.value) } catch {}
+  window.open(geminiUrl.value, '_blank', 'noopener,noreferrer')
+}
+
 const goClaude = () => window.open(claudeUrl.value, '_blank', 'noopener')
 </script>
 
@@ -66,9 +74,18 @@ const goClaude = () => window.open(claudeUrl.value, '_blank', 'noopener')
           <span>Perplexity</span>
         </a>
       </UiDropdownMenuItem>
+
+      <!-- Google Gemini -->
+      <UiDropdownMenuItem @select.prevent="goGemini">
+        <div class="flex items-center gap-2">
+          <SmartIcon name="simple-icons:google" :size="16" />
+          <span>Google (Gemini)</span>
+        </div>
+      </UiDropdownMenuItem>
     </UiDropdownMenuContent>
   </UiDropdownMenu>
 </template>
+
 
 
 
