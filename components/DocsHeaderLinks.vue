@@ -72,15 +72,6 @@ const goClaude = () => window.open(claudeUrl.value, '_blank', 'noopener')
 
 
 
-      <!-- OpenAI -->
-      <UiDropdownMenuItem as-child>
-        <a :href="openaiUrl" target="_blank" rel="noopener" class="flex items-center gap-2">
-          <SmartIcon name="simple-icons:openai" :size="16" />
-          <span>OpenAI (ChatGPT)</span>
-        </a>
-      </UiDropdownMenuItem>
-
-
 
 
 
