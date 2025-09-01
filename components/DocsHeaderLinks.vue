@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
 
 // Uses your layer's auto-imported useContent()
@@ -22,9 +22,40 @@ const claudeUrl = computed(
   () => `https://claude.ai/new?q=${encodeURIComponent(prompt.value)}`
 )
 
-// ✅ Prefill Perplexity via /search?q=
+// --- Toggle & selection memory (Perplexity-only) ---
+const useSelection = ref(false)       // ← toggle is OFF by default
+const lastSelection = ref('')         // ← remembers the last non-empty selection
+
+function captureSelection() {
+  if (typeof window === 'undefined') return
+  const sel = window.getSelection()?.toString().trim() || ''
+  if (sel) lastSelection.value = sel
+}
+
+onMounted(() => {
+  if (typeof document !== 'undefined') {
+    document.addEventListener('selectionchange', captureSelection)
+  }
+})
+onBeforeUnmount(() => {
+  if (typeof document !== 'undefined') {
+    document.removeEventListener('selectionchange', captureSelection)
+  }
+})
+
+// Build Perplexity prompt with (optional) selection
+const promptWithSelection = computed(() => {
+  if (!useSelection.value) return prompt.value
+  const sel =
+    (typeof window !== 'undefined' ? window.getSelection()?.toString().trim() : '') ||
+    lastSelection.value
+  if (!sel) return prompt.value
+  return `${prompt.value}\n\nFocus on this selection:\n"${sel}"`
+})
+
+// ✅ Prefill Perplexity via /search?q= (uses selection when toggled on)
 const perplexityUrl = computed(
-  () => `https://www.perplexity.ai/search/?q=${encodeURIComponent(prompt.value)}`
+  () => `https://www.perplexity.ai/search/?q=${encodeURIComponent(promptWithSelection.value)}`
 )
 
 const goClaude = () => window.open(claudeUrl.value, '_blank', 'noopener')
@@ -66,9 +97,33 @@ const goClaude = () => window.open(claudeUrl.value, '_blank', 'noopener')
           <span>Perplexity</span>
         </a>
       </UiDropdownMenuItem>
+
+      <UiDropdownMenuSeparator />
+      <UiDropdownMenuLabel class="text-xs">Options</UiDropdownMenuLabel>
+
+      <!-- Toggle: Use selected text (Perplexity only) -->
+      <!-- If your shadcn layer supports checkbox items: -->
+      <UiDropdownMenuCheckboxItem v-model:checked="useSelection" @click.stop>
+        <div class="flex items-center justify-between w-full gap-3">
+          <span>Use selected text</span>
+          <span class="text-xs text-muted-foreground">
+            {{ useSelection ? 'On' : 'Off' }}
+          </span>
+        </div>
+      </UiDropdownMenuCheckboxItem>
+
+      <!-- If CheckboxItem isn’t available in your build, you can swap the block above with:
+      <UiDropdownMenuItem @click.stop.prevent="useSelection = !useSelection">
+        <div class="flex items-center justify-between w-full gap-3">
+          <span>Use selected text</span>
+          <UiBadge variant="secondary">{{ useSelection ? 'On' : 'Off' }}</UiBadge>
+        </div>
+      </UiDropdownMenuItem>
+      -->
     </UiDropdownMenuContent>
   </UiDropdownMenu>
 </template>
+
 
 
 
