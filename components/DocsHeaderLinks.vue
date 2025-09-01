@@ -43,11 +43,11 @@ const goClaude = () => window.open(claudeUrl.value, '_blank', 'noopener')
       <UiDropdownMenuLabel class="text-xs">Send this page</UiDropdownMenuLabel>
       <UiDropdownMenuSeparator />
 
-      <!-- OpenAI -->
+      <!-- Perplexity -->
       <UiDropdownMenuItem as-child>
-        <a :href="openaiUrl" target="_blank" rel="noopener" class="flex items-center gap-2">
-          <SmartIcon name="simple-icons:openai" :size="16" />
-          <span>OpenAI (ChatGPT)</span>
+        <a :href="perplexityUrl" target="_blank" rel="noopener" class="flex items-center gap-2">
+          <SmartIcon name="simple-icons:perplexity" :size="16" />
+          <span>Perplexity</span>
         </a>
       </UiDropdownMenuItem>
 
@@ -59,11 +59,11 @@ const goClaude = () => window.open(claudeUrl.value, '_blank', 'noopener')
         </div>
       </UiDropdownMenuItem>
 
-      <!-- Perplexity -->
+      <!-- OpenAI -->
       <UiDropdownMenuItem as-child>
-        <a :href="perplexityUrl" target="_blank" rel="noopener" class="flex items-center gap-2">
-          <SmartIcon name="simple-icons:perplexity" :size="16" />
-          <span>Perplexity</span>
+        <a :href="openaiUrl" target="_blank" rel="noopener" class="flex items-center gap-2">
+          <SmartIcon name="simple-icons:openai" :size="16" />
+          <span>OpenAI (ChatGPT)</span>
         </a>
       </UiDropdownMenuItem>
     </UiDropdownMenuContent>
