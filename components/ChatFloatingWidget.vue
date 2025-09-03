@@ -28,9 +28,6 @@
           <p class="font-medium">AI Assistant</p>
         </div>
         <div class="flex items-center gap-2">
-          <button class="rounded-md p-1 hover:bg-muted" @click="hardReset" title="Hard reset (clear storage)">
-            <Icon name="lucide:trash-2" class="h-4 w-4" />
-          </button>
           <button class="rounded-md p-1 hover:bg-muted" @click="clearChat" title="Clear conversation">
             <Icon name="lucide:rotate-ccw" class="h-4 w-4" />
           </button>
