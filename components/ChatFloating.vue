@@ -83,9 +83,12 @@ import MessageBubble from '~/components/MessageBubble.vue'
 /** Types */
 interface ChatMessage { role: 'system' | 'user' | 'assistant'; content: string }
 
-/** Local storage keys + limits */
+/** Storage keys + limits + version (auto-purge old bad data) */
 const STORAGE_KEY = 'ai:chat:history'
 const STORAGE_OPEN = 'ai:chat:isOpen'
+const STORAGE_VER_KEY = 'ai:chat:ver'
+const STORAGE_VER = '2' // bump to purge stale/malformed history automatically
+
 const MAX_HISTORY = 50
 const MAX_INPUT_CHARS = 2000
 
@@ -106,23 +109,31 @@ watch(prefill, v => {
   if (!v) return
   const text = normalizeInput(v)
   if (text) {
-    messages.value.push({ role: 'user', content: text })
-    trimHistory()
-    saveHistory()
-    onSend() // auto-send prefill
+    // ignore if it still looks like page HTML after normalization
+    if (looksLikeHtml(v) && text.length < 5) {
+      error.value = 'Looks like you passed raw HTML. Select meaningful text or type a question.'
+    } else {
+      messages.value.push({ role: 'user', content: text })
+      trimHistory()
+      saveHistory()
+      onSend() // auto-send prefill
+    }
   }
   prefill.value = null
 })
 
-/** Helpers: sanitize + normalize user input */
+/** Helpers: HTML stripping + guards */
 function stripTags(s: string) {
-  return s
+  return String(s ?? '')
     .replace(/<script[\s\S]*?<\/script>/gi, '')
     .replace(/<style[\s\S]*?<\/style>/gi, '')
     .replace(/<[^>]+>/g, '')
 }
 function normalizeInput(s: string, max = MAX_INPUT_CHARS) {
   return stripTags(s).replace(/\s+/g, ' ').trim().slice(0, max)
+}
+function looksLikeHtml(s: string) {
+  return /<html|<head|<body|<script|window\.__NUXT__|<\/[a-z]/i.test(String(s))
 }
 
 /** UI helpers */
@@ -151,18 +162,51 @@ function saveHistory() {
 }
 function loadHistory() {
   try {
+    // versioned storage: wipe old data automatically
+    const ver = localStorage.getItem(STORAGE_VER_KEY)
+    if (ver !== STORAGE_VER) {
+      localStorage.removeItem(STORAGE_KEY)
+      localStorage.setItem(STORAGE_VER_KEY, STORAGE_VER)
+    }
+
     const raw = localStorage.getItem(STORAGE_KEY)
-    if (raw) messages.value = JSON.parse(raw)
+    if (raw) {
+      const parsed: ChatMessage[] = JSON.parse(raw)
+
+      // auto-purge malformed/huge HTML dumps from past sessions
+      const hasBlob = parsed.some(
+        (m) =>
+          (m?.content?.length ?? 0) > 50000 ||
+          looksLikeHtml(m?.content || '')
+      )
+      if (hasBlob) {
+        localStorage.removeItem(STORAGE_KEY)
+      } else {
+        messages.value = parsed
+      }
+    }
+
     const open = localStorage.getItem(STORAGE_OPEN)
     if (open) isOpen.value = JSON.parse(open)
-  } catch {}
+  } catch {
+    // corrupt storage → nuke it
+    localStorage.removeItem(STORAGE_KEY)
+  }
 }
 
 /** Send */
 async function onSend() {
-  if (!canSend.value || loading.value) return
-  const text = normalizeInput(draft.value)
-  if (!text) return
+  if (loading.value) return
+
+  const raw = draft.value
+  const text = normalizeInput(raw)
+  if (!text) {
+    error.value = looksLikeHtml(raw)
+      ? 'It looks like you pasted raw HTML. Please paste text excerpts or type a question.'
+      : 'Please type a message.'
+    return
+  }
+
   draft.value = ''
   messages.value.push({ role: 'user', content: text })
   trimHistory()
@@ -211,4 +255,5 @@ watch(messages, saveHistory, { deep: true })
 .chat-slide-fade-enter-from { opacity: 0; transform: translateY(8px) scale(.98); }
 .chat-slide-fade-leave-to { opacity: 0; transform: translateY(8px) scale(.98); }
 </style>
+
 
