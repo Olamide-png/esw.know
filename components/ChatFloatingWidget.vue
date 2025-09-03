@@ -107,10 +107,18 @@ function stripTags(s: string) {
 function normalizeInput(s: string, max = MAX_INPUT_CHARS) {
   return stripTags(s).replace(/\s+/g, ' ').trim().slice(0, max)
 }
+// ✅ preserve line breaks so Markdown renders nicely in the bubble
 function normalizeReply(s: string, max = MAX_REPLY_CHARS) {
-  const t = stripTags(s).replace(/\s+/g, ' ').trim()
-  if (/<html|<head|<body|window\.__NUXT__/i.test(s)) return 'Received HTML blob from server and discarded.'
-  return t.slice(0, max)
+  const noTags = String(s ?? '')
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<[^>]+>/g, '')
+  const keepNewlines = noTags
+    .replace(/\r\n/g, '\n')
+    .replace(/\r/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+  return keepNewlines.slice(0, max)
 }
 function looksLikeHtml(s: string) {
   return /<html|<head|<body|<script|window\.__NUXT__/i.test(String(s))
@@ -204,8 +212,7 @@ async function streamAnswer() {
       try {
         const evt = JSON.parse(jsonStr)
         if (evt.token) {
-          // extra safety (server already strips)
-          const token = stripTags(String(evt.token))
+          const token = stripTags(String(evt.token)) // strip HTML, keep markdown/newlines
           messages.value[idx].content += token
           saveHistory()
           requestAnimationFrame(() => {
@@ -213,7 +220,12 @@ async function streamAnswer() {
           })
         }
         if (evt.error) throw new Error(evt.error)
-        if (evt.done) return
+        if (evt.done) {
+          // ✅ post-normalize the full streamed message to keep line breaks tidy
+          messages.value[idx].content = normalizeReply(messages.value[idx].content)
+          saveHistory()
+          return
+        }
       } catch {
         /* ignore malformed chunk */
       }
@@ -289,6 +301,7 @@ watch(messages, saveHistory, { deep: true })
 .chat-slide-fade-enter-from { opacity: 0; transform: translateY(8px) scale(.98); }
 .chat-slide-fade-leave-to { opacity: 0; transform: translateY(8px) scale(.98); }
 </style>
+
 
 
 
