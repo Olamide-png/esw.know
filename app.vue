@@ -14,7 +14,7 @@
     >
       <aside
         v-if="(page.aside ?? true)"
-        class="fixed top-[102px] z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] md:w[250px] lg:w-[320px] shrink-0 overflow-y-auto md:sticky md:top-[60px] md:block"
+        class="fixed top-[102px] z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] md:w-[250px] lg:w-[320px] shrink-0 overflow-y-auto md:sticky md:top-[60px] md:block"
       >
         <LayoutAside :is-mobile="false" />
       </aside>
@@ -59,12 +59,13 @@
 
   <!-- 🟢 Floating AI chat (bottom-right) -->
   <ClientOnly>
-    <ChatFloating />
+    <ChatFloatingWidget />
   </ClientOnly>
 </template>
 
 <script setup lang="ts">
 import Toaster from '@/components/ui/toast/Toaster.vue'
+import ChatFloatingWidget from '~/components/ChatFloatingWidget.vue' // ✅ explicit import
 
 const { page } = useContent()
 const config = useConfig()
@@ -99,6 +100,7 @@ useHead({
   ],
 })
 </script>
+
 
 
 
