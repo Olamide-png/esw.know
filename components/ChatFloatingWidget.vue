@@ -215,13 +215,13 @@ async function streamAnswer() {
         if (evt.error) throw new Error(evt.error)
         if (evt.done) return
       } catch {
-        // ignore malformed chunk
+        /* ignore malformed chunk */
       }
     }
   }
 }
 
-/* ---------- send (streams) ---------- */
+/* ---------- send (stream with fallback) ---------- */
 async function onSend() {
   if (!canSend.value || loading.value) return
   const raw = draft.value
@@ -239,10 +239,25 @@ async function onSend() {
   loading.value = true; error.value = null
 
   try {
+    // Try streaming first
     await streamAnswer()
     trimHistory(); saveHistory()
   } catch (e: any) {
-    error.value = e?.message ?? 'Something went wrong.'
+    // Fallback to non-streaming endpoint (e.g., if streaming 504s on Vercel)
+    try {
+      const res = await $fetch<{ reply: string } | { error: string }>('/api/chat', {
+        method: 'POST',
+        body: { messages: messages.value },
+      })
+      if ('error' in res) throw new Error(res.error)
+      messages.value.push({ role: 'assistant', content: normalizeReply(res.reply) })
+      trimHistory(); saveHistory()
+      requestAnimationFrame(() => {
+        scrollEl.value?.scrollTo({ top: scrollEl.value.scrollHeight, behavior: 'smooth' })
+      })
+    } catch (e2: any) {
+      error.value = e2?.message ?? e?.message ?? 'Something went wrong.'
+    }
   } finally {
     loading.value = false
   }
@@ -274,6 +289,7 @@ watch(messages, saveHistory, { deep: true })
 .chat-slide-fade-enter-from { opacity: 0; transform: translateY(8px) scale(.98); }
 .chat-slide-fade-leave-to { opacity: 0; transform: translateY(8px) scale(.98); }
 </style>
+
 
 
 
