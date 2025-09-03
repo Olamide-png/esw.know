@@ -80,27 +80,58 @@
 import { ref, watch, onMounted, computed, nextTick } from 'vue'
 import MessageBubble from '~/components/MessageBubble.vue'
 
+/** Types */
 interface ChatMessage { role: 'system' | 'user' | 'assistant'; content: string }
 
+/** Local storage keys + limits */
 const STORAGE_KEY = 'ai:chat:history'
 const STORAGE_OPEN = 'ai:chat:isOpen'
+const MAX_HISTORY = 50
+const MAX_INPUT_CHARS = 2000
 
+/** State */
 const isOpen = ref(false)
 const messages = ref<ChatMessage[]>([])
 const draft = ref('')
 const loading = ref(false)
 const error = ref<string | null>(null)
-
 const scrollEl = ref<HTMLElement | null>(null)
 const taRef = ref<HTMLTextAreaElement | null>(null)
 
+/** Optional global bridge for “Ask this page” */
+const chatOpen = useState<boolean>('chat:open', () => false)
+const prefill = useState<string | null>('chat:prefill', () => null)
+watch(chatOpen, v => { if (v && !isOpen.value) toggle() })
+watch(prefill, v => {
+  if (!v) return
+  const text = normalizeInput(v)
+  if (text) {
+    messages.value.push({ role: 'user', content: text })
+    trimHistory()
+    saveHistory()
+    onSend() // auto-send prefill
+  }
+  prefill.value = null
+})
+
+/** Helpers: sanitize + normalize user input */
+function stripTags(s: string) {
+  return s
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<[^>]+>/g, '')
+}
+function normalizeInput(s: string, max = MAX_INPUT_CHARS) {
+  return stripTags(s).replace(/\s+/g, ' ').trim().slice(0, max)
+}
+
+/** UI helpers */
 const toggle = () => {
   isOpen.value = !isOpen.value
   localStorage.setItem(STORAGE_OPEN, JSON.stringify(isOpen.value))
   if (isOpen.value) nextTick(() => taRef.value?.focus())
 }
-
-const canSend = computed(() => draft.value.trim().length > 0)
+const canSend = computed(() => normalizeInput(draft.value).length > 0)
 
 function autoGrow() {
   const ta = taRef.value
@@ -109,10 +140,15 @@ function autoGrow() {
   ta.style.height = Math.min(180, ta.scrollHeight) + 'px'
 }
 
+/** Persistence */
+function trimHistory() {
+  if (messages.value.length > MAX_HISTORY) {
+    messages.value.splice(0, messages.value.length - MAX_HISTORY)
+  }
+}
 function saveHistory() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.value))
 }
-
 function loadHistory() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
@@ -122,11 +158,14 @@ function loadHistory() {
   } catch {}
 }
 
+/** Send */
 async function onSend() {
   if (!canSend.value || loading.value) return
-  const text = draft.value.trim()
+  const text = normalizeInput(draft.value)
+  if (!text) return
   draft.value = ''
   messages.value.push({ role: 'user', content: text })
+  trimHistory()
   saveHistory()
   loading.value = true
   error.value = null
@@ -142,10 +181,10 @@ async function onSend() {
         },
       }
     )
-
     if ('error' in res) throw new Error(res.error)
 
     messages.value.push({ role: 'assistant', content: res.reply })
+    trimHistory()
     saveHistory()
     requestAnimationFrame(() => {
       scrollEl.value?.scrollTo({ top: scrollEl.value.scrollHeight, behavior: 'smooth' })
@@ -157,11 +196,11 @@ async function onSend() {
   }
 }
 
+/** Misc */
 function clearChat() {
   messages.value = []
   saveHistory()
 }
-
 onMounted(loadHistory)
 watch(messages, saveHistory, { deep: true })
 </script>
@@ -172,3 +211,4 @@ watch(messages, saveHistory, { deep: true })
 .chat-slide-fade-enter-from { opacity: 0; transform: translateY(8px) scale(.98); }
 .chat-slide-fade-leave-to { opacity: 0; transform: translateY(8px) scale(.98); }
 </style>
+
