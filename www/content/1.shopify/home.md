@@ -43,7 +43,7 @@ img: /Untitled design (1).webp
 ESW Shopify integration
 
 #content
-ESW Shopify integration levarages Shopify's native checkout to handle shopper's purchase flow.
+ESW Shopify integration levarages Shopify's native checkout to handle shopper's purchase flow..
 ::
 ---
 
