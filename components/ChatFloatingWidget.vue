@@ -4,7 +4,7 @@
     :aria-expanded="isOpen ? 'true' : 'false'"
     aria-controls="nuxt-ai-chat"
     class="fixed bottom-4 right-6 md:right-8 z-50 inline-flex items-center gap-2 rounded-full border bg-background/90 dark:bg-neutral-900/90 backdrop-blur px-4 py-2 shadow-lg hover:shadow-xl transition focus:outline-none focus:ring focus:ring-primary"
-    @click="toggle()"
+    @click="toggle"
   >
     <Icon name="lucide:message-circle" class="h-5 w-5" />
     <span class="hidden sm:inline">Ask AI</span>
@@ -46,13 +46,15 @@
         <p v-if="error" class="text-xs text-red-500">{{ error }}</p>
       </div>
 
+      <!-- Bigger, auto-growing input -->
       <form @submit.prevent="onSend" class="border-t p-3 bg-background/60">
-        <div class="flex items-end gap-2">
+        <div class="flex items-start gap-2">
           <textarea
             v-model="draft"
-            rows="1"
+            rows="3"
             placeholder="Ask anything… (Enter to send, Shift+Enter for new line)"
-            class="w-full resize-none rounded-lg border bg-background px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring focus:ring-primary/40"
+            class="w-full resize-none rounded-lg border bg-background px-3 py-2 text-base leading-6 shadow-sm focus:outline-none focus:ring focus:ring-primary/40
+                   min-h-[3.5rem] md:min-h-[4rem] max-h-[50vh]"
             @keydown.enter.exact.prevent="onSend"
             @input="autoGrow"
             @paste="onPaste"
@@ -60,7 +62,7 @@
           ></textarea>
           <button
             type="submit"
-            class="inline-flex items-center gap-2 rounded-lg border bg-primary text-primary-foreground px-3 py-2 text-sm shadow hover:shadow-md disabled:opacity-50"
+            class="mt-1.5 inline-flex items-center gap-2 rounded-lg border bg-primary text-primary-foreground px-3 py-2 text-sm shadow hover:shadow-md disabled:opacity-50"
             :disabled="loading || !canSend"
           >
             <Icon name="lucide:send" class="h-4 w-4" />
@@ -81,7 +83,7 @@ interface ChatMessage { role: 'system'|'user'|'assistant'; content: string }
 const STORAGE_KEY = 'ai:chat:history'
 const STORAGE_OPEN = 'ai:chat:isOpen'
 const STORAGE_VER_KEY = 'ai:chat:ver'
-const STORAGE_VER = '3' // bump to auto-purge any stale blobs
+const STORAGE_VER = '3' // keep if you used this earlier
 
 const MAX_HISTORY = 50
 const MAX_INPUT_CHARS = 2000
@@ -121,10 +123,13 @@ const toggle = () => {
   if (isOpen.value) nextTick(() => taRef.value?.focus())
 }
 const canSend = computed(() => normalizeInput(draft.value).length > 0)
+
 function autoGrow() {
-  const ta = taRef.value; if (!ta) return
+  const ta = taRef.value
+  if (!ta) return
   ta.style.height = 'auto'
-  ta.style.height = Math.min(180, ta.scrollHeight) + 'px'
+  const max = Math.max(200, Math.round(window.innerHeight * 0.5)) // cap at 50vh (min 200px)
+  ta.style.height = Math.min(max, ta.scrollHeight) + 'px'
 }
 function onPaste(e: ClipboardEvent) {
   const dt = e.clipboardData; if (!dt) return
@@ -215,7 +220,12 @@ function hardReset() {
   location.reload()
 }
 
-onMounted(loadHistory)
+/* Start taller & keep synced */
+onMounted(() => {
+  loadHistory()
+  nextTick(() => autoGrow())
+})
+watch(draft, () => nextTick(() => autoGrow()))
 watch(messages, saveHistory, { deep: true })
 </script>
 
@@ -225,6 +235,7 @@ watch(messages, saveHistory, { deep: true })
 .chat-slide-fade-enter-from { opacity: 0; transform: translateY(8px) scale(.98); }
 .chat-slide-fade-leave-to { opacity: 0; transform: translateY(8px) scale(.98); }
 </style>
+
 
 
 
