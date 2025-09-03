@@ -83,7 +83,7 @@ interface ChatMessage { role: 'system'|'user'|'assistant'; content: string }
 const STORAGE_KEY = 'ai:chat:history'
 const STORAGE_OPEN = 'ai:chat:isOpen'
 const STORAGE_VER_KEY = 'ai:chat:ver'
-const STORAGE_VER = '3' // keep if you used this earlier
+const STORAGE_VER = '3'
 
 const MAX_HISTORY = 50
 const MAX_INPUT_CHARS = 2000
@@ -172,7 +172,56 @@ function loadHistory() {
   }
 }
 
-/* ---------- send ---------- */
+/* ---------- streaming helper ---------- */
+async function streamAnswer() {
+  const res = await fetch('/api/chat-stream', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages: messages.value }),
+  })
+  if (!res.ok || !res.body) throw new Error(`HTTP ${res.status}`)
+
+  const reader = res.body.getReader()
+  const decoder = new TextDecoder()
+  let buffer = ''
+
+  // create empty assistant bubble to append into
+  messages.value.push({ role: 'assistant', content: '' })
+  const idx = messages.value.length - 1
+
+  while (true) {
+    const { value, done } = await reader.read()
+    if (done) break
+    buffer += decoder.decode(value, { stream: true })
+
+    const parts = buffer.split('\n\n')
+    buffer = parts.pop() || ''
+    for (const p of parts) {
+      const line = p.trim()
+      if (!line.startsWith('data:')) continue
+      const jsonStr = line.slice(5).trim()
+      if (!jsonStr) continue
+      try {
+        const evt = JSON.parse(jsonStr)
+        if (evt.token) {
+          // extra safety (server already strips)
+          const token = stripTags(String(evt.token))
+          messages.value[idx].content += token
+          saveHistory()
+          requestAnimationFrame(() => {
+            scrollEl.value?.scrollTo({ top: scrollEl.value.scrollHeight })
+          })
+        }
+        if (evt.error) throw new Error(evt.error)
+        if (evt.done) return
+      } catch {
+        // ignore malformed chunk
+      }
+    }
+  }
+}
+
+/* ---------- send (streams) ---------- */
 async function onSend() {
   if (!canSend.value || loading.value) return
   const raw = draft.value
@@ -190,18 +239,8 @@ async function onSend() {
   loading.value = true; error.value = null
 
   try {
-    const res = await $fetch<{ reply: string } | { error: string }>('/api/chat', {
-      method: 'POST',
-      body: { messages: messages.value },
-    })
-    if ('error' in res) throw new Error(res.error)
-
-    const safeReply = normalizeReply(res.reply)
-    messages.value.push({ role: 'assistant', content: safeReply })
+    await streamAnswer()
     trimHistory(); saveHistory()
-    requestAnimationFrame(() => {
-      scrollEl.value?.scrollTo({ top: scrollEl.value.scrollHeight, behavior: 'smooth' })
-    })
   } catch (e: any) {
     error.value = e?.message ?? 'Something went wrong.'
   } finally {
@@ -235,6 +274,7 @@ watch(messages, saveHistory, { deep: true })
 .chat-slide-fade-enter-from { opacity: 0; transform: translateY(8px) scale(.98); }
 .chat-slide-fade-leave-to { opacity: 0; transform: translateY(8px) scale(.98); }
 </style>
+
 
 
 
