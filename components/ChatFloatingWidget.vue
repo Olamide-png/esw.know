@@ -15,11 +15,14 @@
     <section
       v-if="isOpen"
       id="nuxt-ai-chat"
-      class="fixed bottom-20 right-6 md:right-8 z-50 w-[92vw] max-w-[420px] rounded-2xl border bg-background/95 dark:bg-neutral-900/95 backdrop-blur supports-[backdrop-filter]:bg-background/70 shadow-2xl ring-1 ring-black/5 dark:ring-white/10 flex flex-col overflow-hidden"
+      class="fixed bottom-20 right-6 md:right-8 z-50 w-[92vw] max-w-[420px]
+             max-h-[85vh] min-h-0 rounded-2xl border bg-background/95 dark:bg-neutral-900/95
+             backdrop-blur supports-[backdrop-filter]:bg-background/70 shadow-2xl
+             ring-1 ring-black/5 dark:ring-white/10 flex flex-col overflow-hidden"
       role="dialog"
       aria-label="AI assistant chat"
     >
-      <header class="flex items-center justify-between px-4 py-3 border-b">
+      <header class="shrink-0 flex items-center justify-between px-4 py-3 border-b">
         <div class="flex items-center gap-2">
           <Icon name="lucide:sparkles" class="h-4 w-4" />
           <p class="font-medium">AI Assistant</p>
@@ -37,7 +40,10 @@
         </div>
       </header>
 
-      <div ref="scrollEl" class="flex-1 overflow-y-auto p-3 space-y-3">
+      <div
+        ref="scrollEl"
+        class="flex-1 min-h-0 overflow-y-auto overscroll-contain p-3 space-y-3"
+      >
         <MessageBubble v-for="(m,i) in messages" :key="i" :role="m.role" :content="m.content" />
         <div v-if="loading" class="flex items-start gap-2 text-sm opacity-80">
           <span class="mt-1"><Icon name="lucide:bot" class="h-5 w-5" /></span>
@@ -47,7 +53,7 @@
       </div>
 
       <!-- Bigger, auto-growing input -->
-      <form @submit.prevent="onSend" class="border-t p-3 bg-background/60">
+      <form @submit.prevent="onSend" class="shrink-0 border-t p-3 bg-background/60">
         <div class="flex items-start gap-2">
           <textarea
             v-model="draft"
@@ -75,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, computed, nextTick } from 'vue'
+import { ref, watch, onMounted, onUnmounted, computed, nextTick } from 'vue'
 import MessageBubble from '~/components/MessageBubble.vue'
 
 interface ChatMessage { role: 'system'|'user'|'assistant'; content: string }
@@ -107,7 +113,7 @@ function stripTags(s: string) {
 function normalizeInput(s: string, max = MAX_INPUT_CHARS) {
   return stripTags(s).replace(/\s+/g, ' ').trim().slice(0, max)
 }
-// ✅ preserve line breaks so Markdown renders nicely in the bubble
+// preserve line breaks for markdown
 function normalizeReply(s: string, max = MAX_REPLY_CHARS) {
   const noTags = String(s ?? '')
     .replace(/<script[\s\S]*?<\/script>/gi, '')
@@ -136,7 +142,7 @@ function autoGrow() {
   const ta = taRef.value
   if (!ta) return
   ta.style.height = 'auto'
-  const max = Math.max(200, Math.round(window.innerHeight * 0.5)) // cap at 50vh (min 200px)
+  const max = Math.max(200, Math.round(window.innerHeight * 0.5))
   ta.style.height = Math.min(max, ta.scrollHeight) + 'px'
 }
 function onPaste(e: ClipboardEvent) {
@@ -212,7 +218,7 @@ async function streamAnswer() {
       try {
         const evt = JSON.parse(jsonStr)
         if (evt.token) {
-          const token = stripTags(String(evt.token)) // strip HTML, keep markdown/newlines
+          const token = stripTags(String(evt.token))
           messages.value[idx].content += token
           saveHistory()
           requestAnimationFrame(() => {
@@ -221,14 +227,11 @@ async function streamAnswer() {
         }
         if (evt.error) throw new Error(evt.error)
         if (evt.done) {
-          // ✅ post-normalize the full streamed message to keep line breaks tidy
           messages.value[idx].content = normalizeReply(messages.value[idx].content)
           saveHistory()
           return
         }
-      } catch {
-        /* ignore malformed chunk */
-      }
+      } catch { /* ignore malformed chunk */ }
     }
   }
 }
@@ -251,11 +254,9 @@ async function onSend() {
   loading.value = true; error.value = null
 
   try {
-    // Try streaming first
     await streamAnswer()
     trimHistory(); saveHistory()
   } catch (e: any) {
-    // Fallback to non-streaming endpoint (e.g., if streaming 504s on Vercel)
     try {
       const res = await $fetch<{ reply: string } | { error: string }>('/api/chat', {
         method: 'POST',
@@ -286,11 +287,16 @@ function hardReset() {
   location.reload()
 }
 
-/* Start taller & keep synced */
+/* Start taller & keep synced + Esc to close */
+function onKey(e: KeyboardEvent) {
+  if (e.key === 'Escape' && isOpen.value) toggle()
+}
 onMounted(() => {
   loadHistory()
   nextTick(() => autoGrow())
+  window.addEventListener('keydown', onKey)
 })
+onUnmounted(() => window.removeEventListener('keydown', onKey))
 watch(draft, () => nextTick(() => autoGrow()))
 watch(messages, saveHistory, { deep: true })
 </script>
@@ -301,6 +307,7 @@ watch(messages, saveHistory, { deep: true })
 .chat-slide-fade-enter-from { opacity: 0; transform: translateY(8px) scale(.98); }
 .chat-slide-fade-leave-to { opacity: 0; transform: translateY(8px) scale(.98); }
 </style>
+
 
 
 
