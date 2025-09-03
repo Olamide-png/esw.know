@@ -6,7 +6,7 @@
     class="fixed bottom-4 right-6 md:right-8 z-50 inline-flex items-center gap-2 rounded-full border bg-background/90 dark:bg-neutral-900/90 backdrop-blur px-4 py-2 shadow-lg hover:shadow-xl transition focus:outline-none focus:ring focus:ring-primary"
     @click="toggle"
   >
-    <Icon name="lucide:message-circle" class="h-5 w-5" />
+    <Icon name="streamline-emojis:robot-face-3" class="h-5 w-5" />
     <span class="hidden sm:inline">Ask AI</span>
   </button>
 
