@@ -59,7 +59,8 @@
 
   <!-- 🟢 Floating AI chat (bottom-right) -->
   <ClientOnly>
-    <ChatFloatingWidget />
+    <!-- Hide only on the exact /chat route -->
+    <ChatFloatingWidget v-if="route.path !== '/chat'" />
   </ClientOnly>
 </template>
 
@@ -100,6 +101,7 @@ useHead({
   ],
 })
 </script>
+
 
 
 
