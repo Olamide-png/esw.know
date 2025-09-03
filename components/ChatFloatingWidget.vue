@@ -19,30 +19,26 @@
       role="dialog"
       aria-label="AI assistant chat"
     >
-      <!-- Header -->
       <header class="flex items-center justify-between px-4 py-3 border-b">
         <div class="flex items-center gap-2">
           <Icon name="lucide:sparkles" class="h-4 w-4" />
           <p class="font-medium">AI Assistant</p>
         </div>
         <div class="flex items-center gap-2">
-          <button class="rounded-md p-1 hover:bg-muted" @click="clearChat()" title="Clear conversation">
+          <button class="rounded-md p-1 hover:bg-muted" @click="hardReset" title="Hard reset (clear storage)">
+            <Icon name="lucide:trash-2" class="h-4 w-4" />
+          </button>
+          <button class="rounded-md p-1 hover:bg-muted" @click="clearChat" title="Clear conversation">
             <Icon name="lucide:rotate-ccw" class="h-4 w-4" />
           </button>
-          <button class="rounded-md p-1 hover:bg-muted" @click="toggle()" title="Close">
+          <button class="rounded-md p-1 hover:bg-muted" @click="toggle" title="Close">
             <Icon name="lucide:x" class="h-4 w-4" />
           </button>
         </div>
       </header>
 
-      <!-- Messages -->
       <div ref="scrollEl" class="flex-1 overflow-y-auto p-3 space-y-3">
-        <MessageBubble
-          v-for="(m, i) in messages"
-          :key="i"
-          :role="m.role"
-          :content="m.content"
-        />
+        <MessageBubble v-for="(m,i) in messages" :key="i" :role="m.role" :content="m.content" />
         <div v-if="loading" class="flex items-start gap-2 text-sm opacity-80">
           <span class="mt-1"><Icon name="lucide:bot" class="h-5 w-5" /></span>
           <span class="animate-pulse">Thinking…</span>
@@ -50,7 +46,6 @@
         <p v-if="error" class="text-xs text-red-500">{{ error }}</p>
       </div>
 
-      <!-- Input -->
       <form @submit.prevent="onSend" class="border-t p-3 bg-background/60">
         <div class="flex items-end gap-2">
           <textarea
@@ -60,6 +55,7 @@
             class="w-full resize-none rounded-lg border bg-background px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring focus:ring-primary/40"
             @keydown.enter.exact.prevent="onSend"
             @input="autoGrow"
+            @paste="onPaste"
             ref="taRef"
           ></textarea>
           <button
@@ -80,19 +76,17 @@
 import { ref, watch, onMounted, computed, nextTick } from 'vue'
 import MessageBubble from '~/components/MessageBubble.vue'
 
-/** Types */
-interface ChatMessage { role: 'system' | 'user' | 'assistant'; content: string }
+interface ChatMessage { role: 'system'|'user'|'assistant'; content: string }
 
-/** Storage keys + limits + version (auto-purge old bad data) */
 const STORAGE_KEY = 'ai:chat:history'
 const STORAGE_OPEN = 'ai:chat:isOpen'
 const STORAGE_VER_KEY = 'ai:chat:ver'
-const STORAGE_VER = '2' // bump to purge stale/malformed history automatically
+const STORAGE_VER = '3' // bump to auto-purge any stale blobs
 
 const MAX_HISTORY = 50
 const MAX_INPUT_CHARS = 2000
+const MAX_REPLY_CHARS = 1200
 
-/** State */
 const isOpen = ref(false)
 const messages = ref<ChatMessage[]>([])
 const draft = ref('')
@@ -101,28 +95,7 @@ const error = ref<string | null>(null)
 const scrollEl = ref<HTMLElement | null>(null)
 const taRef = ref<HTMLTextAreaElement | null>(null)
 
-/** Optional global bridge for “Ask this page” */
-const chatOpen = useState<boolean>('chat:open', () => false)
-const prefill = useState<string | null>('chat:prefill', () => null)
-watch(chatOpen, v => { if (v && !isOpen.value) toggle() })
-watch(prefill, v => {
-  if (!v) return
-  const text = normalizeInput(v)
-  if (text) {
-    // ignore if it still looks like page HTML after normalization
-    if (looksLikeHtml(v) && text.length < 5) {
-      error.value = 'Looks like you passed raw HTML. Select meaningful text or type a question.'
-    } else {
-      messages.value.push({ role: 'user', content: text })
-      trimHistory()
-      saveHistory()
-      onSend() // auto-send prefill
-    }
-  }
-  prefill.value = null
-})
-
-/** Helpers: HTML stripping + guards */
+/* ---------- sanitation ---------- */
 function stripTags(s: string) {
   return String(s ?? '')
     .replace(/<script[\s\S]*?<\/script>/gi, '')
@@ -132,26 +105,40 @@ function stripTags(s: string) {
 function normalizeInput(s: string, max = MAX_INPUT_CHARS) {
   return stripTags(s).replace(/\s+/g, ' ').trim().slice(0, max)
 }
+function normalizeReply(s: string, max = MAX_REPLY_CHARS) {
+  const t = stripTags(s).replace(/\s+/g, ' ').trim()
+  if (/<html|<head|<body|window\.__NUXT__/i.test(s)) return 'Received HTML blob from server and discarded.'
+  return t.slice(0, max)
+}
 function looksLikeHtml(s: string) {
-  return /<html|<head|<body|<script|window\.__NUXT__|<\/[a-z]/i.test(String(s))
+  return /<html|<head|<body|<script|window\.__NUXT__/i.test(String(s))
 }
 
-/** UI helpers */
+/* ---------- ui ---------- */
 const toggle = () => {
   isOpen.value = !isOpen.value
   localStorage.setItem(STORAGE_OPEN, JSON.stringify(isOpen.value))
   if (isOpen.value) nextTick(() => taRef.value?.focus())
 }
 const canSend = computed(() => normalizeInput(draft.value).length > 0)
-
 function autoGrow() {
-  const ta = taRef.value
-  if (!ta) return
+  const ta = taRef.value; if (!ta) return
   ta.style.height = 'auto'
   ta.style.height = Math.min(180, ta.scrollHeight) + 'px'
 }
+function onPaste(e: ClipboardEvent) {
+  const dt = e.clipboardData; if (!dt) return
+  const html = dt.getData('text/html')
+  if (html) {
+    e.preventDefault()
+    const plain = dt.getData('text/plain') || stripTags(html)
+    const normalized = normalizeInput(plain)
+    draft.value = (draft.value ? draft.value + ' ' : '') + normalized
+    nextTick(autoGrow)
+  }
+}
 
-/** Persistence */
+/* ---------- persistence ---------- */
 function trimHistory() {
   if (messages.value.length > MAX_HISTORY) {
     messages.value.splice(0, messages.value.length - MAX_HISTORY)
@@ -162,42 +149,27 @@ function saveHistory() {
 }
 function loadHistory() {
   try {
-    // versioned storage: wipe old data automatically
     const ver = localStorage.getItem(STORAGE_VER_KEY)
     if (ver !== STORAGE_VER) {
       localStorage.removeItem(STORAGE_KEY)
       localStorage.setItem(STORAGE_VER_KEY, STORAGE_VER)
     }
-
     const raw = localStorage.getItem(STORAGE_KEY)
     if (raw) {
       const parsed: ChatMessage[] = JSON.parse(raw)
-
-      // auto-purge malformed/huge HTML dumps from past sessions
-      const hasBlob = parsed.some(
-        (m) =>
-          (m?.content?.length ?? 0) > 50000 ||
-          looksLikeHtml(m?.content || '')
-      )
-      if (hasBlob) {
-        localStorage.removeItem(STORAGE_KEY)
-      } else {
-        messages.value = parsed
-      }
+      const hasBlob = parsed.some(m => (m?.content?.length ?? 0) > 50000 || looksLikeHtml(m?.content || ''))
+      messages.value = hasBlob ? [] : parsed
     }
-
     const open = localStorage.getItem(STORAGE_OPEN)
     if (open) isOpen.value = JSON.parse(open)
   } catch {
-    // corrupt storage → nuke it
     localStorage.removeItem(STORAGE_KEY)
   }
 }
 
-/** Send */
+/* ---------- send ---------- */
 async function onSend() {
-  if (loading.value) return
-
+  if (!canSend.value || loading.value) return
   const raw = draft.value
   const text = normalizeInput(raw)
   if (!text) {
@@ -209,27 +181,19 @@ async function onSend() {
 
   draft.value = ''
   messages.value.push({ role: 'user', content: text })
-  trimHistory()
-  saveHistory()
-  loading.value = true
-  error.value = null
+  trimHistory(); saveHistory()
+  loading.value = true; error.value = null
 
   try {
-    const res = await $fetch<{ reply: string } | { error: string }>(
-      '/api/chat',
-      {
-        method: 'POST',
-        body: {
-          messages: messages.value,
-          meta: { client: 'nuxt-floating-chat', ts: Date.now() },
-        },
-      }
-    )
+    const res = await $fetch<{ reply: string } | { error: string }>('/api/chat', {
+      method: 'POST',
+      body: { messages: messages.value },
+    })
     if ('error' in res) throw new Error(res.error)
 
-    messages.value.push({ role: 'assistant', content: res.reply })
-    trimHistory()
-    saveHistory()
+    const safeReply = normalizeReply(res.reply)
+    messages.value.push({ role: 'assistant', content: safeReply })
+    trimHistory(); saveHistory()
     requestAnimationFrame(() => {
       scrollEl.value?.scrollTo({ top: scrollEl.value.scrollHeight, behavior: 'smooth' })
     })
@@ -240,11 +204,17 @@ async function onSend() {
   }
 }
 
-/** Misc */
+/* ---------- actions ---------- */
 function clearChat() {
-  messages.value = []
-  saveHistory()
+  messages.value = []; saveHistory()
 }
+function hardReset() {
+  localStorage.removeItem(STORAGE_KEY)
+  localStorage.removeItem(STORAGE_OPEN)
+  localStorage.setItem(STORAGE_VER_KEY, STORAGE_VER)
+  location.reload()
+}
+
 onMounted(loadHistory)
 watch(messages, saveHistory, { deep: true })
 </script>
@@ -255,5 +225,6 @@ watch(messages, saveHistory, { deep: true })
 .chat-slide-fade-enter-from { opacity: 0; transform: translateY(8px) scale(.98); }
 .chat-slide-fade-leave-to { opacity: 0; transform: translateY(8px) scale(.98); }
 </style>
+
 
 
