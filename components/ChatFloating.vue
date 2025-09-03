@@ -3,7 +3,7 @@
   <button
     :aria-expanded="isOpen ? 'true' : 'false'"
     aria-controls="nuxt-ai-chat"
-    class="fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full border bg-background/90 dark:bg-neutral-900/90 backdrop-blur px-4 py-2 shadow-lg hover:shadow-xl transition focus:outline-none focus:ring focus:ring-primary"
+    class="fixed bottom-4 right-6 md:right-8 z-50 inline-flex items-center gap-2 rounded-full border bg-background/90 dark:bg-neutral-900/90 backdrop-blur px-4 py-2 shadow-lg hover:shadow-xl transition focus:outline-none focus:ring focus:ring-primary"
     @click="toggle()"
   >
     <Icon name="lucide:message-circle" class="h-5 w-5" />
@@ -15,7 +15,7 @@
     <section
       v-if="isOpen"
       id="nuxt-ai-chat"
-      class="fixed bottom-20 right-4 z-50 w-[92vw] max-w-[380px] rounded-2xl border bg-background/95 dark:bg-neutral-900/95 backdrop-blur supports-[backdrop-filter]:bg-background/70 shadow-2xl ring-1 ring-black/5 dark:ring-white/10 flex flex-col overflow-hidden"
+      class="fixed bottom-20 right-6 md:right-8 z-50 w-[92vw] max-w-[420px] rounded-2xl border bg-background/95 dark:bg-neutral-900/95 backdrop-blur supports-[backdrop-filter]:bg-background/70 shadow-2xl ring-1 ring-black/5 dark:ring-white/10 flex flex-col overflow-hidden"
       role="dialog"
       aria-label="AI assistant chat"
     >
@@ -61,8 +61,12 @@
             @keydown.enter.exact.prevent="onSend"
             @input="autoGrow"
             ref="taRef"
-          />
-          <button type="submit" class="inline-flex items-center gap-2 rounded-lg border bg-primary text-primary-foreground px-3 py-2 text-sm shadow hover:shadow-md disabled:opacity-50" :disabled="loading || !canSend">
+          ></textarea>
+          <button
+            type="submit"
+            class="inline-flex items-center gap-2 rounded-lg border bg-primary text-primary-foreground px-3 py-2 text-sm shadow hover:shadow-md disabled:opacity-50"
+            :disabled="loading || !canSend"
+          >
             <Icon name="lucide:send" class="h-4 w-4" />
             <span class="sr-only sm:not-sr-only">Send</span>
           </button>
@@ -73,9 +77,9 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { ref, watch, onMounted, computed, nextTick } from 'vue'
+import MessageBubble from '~/components/MessageBubble.vue'
 
-/** Message type */
 interface ChatMessage { role: 'system' | 'user' | 'assistant'; content: string }
 
 const STORAGE_KEY = 'ai:chat:history'
@@ -143,7 +147,6 @@ async function onSend() {
 
     messages.value.push({ role: 'assistant', content: res.reply })
     saveHistory()
-    // scroll to bottom on reply
     requestAnimationFrame(() => {
       scrollEl.value?.scrollTo({ top: scrollEl.value.scrollHeight, behavior: 'smooth' })
     })
@@ -161,13 +164,6 @@ function clearChat() {
 
 onMounted(loadHistory)
 watch(messages, saveHistory, { deep: true })
-</script>
-
-<script lang="ts">
-// Give Nuxt Icon a hint for SSR environments where components are auto‑registered
-export default {
-  components: { Icon: (globalThis as any).defineComponent?.() ?? {} },
-}
 </script>
 
 <style scoped>
