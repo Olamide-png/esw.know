@@ -6,7 +6,7 @@
     class="fixed bottom-4 right-6 md:right-8 z-50 inline-flex items-center gap-2 rounded-full border bg-background/90 dark:bg-neutral-900/90 backdrop-blur px-4 py-2 shadow-lg hover:shadow-xl transition focus:outline-none focus:ring focus:ring-primary"
     @click="toggle"
   >
-    <Icon name="lucide:bot" class="h-6 w-6" />
+    <Icon name="lucide:bot" class="h-8 w-8" />
     <span class="hidden sm:inline">Ask AI</span>
   </button>
 
@@ -93,7 +93,7 @@ const STORAGE_VER = '3'
 
 const MAX_HISTORY = 50
 const MAX_INPUT_CHARS = 2000
-const MAX_REPLY_CHARS = 1200
+const MAX_REPLY_CHARS = 8000
 
 const isOpen = ref(false)
 const messages = ref<ChatMessage[]>([])
