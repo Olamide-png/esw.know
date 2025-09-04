@@ -99,7 +99,6 @@
 
 <script setup lang="ts">
 import { ref, watch, nextTick, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
 import { useChatStore } from '@/composables/useChatStore'
 import MessageBubble from '@/components/MessageBubble.vue'
 
@@ -109,9 +108,6 @@ const draft = ref('')
 const sidebarOpen = ref(false)
 const scrollEl = ref<HTMLElement | null>(null)
 const taRef = ref<HTMLTextAreaElement | null>(null)
-
-const route = useRoute()
-const router = useRouter()
 
 function scrollToBottom(smooth = false) {
   requestAnimationFrame(() => {
@@ -125,39 +121,6 @@ async function onSend() {
   await send(text)
   scrollToBottom(true)
 }
-
-// Prefill from ?q= and optional auto-send with ?send=1 or ?autosend=true
-onMounted(async () => {
-  // Handle q=
-  const qRaw = route.query.q
-  const q = Array.isArray(qRaw) ? qRaw[0] : (qRaw as string) || ''
-  if (q) {
-    draft.value = q
-    await nextTick()
-    taRef.value?.focus()
-  }
-
-  // Auto-send?
-  const sRaw = route.query.send ?? route.query.autosend
-  const s = Array.isArray(sRaw) ? sRaw[0] : (sRaw as string) || ''
-  const shouldSend = q && (s === '1' || s?.toLowerCase?.() === 'true')
-  if (shouldSend && !loading.value) {
-    const text = q.trim()
-    if (text) {
-      draft.value = ''
-      await send(text)
-    }
-  }
-
-  // Clean URL after handling
-  if (route.query.q || route.query.send || route.query.autosend) {
-    const clean: Record<string, any> = { ...route.query }
-    delete clean.q; delete clean.send; delete clean.autosend
-    router.replace({ query: clean })
-  }
-
-  scrollToBottom()
-})
 
 watch(current, () => nextTick(() => scrollToBottom()))
 onMounted(() => scrollToBottom())
