@@ -78,7 +78,7 @@ const goClaude = () => window.open(claudeUrl.value, '_blank', 'noopener')
       rel="noopener"
       class="inline-flex items-center gap-2 rounded-md px-3 py-1.5 hover:bg-muted"
     >
-      <SmartIcon name="lucide:bot" :size="16" />
+      <SmartIcon name="lucide:bot-message-square" :size="16" />
       <span class="hidden sm:inline">AI Chat</span>
     </NuxtLink>
   </div>
