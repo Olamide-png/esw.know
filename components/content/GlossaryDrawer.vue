@@ -10,20 +10,30 @@ import {
 } from "@/components/ui/sheet"
 
 const props = withDefaults(defineProps<{
-  /** The word/phrase shown as the clickable trigger */
   term: string
-  /** Optional subtitle shown under the title in the drawer */
   subtitle?: string
-  /** Optional: 'right' | 'left' | 'top' | 'bottom' (defaults right) */
   side?: 'right' | 'left' | 'top' | 'bottom'
+  /** md ~ 560px, lg ~ 640px, xl ~ 768px, 2xl ~ 896px, 3xl ~ 1024px */
+  size?: 'md' | 'lg' | 'xl' | '2xl' | '3xl'
+  /** Extra classes for the content wrapper (optional) */
+  contentClass?: string
 }>(), {
-  side: 'right'
+  side: 'right',
+  size: 'xl'
 })
+
+/** Map sizes to responsive max widths */
+const sizeClass = {
+  md:  'w-full sm:max-w-md',
+  lg:  'w-full sm:max-w-lg',
+  xl:  'w-full sm:max-w-xl',
+  '2xl':'w-full sm:max-w-2xl',
+  '3xl':'w-full sm:max-w-3xl'
+}[props.size]
 </script>
 
 <template>
   <Sheet>
-    <!-- Inline trigger that looks like a link with a dotted underline -->
     <SheetTrigger as-child>
       <button
         type="button"
@@ -34,15 +44,23 @@ const props = withDefaults(defineProps<{
       </button>
     </SheetTrigger>
 
-    <SheetContent :side="props.side" class="w-full sm:max-w-md">
+    <!-- Theme-aware, wider drawer -->
+    <SheetContent
+      :side="props.side"
+      :class="[
+        sizeClass,
+        // Ensure it inherits theme variables from shadcn
+        'bg-background text-foreground border-l',
+        // Let pages add more classes if needed
+        props.contentClass
+      ]"
+    >
       <SheetHeader class="mb-2">
         <SheetTitle class="text-base sm:text-lg">{{ props.term }}</SheetTitle>
         <SheetDescription v-if="props.subtitle">{{ props.subtitle }}</SheetDescription>
       </SheetHeader>
 
-      <!-- Your Markdown from the page goes here -->
       <div class="prose dark:prose-invert prose-sm sm:prose-base max-w-none">
-        <!-- Use MDCSlot/slot to unwrap <p> wrappers nicely -->
         <slot />
       </div>
 
@@ -59,3 +77,4 @@ const props = withDefaults(defineProps<{
     </SheetContent>
   </Sheet>
 </template>
+
