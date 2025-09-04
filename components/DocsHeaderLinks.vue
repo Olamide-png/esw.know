@@ -27,6 +27,10 @@ const perplexityUrl = computed(
   () => `https://www.perplexity.ai/search/?q=${encodeURIComponent(prompt.value)}`
 )
 
+// ✅ Your on-site Chat page with prefilled prompt
+// (If you want it to auto-send too, append &send=1)
+const chatUrl = computed(() => `/chat?q=${encodeURIComponent(prompt.value)}`)
+
 const goClaude = () => window.open(claudeUrl.value, '_blank', 'noopener')
 </script>
 
@@ -71,9 +75,9 @@ const goClaude = () => window.open(claudeUrl.value, '_blank', 'noopener')
       </UiDropdownMenuContent>
     </UiDropdownMenu>
 
-    <!-- New: link to your on-site ChatGPT-style page (/chat) in a new tab -->
+    <!-- Link to your on-site ChatGPT-style page (/chat) in a new tab with prefilled prompt -->
     <NuxtLink
-      to="/chat"
+      :to="chatUrl"
       target="_blank"
       rel="noopener"
       class="inline-flex items-center gap-2 rounded-md px-3 py-1.5 hover:bg-muted"
@@ -83,6 +87,7 @@ const goClaude = () => window.open(claudeUrl.value, '_blank', 'noopener')
     </NuxtLink>
   </div>
 </template>
+
 
 
 
