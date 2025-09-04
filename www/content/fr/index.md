@@ -153,5 +153,7 @@ ESW Shopify integration leverages Shopify's native checkout to handle shopper's 
   </div>
 </div>
 
+<ClientOnly>
+  <AISearchBar class="mx-auto my-6" />
+</ClientOnly>
 
-<AISearchBar class="mx-auto my-6" />
