@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full max-w-3xl">
+  <div class="not-prose relative w-full max-w-none">
     <!-- INPUT -->
     <form @submit.prevent="onAsk" class="relative">
       <div
