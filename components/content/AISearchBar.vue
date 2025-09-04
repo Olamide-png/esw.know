@@ -94,7 +94,6 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import Icon from '~icons/lucide/bot' // Nuxt Icon auto-import works with <Icon name="..."> already; keep usage below
 
 /* ---------- Props ---------- */
 const props = defineProps<{
@@ -195,9 +194,7 @@ const canSend = computed(() => !!normalizeInput(query.value))
 function focusInput() { inputRef.value?.focus() }
 function clearAll() { stop(); answer.value = ''; error.value = null; query.value = ''; focusInput() }
 async function copyAnswer() {
-  try {
-    await navigator.clipboard.writeText(answer.value || '')
-  } catch {}
+  try { await navigator.clipboard.writeText(answer.value || '') } catch {}
 }
 
 /* Streaming with fallback */
@@ -208,7 +205,6 @@ async function onAsk() {
   error.value = null
   loading.value = true
 
-  // Build messages (single-turn; add optional system if provided)
   const messages: Array<{ role: 'system'|'user'|'assistant'; content: string }> = []
   if (props.system) messages.push({ role: 'system', content: stripTags(props.system) })
   messages.push({ role: 'user', content: text })
@@ -216,7 +212,6 @@ async function onAsk() {
   try {
     await stream(messages)
   } catch (e: any) {
-    // Fallback to non-streaming
     try {
       const res = await $fetch<{ reply: string } | { error: string }>('/api/chat', {
         method: 'POST',
@@ -306,3 +301,4 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
 :deep(pre) { max-width: 100%; }
 :deep(code) { word-break: break-word; }
 </style>
+
