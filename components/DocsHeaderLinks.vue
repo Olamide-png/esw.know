@@ -31,44 +31,59 @@ const goClaude = () => window.open(claudeUrl.value, '_blank', 'noopener')
 </script>
 
 <template>
-  <UiDropdownMenu>
-    <UiDropdownMenuTrigger as-child>
-      <UiButton variant="ghost" size="sm" class="gap-2">
-        <SmartIcon name="lucide:sparkles" :size="16" />
-        <span class="hidden sm:inline">Ask AI about this page</span>
-      </UiButton>
-    </UiDropdownMenuTrigger>
+  <!-- Wrap both controls so we can show dropdown + AI Chat link side by side -->
+  <div class="flex items-center gap-2">
+    <UiDropdownMenu>
+      <UiDropdownMenuTrigger as-child>
+        <UiButton variant="ghost" size="sm" class="gap-2">
+          <SmartIcon name="lucide:sparkles" :size="16" />
+          <span class="hidden sm:inline">Ask AI about this page</span>
+        </UiButton>
+      </UiDropdownMenuTrigger>
 
-    <UiDropdownMenuContent align="end" class="min-w-48">
-      <UiDropdownMenuLabel class="text-xs">Send this page</UiDropdownMenuLabel>
-      <UiDropdownMenuSeparator />
+      <UiDropdownMenuContent align="end" class="min-w-48">
+        <UiDropdownMenuLabel class="text-xs">Send this page</UiDropdownMenuLabel>
+        <UiDropdownMenuSeparator />
 
-      <!-- OpenAI -->
-      <UiDropdownMenuItem as-child>
-        <a :href="openaiUrl" target="_blank" rel="noopener" class="flex items-center gap-2">
-          <SmartIcon name="simple-icons:openai" :size="16" />
-          <span>OpenAI (ChatGPT)</span>
-        </a>
-      </UiDropdownMenuItem>
+        <!-- OpenAI -->
+        <UiDropdownMenuItem as-child>
+          <a :href="openaiUrl" target="_blank" rel="noopener" class="flex items-center gap-2">
+            <SmartIcon name="simple-icons:openai" :size="16" />
+            <span>OpenAI (ChatGPT)</span>
+          </a>
+        </UiDropdownMenuItem>
 
-      <!-- Anthropic -->
-      <UiDropdownMenuItem @select.prevent="goClaude">
-        <div class="flex items-center gap-2">
-          <SmartIcon name="simple-icons:anthropic" :size="16" />
-          <span>Anthropic (Claude)</span>
-        </div>
-      </UiDropdownMenuItem>
+        <!-- Anthropic -->
+        <UiDropdownMenuItem @select.prevent="goClaude">
+          <div class="flex items-center gap-2">
+            <SmartIcon name="simple-icons:anthropic" :size="16" />
+            <span>Anthropic (Claude)</span>
+          </div>
+        </UiDropdownMenuItem>
 
-      <!-- Perplexity -->
-      <UiDropdownMenuItem as-child>
-        <a :href="perplexityUrl" target="_blank" rel="noopener" class="flex items-center gap-2">
-          <SmartIcon name="simple-icons:perplexity" :size="16" />
-          <span>Perplexity</span>
-        </a>
-      </UiDropdownMenuItem>
-    </UiDropdownMenuContent>
-  </UiDropdownMenu>
+        <!-- Perplexity -->
+        <UiDropdownMenuItem as-child>
+          <a :href="perplexityUrl" target="_blank" rel="noopener" class="flex items-center gap-2">
+            <SmartIcon name="simple-icons:perplexity" :size="16" />
+            <span>Perplexity</span>
+          </a>
+        </UiDropdownMenuItem>
+      </UiDropdownMenuContent>
+    </UiDropdownMenu>
+
+    <!-- New: link to your on-site ChatGPT-style page (/chat) in a new tab -->
+    <NuxtLink
+      to="/chat"
+      target="_blank"
+      rel="noopener"
+      class="inline-flex items-center gap-2 rounded-md px-3 py-1.5 hover:bg-muted"
+    >
+      <SmartIcon name="lucide:bot" :size="16" />
+      <span class="hidden sm:inline">AI Chat</span>
+    </NuxtLink>
+  </div>
 </template>
+
 
 
 
