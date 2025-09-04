@@ -44,27 +44,29 @@ const sizeClass = {
       </button>
     </SheetTrigger>
 
-    <!-- Theme-aware, wider drawer -->
     <SheetContent
       :side="props.side"
       :class="[
         sizeClass,
-        // Ensure it inherits theme variables from shadcn
-        'bg-background text-foreground border-l',
-        // Let pages add more classes if needed
+        'bg-background text-foreground border-l flex flex-col h-full', // flex for layout
         props.contentClass
       ]"
     >
-      <SheetHeader class="mb-2">
+      <!-- Fixed header -->
+      <SheetHeader class="shrink-0 p-4 border-b">
         <SheetTitle class="text-base sm:text-lg">{{ props.term }}</SheetTitle>
         <SheetDescription v-if="props.subtitle">{{ props.subtitle }}</SheetDescription>
       </SheetHeader>
 
-      <div class="prose dark:prose-invert prose-sm sm:prose-base max-w-none">
-        <slot />
+      <!-- Scrollable content -->
+      <div class="flex-1 overflow-y-auto px-4 py-3 custom-scrollbar">
+        <div class="prose dark:prose-invert prose-sm sm:prose-base max-w-none">
+          <slot />
+        </div>
       </div>
 
-      <div class="mt-6 flex justify-end">
+      <!-- Fixed footer -->
+      <div class="shrink-0 p-4 border-t flex justify-end">
         <SheetClose as-child>
           <button
             type="button"
@@ -77,4 +79,5 @@ const sizeClass = {
     </SheetContent>
   </Sheet>
 </template>
+
 
