@@ -2,64 +2,13 @@
 import { h, onMounted, onBeforeUnmount, ref, createApp, defineComponent, resolveComponent } from 'vue'
 import { BASE_TERMS } from '~/glossary/base-terms'
 
-const props = withDefaults(defineProps<{
-  terms?: Record<string, string>
-  enableAI?: boolean
-  maxPerTerm?: number
-  target?: string
-  /** text class for tooltip content (applied to inner wrapper) */
-  tooltipTextClass?: string
-  /** container classes for UiTooltipContent (bg/border/shadow etc.) */
-  contentClass?: string
-}>(), {
-  terms: () => ({}),
-  enableAI: false,
-  maxPerTerm: 3,
-  target: '[data-content-root], article, main',
-  // Use scaleable, non-arbitrary classes by default (works without safelist)
-  tooltipTextClass: 'text-lg leading-6 md:text-xl md:leading-7',
-  // Elegant, theme-aware container (no pure black), with blur + soft shadow
-  contentClass:
-    'rounded-2xl border border-border bg-card/95 dark:bg-popover/95 ' +
-    'backdrop-blur-md px-3 py-2 shadow-lg text-popover-foreground'
-})
-
-const rootEl = ref<HTMLElement | null>(null)
-let observer: MutationObserver | null = null
-
-function textFrom(el: Element): string {
-  const clone = el.cloneNode(true) as HTMLElement
-  clone.querySelectorAll(
-    'code, pre, kbd, samp, a, h1, h2, h3, h4, h5, h6, button,' +
-    '.card, [data-card], .card-content, .card-header, .card-footer,' +
-    'uicard, uicardcontent, uicardheader, uicardfooter'
-  ).forEach(n => n.remove())
-  return clone.textContent || ''
-}
-
-async function buildTermsMap(sourceText?: string): Promise<Record<string, string>> {
-  const merged = { ...BASE_TERMS, ...props.terms }
-  if (!props.enableAI || !sourceText?.trim()) return merged
-  try {
-    const r = await $fetch<{ terms: Record<string, string> }>('/api/glossary/extract', {
-      method: 'POST',
-      body: { text: sourceText, known: Object.keys(merged) }
-    })
-    return { ...merged, ...r.terms }
-  } catch {
-    return merged
-  }
-}
-
-/** Tooltip host with graceful fallback (native title) if UiTooltip* isn't available */
 const TooltipTerm = defineComponent<{
   text: string
   def: string
   tooltipTextClass?: string
-  contentClass?: string
 }>({
   name: 'TooltipTerm',
-  props: ['text', 'def', 'tooltipTextClass', 'contentClass'] as any,
+  props: ['text', 'def', 'tooltipTextClass'] as any,
   setup(p) {
     const TP = resolveComponent('UiTooltipProvider')
     const TT = resolveComponent('UiTooltip')
@@ -72,32 +21,48 @@ const TooltipTerm = defineComponent<{
       TR !== 'UiTooltipTrigger' &&
       TC !== 'UiTooltipContent'
 
+    // Fallback: native title so text never disappears
     if (!haveShadcn) {
-      // Fallback: visible text + native title tooltip
       return () =>
         h('span', {
-          class: 'inline-block cursor-help underline decoration-dotted underline-offset-4',
+          class:
+            'inline-block cursor-help underline decoration-dotted underline-offset-4',
           title: p.def
         }, p.text)
     }
 
-    // Shadcn tooltip (container + inner text wrapper)
+    // shadcn tooltip with forced inner text sizing + elegant, theme-aware surface
     return () =>
       h(TP as any, { delayDuration: 80 }, () =>
         h(TT as any, null, {
           default: () => [
             h(TR as any, { asChild: true }, () =>
               h('span', {
-                class: 'inline-block cursor-help underline decoration-dotted underline-offset-4'
+                class:
+                  'inline-block cursor-help underline decoration-dotted underline-offset-4'
               }, p.text)
             ),
-            h(TC as any, {
-              side: 'top',
-              align: 'center',
-              sideOffset: 8,
-              class: `z-50 max-w-xs whitespace-pre-line ${p.contentClass ?? ''}`
-            }, () =>
-              h('div', { class: `${p.tooltipTextClass ?? ''}` }, p.def)
+            h(
+              TC as any,
+              {
+                side: 'top',
+                align: 'center',
+                sideOffset: 6,
+                // Force a non-black, theme-aware look:
+                // - uses bg-popover (light) and dark:bg-neutral-900/90 with subtle border
+                // - small blur for elegance, rounded corners, soft shadow
+                class:
+                  'max-w-sm whitespace-pre-line rounded-lg border ' +
+                  'bg-popover/95 text-popover-foreground ' +
+                  'dark:bg-neutral-900/90 dark:text-neutral-100 ' +
+                  'backdrop-blur-sm shadow-md px-0 py-0'
+              },
+              () =>
+                // Inner wrapper gets the font sizing so it always applies
+                h('div', {
+                  class:
+                    `px-3 py-2 leading-snug ${p.tooltipTextClass || 'text-base'}`
+                }, p.def)
             )
           ]
         })
