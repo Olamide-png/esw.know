@@ -3,7 +3,6 @@ export const BASE_TERMS: Record<string, string> = {
   "Pricing Advisor": "Service that calculates localized prices using FX, duties, and taxes. See also: Fixed Pricing, Calculated Pricing.",
   "Fixed Pricing": "Retailer supplies pre-calculated localized prices per country. See also: Pricing Advisor.",
   "Calculated Pricing": "Localized price calculated at runtime from base price + rules. See also: Pricing Advisor.",
-  "Checkout": "The flow where shoppers review their order and pay. See also: Payments App.",
   "Return Authorization": "Approval and identifier to accept a product return. See also: GRP Returns.",
   "GRP Returns": "Global Returns Platform for labels, status, and exchanges. See also: Return Authorization.",
 
