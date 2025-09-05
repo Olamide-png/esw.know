@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { h, onMounted, onBeforeUnmount, ref, createApp, defineComponent } from 'vue'
+import { h, onMounted, onBeforeUnmount, ref, createApp, defineComponent, resolveComponent } from 'vue'
 import { BASE_TERMS } from '~/glossary/base-terms'
 
 const props = withDefaults(defineProps<{
@@ -44,7 +44,7 @@ async function buildTermsMap(sourceText?: string): Promise<Record<string, string
   }
 }
 
-// Render shadcn tooltip using globally-registered tags
+/** Tooltip host with graceful fallback (native title) if UiTooltip* isn't available */
 const TooltipTerm = defineComponent<{
   text: string
   def: string
@@ -53,16 +53,38 @@ const TooltipTerm = defineComponent<{
   name: 'TooltipTerm',
   props: ['text', 'def', 'tooltipTextClass'] as any,
   setup(p) {
+    // Try to resolve globally-registered shadcn components
+    const TP = resolveComponent('UiTooltipProvider')
+    const TT = resolveComponent('UiTooltip')
+    const TR = resolveComponent('UiTooltipTrigger')
+    const TC = resolveComponent('UiTooltipContent')
+
+    const haveShadcn =
+      TP !== 'UiTooltipProvider' &&
+      TT !== 'UiTooltip' &&
+      TR !== 'UiTooltipTrigger' &&
+      TC !== 'UiTooltipContent'
+
+    // Fallback keeps text visible with native title tooltip
+    if (!haveShadcn) {
+      return () =>
+        h('span', {
+          class: 'inline-block cursor-help underline decoration-dotted underline-offset-4',
+          title: p.def
+        }, p.text)
+    }
+
+    // Shadcn tooltip path
     return () =>
-      h('UiTooltipProvider', { delayDuration: 80 }, () =>
-        h('UiTooltip', null, {
+      h(TP as any, { delayDuration: 80 }, () =>
+        h(TT as any, null, {
           default: () => [
-            h('UiTooltipTrigger', { asChild: true }, () =>
+            h(TR as any, { asChild: true }, () =>
               h('span', {
                 class: 'inline-block cursor-help underline decoration-dotted underline-offset-4'
               }, p.text)
             ),
-            h('UiTooltipContent', {
+            h(TC as any, {
               side: 'top',
               align: 'center',
               class: `max-w-xs whitespace-pre-line ${p.tooltipTextClass ?? 'text-base'}`
@@ -178,5 +200,6 @@ onBeforeUnmount(() => observer?.disconnect())
 <template>
   <slot />
 </template>
+
 
 
