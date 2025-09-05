@@ -71,21 +71,24 @@ function applyGlossary(el: Element, terms: Record<string, string>) {
   })
 
   const makeNode = (original: string, term: string, def: string) => {
-    // CSS-only tooltip, theme-aware, larger text
-    const span = document.createElement('span')
-    span.className = 'group relative inline-block cursor-help underline decoration-dotted underline-offset-4'
-    span.setAttribute('aria-label', `Definition: ${def}`)
-    span.innerHTML = `
-      <span>${original}</span>
-      <span
-        class="pointer-events-none absolute left-1/2 top-full z-50 hidden -translate-x-1/2 whitespace-pre-line
-               rounded-2xl border border-border bg-card/95 dark:bg-popover/95 backdrop-blur-xl
-               px-3 py-2 shadow-lg text-popover-foreground group-hover:block mt-2 w-max max-w-[22rem]">
-        <span class="block text-base leading-6 md:text-md md:leading-7">${def}</span>
-      </span>
-    `
-    return span
-  }
+  // CSS-only tooltip, theme-aware, larger text, with yellow question mark icon
+  const span = document.createElement('span')
+  span.className = 'group relative inline-flex items-center gap-1 cursor-help underline decoration-dotted underline-offset-4'
+  span.setAttribute('aria-label', `Definition: ${def}`)
+  span.innerHTML = `
+    <span>${original}</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-[1.1em] h-[1.1em] text-yellow-500 dark:text-yellow-400 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm.25 15.5a1.25 1.25 0 1 1-1.25-1.25 1.25 1.25 0 0 1 1.25 1.25ZM13.2 10.9l-.68.54a1.31 1.31 0 0 0-.52 1v.14a1 1 0 0 1-2 0v-.14a3.31 3.31 0 0 1 1.32-2.57l.68-.54A1.3 1.3 0 1 0 11 7a1 1 0 0 1-2 0 3.3 3.3 0 1 1 4.2 3.9Z"/>
+    </svg>
+    <span
+      class="pointer-events-none absolute left-1/2 top-full z-50 hidden -translate-x-1/2 whitespace-pre-line
+             rounded-2xl border border-border bg-card/95 dark:bg-popover/95 backdrop-blur-md
+             px-3 py-2 shadow-lg text-popover-foreground group-hover:block mt-2 w-max max-w-[22rem]">
+      <span class="block text-base leading-6 md:text-lg md:leading-7">${def}</span>
+    </span>
+  `
+  return span
+}
 
   const replacements: Array<{ node: Text, fragments: (Node | string)[] }> = []
 
