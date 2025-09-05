@@ -29,13 +29,44 @@ function textFrom(el: Element): string {
 }
 
 function buildTermsMap(sourceText?: string): Promise<Record<string, string>> {
-  const merged = { ...BASE_TERMS, ...props.terms }
-  if (!props.enableAI || !sourceText?.trim()) return Promise.resolve(merged)
-  // Optional AI augmentation; safe fallback if API not configured
+  // helper: normalize to a lowercase-keyed Map
+  const toMap = (obj?: Record<string, string>) => {
+    const map = new Map<string, string>()
+    if (!obj) return map
+    for (const [k, v] of Object.entries(obj)) {
+      const key = (k ?? '').trim().toLowerCase()
+      const val = (v ?? '').trim()
+      if (key && val) map.set(key, val)
+    }
+    return map
+  }
+
+  // start with base + user-supplied terms (case-insensitive)
+  const baseMerged = { ...BASE_TERMS, ...props.terms }
+  const baseMap = toMap(baseMerged)
+
+  // if AI disabled or no text, just return normalized object
+  if (!props.enableAI || !sourceText?.trim()) {
+    return Promise.resolve(Object.fromEntries(baseMap))
+  }
+
+  // otherwise, fetch AI terms and merge with precedence (AI wins)
   return $fetch<{ terms: Record<string, string> }>('/api/glossary/extract', {
     method: 'POST',
-    body: { text: sourceText, known: Object.keys(merged) }
-  }).then(r => ({ ...merged, ...r.terms })).catch(() => merged)
+    body: {
+      text: sourceText,
+      // send known keys (lowercased & unique) to reduce duplicates
+      known: Array.from(new Set(Object.keys(baseMerged).map(k => k.toLowerCase())))
+    }
+  })
+  .then((r) => {
+    const aiMap = toMap(r?.terms || {})
+    // merge: base first, then AI overrides
+    const out = new Map(baseMap)
+    for (const [k, v] of aiMap) out.set(k, v)
+    return Object.fromEntries(out)
+  })
+  .catch(() => Object.fromEntries(baseMap)) // graceful fallback
 }
 
 function applyGlossary(el: Element, terms: Record<string, string>) {
