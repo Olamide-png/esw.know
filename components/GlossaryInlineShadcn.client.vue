@@ -7,13 +7,21 @@ const props = withDefaults(defineProps<{
   enableAI?: boolean
   maxPerTerm?: number
   target?: string
+  /** text class for tooltip content (applied to inner wrapper) */
   tooltipTextClass?: string
+  /** container classes for UiTooltipContent (bg/border/shadow etc.) */
+  contentClass?: string
 }>(), {
   terms: () => ({}),
   enableAI: false,
   maxPerTerm: 3,
   target: '[data-content-root], article, main',
-  tooltipTextClass: 'text-base leading-snug md:text-[1.05rem]'
+  // Use scaleable, non-arbitrary classes by default (works without safelist)
+  tooltipTextClass: 'text-lg leading-6 md:text-xl md:leading-7',
+  // Elegant, theme-aware container (no pure black), with blur + soft shadow
+  contentClass:
+    'rounded-2xl border border-border bg-card/95 dark:bg-popover/95 ' +
+    'backdrop-blur-md px-3 py-2 shadow-lg text-popover-foreground'
 })
 
 const rootEl = ref<HTMLElement | null>(null)
@@ -21,7 +29,6 @@ let observer: MutationObserver | null = null
 
 function textFrom(el: Element): string {
   const clone = el.cloneNode(true) as HTMLElement
-  // ignore content inside cards + usual noisy nodes
   clone.querySelectorAll(
     'code, pre, kbd, samp, a, h1, h2, h3, h4, h5, h6, button,' +
     '.card, [data-card], .card-content, .card-header, .card-footer,' +
@@ -49,11 +56,11 @@ const TooltipTerm = defineComponent<{
   text: string
   def: string
   tooltipTextClass?: string
+  contentClass?: string
 }>({
   name: 'TooltipTerm',
-  props: ['text', 'def', 'tooltipTextClass'] as any,
+  props: ['text', 'def', 'tooltipTextClass', 'contentClass'] as any,
   setup(p) {
-    // Try to resolve globally-registered shadcn components
     const TP = resolveComponent('UiTooltipProvider')
     const TT = resolveComponent('UiTooltip')
     const TR = resolveComponent('UiTooltipTrigger')
@@ -65,8 +72,8 @@ const TooltipTerm = defineComponent<{
       TR !== 'UiTooltipTrigger' &&
       TC !== 'UiTooltipContent'
 
-    // Fallback keeps text visible with native title tooltip
     if (!haveShadcn) {
+      // Fallback: visible text + native title tooltip
       return () =>
         h('span', {
           class: 'inline-block cursor-help underline decoration-dotted underline-offset-4',
@@ -74,7 +81,7 @@ const TooltipTerm = defineComponent<{
         }, p.text)
     }
 
-    // Shadcn tooltip path
+    // Shadcn tooltip (container + inner text wrapper)
     return () =>
       h(TP as any, { delayDuration: 80 }, () =>
         h(TT as any, null, {
@@ -87,8 +94,11 @@ const TooltipTerm = defineComponent<{
             h(TC as any, {
               side: 'top',
               align: 'center',
-              class: `max-w-xs whitespace-pre-line ${p.tooltipTextClass ?? 'text-base'}`
-            }, () => p.def)
+              sideOffset: 8,
+              class: `z-50 max-w-xs whitespace-pre-line ${p.contentClass ?? ''}`
+            }, () =>
+              h('div', { class: `${p.tooltipTextClass ?? ''}` }, p.def)
+            )
           ]
         })
       )
