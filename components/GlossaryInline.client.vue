@@ -80,11 +80,14 @@ function applyGlossary(el: Element, terms: Record<string, string>) {
     span.className = 'group relative inline-block cursor-help underline decoration-dotted underline-offset-4'
     span.setAttribute('aria-label', `Definition: ${def}`)
     span.innerHTML = `
-      <span>${original}</span>
-      <span class="pointer-events-none absolute left-1/2 top-full z-50 hidden -translate-x-1/2 whitespace-pre-line rounded-md border bg-popover px-2 py-1 text-xs text-popover-foreground shadow-md group-hover:block mt-2 w-max max-w-[20rem]">
-        ${def}
-      </span>
-    `
+  <span>${original}</span>
+  <span
+    class="pointer-events-none absolute left-1/2 top-full z-50 hidden -translate-x-1/2 whitespace-pre-line
+           rounded-2xl border border-border bg-card/95 dark:bg-popover/95 backdrop-blur-xl
+           px-3 py-2 shadow-lg text-popover-foreground group-hover:block mt-2 w-max max-w-[22rem]">
+    <span class="block text-base leading-6 md:text-lg md:leading-7">${def}</span>
+  </span>
+`
     return span
   }
 
