@@ -65,7 +65,7 @@ ESW Shopify integration leverages Shopify's native checkout to handle shopper's 
 
   <div class="grid md:grid-cols-2 items-center gap-y-6 mt-12 max-md:max-w-md max-md:mx-auto">
       <!-- Shopify Card -->
-      <div class="bg-white border border-gray-300 shadow-sm md:rounded-tl-3xl md:rounded-bl-3xl max-md:rounded-3xl p-8 sm:p-10">
+      <div class="bg-white border border-gray-300 shadow-lg md:rounded-tl-3xl md:rounded-bl-3xl max-md:rounded-3xl p-8 sm:p-10">
         <h3 class="text-slate-900 text-lg font-semibold mb-4">Handled by Shopify</h3>
         <ul class="space-y-5">
           <li class="flex items-center text-[15px] text-slate-600 font-medium">
@@ -102,7 +102,7 @@ ESW Shopify integration leverages Shopify's native checkout to handle shopper's 
       </div>
 
   <!-- ESW Card -->
-  <div class="bg-slate-900 border border-gray-900 shadow-2xl rounded-3xl p-8 sm:p-10 relative md:right-1">
+  <div class="bg-slate-900 border border-gray-900 shadow-xl rounded-3xl p-8 sm:p-10 relative md:right-1">
         <h3 class="text-white text-lg font-semibold mb-4">Handled by ESW</h3>
         <ul class="space-y-5">
           <li class="flex items-center text-[15px] text-slate-300 font-medium">
