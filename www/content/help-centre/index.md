@@ -35,8 +35,6 @@ Common queries and help documentation.
   ---
   title: Orders
   icon: lucide:package-open
-  to: /help-centre/order-issues
-  target: _self
   ---
   Explore common order queries
   ::
@@ -45,8 +43,6 @@ Common queries and help documentation.
   ---
   title: Checkout
   icon: lucide:shopping-cart
-  to: /help-centre/main-page
-  target: _self
   ---
   Explore common checkout queries
   ::
