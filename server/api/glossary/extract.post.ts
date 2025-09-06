@@ -1,52 +1,50 @@
-import { defineEventHandler, readBody } from 'h3'
-
 export default defineEventHandler(async (event) => {
-  const { text, known = [] } = await readBody<{ text: string; known?: string[] }>(event)
-  const apiKey = process.env.OPENAI_API_KEY
+  const body = await readBody<{ 
+    query: string
+    pageTitle?: string
+    pageUrl?: string
+    extraContext?: string
+  }>(event)
 
-  // No key? Return empty augmentation.
-  if (!apiKey || !text?.trim()) {
-    return { terms: {} as Record<string, string> }
+  if (!body?.query) {
+    throw createError({ statusCode: 400, statusMessage: 'Missing "query"' })
+  }
+  if (!process.env.OPENAI_API_KEY) {
+    throw createError({ statusCode: 500, statusMessage: 'OPENAI_API_KEY not set' })
   }
 
-  // Keep it short + domainy
   const prompt = `
-Extract up to 20 domain-specific terms from the content below and define each in <= 24 words.
-Return strict JSON { "terms": { "Term": "Definition", ... } }.
-Avoid generic terms; favor e-commerce, ESW, Shopify, SFCC, pricing, returns, checkout, logistics.
-Do not include terms already in this list: ${known.slice(0,200).join(', ')}.
+You are a concise documentation assistant.
+Return practical, step-specific guidance (<= 180 words).
+Prefer short bullet points. Use code only if essential.
 
-CONTENT:
-${text.slice(0, 12000)}
-`
+Page: ${body.pageTitle ?? 'Unknown'}
+URL: ${body.pageUrl ?? 'Unknown'}
+Extra Context: ${body.extraContext ?? 'None'}
 
-  const res = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
+Problem:
+${body.query}
+`.trim()
+
+  const resp = await fetch("https://api.openai.com/v1/responses", {
+    method: "POST",
     headers: {
-      'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
     },
     body: JSON.stringify({
-      model: 'gpt-4o-mini',
-      messages: [
-        { role: 'system', content: 'You are a precise documentation glossary extractor.' },
-        { role: 'user', content: prompt }
-      ],
-      temperature: 0.2,
-      response_format: { type: 'json_object' }
+      model: "gpt-4o-mini",
+      input: prompt,
+      max_output_tokens: 220
     })
   })
 
-  if (!res.ok) {
-    return { terms: {} }
+  if (!resp.ok) {
+    const t = await resp.text().catch(() => '')
+    throw createError({ statusCode: 502, statusMessage: `AI upstream error: ${t || resp.statusText}` })
   }
 
-  const data = await res.json()
-  // Safe parse
-  try {
-    const obj = JSON.parse(data.choices?.[0]?.message?.content ?? '{"terms":{}}')
-    return { terms: obj.terms || {} }
-  } catch {
-    return { terms: {} }
-  }
+  const data = await resp.json()
+  return { answer: data.output_text ?? "No answer generated." }
 })
+
