@@ -114,6 +114,7 @@ function stripTags(s: string) {
 function normalizeInput(s: string, max = MAX_INPUT_CHARS) {
   return stripTags(s).replace(/\s+/g, ' ').trim().slice(0, max)
 }
+// preserve line breaks for markdown
 function normalizeReply(s: string, max = MAX_REPLY_CHARS) {
   const noTags = String(s ?? '')
     .replace(/<script[\s\S]*?<\/script>/gi, '')
@@ -231,7 +232,9 @@ async function streamAnswer() {
           saveHistory()
           return
         }
-      } catch { /* ignore malformed chunk */ }
+      } catch {
+        // tolerate malformed/partial chunks
+      }
     }
   }
 }
@@ -260,6 +263,7 @@ async function onSend() {
       scrollEl.value?.scrollTo({ top: scrollEl.value.scrollHeight, behavior: 'smooth' })
     })
   } catch (e: any) {
+    // Fallback: non-streaming endpoint returns { reply } or { error }
     try {
       const res = await $fetch<{ reply: string } | { error: string }>('/api/chat', {
         method: 'POST',
@@ -302,4 +306,5 @@ watch(messages, saveHistory, { deep: true })
 .chat-slide-fade-enter-from { opacity: 0; transform: translateY(8px) scale(.98); }
 .chat-slide-fade-leave-to { opacity: 0; transform: translateY(8px) scale(.98); }
 </style>
+
 
