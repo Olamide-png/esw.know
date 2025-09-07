@@ -5,7 +5,7 @@
     :aria-expanded="isOpen ? 'true' : 'false'"
     aria-controls="nuxt-ai-chat"
     class="fixed bottom-4 right-6 md:right-8 z-[1000] inline-flex items-center gap-2 rounded-full border border-white/20 dark:border-white/10
-           bg-background/40 dark:bg-neutral-900/40 backdrop-blur-xl
+           bg-background/40 dark:bg-neutral-900/40 backdrop-blur-lg
            px-4 py-2 shadow-lg hover:shadow-xl transition focus:outline-none focus:ring focus:ring-primary/30"
     @click="toggle"
   >
@@ -21,7 +21,7 @@
       class="chat-panel fixed bottom-4 right-4 md:right-8 z-[1000] isolate
              w-[min(95vw,480px)] max-h-[80vh] md:max-h-[85vh]
              rounded-2xl border border-white/20 dark:border-white/10
-             bg-transparent supports-[backdrop-filter]:bg-transparent backdrop-blur-xl
+             bg-transparent supports-[backdrop-filter]:bg-transparent backdrop-blur-lg
              shadow-2xl ring-1 ring-white/10 dark:ring-white/10
              flex flex-col overflow-hidden"
       role="dialog"
