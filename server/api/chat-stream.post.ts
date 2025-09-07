@@ -1,62 +1,121 @@
 // server/api/chat-stream.post.ts
-import { defineEventHandler, readBody, setResponseHeader } from 'h3'
-import OpenAI from 'openai'
+import { defineEventHandler, readBody, setResponseStatus, setHeader } from 'h3'
+
+// Force Node (not Edge)
+export const config = { runtime: 'nodejs' } as const
 
 export default defineEventHandler(async (event) => {
-  const { q, meta } = await readBody<{ q?: string; meta?: Record<string, any> }>(event)
-  const userQuery = (q ?? '').toString().trim()
-  if (!userQuery) {
-    event.node.res.statusCode = 400
-    return { error: 'Missing "q" in body.' }
+  // Prepare SSE response
+  setHeader(event, 'Content-Type', 'text/event-stream; charset=utf-8')
+  setHeader(event, 'Cache-Control', 'no-cache, no-transform')
+  setHeader(event, 'Connection', 'keep-alive')
+
+  const { res } = event.node
+  // @ts-ignore - not always available, fine to ignore
+  res.flushHeaders?.()
+
+  const write = (objOrString: any) => {
+    const line =
+      typeof objOrString === 'string'
+        ? objOrString
+        : `data: ${JSON.stringify(objOrString)}`
+    res.write(line + '\n\n')
   }
-
-  // SSE headers
-  setResponseHeader(event, 'Content-Type', 'text/event-stream; charset=utf-8')
-  setResponseHeader(event, 'Cache-Control', 'no-cache, no-transform')
-  setResponseHeader(event, 'Connection', 'keep-alive')
-  // Vercel/Node buffering quirks
-  // @ts-ignore
-  event.node.res.flushHeaders?.()
-
-  const encoder = new TextEncoder()
-  const write = (chunk: string) => event.node.res.write(encoder.encode(chunk))
-  const send = (payload: any) => write(`data: ${typeof payload === 'string' ? payload : JSON.stringify(payload)}\n\n`)
-
-  // (optional) send a tiny UI payload at start (your client will show it in the debug box)
-  // remove this block if you don’t want it:
-  send({ type: 'ui', payload: { source: 'chat-stream', receivedAt: new Date().toISOString(), meta } })
 
   try {
-    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+    const body = await readBody<{ messages?: any; q?: string; meta?: any }>(event)
+    // Accept either full messages[] or simple q
+    const q = (body?.q ?? '').trim()
+    const messages =
+      Array.isArray(body?.messages) && body.messages.length
+        ? body.messages
+        : [
+            { role: 'system', content: 'You are a concise, helpful assistant.' },
+            ...(q ? [{ role: 'user', content: q }] : []),
+          ]
 
-    const stream = await openai.chat.completions.create({
-      model: 'gpt-4o-mini', // fast/cheap + good quality. change if you want.
-      stream: true,
-      messages: [
-        {
-          role: 'system',
-          content:
-            'You are a concise, helpful assistant. Keep answers short unless the user asks for detail.',
-        },
-        { role: 'user', content: userQuery },
-      ],
-    })
-
-    for await (const part of stream) {
-      const delta = part.choices?.[0]?.delta?.content
-      if (delta) send({ type: 'text', delta })
+    if (!messages.length) {
+      setResponseStatus(event, 400)
+      write({ error: 'Missing "q" or "messages".' })
+      write('[DONE]')
+      res.end()
+      return
     }
 
-    // finish
-    send('[DONE]')
+    const apiKey = process.env.OPENAI_API_KEY
+    if (!apiKey) {
+      setResponseStatus(event, 500)
+      write({ error: 'OPENAI_API_KEY env var is not set' })
+      write('[DONE]')
+      res.end()
+      return
+    }
+
+    const upstream = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        stream: true,
+        messages,
+      }),
+    })
+
+    if (!upstream.ok || !upstream.body) {
+      const err = await upstream.json().catch(() => ({}))
+      setResponseStatus(event, upstream.status)
+      write({ error: err?.error?.message || `Upstream ${upstream.status}` })
+      write('[DONE]')
+      res.end()
+      return
+    }
+
+    const reader = upstream.body.getReader()
+    const decoder = new TextDecoder()
+
+    let done = false
+    while (!done) {
+      const { value, done: upstreamDone } = await reader.read()
+      if (upstreamDone) break
+      const chunk = decoder.decode(value)
+
+      for (const line of chunk.split('\n')) {
+        const trimmed = line.trim()
+        if (!trimmed.startsWith('data:')) continue
+        const payload = trimmed.slice(5).trim()
+        if (!payload) continue
+        if (payload === '[DONE]') {
+          write('[DONE]')
+          res.end()
+          return
+        }
+        try {
+          const parsed = JSON.parse(payload)
+          const delta = parsed?.choices?.[0]?.delta?.content
+          if (delta) {
+            // Match your FabChat.vue protocol
+            write({ type: 'text', delta })
+          }
+        } catch {
+          // If upstream sends a non-JSON data line (rare), pass it through as text
+          write({ type: 'text', delta: payload })
+        }
+      }
+    }
+
+    write('[DONE]')
+    res.end()
   } catch (err: any) {
-    // surface the error to the UI once
-    send({ type: 'text', delta: `\n\n(Streaming error: ${err?.message ?? String(err)})` })
-    send('[DONE]')
-  } finally {
-    // end the HTTP response
-    event.node.res.end()
+    setResponseStatus(event, 500)
+    // Stream the error so the client can show it in the UI
+    res.write(`data: ${JSON.stringify({ error: err?.message ?? String(err) })}\n\n`)
+    res.write('data: [DONE]\n\n')
+    res.end()
   }
 })
+
 
 
