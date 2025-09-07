@@ -106,7 +106,6 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, computed, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
-import { queryContent } from '#content/query'
 import MessageBubble from '~/components/MessageBubble.vue'
 
 interface ChatMessage { role: 'system'|'user'|'assistant'; content: string }
@@ -120,8 +119,8 @@ const MAX_HISTORY = 50
 const MAX_INPUT_CHARS = 2000
 const MAX_REPLY_CHARS = 1200
 
-// IMPORTANT: server clamps each message to CHAT_MAX_INPUT (default 1800).
-// Keep context under this budget unless you increase CHAT_MAX_INPUT in env.
+// Server clamps each message to CHAT_MAX_INPUT (default 1800). Keep context under this
+// budget unless you increase CHAT_MAX_INPUT in env.
 const CONTEXT_BUDGET = 1500
 
 const isOpen = ref(false)
@@ -133,6 +132,9 @@ const scrollEl = ref<HTMLElement | null>(null)
 const taRef = ref<HTMLTextAreaElement | null>(null)
 
 const route = useRoute()
+
+/* ✅ useContent() is client-safe in this layer */
+const { page } = useContent()
 
 /* ---------- page context ---------- */
 const useContext = ref(true)
@@ -180,12 +182,14 @@ function mdastToText(node: any): string {
   if (t === 'root') return (node.children || []).map(mdastToText).join('')
   return ''
 }
+
 async function loadPageContext() {
   try {
-    const doc: any = await queryContent(route.path).findOne()
+    const doc: any = page?.value
     pageTitle.value = doc?.title || doc?.head?.title || 'This page'
     let text = ''
     if (doc?.body) text = mdastToText(doc.body)
+    // Fallback: scrape DOM if body missing (rare)
     if (!text && typeof window !== 'undefined') {
       const el = document.querySelector('main, article, .prose') as HTMLElement | null
       if (el) text = el.innerText || ''
@@ -201,7 +205,10 @@ async function loadPageContext() {
     pageText.value = ''
   }
 }
+
+/* Refresh context when URL or content doc changes */
 watch(() => route.fullPath, () => { loadPageContext() }, { immediate: true })
+watch(page, () => { loadPageContext() })
 
 /* ---------- ui ---------- */
 const toggle = () => {
@@ -390,6 +397,7 @@ watch(messages, saveHistory, { deep: true })
 .chat-slide-fade-enter-from { opacity: 0; transform: translateY(8px) scale(.98); }
 .chat-slide-fade-leave-to { opacity: 0; transform: translateY(8px) scale(.98); }
 </style>
+
 
 
 
