@@ -104,13 +104,11 @@ export default defineNuxtConfig({
 
   // ✅ Server-only config for your REST calls to OpenAI and chat limits
   runtimeConfig: {
-    // server-only (NOT exposed to client)
-    aiApiKey: process.env.AI_API_KEY,
-    aiBaseUrl: process.env.AI_BASE_URL || 'https://api.openai.com/v1',
-    aiModel: process.env.AI_MODEL || 'gpt-4.1-mini',
-    aiSystemPrompt: process.env.AI_SYSTEM_PROMPT || '',
-    // public keys go here if you ever need them on client:
-    public: {}
+  aiApiKey: process.env.AI_API_KEY,                 // required
+  aiBaseUrl: process.env.AI_BASE_URL || 'https://api.openai.com/v1',
+  aiModel: process.env.AI_MODEL || 'gpt-4.1-mini',
+  aiSystemPrompt: process.env.AI_SYSTEM_PROMPT || '',
+  public: {}
   },
 
   // (Optional) Route hints—useful if you ever expose the API cross-origin
