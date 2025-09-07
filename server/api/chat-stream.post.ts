@@ -1,138 +1,113 @@
 // server/api/chat-stream.post.ts
-import { defineEventHandler, readBody, setHeader, setResponseStatus } from 'h3'
+import { defineEventHandler, readBody, setHeader, createError } from 'h3'
+import type { H3Event } from 'h3'
+import { retrieveREST } from '../../utils/rag'
 
-interface ChatMessage { role: 'system'|'user'|'assistant'; content: string }
+interface ChatMessage { role: 'system'|'user'|'assistant', content: string }
 
-const MAX_INPUT = Number(process.env.CHAT_MAX_INPUT ?? 1800)
-const MAX_MESSAGES = 50
-const MAX_REPLY = Number(process.env.CHAT_MAX_REPLY ?? 2000)
-const OPENAI_BASE_URL = process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1'
-const OPENAI_MODEL = process.env.OPENAI_MODEL || 'gpt-4o-mini'
-
-function stripTags(s: string) {
-  return String(s ?? '')
-    .replace(/<script[\s\S]*?<\/script>/gi, '')
-    .replace(/<style[\s\S]*?<\/style>/gi, '')
-    .replace(/<[^>]+>/g, '')
+function buildSystemPrompt() {
+  return (
+    'You are an AI assistant for a Nuxt + shadcn docs site.\n' +
+    'Use retrieved context to stay grounded. Cite inline like [Title](/path#chunk) when you copy exact phrases.\n' +
+    'Be concise. If info is missing, say so briefly.'
+  )
 }
-function normalize(s: string) { return stripTags(s).replace(/\s+/g, ' ').trim() }
-function clamp(s: string, n: number) { return s.length <= n ? s : s.slice(0, n) }
+
+async function buildContext(event: H3Event, history: ChatMessage[], apiKey: string, baseUrl: string, embedModel: string) {
+  const lastUser = [...history].reverse().find(m => m.role === 'user')?.content?.slice(0, 500) || ''
+  if (!lastUser) return ''
+  const sources = await retrieveREST(event, lastUser, apiKey, baseUrl, embedModel, 6)
+  const ctx = sources.map((s,i)=>`### Doc ${i+1}: ${s.page} (${s.url})\n${s.text}`).join('\n\n')
+  return ctx
+}
 
 export default defineEventHandler(async (event) => {
-  // Prepare SSE headers
-  setHeader(event, 'Content-Type', 'text/event-stream; charset=utf-8')
-  setHeader(event, 'Cache-Control', 'no-cache, no-transform')
-  setHeader(event, 'Connection', 'keep-alive')
-  setHeader(event, 'X-Accel-Buffering', 'no')
+  const cfg = useRuntimeConfig()
+  const apiKey = cfg.openaiApiKey as string
+  const baseUrl = cfg.openaiBaseUrl as string
+  const model = (cfg.openaiModel as string) || 'gpt-4.1-mini'
+  const embedModel = (cfg.embedModel as string) || 'text-embedding-3-small'
+  const chatMaxInput = Number(cfg.chatMaxInput || 1800)
+  const chatTimeoutMs = Number(cfg.chatTimeoutMs || 20000)
 
-  const write = (obj: any) => {
-    // send an SSE "data:" line
-    // eslint-disable-next-line no-undef
-    event.node.res.write(`data: ${JSON.stringify(obj)}\n\n`)
+  if (!apiKey) throw createError({ statusCode: 500, statusMessage: 'Missing OPENAI_API_KEY' })
+
+  const body = await readBody<{ messages: ChatMessage[] }>(event)
+  const history = Array.isArray(body?.messages) ? body!.messages : []
+  const last = history.at(-1)
+  if (!last || last.role !== 'user' || !last.content?.trim()) {
+    throw createError({ statusCode: 400, statusMessage: 'No user message.' })
   }
-  const end = () => { try { event.node.res.end() } catch {} }
-
-  // Abort if client disconnects
-  const ac = new AbortController()
-  event.node.req.on('close', () => ac.abort())
-
-  // Read & sanitize input
-  let raw: ChatMessage[] = []
-  try {
-    const body = await readBody<{ messages?: ChatMessage[] }>(event)
-    raw = Array.isArray(body?.messages) ? body!.messages : []
-  } catch {}
-  const sanitized = raw.map(m => ({ role: m.role, content: clamp(normalize(m.content), MAX_INPUT) }))
-  const messages = sanitized.slice(-MAX_MESSAGES)
-
-  // Demo mode? stream a tiny fake reply
-  const DEMO_MODE = (() => {
-    const v = process.env.DEMO_MODE
-    const isExplicitFalse = v ? /^(false|0|off|no)$/i.test(v) : false
-    if (v != null) return !isExplicitFalse
-    return !process.env.OPENAI_API_KEY
-  })()
-
-  if (DEMO_MODE) {
-    const last = [...messages].reverse().find(m => m.role === 'user')?.content || 'your message'
-    const text = `👋 (Demo) Streaming reply: I received “${last}”. Connect an API key for real answers.`
-    for (const chunk of text.match(/.{1,12}/g) || []) write({ token: chunk })
-    write({ done: true })
-    return end()
+  if (last.content.length > chatMaxInput) {
+    throw createError({ statusCode: 413, statusMessage: `Prompt too long (>${chatMaxInput} chars)` })
   }
 
-  // Real streaming via OpenAI-compatible API
-  const key = process.env.OPENAI_API_KEY
-  if (!key) {
-    setResponseStatus(event, 400)
-    write({ error: 'Missing OPENAI_API_KEY' })
-    write({ done: true })
-    return end()
-  }
+  // Build system + RAG context
+  const system = buildSystemPrompt()
+  const context = await buildContext(event, history, apiKey, baseUrl, embedModel)
 
-  const payload = { model: OPENAI_MODEL, messages, temperature: 0.7, stream: true }
+  // Transform chat history for the model
+  const msgs = [
+    { role: 'system', content: system },
+    ...(context ? [{ role: 'system' as const, content: `Context:\n${context}` }] : []),
+    ...history.map(m => ({ role: m.role as 'system'|'user'|'assistant', content: m.content })),
+  ]
 
-  try {
-    const r = await fetch(`${OPENAI_BASE_URL}/chat/completions`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${key}`,
-      },
-      body: JSON.stringify(payload),
-      signal: ac.signal,
-    })
-    if (!r.ok || !r.body) {
-      setResponseStatus(event, r.status || 500)
-      write({ error: `Upstream error: ${r.status} ${await r.text()}` })
-      write({ done: true })
-      return end()
-    }
+  const controller = new AbortController()
+  const abortTimer = setTimeout(() => controller.abort(), chatTimeoutMs)
 
-    const reader = r.body.getReader()
-    const decoder = new TextDecoder()
-    let buf = ''
-    let sent = 0
+  const rsp = await fetch(`${baseUrl}/chat/completions`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ model, stream: true, temperature: 0.25, messages: msgs }),
+    signal: controller.signal
+  }).catch((e) => e)
 
-    while (true) {
-      const { value, done } = await reader.read()
-      if (done) break
-      buf += decoder.decode(value, { stream: true })
+  clearTimeout(abortTimer)
 
-      // OpenAI streams as SSE lines: "data: {...}\n\n"
-      const parts = buf.split('\n\n')
-      buf = parts.pop() || ''
-      for (const part of parts) {
-        const line = part.trim()
-        if (!line.startsWith('data:')) continue
-        const data = line.slice(5).trim()
-        if (data === '[DONE]') { write({ done: true }); end(); return }
+  const stream = new ReadableStream({
+    async start(ctrl) {
+      const enc = new TextEncoder()
+      const send = (obj: any) => ctrl.enqueue(enc.encode(`data: ${JSON.stringify(obj)}\n\n`))
 
-        try {
-          const json = JSON.parse(data)
-          const delta = json?.choices?.[0]?.delta?.content
-          if (!delta) continue
-          let token = stripTags(String(delta))
-          if (!token) continue
+      if (!(rsp instanceof Response)) {
+        send({ error: `Network error: ${String(rsp)}` }); ctrl.close(); return
+      }
+      if (!rsp.ok || !rsp.body) {
+        const t = await rsp.text().catch(()=> 'Unknown error')
+        send({ error: `OpenAI error: ${t}` }); ctrl.close(); return
+      }
 
-          // clamp total output
-          if (sent >= MAX_REPLY) continue
-          if (sent + token.length > MAX_REPLY) token = token.slice(0, MAX_REPLY - sent)
-          sent += token.length
+      const reader = rsp.body.getReader()
+      const decoder = new TextDecoder()
 
-          write({ token })
-        } catch {
-          // ignore bad chunk
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        const chunk = decoder.decode(value)
+        for (const line of chunk.split('\n')) {
+          if (!line.startsWith('data:')) continue
+          const data = line.slice(5).trim()
+          if (data === '[DONE]') continue
+          try {
+            const evt = JSON.parse(data)
+            const delta = evt.choices?.[0]?.delta?.content
+            if (typeof delta === 'string' && delta.length) {
+              // emit token
+              send({ token: delta })
+            }
+          } catch { /* ignore keepalive */ }
         }
       }
-    }
 
-    write({ done: true })
-    return end()
-  } catch (e: any) {
-    setResponseStatus(event, 504)
-    write({ error: `Upstream timeout or network error: ${e?.message || e}` })
-    write({ done: true })
-    return end()
-  }
+      send({ done: true })
+      ctrl.close()
+    }
+  })
+
+  setHeader(event, 'Content-Type', 'text/event-stream; charset=utf-8')
+  setHeader(event, 'Cache-Control', 'no-cache, no-transform')
+  setHeader(event, 'X-Accel-Buffering', 'no')
+  return stream
 })
+
