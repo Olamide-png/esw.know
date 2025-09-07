@@ -21,20 +21,21 @@
       v-if="isOpen"
       id="nuxt-ai-chat"
       class="chat-panel fixed bottom-4 right-4 md:right-8 z-[1000] isolate
-             w-[min(95vw,480px)] max-h-[80vh] md:max-h-[85vh]
-             rounded-2xl border bg-background/25 backdrop-blur-md
+             w-[min(95vw,520px)] max-h-[85vh]
+             rounded-2xl border bg-background/25 backdrop-blur-lg
              shadow-2xl ring-1 ring-black/5 dark:ring-white/10
              flex flex-col overflow-hidden"
       role="dialog"
       aria-label="AI assistant chat"
     >
       <!-- Header -->
-      <header class="flex items-center justify-between px-4 py-3 border-b bg-background/20 backdrop-blur-md">
+      <header class="flex items-center justify-between px-4 py-3 border-b bg-background/20 backdrop-blur-lg">
         <div class="flex items-center gap-2">
           <Icon name="lucide:sparkles" class="h-4 w-4" />
           <p class="font-medium">AI Assistant</p>
         </div>
         <div class="flex items-center gap-2">
+          <!-- Context toggle -->
           <button
             class="hidden sm:inline-flex items-center gap-1 rounded-md border px-2 py-1 text-xs
                    bg-background/20 hover:bg-background/30"
@@ -63,9 +64,12 @@
         ref="scrollEl"
         class="flex-1 overflow-y-auto overscroll-contain p-3 pr-4 space-y-3 bg-transparent"
       >
-        <div v-if="useContext" class="mb-2">
-          <span class="inline-flex items-center gap-1 text-[11px] rounded-md
-                       bg-muted/60 border px-2 py-1">
+        <!-- Non-overlapping context banner -->
+        <div v-if="useContext" class="mb-2 sticky top-0 z-[1]">
+          <span
+            class="inline-flex items-center gap-1 text-[11px] rounded-md
+                   bg-muted/70 border px-2 py-1 backdrop-blur-lg"
+          >
             <Icon name="lucide:info" class="h-3.5 w-3.5" />
             <span>Answering from this page. ({{ contextChars }} chars)</span>
           </span>
@@ -126,15 +130,12 @@ interface ChatMessage { role: 'system'|'user'|'assistant'; content: string }
 const STORAGE_KEY = 'ai:chat:history'
 const STORAGE_OPEN = 'ai:chat:isOpen'
 const STORAGE_VER_KEY = 'ai:chat:ver'
-const STORAGE_VER = '4' // bumped due to new context behavior
+const STORAGE_VER = '5' // bump due to prompt/style changes
 
 const MAX_HISTORY = 50
 const MAX_INPUT_CHARS = 2000
 const MAX_REPLY_CHARS = 1200
-
-// Server clamps each message to CHAT_MAX_INPUT (default 1800). Keep context under this
-// budget unless you increase CHAT_MAX_INPUT in env.
-const CONTEXT_BUDGET = 1500
+const CONTEXT_BUDGET = 1500 // keep under server CHAT_MAX_INPUT
 
 const isOpen = ref(false)
 const messages = ref<ChatMessage[]>([])
@@ -145,8 +146,6 @@ const scrollEl = ref<HTMLElement | null>(null)
 const taRef = ref<HTMLTextAreaElement | null>(null)
 
 const route = useRoute()
-
-/* ✅ useContent() is client-safe in this layer */
 const { page } = useContent()
 
 /* ---------- page context ---------- */
@@ -164,7 +163,6 @@ function stripTags(s: string) {
 function normalizeInput(s: string, max = MAX_INPUT_CHARS) {
   return stripTags(s).replace(/\s+/g, ' ').trim().slice(0, max)
 }
-// preserve newlines for nicer markdown
 function normalizeReply(s: string, max = MAX_REPLY_CHARS) {
   const noTags = String(s ?? '')
     .replace(/<script[\s\S]*?<\/script>/gi, '')
@@ -175,16 +173,14 @@ function normalizeReply(s: string, max = MAX_REPLY_CHARS) {
 }
 function looksLikeHtml(s: string) { return /<html|<head|<body|<script|window\.__NUXT__/i.test(String(s)) }
 
-/* mdast -> plain text (Nuxt Content body) */
+/* mdast -> plain text */
 function mdastToText(node: any): string {
   if (!node) return ''
   const t = node.type
   if (t === 'text') return node.value || ''
   if (t === 'inlineCode') return '`' + (node.value || '') + '`'
   if (t === 'code') return '\n\n' + (node.value || '') + '\n\n'
-  if (t === 'link' || t === 'emphasis' || t === 'strong' || t === 'delete' || t === 'span') {
-    return (node.children || []).map(mdastToText).join('')
-  }
+  if (t === 'link' || t === 'emphasis' || t === 'strong' || t === 'delete' || t === 'span') return (node.children || []).map(mdastToText).join('')
   if (t === 'list') return '\n' + (node.children || []).map(mdastToText).join('\n') + '\n'
   if (t === 'listItem' || t === 'paragraph') return (node.children || []).map(mdastToText).join('') + '\n'
   if (t === 'heading' || t === 'blockquote') return '\n' + (node.children || []).map(mdastToText).join('') + '\n'
@@ -202,24 +198,17 @@ async function loadPageContext() {
     pageTitle.value = doc?.title || doc?.head?.title || 'This page'
     let text = ''
     if (doc?.body) text = mdastToText(doc.body)
-    // Fallback: scrape DOM if body missing (rare)
     if (!text && typeof window !== 'undefined') {
       const el = document.querySelector('main, article, .prose') as HTMLElement | null
       if (el) text = el.innerText || ''
     }
-    text = stripTags(text)
-      .replace(/\r\n/g, '\n').replace(/\r/g, '\n')
-      .replace(/\n{3,}/g, '\n\n')
-      .trim()
-    // keep within budget (server clamps anyway)
+    text = stripTags(text).replace(/\r\n/g, '\n').replace(/\r/g, '\n').replace(/\n{3,}/g, '\n\n').trim()
     pageText.value = text.slice(0, CONTEXT_BUDGET)
   } catch {
     pageTitle.value = 'This page'
     pageText.value = ''
   }
 }
-
-/* Refresh context when URL or content doc changes */
 watch(() => route.fullPath, () => { loadPageContext() }, { immediate: true })
 watch(page, () => { loadPageContext() })
 
@@ -254,9 +243,7 @@ function trimHistory() {
     messages.value.splice(0, messages.value.length - MAX_HISTORY)
   }
 }
-function saveHistory() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.value))
-}
+function saveHistory() { localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.value)) }
 function loadHistory() {
   try {
     const ver = localStorage.getItem(STORAGE_VER_KEY)
@@ -277,7 +264,7 @@ function loadHistory() {
   }
 }
 
-/* ---------- streaming helper (now accepts payload messages) ---------- */
+/* ---------- streaming helper ---------- */
 async function streamAnswer(payloadMessages: ChatMessage[]) {
   const res = await fetch('/api/chat-stream', {
     method: 'POST',
@@ -326,7 +313,7 @@ async function streamAnswer(payloadMessages: ChatMessage[]) {
   }
 }
 
-/* ---------- send (stream with fallback), injecting page context ---------- */
+/* ---------- send (with page context) ---------- */
 async function onSend() {
   if (!canSend.value || loading.value) return
   const raw = draft.value
@@ -343,12 +330,21 @@ async function onSend() {
   trimHistory(); saveHistory()
   loading.value = true; error.value = null
 
-  // Build payload messages: add a system instruction and include page context with the question
+  // 🌟 System prompt: Markdown first. Optional ` ```ui ` JSON block (cards/steps/table/list/callout).
   const systemMsg: ChatMessage = {
     role: 'system',
-    content:
-      'You are a helpful docs assistant. Use ONLY the provided page content to answer. If the answer is not present, say you cannot find it on this page.',
+    content: [
+      'You are a helpful docs assistant.',
+      'Default to concise **Markdown** with headings, lists, code blocks, and links.',
+      'When a small UI helps (summaries, steps, tables, link cards, alerts), also include ONE fenced block:',
+      '```ui',
+      '{ "type": "callout" | "steps" | "cards" | "table" | "list", ... }',
+      '```',
+      'The Markdown should come first, then the UI block. Keep JSON valid and compact (<2KB).',
+      'Use ONLY the provided page content. If the answer is not present, say so clearly.'
+    ].join(' ')
   }
+
   const contextBlock =
     useContext.value && pageText.value
       ? `<<<PAGE_CONTENT_START>>>\n${pageText.value}\n<<<PAGE_CONTENT_END>>>`
@@ -356,9 +352,7 @@ async function onSend() {
 
   const payloadMessages: ChatMessage[] = [
     systemMsg,
-    // include prior turns (sanitized on server) so follow-ups work
     ...messages.value.map(m => ({ role: m.role, content: m.content })),
-    // augment the latest user turn with the context block
     { role: 'user', content: `Question: ${text}\n\n${contextBlock}` },
   ]
 
@@ -366,7 +360,6 @@ async function onSend() {
     await streamAnswer(payloadMessages)
     trimHistory(); saveHistory()
   } catch (e: any) {
-    // Fallback to non-streaming endpoint (e.g., if streaming 504s on Vercel)
     try {
       const res = await $fetch<{ reply: string } | { error: string }>('/api/chat', {
         method: 'POST',
@@ -412,6 +405,7 @@ watch(messages, saveHistory, { deep: true })
 
 .chat-panel { pointer-events: auto; }
 </style>
+
 
 
 
