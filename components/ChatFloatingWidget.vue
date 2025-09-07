@@ -21,7 +21,7 @@
       v-if="isOpen"
       id="nuxt-ai-chat"
       class="chat-panel fixed bottom-4 right-4 md:right-8 z-[1000] isolate
-             w-[min(96vw,560px)] max-h-[80vh] md:max-h-[85vh]
+             w-[min(96vw,660px)] max-h-[80vh] md:max-h-[85vh]
              rounded-2xl border bg-background/25 backdrop-blur-lg
              shadow-2xl ring-1 ring-black/5 dark:ring-white/10
              flex flex-col overflow-hidden"

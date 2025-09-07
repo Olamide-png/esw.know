@@ -2,130 +2,82 @@
 import { computed, onMounted, onUpdated, ref } from 'vue'
 
 const props = defineProps<{ role: 'user'|'assistant'|'system'; content: string }>()
-const rootEl = ref<HTMLElement | null>(null)
 
 /* ---------- helpers ---------- */
+const rootEl = ref<HTMLElement | null>(null)
 function escapeHtml(s: string) {
-  return String(s ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
 }
 function safeUrl(u: string) {
   try {
     const url = new URL(u, typeof window !== 'undefined' ? window.location.origin : 'https://example.com')
-    return ['http:', 'https:', 'mailto:'].includes(url.protocol) ? url.href : '#'
+    return ['http:','https:','mailto:'].includes(url.protocol) ? url.href : '#'
   } catch { return '#' }
 }
 
-/* ---------- parse “Generative UI” blocks ---------- */
-type UiBlock =
-  | { type: 'cards', cards: Array<{ title: string; description?: string; href?: string }> }
-  | { type: 'callout', title?: string; body?: string; variant?: 'info'|'success'|'warning'|'danger' }
-  | { type: 'steps', items: string[] }
-  | { type: 'kpis', items: Array<{ label: string; value: string }> }
-  | { type: 'table', headers: string[], rows: string[][] }
-
-function extractUiAndText(src: string) {
-  let ui: UiBlock | null = null
-  let text = src ?? ''
-
-  const m = text.match(/```ui\s*([\s\S]*?)```/i) || text.match(/```json\s*([\s\S]*?)```/i)
-  if (m && m[1]) {
-    try { ui = JSON.parse(m[1]) } catch {}
-    text = text.replace(m[0], '').trim()
-  }
-  return { ui, text }
-}
-
-/* ---------- light but rich markdown to HTML ---------- */
+/* ---------- light markdown (theme-friendly) ---------- */
 function renderMarkdown(src: string) {
-  // ALWAYS escape first
-  let s = escapeHtml(src).replace(/\r\n?/g, '\n')
+  let s = escapeHtml(src ?? '').replace(/\r\n?/g, '\n')
 
-  // Horizontal rule
-  s = s.replace(/^\s*[-*_]{3,}\s*$/gm, '<hr>')
-
-  // Blockquotes
-  s = s.replace(/(^|\n)>\s?([^\n]+(?:\n(?!\n|> ).+)*)/g, (_m, pfx, body) =>
-    `${pfx}<blockquote><p>${body.replace(/\n/g, '<br>')}</p></blockquote>`)
-
-  // Fenced code
+  // fenced code ```lang\n...\n```
   s = s.replace(/```(\w+)?\n([\s\S]*?)```/g, (_m, lang = '', code = '') => {
     const c = escapeHtml(code)
     const l = String(lang).toLowerCase().trim()
     return `
-      <div class="relative group border rounded-lg overflow-hidden">
-        <button type="button" class="absolute right-2 top-2 text-xs px-2 py-1 rounded-md border bg-background/80 opacity-0 group-hover:opacity-100 transition"
-                data-copy="block">Copy</button>
-        <pre class="overflow-x-auto text-sm leading-6 p-3 m-0"><code class="language-${l}">${c}</code></pre>
+      <div class="relative group border rounded-lg overflow-hidden bg-muted/70">
+        <button type="button"
+          class="absolute right-2 top-2 text-xs px-2 py-1 rounded-md border bg-background/80
+                 opacity-0 group-hover:opacity-100 transition"
+          data-copy="block">Copy</button>
+        <pre class="overflow-x-auto text-[13px] leading-6 p-3 m-0"><code class="language-${l}">${c}</code></pre>
       </div>`
   })
 
-  // Tables (GitHub-style)
-  s = s.replace(
-    /(^|\n)\|(.+?)\|\s*\n\|([ :-|]+)\|\s*\n((?:\|.*\|\s*(?:\n|$))+)/g,
-    (_m, pfx, head, _sep, rows) => {
-      const headers = head.split('|').map(h => h.trim())
-      const trs = rows
-        .trim()
-        .split('\n')
-        .map(r => `<tr>${r.trim().slice(1, -1).split('|').map(c => `<td>${c.trim()}</td>`).join('')}</tr>`)
-        .join('')
-      return `${pfx}<table><thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${trs}</tbody></table>`
-    }
-  )
+  // inline code
+  s = s.replace(/`([^`\n]+)`/g, (_m, code) => `<code class="rounded bg-muted px-1 py-0.5 text-[12px] border">${code}</code>`)
 
-  // Inline code
-  s = s.replace(/`([^`\n]+)`/g, (_m, code) => `<code class="rounded px-1 py-0.5 border text-[0.9em]">${code}</code>`)
-
-  // Headings
+  // headings
   s = s.replace(/^(#{1,6})\s+(.+)$/gm, (_m, hashes: string, text: string) => {
     const level = Math.min(6, hashes.length)
     const sizes = ['text-2xl','text-xl','text-lg','text-base','text-sm','text-xs']
     return `<h${level} class="font-semibold ${sizes[level-1]} mt-3 mb-2">${text}</h${level}>`
   })
 
-  // Bold / italic
-  s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-  s = s.replace(/(^|[^\*])\*([^\*\n]+)\*/g, '$1<em>$2</em>')
-  s = s.replace(/(^|[^_])_([^_\n]+)_/g, '$1<em>$2</em>')
+  // links
+  s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_m, text, url) => {
+    const u = safeUrl(url)
+    return `<a href="${u}" target="_blank" rel="noopener" class="underline decoration-dotted underline-offset-2">${escapeHtml(text)}</a>`
+  })
 
-  // Links
-  s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_m, text, url) =>
-    `<a href="${safeUrl(url)}" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted underline-offset-2">${text}</a>`
-  )
-
-  // Task list items
-  s = s.replace(/^- \[( |x)\]\s+(.+)$/gmi, (_m, chk, txt) =>
-    `<li class="list-none"><label class="inline-flex items-start gap-2"><input type="checkbox" disabled ${chk==='x'?'checked':''} class="mt-1"><span>${txt}</span></label></li>`
-  )
-
-  // Unordered/ordered lists (basic)
+  // basic lists
   s = s.replace(/(?:^|\n)([-*])\s+([^\n]+)(?=(\n[-*]\s+)|\n\n|$)/g, (_m, _b, item) => `\n<li>${item}</li>`)
   s = s.replace(/(?:\n<li>[\s\S]*?<\/li>)+/g, (m) => `<ul class="list-disc pl-5 space-y-1">${m}</ul>`)
   s = s.replace(/(?:^|\n)(\d+)\.\s+([^\n]+)(?=(\n\d+\.\s+)|\n\n|$)/g, (_m, _n, item) => `\n<li>${item}</li>`)
-  s = s.replace(/(?:\n<li>[\s\S]*?<\/li>)+/g, (m) => (m.includes('<ul') ? m : `<ol class="list-decimal pl-5 space-y-1">${m}</ol>`))
+  s = s.replace(/(?:\n<li>[\s\S]*?<\/li>)+/g, (m) => m.includes('<ul') ? m : `<ol class="list-decimal pl-5 space-y-1">${m}</ol>`)
 
-  // Paragraphs
-  s = s
-    .split(/\n{2,}/)
-    .map(block => (/^\s*<(h\d|ul|ol|div|pre|table|hr|blockquote)/i.test(block) ? block : `<p class="leading-7">${block.replace(/\n/g, '<br>')}</p>`))
-    .join('\n')
+  // paragraphs
+  s = s.split(/\n{2,}/).map(block => {
+    if (/^\s*<(h\d|ul|ol|div|pre)/i.test(block)) return block
+    return `<p class="leading-7">${block.replace(/\n/g,'<br>')}</p>`
+  }).join('\n')
 
   return s
 }
 
-/* Build final render data */
-const parsed = computed(() => {
-  const { ui, text } = extractUiAndText(props.content || '')
-  return { ui, html: renderMarkdown(text) }
+const html = computed(() => renderMarkdown(props.content ?? ''))
+
+/* ---------- generative UI ---------- */
+/** Extract first ```ui ...``` fenced block and parse JSON */
+const uiSpec = computed<any | null>(() => {
+  const m = props.content?.match(/```ui\s*?\n([\s\S]*?)```/i)
+  if (!m) return null
+  try { return JSON.parse(m[1]) } catch { return null }
 })
 
-/* Copy buttons inside code blocks */
-async function copyWhole() {
-  try { await navigator.clipboard.writeText(props.content || '') } catch {}
-}
+/* copy whole bubble */
+async function copyWhole() { try { await navigator.clipboard.writeText(props.content || '') } catch {} }
+
+/* wire per-block copy buttons */
 function wireCopyButtons() {
   const el = rootEl.value; if (!el) return
   el.querySelectorAll<HTMLButtonElement>('button[data-copy="block"]').forEach(btn => {
@@ -137,6 +89,14 @@ function wireCopyButtons() {
 }
 onMounted(wireCopyButtons)
 onUpdated(wireCopyButtons)
+
+/* map variants to shadcn docs alert variants */
+function mapAlertVariant(v?: string) {
+  if (!v) return 'default'
+  const k = v.toLowerCase()
+  if (k === 'danger' || k === 'error' || k === 'destructive') return 'destructive'
+  return 'default'
+}
 </script>
 
 <template>
@@ -148,11 +108,11 @@ onUpdated(wireCopyButtons)
     </span>
 
     <div
-      :class="role==='user' ? 'bg-primary text-primary-foreground' : 'bg-muted/80 backdrop-blur'"
+      :class="role==='user' ? 'bg-primary text-primary-foreground' : 'bg-muted/60'"
       class="relative rounded-2xl px-3 py-2 w-full"
       ref="rootEl"
     >
-      <!-- Copy whole message -->
+      <!-- copy whole -->
       <div v-if="role==='assistant'" class="absolute right-2 top-2">
         <button
           type="button"
@@ -164,90 +124,78 @@ onUpdated(wireCopyButtons)
         </button>
       </div>
 
-      <!-- Generative UI (when present) -->
-      <template v-if="role!=='user' && parsed.ui">
-        <!-- Cards -->
-        <div v-if="parsed.ui.type==='cards'" class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-2">
-          <a
-            v-for="(c, i) in (parsed.ui.cards || [])"
-            :key="i"
-            :href="c.href || '#'"
-            target="_blank"
-            rel="noopener"
-            class="rounded-lg border p-3 hover:shadow-sm transition bg-background/70"
-          >
-            <div class="font-medium">{{ c.title }}</div>
-            <p v-if="c.description" class="text-xs opacity-80 mt-1">{{ c.description }}</p>
-          </a>
-        </div>
-
-        <!-- Callout -->
-        <div
-          v-else-if="parsed.ui.type==='callout'"
-          :class="[
-            'rounded-lg border p-3 mb-2',
-            parsed.ui.variant==='success' && 'border-green-500/40',
-            parsed.ui.variant==='warning' && 'border-amber-500/40',
-            parsed.ui.variant==='danger' && 'border-red-500/40',
-            (!parsed.ui.variant || parsed.ui.variant==='info') && 'border-blue-500/40'
-          ]"
-        >
-          <div v-if="parsed.ui.title" class="font-medium">{{ parsed.ui.title }}</div>
-          <div v-if="parsed.ui.body" class="text-sm opacity-90 mt-1">{{ parsed.ui.body }}</div>
-        </div>
-
-        <!-- Steps -->
-        <ol v-else-if="parsed.ui.type==='steps'" class="mb-2 list-decimal pl-5 space-y-1">
-          <li v-for="(s,i) in parsed.ui.items || []" :key="i">{{ s }}</li>
-        </ol>
-
-        <!-- KPIs -->
-        <div v-else-if="parsed.ui.type==='kpis'" class="grid grid-cols-2 gap-2 mb-2">
-          <div v-for="(k,i) in parsed.ui.items || []" :key="i" class="rounded-lg border p-3 bg-background/70">
-            <div class="text-xs opacity-70">{{ k.label }}</div>
-            <div class="text-lg font-semibold">{{ k.value }}</div>
-          </div>
-        </div>
-
-        <!-- Table -->
-        <div v-else-if="parsed.ui.type==='table'" class="mb-2 overflow-x-auto">
-          <table class="min-w-full text-sm">
-            <thead>
-              <tr>
-                <th v-for="(h,i) in parsed.ui.headers" :key="i" class="text-left py-1 px-2 border-b">{{ h }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(r,ri) in parsed.ui.rows" :key="ri">
-                <td v-for="(c,ci) in r" :key="ci" class="py-1 px-2 border-b align-top">{{ c }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </template>
-
-      <!-- Markdown -->
-      <div
-        v-if="role!=='user'"
-        class="prose prose-sm max-w-none dark:prose-invert"
-        v-html="parsed.html"
-      />
+      <!-- prose answer -->
+      <div v-if="role!=='user'" class="prose prose-sm max-w-none dark:prose-invert" v-html="html" />
       <div v-else class="whitespace-pre-wrap">{{ content }}</div>
+
+      <!-- Generative UI (uses shadcn-docs-nuxt Ui* components) -->
+      <div v-if="uiSpec" class="mt-3 space-y-3">
+        <!-- CARDS -->
+        <div v-if="uiSpec.type === 'cards'" class="grid grid-cols-1 gap-3">
+          <UiCard v-for="(c, i) in uiSpec.cards || []" :key="i" class="hover:shadow-sm transition">
+            <UiCardHeader class="pb-2">
+              <UiCardTitle class="text-base">{{ c.title }}</UiCardTitle>
+              <p v-if="c.subtitle" class="text-xs text-muted-foreground">{{ c.subtitle }}</p>
+            </UiCardHeader>
+            <UiCardContent class="pt-0">
+              <p v-if="c.description" class="text-sm mb-2">{{ c.description }}</p>
+              <NuxtLink v-if="c.href" :to="c.href" class="inline-flex items-center gap-1 text-sm underline">
+                Visit <Icon name="lucide:arrow-up-right" class="w-3.5 h-3.5" />
+              </NuxtLink>
+            </UiCardContent>
+          </UiCard>
+        </div>
+
+        <!-- STEPS -->
+        <div v-else-if="uiSpec.type === 'steps'">
+          <ol class="space-y-2">
+            <li v-for="(s,i) in uiSpec.items || []" :key="i" class="flex items-start gap-3">
+              <UiBadge variant="outline" class="rounded-full min-w-6 h-6 flex items-center justify-center text-xs">{{ i+1 }}</UiBadge>
+              <span class="leading-6">{{ s }}</span>
+            </li>
+          </ol>
+        </div>
+
+        <!-- CALLOUT -->
+        <UiAlert v-else-if="uiSpec.type === 'callout'" :variant="mapAlertVariant(uiSpec.variant)">
+          <UiAlertTitle v-if="uiSpec.title">{{ uiSpec.title }}</UiAlertTitle>
+          <UiAlertDescription v-if="uiSpec.body">{{ uiSpec.body }}</UiAlertDescription>
+        </UiAlert>
+
+        <!-- KPIS -->
+        <div v-else-if="uiSpec.type === 'kpis'" class="grid grid-cols-2 gap-3">
+          <UiCard v-for="(k,i) in uiSpec.items || []" :key="i">
+            <UiCardContent class="py-3">
+              <div class="text-2xl font-semibold">{{ k.value }}</div>
+              <div class="text-xs text-muted-foreground mt-0.5">{{ k.label }}</div>
+            </UiCardContent>
+          </UiCard>
+        </div>
+
+        <!-- TABLE -->
+        <div v-else-if="uiSpec.type === 'table'" class="overflow-x-auto">
+          <UiTable>
+            <UiTableHeader>
+              <UiTableRow>
+                <UiTableHead v-for="(h,i) in uiSpec.headers || []" :key="i">{{ h }}</UiTableHead>
+              </UiTableRow>
+            </UiTableHeader>
+            <UiTableBody>
+              <UiTableRow v-for="(row,ri) in uiSpec.rows || []" :key="ri">
+                <UiTableCell v-for="(cell,ci) in row" :key="ci">{{ cell }}</UiTableCell>
+              </UiTableRow>
+            </UiTableBody>
+          </UiTable>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.prose :where(a){ text-underline-offset: 2px; text-decoration-style: dotted; }
 .prose :where(pre){ background: transparent; }
-.prose :where(table){ width: 100%; border-collapse: collapse; }
-.prose :where(th, td){ padding: .25rem .5rem; border-bottom: 1px solid hsl(var(--border)); }
-.prose :where(hr){ border: 0; border-top: 1px solid hsl(var(--border)); margin: 0.75rem 0; }
-.prose :where(blockquote){
-  border-left: 3px solid hsl(var(--border));
-  padding-left: .75rem; margin: .5rem 0;
-}
 </style>
+
 
 
 
