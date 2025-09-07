@@ -1,59 +1,53 @@
 // server/api/chat.post.ts
-import { defineEventHandler, readBody, setResponseStatus } from 'h3'
-
-// Force Node (not Edge)
-export const config = { runtime: 'nodejs' } as const
+const API_KEY   = process.env.AI_API_KEY!
+const MODEL     = process.env.AI_MODEL   || 'gpt-4o-mini'
+const BASE_URL  = process.env.AI_BASE_URL || 'https://api.openai.com/v1'
+const SYS       = process.env.AI_SYSTEM_PROMPT || 'You are a helpful, concise assistant.'
 
 export default defineEventHandler(async (event) => {
-  try {
-    const body = await readBody<{ q?: string }>(event)
-    const q = (body?.q ?? '').trim()
-    if (!q) {
-      setResponseStatus(event, 400)
-      return { error: 'Missing "q" in body.' }
-    }
-
-    const apiKey = process.env.OPENAI_API_KEY
-    if (!apiKey) {
-      setResponseStatus(event, 500)
-      return { error: 'OPENAI_API_KEY env var is not set' }
-    }
-
-    const res = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        messages: [
-          { role: 'system', content: 'You are a concise, helpful assistant.' },
-          { role: 'user', content: q },
-        ],
-      }),
-    })
-
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}))
-      setResponseStatus(event, res.status)
-      return { error: err?.error?.message || `Upstream ${res.status}` }
-    }
-
-    const json = await res.json()
-    const reply =
-      json?.choices?.[0]?.message?.content?.trim() ||
-      'Sorry, I could not produce a response.'
-    return { reply }
-  } catch (err: any) {
-    setResponseStatus(event, 500)
-    return {
-      error: err?.message ?? String(err),
-      code: err?.code,
-      type: err?.type,
-    }
+  if (!API_KEY) {
+    event.node.res.statusCode = 500
+    return { error: 'Missing AI_API_KEY env' }
   }
+
+  // Accept either { q, meta } or { messages }
+  const body = await readBody<any>(event)
+  let msgs: { role: 'system'|'user'|'assistant'; content: string }[] = []
+
+  if (Array.isArray(body?.messages)) {
+    msgs = body.messages
+  } else if (body?.q) {
+    msgs = [{ role: 'user', content: String(body.q) }]
+  }
+
+  const payload = {
+    model: MODEL,
+    stream: false,
+    messages: [
+      { role: 'system', content: SYS },
+      ...msgs.map(m => ({ role: m.role, content: String(m.content ?? '').slice(0, 4000) })),
+    ],
+    temperature: 0.5,
+  }
+
+  const r = await fetch(`${BASE_URL}/chat/completions`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+
+  if (!r.ok) {
+    return { error: `Upstream error ${r.status}` }
+  }
+
+  const j = await r.json()
+  const reply = j.choices?.[0]?.message?.content || ''
+  return { reply }
 })
+
 
 
 
