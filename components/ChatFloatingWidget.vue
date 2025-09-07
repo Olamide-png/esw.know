@@ -3,7 +3,7 @@
   <button
     :aria-expanded="isOpen ? 'true' : 'false'"
     aria-controls="nuxt-ai-chat"
-    class="fixed bottom-4 right-6 md:right-8 z-50 inline-flex items-center gap-2 rounded-full border bg-background/90 dark:bg-neutral-900/90 backdrop-blur px-4 py-2 shadow-lg hover:shadow-xl transition focus:outline-none focus:ring focus:ring-primary"
+    class="fixed bottom-4 right-6 md:right-8 z-[1000] inline-flex items-center gap-2 rounded-full border bg-background/90 dark:bg-neutral-900/90 backdrop-blur px-4 py-2 shadow-lg hover:shadow-xl transition focus:outline-none focus:ring focus:ring-primary"
     @click="toggle"
   >
     <Icon name="lucide:bot" class="h-5 w-5" />
@@ -15,11 +15,16 @@
     <section
       v-if="isOpen"
       id="nuxt-ai-chat"
-      class="fixed bottom-20 right-6 md:right-8 z-50 w-[92vw] max-w-[420px] rounded-2xl border bg-background/95 dark:bg-neutral-900/95 backdrop-blur supports-[backdrop-filter]:bg-background/70 shadow-2xl ring-1 ring-black/5 dark:ring-white/10 flex flex-col overflow-hidden"
+      class="chat-panel fixed bottom-4 right-4 md:right-8 z-[1000] isolate
+             w-[min(92vw,420px)] max-h-[80vh] md:max-h-[85vh]
+             rounded-2xl border bg-background/95 dark:bg-neutral-900/95
+             backdrop-blur supports-[backdrop-filter]:bg-background/70
+             shadow-2xl ring-1 ring-black/5 dark:ring-white/10
+             flex flex-col overflow-hidden"
       role="dialog"
       aria-label="AI assistant chat"
     >
-      <header class="flex items-center justify-between px-4 py-3 border-b">
+      <header class="flex items-center justify-between px-4 py-3 border-b bg-background/60">
         <div class="flex items-center gap-2">
           <Icon name="lucide:sparkles" class="h-4 w-4" />
           <p class="font-medium">AI Assistant</p>
@@ -54,8 +59,10 @@
         </div>
       </header>
 
-      <div ref="scrollEl" class="flex-1 overflow-y-auto p-3 space-y-3">
-        <!-- Small banner when context is active -->
+      <div
+        ref="scrollEl"
+        class="flex-1 overflow-y-auto overscroll-contain p-3 pr-4 space-y-3 bg-background/50"
+      >
         <div v-if="useContext" class="text-[11px] opacity-70 -mb-1">
           <Icon name="lucide:info" class="inline h-3.5 w-3.5 mr-1 -mt-0.5" />
           Answering from <span class="font-medium">this page</span>. ({{ contextChars }} chars)
@@ -75,20 +82,21 @@
         <p v-if="error" class="text-xs text-red-500">{{ error }}</p>
       </div>
 
-      <!-- Bigger, auto-growing input -->
-      <form @submit.prevent="onSend" class="border-t p-3 bg-background/60">
+      <!-- Input -->
+      <form @submit.prevent="onSend" class="shrink-0 border-t p-3 bg-background/80 backdrop-blur">
         <div class="flex items-start gap-2">
           <textarea
             v-model="draft"
             rows="3"
             placeholder="Ask anything… (Enter to send, Shift+Enter for new line)"
-            class="w-full resize-none rounded-lg border bg-background px-3 py-2 text-base leading-6 shadow-sm focus:outline-none focus:ring focus:ring-primary/40
-                   min-h-[3.5rem] md:min-h-[4rem] max-h-[50vh]"
+            class="w-full resize-none rounded-lg border bg-background px-3 py-2 text-base leading-6 shadow-sm
+                   focus:outline-none focus:ring focus:ring-primary/40
+                   min-h-[3.5rem] md:min-h-[4rem] max-h-[45vh]"
             @keydown.enter.exact.prevent="onSend"
             @input="autoGrow"
             @paste="onPaste"
             ref="taRef"
-          ></textarea>
+          />
           <button
             type="submit"
             class="mt-1.5 inline-flex items-center gap-2 rounded-lg border bg-primary text-primary-foreground px-3 py-2 text-sm shadow hover:shadow-md disabled:opacity-50"
@@ -392,10 +400,17 @@ watch(messages, saveHistory, { deep: true })
 </script>
 
 <style scoped>
+/* Smooth open/close */
 .chat-slide-fade-enter-active,
 .chat-slide-fade-leave-active { transition: all .2s ease; }
 .chat-slide-fade-enter-from { opacity: 0; transform: translateY(8px) scale(.98); }
-.chat-slide-fade-leave-to { opacity: 0; transform: translateY(8px) scale(.98); }
+.chat-slide-fade-leave-to   { opacity: 0; transform: translateY(8px) scale(.98); }
+
+/* Make sure nothing on the page overlaps; create a high stacking context */
+.chat-panel { pointer-events: auto; }
+
+/* Defensive: if any global “copy” widgets use outrageous z-index, keep our surface on top */
+:where(.chat-panel, .chat-panel *) { z-index: auto; }
 </style>
 
 
