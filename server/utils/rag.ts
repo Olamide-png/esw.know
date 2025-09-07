@@ -1,7 +1,16 @@
-import { $content } from '#content/server'
+// server/utils/rag.ts
+import { serverQueryContent } from '#content/server'  // ✅ use serverQueryContent
+import type { H3Event } from 'h3'
 import { createError } from 'h3'
 
-export interface DocChunk { id: string; page: string; url: string; text: string; embedding?: number[] }
+export interface DocChunk {
+  id: string
+  page: string
+  url: string
+  text: string
+  embedding?: number[]
+}
+
 const store: { chunks: DocChunk[] } = { chunks: [] }
 
 function splitText(src: string, max = 800, overlap = 120) {
@@ -10,20 +19,28 @@ function splitText(src: string, max = 800, overlap = 120) {
   return out.map(s => s.trim()).filter(Boolean)
 }
 
-export async function ensureIndex() {
+export async function ensureIndex(event: H3Event) {
   if (store.chunks.length) return store
-  const docs = await $content().where({ _extension: 'md' }).find()
+
+  // ✅ query content on the server with the current event
+  const docs = await serverQueryContent(event).where({ _extension: 'md' }).find()
+
   const all: DocChunk[] = []
   for (const d of docs) {
-    const raw = (d.bodyText || '').toString()
-    const parts = splitText(raw)
-    parts.forEach((text, i) => all.push({
-      id: `${d._path}#${i}`,
-      page: d.title || d._path!,
-      url: d._path!,
-      text
-    }))
+    // Many builds expose a convenient `bodyText`; if you don’t have it,
+    // replace with your own markdown-to-text extraction.
+    const raw = (d as any).bodyText ?? ''   // keep compatibility with your fork
+    const parts = splitText(String(raw))
+    parts.forEach((text, i) => {
+      all.push({
+        id: `${d._path}#${i}`,
+        page: (d as any).title || d._path!,
+        url: d._path!,
+        text
+      })
+    })
   }
+
   store.chunks = all
   return store
 }
@@ -47,8 +64,8 @@ async function createEmbeddingsREST(apiKey: string, baseUrl: string, model: stri
   return res.json() as Promise<{ data: { embedding: number[] }[] }>
 }
 
-export async function embedAllREST(apiKey: string, baseUrl: string, embedModel: string) {
-  await ensureIndex()
+export async function embedAllREST(event: H3Event, apiKey: string, baseUrl: string, embedModel: string) {
+  await ensureIndex(event)
   const needs = store.chunks.filter(c => !c.embedding)
   if (!needs.length) return
   const batchSize = 64
@@ -61,6 +78,7 @@ export async function embedAllREST(apiKey: string, baseUrl: string, embedModel: 
 }
 
 export async function retrieveREST(
+  event: H3Event,
   query: string,
   apiKey: string,
   baseUrl: string,
@@ -68,8 +86,9 @@ export async function retrieveREST(
   k = 6,
   meta?: { path?: string; sel?: string }
 ) {
-  await ensureIndex()
-  await embedAllREST(apiKey, baseUrl, embedModel)
+  await ensureIndex(event)
+  await embedAllREST(event, apiKey, baseUrl, embedModel)
+
   const { data } = await createEmbeddingsREST(apiKey, baseUrl, embedModel, query)
   const qEmb = data[0].embedding
 
@@ -82,3 +101,4 @@ export async function retrieveREST(
   }))
   return scored.sort((a, b) => b.s - a.s).slice(0, k).map(r => r.c)
 }
+
