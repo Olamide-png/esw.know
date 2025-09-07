@@ -1,41 +1,42 @@
 <template>
-  <!-- Floating Button (transparent-ish) -->
+  <!-- Floating Button (hidden when panel is open) -->
   <button
     v-if="!isOpen"
     :aria-expanded="isOpen ? 'true' : 'false'"
     aria-controls="nuxt-ai-chat"
-    class="fixed bottom-4 right-6 md:right-8 z-[1000] inline-flex items-center gap-2 rounded-full border border-white/20 dark:border-white/10
-           bg-background/40 dark:bg-neutral-900/40 backdrop-blur-lg
-           px-4 py-2 shadow-lg hover:shadow-xl transition focus:outline-none focus:ring focus:ring-primary/30"
+    class="fixed bottom-4 right-6 md:right-8 z-[1000]
+           inline-flex items-center gap-2 rounded-full border
+           bg-background/40 backdrop-blur-lg
+           px-4 py-2 shadow-lg hover:shadow-xl transition
+           focus:outline-none focus:ring focus:ring-primary/30"
     @click="toggle"
   >
     <Icon name="lucide:bot" class="h-5 w-5" />
     <span class="hidden sm:inline">Ask AI</span>
   </button>
 
-  <!-- Panel (glassy / transparent) -->
+  <!-- Panel (glassy + theme-aware) -->
   <transition name="chat-slide-fade">
     <section
       v-if="isOpen"
       id="nuxt-ai-chat"
       class="chat-panel fixed bottom-4 right-4 md:right-8 z-[1000] isolate
              w-[min(95vw,480px)] max-h-[80vh] md:max-h-[85vh]
-             rounded-2xl border border-white/20 dark:border-white/10
-             bg-transparent supports-[backdrop-filter]:bg-transparent backdrop-blur-lg
-             shadow-2xl ring-1 ring-white/10 dark:ring-white/10
+             rounded-2xl border bg-background/25 backdrop-blur-lg
+             shadow-2xl ring-1 ring-black/5 dark:ring-white/10
              flex flex-col overflow-hidden"
       role="dialog"
       aria-label="AI assistant chat"
     >
-      <!-- Header (subtle glass) -->
-      <header class="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-background/20">
+      <!-- Header -->
+      <header class="flex items-center justify-between px-4 py-3 border-b bg-background/20 backdrop-blur-lg">
         <div class="flex items-center gap-2">
           <Icon name="lucide:sparkles" class="h-4 w-4" />
           <p class="font-medium">AI Assistant</p>
         </div>
         <div class="flex items-center gap-2">
           <button
-            class="hidden sm:inline-flex items-center gap-1 rounded-md border border-white/20 px-2 py-1 text-xs
+            class="hidden sm:inline-flex items-center gap-1 rounded-md border px-2 py-1 text-xs
                    bg-background/20 hover:bg-background/30"
             :class="useContext ? 'opacity-100' : 'opacity-70'"
             @click="useContext = !useContext"
@@ -43,7 +44,9 @@
           >
             <Icon name="lucide:file-text" class="h-3.5 w-3.5" />
             <span class="max-w-[12rem] truncate">{{ pageTitle || 'This page' }}</span>
-            <span class="ml-1 rounded bg-muted/60 px-1.5 py-0.5 text-[10px]">{{ useContext ? 'ON' : 'OFF' }}</span>
+            <span class="ml-1 rounded bg-muted/70 px-1.5 py-0.5 text-[10px]">
+              {{ useContext ? 'ON' : 'OFF' }}
+            </span>
           </button>
 
           <button class="rounded-md p-1 hover:bg-background/20" @click="hardReset" title="Hard reset (clear storage)">
@@ -58,14 +61,14 @@
         </div>
       </header>
 
-      <!-- Messages area (fully transparent surface; scroll inside) -->
+      <!-- Messages -->
       <div
         ref="scrollEl"
         class="flex-1 overflow-y-auto overscroll-contain p-3 pr-4 space-y-3 bg-transparent"
       >
         <div v-if="useContext" class="mb-2">
           <span class="inline-flex items-center gap-1 text-[11px] rounded-md
-                       bg-background/30 border border-white/10 px-2 py-1">
+                       bg-muted/60 border px-2 py-1">
             <Icon name="lucide:info" class="h-3.5 w-3.5" />
             <span>Answering from this page. ({{ contextChars }} chars)</span>
           </span>
@@ -85,15 +88,15 @@
         <p v-if="error" class="text-xs text-red-500">{{ error }}</p>
       </div>
 
-      <!-- Input (semi-opaque for readability) -->
-      <form @submit.prevent="onSend" class="shrink-0 border-t border-white/10 p-3 bg-background/30 backdrop-blur">
+      <!-- Input -->
+      <form @submit.prevent="onSend" class="shrink-0 border-t p-3 bg-background/35 backdrop-blur-lg">
         <div class="flex items-start gap-2">
           <textarea
             v-model="draft"
             rows="3"
             placeholder="Ask anything… (Enter to send, Shift+Enter for new line)"
-            class="w-full resize-none rounded-lg border border-white/20
-                   bg-background/70 px-3 py-2 text-base leading-6 shadow-sm
+            class="w-full resize-none rounded-lg border
+                   bg-background/80 px-3 py-2 text-base leading-6 shadow-sm
                    focus:outline-none focus:ring focus:ring-primary/40
                    min-h-[3.5rem] md:min-h-[4rem] max-h-[45vh]"
             @keydown.enter.exact.prevent="onSend"
@@ -103,7 +106,7 @@
           />
           <button
             type="submit"
-            class="mt-1.5 inline-flex items-center gap-2 rounded-lg border border-white/20
+            class="mt-1.5 inline-flex items-center gap-2 rounded-lg border
                    bg-primary/90 text-primary-foreground px-3 py-2 text-sm shadow hover:shadow-md disabled:opacity-50"
             :disabled="loading || !canSend"
           >
@@ -410,7 +413,6 @@ watch(messages, saveHistory, { deep: true })
 .chat-slide-fade-enter-from { opacity: 0; transform: translateY(8px) scale(.98); }
 .chat-slide-fade-leave-to   { opacity: 0; transform: translateY(8px) scale(.98); }
 
-/* Keep clicks working; panel is glassy but interactive */
 .chat-panel { pointer-events: auto; }
 </style>
 
