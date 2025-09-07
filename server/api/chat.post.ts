@@ -1,52 +1,73 @@
 // server/api/chat.post.ts
-const API_KEY   = process.env.AI_API_KEY!
-const MODEL     = process.env.AI_MODEL   || 'gpt-4o-mini'
-const BASE_URL  = process.env.AI_BASE_URL || 'https://api.openai.com/v1'
-const SYS       = process.env.AI_SYSTEM_PROMPT || 'You are a helpful, concise assistant.'
+import { defineEventHandler, readBody, setResponseStatus } from 'h3'
 
 export default defineEventHandler(async (event) => {
-  if (!API_KEY) {
-    event.node.res.statusCode = 500
-    return { error: 'Missing AI_API_KEY env' }
+  // Use runtimeConfig so it works on Vercel and during build
+  const { aiApiKey, aiBaseUrl, aiModel, aiSystemPrompt } = useRuntimeConfig()
+
+  if (!aiApiKey) {
+    setResponseStatus(event, 500)
+    return { error: 'Missing AI_API_KEY (runtimeConfig.aiApiKey).' }
   }
 
-  // Accept either { q, meta } or { messages }
-  const body = await readBody<any>(event)
-  let msgs: { role: 'system'|'user'|'assistant'; content: string }[] = []
+  let body: any = {}
+  try {
+    body = await readBody(event)
+  } catch (err: any) {
+    setResponseStatus(event, 400)
+    return { error: `Invalid JSON body: ${err?.message || 'failed to parse'}` }
+  }
 
+  // Accept either { messages } or { q }
+  let msgs: { role: 'system'|'user'|'assistant'; content: string }[] = []
   if (Array.isArray(body?.messages)) {
-    msgs = body.messages
+    msgs = body.messages.map((m: any) => ({
+      role: m.role,
+      content: String(m.content ?? '').slice(0, 4000),
+    }))
   } else if (body?.q) {
-    msgs = [{ role: 'user', content: String(body.q) }]
+    msgs = [{ role: 'user', content: String(body.q).slice(0, 4000) }]
+  } else {
+    setResponseStatus(event, 400)
+    return { error: 'Provide { messages } or { q } in request body.' }
   }
 
   const payload = {
-    model: MODEL,
+    model: aiModel || 'gpt-4o-mini',
     stream: false,
-    messages: [
-      { role: 'system', content: SYS },
-      ...msgs.map(m => ({ role: m.role, content: String(m.content ?? '').slice(0, 4000) })),
-    ],
     temperature: 0.5,
+    messages: [
+      { role: 'system', content: aiSystemPrompt || 'You are a helpful, concise assistant.' },
+      ...msgs,
+    ],
   }
 
-  const r = await fetch(`${BASE_URL}/chat/completions`, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  })
+  try {
+    const r = await fetch(`${aiBaseUrl || 'https://api.openai.com/v1'}/chat/completions`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${aiApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
 
-  if (!r.ok) {
-    return { error: `Upstream error ${r.status}` }
+    if (!r.ok) {
+      const text = await r.text().catch(() => '')
+      setResponseStatus(event, r.status || 500)
+      // Surface upstream message to the client so you can see it in the UI/console
+      return { error: `Upstream ${r.status}: ${text || 'no body'}` }
+    }
+
+    const j = await r.json()
+    const reply = j?.choices?.[0]?.message?.content ?? ''
+    return { reply }
+  } catch (err: any) {
+    setResponseStatus(event, 500)
+    return { error: `Request failed: ${err?.message || 'unknown error'}` }
   }
-
-  const j = await r.json()
-  const reply = j.choices?.[0]?.message?.content || ''
-  return { reply }
 })
+
 
 
 

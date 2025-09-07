@@ -104,14 +104,12 @@ export default defineNuxtConfig({
 
   // ✅ Server-only config for your REST calls to OpenAI and chat limits
   runtimeConfig: {
-    openaiApiKey: process.env.OPENAI_API_KEY,
-    openaiModel: process.env.OPENAI_MODEL || 'gpt-4.1-mini',
-    openaiBaseUrl: process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1',
-    chatMaxInput: Number(process.env.CHAT_MAX_INPUT || 1800),
-    chatMaxReply: Number(process.env.CHAT_MAX_REPLY || 2000),
-    chatTimeoutMs: Number(process.env.CHAT_TIMEOUT_MS || 20000),
-    demoMode: String(process.env.DEMO_MODE || 'false') === 'true',
-  },
+    aiApiKey: process.env.AI_API_KEY,                           // server-only
+    aiBaseUrl: process.env.AI_BASE_URL || 'https://api.openai.com/v1',
+    aiModel: process.env.AI_MODEL || 'gpt-4.1-mini',
+    aiSystemPrompt: process.env.AI_SYSTEM_PROMPT || '',
+    public: {}
+  }
 
   // (Optional) Route hints—useful if you ever expose the API cross-origin
   // routeRules: {
