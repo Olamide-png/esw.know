@@ -1,3 +1,4 @@
+// server/api/chat.post.ts
 import { defineEventHandler, readBody, setHeader, createError } from 'h3'
 import { retrieveREST } from '../utils/rag'
 
@@ -19,7 +20,8 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 413, statusMessage: `Prompt too long (>${chatMaxInput} chars)` })
   }
 
-  const sources = await retrieveREST(q, apiKey, baseUrl, embedModel, 6, body?.meta)
+  // ✅ pass event
+  const sources = await retrieveREST(event, q, apiKey, baseUrl, embedModel, 6, body?.meta)
   const context = sources.map((s, i) => `### Doc ${i+1}: ${s.page} (${s.url})\n${s.text}`).join('\n\n')
 
   const sys =
@@ -87,7 +89,6 @@ export default defineEventHandler(async (event) => {
             if (delta.includes('<UI>')) { inUi = true; uiBuffer += delta.split('<UI>')[1]; continue }
             if (inUi) {
               uiBuffer += delta
-              // naive close detection; works for single JSON object
               if (uiBuffer.trim().endsWith('}')) {
                 try { const payload = JSON.parse(uiBuffer); send(JSON.stringify({ type: 'ui', payload })) } catch {}
                 uiBuffer = ''; inUi = false
@@ -96,9 +97,7 @@ export default defineEventHandler(async (event) => {
             }
 
             send(JSON.stringify({ type: 'text', delta }))
-          } catch {
-            // ignore keep-alives/malformed
-          }
+          } catch { /* ignore keep-alives */ }
         }
       }
 
@@ -112,5 +111,6 @@ export default defineEventHandler(async (event) => {
   setHeader(event, 'X-Accel-Buffering', 'no')
   return stream
 })
+
 
 
