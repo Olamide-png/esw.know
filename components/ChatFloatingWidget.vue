@@ -21,7 +21,7 @@
       v-if="isOpen"
       id="nuxt-ai-chat"
       class="chat-panel fixed bottom-4 right-4 md:right-8 z-[1000] isolate
-             w-[min(95vw,520px)] max-h-[85vh]
+             w-[min(96vw,560px)] max-h-[80vh] md:max-h-[85vh]
              rounded-2xl border bg-background/25 backdrop-blur-lg
              shadow-2xl ring-1 ring-black/5 dark:ring-white/10
              flex flex-col overflow-hidden"
@@ -35,7 +35,6 @@
           <p class="font-medium">AI Assistant</p>
         </div>
         <div class="flex items-center gap-2">
-          <!-- Context toggle -->
           <button
             class="hidden sm:inline-flex items-center gap-1 rounded-md border px-2 py-1 text-xs
                    bg-background/20 hover:bg-background/30"
@@ -64,12 +63,9 @@
         ref="scrollEl"
         class="flex-1 overflow-y-auto overscroll-contain p-3 pr-4 space-y-3 bg-transparent"
       >
-        <!-- Non-overlapping context banner -->
-        <div v-if="useContext" class="mb-2 sticky top-0 z-[1]">
-          <span
-            class="inline-flex items-center gap-1 text-[11px] rounded-md
-                   bg-muted/70 border px-2 py-1 backdrop-blur-lg"
-          >
+        <div v-if="useContext" class="mb-2">
+          <span class="inline-flex items-center gap-1 text-[11px] rounded-md
+                       bg-muted/60 border px-2 py-1">
             <Icon name="lucide:info" class="h-3.5 w-3.5" />
             <span>Answering from this page. ({{ contextChars }} chars)</span>
           </span>
@@ -130,12 +126,12 @@ interface ChatMessage { role: 'system'|'user'|'assistant'; content: string }
 const STORAGE_KEY = 'ai:chat:history'
 const STORAGE_OPEN = 'ai:chat:isOpen'
 const STORAGE_VER_KEY = 'ai:chat:ver'
-const STORAGE_VER = '5' // bump due to prompt/style changes
+const STORAGE_VER = '4'
 
 const MAX_HISTORY = 50
 const MAX_INPUT_CHARS = 2000
 const MAX_REPLY_CHARS = 1200
-const CONTEXT_BUDGET = 1500 // keep under server CHAT_MAX_INPUT
+const CONTEXT_BUDGET = 1500
 
 const isOpen = ref(false)
 const messages = ref<ChatMessage[]>([])
@@ -173,14 +169,15 @@ function normalizeReply(s: string, max = MAX_REPLY_CHARS) {
 }
 function looksLikeHtml(s: string) { return /<html|<head|<body|<script|window\.__NUXT__/i.test(String(s)) }
 
-/* mdast -> plain text */
 function mdastToText(node: any): string {
   if (!node) return ''
   const t = node.type
   if (t === 'text') return node.value || ''
   if (t === 'inlineCode') return '`' + (node.value || '') + '`'
   if (t === 'code') return '\n\n' + (node.value || '') + '\n\n'
-  if (t === 'link' || t === 'emphasis' || t === 'strong' || t === 'delete' || t === 'span') return (node.children || []).map(mdastToText).join('')
+  if (t === 'link' || t === 'emphasis' || t === 'strong' || t === 'delete' || t === 'span') {
+    return (node.children || []).map(mdastToText).join('')
+  }
   if (t === 'list') return '\n' + (node.children || []).map(mdastToText).join('\n') + '\n'
   if (t === 'listItem' || t === 'paragraph') return (node.children || []).map(mdastToText).join('') + '\n'
   if (t === 'heading' || t === 'blockquote') return '\n' + (node.children || []).map(mdastToText).join('') + '\n'
@@ -191,7 +188,6 @@ function mdastToText(node: any): string {
   if (t === 'root') return (node.children || []).map(mdastToText).join('')
   return ''
 }
-
 async function loadPageContext() {
   try {
     const doc: any = page?.value
@@ -202,7 +198,10 @@ async function loadPageContext() {
       const el = document.querySelector('main, article, .prose') as HTMLElement | null
       if (el) text = el.innerText || ''
     }
-    text = stripTags(text).replace(/\r\n/g, '\n').replace(/\r/g, '\n').replace(/\n{3,}/g, '\n\n').trim()
+    text = stripTags(text)
+      .replace(/\r\n/g, '\n').replace(/\r/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim()
     pageText.value = text.slice(0, CONTEXT_BUDGET)
   } catch {
     pageTitle.value = 'This page'
@@ -243,7 +242,9 @@ function trimHistory() {
     messages.value.splice(0, messages.value.length - MAX_HISTORY)
   }
 }
-function saveHistory() { localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.value)) }
+function saveHistory() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.value))
+}
 function loadHistory() {
   try {
     const ver = localStorage.getItem(STORAGE_VER_KEY)
@@ -313,7 +314,7 @@ async function streamAnswer(payloadMessages: ChatMessage[]) {
   }
 }
 
-/* ---------- send (with page context) ---------- */
+/* ---------- send (stream with fallback), with Generative-UI hint ---------- */
 async function onSend() {
   if (!canSend.value || loading.value) return
   const raw = draft.value
@@ -330,19 +331,17 @@ async function onSend() {
   trimHistory(); saveHistory()
   loading.value = true; error.value = null
 
-  // 🌟 System prompt: Markdown first. Optional ` ```ui ` JSON block (cards/steps/table/list/callout).
   const systemMsg: ChatMessage = {
     role: 'system',
-    content: [
-      'You are a helpful docs assistant.',
-      'Default to concise **Markdown** with headings, lists, code blocks, and links.',
-      'When a small UI helps (summaries, steps, tables, link cards, alerts), also include ONE fenced block:',
-      '```ui',
-      '{ "type": "callout" | "steps" | "cards" | "table" | "list", ... }',
-      '```',
-      'The Markdown should come first, then the UI block. Keep JSON valid and compact (<2KB).',
-      'Use ONLY the provided page content. If the answer is not present, say so clearly.'
-    ].join(' ')
+    content:
+      'You are a helpful docs assistant. Prefer concise, well-structured answers. Use ONLY the provided page content to answer; ' +
+      'if not present, say you cannot find it on this page. When helpful, append a fenced block ```ui ...``` with JSON for ' +
+      'lightweight UI. Supported types: ' +
+      '{ "type":"cards","cards":[{ "title","description","href" }] }, ' +
+      '{ "type":"steps","items":[ "...", "..." ] }, ' +
+      '{ "type":"callout","variant":"info|success|warning|danger","title","body" }, ' +
+      '{ "type":"kpis","items":[{ "label","value" }] }, ' +
+      '{ "type":"table","headers":[...],"rows":[[...],[...]] }.'
   }
 
   const contextBlock =
@@ -405,6 +404,7 @@ watch(messages, saveHistory, { deep: true })
 
 .chat-panel { pointer-events: auto; }
 </style>
+
 
 
 
