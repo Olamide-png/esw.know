@@ -1,80 +1,141 @@
 // server/api/chat-stream.post.ts
-import { defineEventHandler, readBody, setHeader } from 'h3'
-
 export default defineEventHandler(async (event) => {
-  const { aiApiKey, aiBaseUrl, aiModel, aiSystemPrompt } = useRuntimeConfig()
-
-  if (!aiApiKey) {
-    setHeader(event, 'Content-Type', 'application/json')
-    event.node.res.statusCode = 500
-    return { error: 'Missing AI_API_KEY (runtimeConfig.aiApiKey).' }
+  const config = useRuntimeConfig();
+  if (!config.aiApiKey) {
+    // send one SSE error packet so your UI shows it
+    const stream = new ReadableStream({
+      start(controller) {
+        const enc = new TextEncoder();
+        controller.enqueue(enc.encode(`data: ${JSON.stringify({ error: 'AI_API_KEY is missing' })}\n\n`));
+        controller.enqueue(enc.encode(`data: ${JSON.stringify({ done: true })}\n\n`));
+        controller.close();
+      },
+    });
+    return sendStream(event, stream);
   }
 
-  const body = await readBody<{ messages: { role: 'system'|'user'|'assistant'; content: string }[] }>(event)
-  const inputMsgs = Array.isArray(body?.messages) ? body.messages : []
+  const body = await readBody<{
+    messages?: Array<{ role: 'system' | 'user' | 'assistant'; content: string }>;
+    q?: string;
+    meta?: any;
+  }>(event);
 
-  const payload = {
-    model: aiModel || 'gpt-4o-mini',
-    stream: true,
-    temperature: 0.5,
-    messages: [
-      { role: 'system', content: aiSystemPrompt || 'You are a helpful, concise assistant.' },
-      ...inputMsgs.map(m => ({ role: m.role, content: String(m.content ?? '').slice(0, 4000) })),
-    ],
+  let messages = body?.messages;
+  if (!messages || !Array.isArray(messages) || messages.length === 0) {
+    const q = (body?.q || '').toString().trim();
+    if (!q) {
+      // same SSE error style
+      const stream = new ReadableStream({
+        start(controller) {
+          const enc = new TextEncoder();
+          controller.enqueue(enc.encode(`data: ${JSON.stringify({ error: 'Missing messages or q' })}\n\n`));
+          controller.enqueue(enc.encode(`data: ${JSON.stringify({ done: true })}\n\n`));
+          controller.close();
+        },
+      });
+      return sendStream(event, stream);
+    }
+    messages = [{ role: 'user', content: q }];
   }
 
-  // SSE headers
-  setHeader(event, 'Content-Type', 'text/event-stream; charset=utf-8')
-  setHeader(event, 'Cache-Control', 'no-cache, no-transform')
-  setHeader(event, 'Connection', 'keep-alive')
-  setHeader(event, 'X-Accel-Buffering', 'no')
+  const sys = (config.aiSystemPrompt || '').toString().trim();
+  if (sys) messages.unshift({ role: 'system', content: sys });
 
-  const upstream = await fetch(`${aiBaseUrl || 'https://api.openai.com/v1'}/chat/completions`, {
+  const url = `${(config.aiBaseUrl || 'https://api.openai.com/v1').replace(/\/$/, '')}/chat/completions`;
+
+  const upstreamReq = fetch(url, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${aiApiKey}`,
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${config.aiApiKey}`,
     },
-    body: JSON.stringify(payload),
-  })
+    body: JSON.stringify({
+      model: config.aiModel || 'gpt-4o-mini',
+      messages,
+      stream: true,
+    }),
+  });
 
-  if (!upstream.ok || !upstream.body) {
-    event.node.res.statusCode = upstream.status || 500
-    event.node.res.write(`data: ${JSON.stringify({ error: `Upstream ${upstream.status}` })}\n\n`)
-    return event.node.res.end()
-  }
+  const stream = new ReadableStream({
+    async start(controller) {
+      const enc = new TextEncoder();
+      const send = (obj: any) => controller.enqueue(enc.encode(`data: ${JSON.stringify(obj)}\n\n`));
 
-  const reader = upstream.body.getReader()
-  const decoder = new TextDecoder()
-
-  try {
-    while (true) {
-      const { done, value } = await reader.read()
-      if (done) break
-      const chunk = decoder.decode(value, { stream: true })
-
-      for (const line of chunk.split('\n')) {
-        const t = line.trim()
-        if (!t.startsWith('data:')) continue
-        const data = t.slice(5).trim()
-        if (data === '[DONE]') continue
-
-        try {
-          const j = JSON.parse(data)
-          const delta = j?.choices?.[0]?.delta?.content || ''
-          if (delta) event.node.res.write(`data: ${JSON.stringify({ token: delta })}\n\n`)
-        } catch {
-          if (data) event.node.res.write(`data: ${JSON.stringify({ token: data })}\n\n`)
+      try {
+        const upstream = await upstreamReq;
+        if (!upstream.ok) {
+          let msg = upstream.statusText;
+          try {
+            const j = await upstream.json();
+            msg = j?.error?.message || msg;
+          } catch {}
+          send({ error: msg });
+          send({ done: true });
+          controller.close();
+          return;
         }
+
+        if (!upstream.body) {
+          send({ error: 'No upstream stream body' });
+          send({ done: true });
+          controller.close();
+          return;
+        }
+
+        const reader = upstream.body.getReader();
+        const decoder = new TextDecoder();
+
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+
+          const chunk = decoder.decode(value, { stream: true });
+          for (const rawLine of chunk.split('\n')) {
+            const line = rawLine.trim();
+            if (!line.startsWith('data:')) continue;
+
+            const payload = line.slice(5).trim();
+            if (!payload) continue;
+            if (payload === '[DONE]') {
+              send({ done: true });
+              controller.close();
+              return;
+            }
+
+            // OpenAI-style stream chunk
+            try {
+              const json = JSON.parse(payload);
+              const delta: string = json?.choices?.[0]?.delta?.content ?? '';
+              if (delta) send({ token: delta });
+            } catch {
+              // Best-effort passthrough if provider sends plain text
+              send({ token: payload });
+            }
+          }
+        }
+
+        send({ done: true });
+        controller.close();
+      } catch (err: any) {
+        send({ error: err?.message || 'Stream error' });
+        send({ done: true });
+        controller.close();
       }
-    }
-    event.node.res.write(`data: ${JSON.stringify({ done: true })}\n\n`)
-  } catch (err: any) {
-    event.node.res.write(`data: ${JSON.stringify({ error: err?.message || 'stream error' })}\n\n`)
-  } finally {
-    event.node.res.end()
-  }
-})
+    },
+  });
+
+  // Proper SSE headers for Nitro
+  setResponseHeaders(event, {
+    'Content-Type': 'text/event-stream; charset=utf-8',
+    'Cache-Control': 'no-cache, no-transform',
+    Connection: 'keep-alive',
+    // Vercel/Proxies: hint that this is a stream
+    'X-Accel-Buffering': 'no',
+  });
+
+  return sendStream(event, stream);
+});
+
 
 
 
