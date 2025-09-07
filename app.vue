@@ -1,3 +1,4 @@
+<!-- app.vue -->
 <template>
   <NuxtLoadingIndicator :color="false" class="z-100 bg-primary/80" />
   <LayoutBanner v-if="config.banner.enable" />
@@ -12,7 +13,7 @@
       ]"
     >
       <aside
-        v-if="page.aside ?? true"
+        v-if="(page.aside ?? true)"
         class="fixed top-[102px] z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] md:w-[250px] lg:w-[320px] shrink-0 overflow-y-auto md:sticky md:top-[60px] md:block"
       >
         <LayoutAside :is-mobile="false" />
@@ -36,7 +37,14 @@
         <path d="M628.5 -578L..." fill="#00DC82" fill-opacity="0.4" />
       </g>
       <defs>
-        <filter id="filter0_f" x="0" y="-659" width="1255" height="1251" filterUnits="userSpaceOnUse">
+        <filter
+          id="filter0_f"
+          x="0"
+          y="-659"
+          width="1255"
+          height="1251"
+          filterUnits="userSpaceOnUse"
+        >
           <feFlood flood-opacity="0" result="BackgroundImageFix" />
           <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
           <feGaussianBlur stdDeviation="60" result="effect1_foregroundBlur" />
@@ -49,15 +57,16 @@
   <Toaster />
   <LayoutFooter />
 
-  <!-- ✅ Floating RAG bot mounted globally -->
+  <!-- 🟢 Floating AI chat (bottom-right) -->
   <ClientOnly>
-    <FabChat />
+    <!-- Hide only on the exact /chat route -->
+    <ChatFloatingWidget v-if="route.path !== '/chat'" />
   </ClientOnly>
 </template>
 
 <script setup lang="ts">
 import Toaster from '@/components/ui/toast/Toaster.vue'
-import FabChat from '@/components/ai/FabChat.vue' // ✅ added
+import ChatFloatingWidget from '~/components/ChatFloatingWidget.vue' // ✅ explicit import
 
 const { page } = useContent()
 const config = useConfig()
@@ -84,10 +93,19 @@ useServerHead({
 // ✅ Add favicon here
 useHead({
   link: [
-    { rel: 'icon', type: 'image/x-icon', href: '/ESW favicon.svg' },
+    {
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/ESW favicon.svg',
+    },
   ],
 })
 </script>
+
+
+
+
+
 
 
 

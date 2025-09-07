@@ -6,7 +6,7 @@
     class="fixed bottom-4 right-6 md:right-8 z-50 inline-flex items-center gap-2 rounded-full border bg-background/90 dark:bg-neutral-900/90 backdrop-blur px-4 py-2 shadow-lg hover:shadow-xl transition focus:outline-none focus:ring focus:ring-primary"
     @click="toggle"
   >
-    <Icon name="lucide:bot" class="h-8 w-8" />
+    <Icon name="lucide:bot" class="h-5 w-5" />
     <span class="hidden sm:inline">Ask AI</span>
   </button>
 
@@ -15,19 +15,36 @@
     <section
       v-if="isOpen"
       id="nuxt-ai-chat"
-      class="fixed bottom-20 right-6 md:right-8 z-50 w-[92vw] max-w-[420px]
-             max-h-[85vh] min-h-0 rounded-2xl border bg-background/95 dark:bg-neutral-900/95
-             backdrop-blur supports-[backdrop-filter]:bg-background/70 shadow-2xl
-             ring-1 ring-black/5 dark:ring-white/10 flex flex-col overflow-hidden"
+      class="fixed bottom-20 right-6 md:right-8 z-50 w-[92vw] max-w-[420px] rounded-2xl border bg-background/95 dark:bg-neutral-900/95 backdrop-blur supports-[backdrop-filter]:bg-background/70 shadow-2xl ring-1 ring-black/5 dark:ring-white/10 flex flex-col overflow-hidden"
       role="dialog"
       aria-label="AI assistant chat"
     >
-      <header class="shrink-0 flex items-center justify-between px-4 py-3 border-b">
+      <header class="flex items-center justify-between px-4 py-3 border-b">
         <div class="flex items-center gap-2">
           <Icon name="lucide:sparkles" class="h-4 w-4" />
           <p class="font-medium">AI Assistant</p>
         </div>
         <div class="flex items-center gap-2">
+          <!-- Page context toggle + title -->
+          <button
+            class="hidden sm:inline-flex items-center gap-1 rounded-md border px-2 py-1 text-xs hover:bg-muted"
+            :class="useContext ? 'opacity-100' : 'opacity-60'"
+            @click="useContext = !useContext"
+            :title="useContext ? 'Using page context' : 'Click to use this page as context'"
+          >
+            <Icon name="lucide:file-text" class="h-3.5 w-3.5" />
+            <span class="max-w-[12rem] truncate">{{ pageTitle || 'This page' }}</span>
+            <span
+              class="ml-1 rounded bg-muted px-1.5 py-0.5 text-[10px]"
+              :class="useContext ? 'opacity-100' : 'opacity-60'"
+            >
+              {{ useContext ? 'ON' : 'OFF' }}
+            </span>
+          </button>
+
+          <button class="rounded-md p-1 hover:bg-muted" @click="hardReset" title="Hard reset (clear storage)">
+            <Icon name="lucide:trash-2" class="h-4 w-4" />
+          </button>
           <button class="rounded-md p-1 hover:bg-muted" @click="clearChat" title="Clear conversation">
             <Icon name="lucide:rotate-ccw" class="h-4 w-4" />
           </button>
@@ -37,11 +54,20 @@
         </div>
       </header>
 
-      <div
-        ref="scrollEl"
-        class="flex-1 min-h-0 overflow-y-auto overscroll-contain p-3 space-y-3"
-      >
-        <MessageBubble v-for="(m,i) in messages" :key="i" :role="m.role" :content="m.content" />
+      <div ref="scrollEl" class="flex-1 overflow-y-auto p-3 space-y-3">
+        <!-- Small banner when context is active -->
+        <div v-if="useContext" class="text-[11px] opacity-70 -mb-1">
+          <Icon name="lucide:info" class="inline h-3.5 w-3.5 mr-1 -mt-0.5" />
+          Answering from <span class="font-medium">this page</span>. ({{ contextChars }} chars)
+        </div>
+
+        <MessageBubble
+          v-for="(m,i) in messages"
+          :key="i"
+          :role="m.role"
+          :content="m.content"
+        />
+
         <div v-if="loading" class="flex items-start gap-2 text-sm opacity-80">
           <span class="mt-1"><Icon name="lucide:bot" class="h-5 w-5" /></span>
           <span class="animate-pulse">Thinking…</span>
@@ -50,7 +76,7 @@
       </div>
 
       <!-- Bigger, auto-growing input -->
-      <form @submit.prevent="onSend" class="shrink-0 border-t p-3 bg-background/60">
+      <form @submit.prevent="onSend" class="border-t p-3 bg-background/60">
         <div class="flex items-start gap-2">
           <textarea
             v-model="draft"
@@ -78,7 +104,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, onUnmounted, computed, nextTick } from 'vue'
+import { ref, watch, onMounted, computed, nextTick } from 'vue'
+import { useRoute } from 'vue-router'
+import { queryContent } from '#content/query'
 import MessageBubble from '~/components/MessageBubble.vue'
 
 interface ChatMessage { role: 'system'|'user'|'assistant'; content: string }
@@ -86,11 +114,15 @@ interface ChatMessage { role: 'system'|'user'|'assistant'; content: string }
 const STORAGE_KEY = 'ai:chat:history'
 const STORAGE_OPEN = 'ai:chat:isOpen'
 const STORAGE_VER_KEY = 'ai:chat:ver'
-const STORAGE_VER = '3'
+const STORAGE_VER = '4' // bumped due to new context behavior
 
 const MAX_HISTORY = 50
 const MAX_INPUT_CHARS = 2000
-const MAX_REPLY_CHARS = 8000
+const MAX_REPLY_CHARS = 1200
+
+// IMPORTANT: server clamps each message to CHAT_MAX_INPUT (default 1800).
+// Keep context under this budget unless you increase CHAT_MAX_INPUT in env.
+const CONTEXT_BUDGET = 1500
 
 const isOpen = ref(false)
 const messages = ref<ChatMessage[]>([])
@@ -100,7 +132,14 @@ const error = ref<string | null>(null)
 const scrollEl = ref<HTMLElement | null>(null)
 const taRef = ref<HTMLTextAreaElement | null>(null)
 
-/* ---------- sanitation ---------- */
+const route = useRoute()
+
+/* ---------- page context ---------- */
+const useContext = ref(true)
+const pageTitle = ref('')
+const pageText = ref('')
+const contextChars = computed(() => pageText.value.length)
+
 function stripTags(s: string) {
   return String(s ?? '')
     .replace(/<script[\s\S]*?<\/script>/gi, '')
@@ -110,22 +149,59 @@ function stripTags(s: string) {
 function normalizeInput(s: string, max = MAX_INPUT_CHARS) {
   return stripTags(s).replace(/\s+/g, ' ').trim().slice(0, max)
 }
-// preserve line breaks for markdown
+// preserve newlines for nicer markdown
 function normalizeReply(s: string, max = MAX_REPLY_CHARS) {
   const noTags = String(s ?? '')
     .replace(/<script[\s\S]*?<\/script>/gi, '')
     .replace(/<style[\s\S]*?<\/style>/gi, '')
     .replace(/<[^>]+>/g, '')
-  const keepNewlines = noTags
-    .replace(/\r\n/g, '\n')
-    .replace(/\r/g, '\n')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim()
+  const keepNewlines = noTags.replace(/\r\n/g, '\n').replace(/\r/g, '\n').replace(/\n{3,}/g, '\n\n').trim()
   return keepNewlines.slice(0, max)
 }
-function looksLikeHtml(s: string) {
-  return /<html|<head|<body|<script|window\.__NUXT__/i.test(String(s))
+function looksLikeHtml(s: string) { return /<html|<head|<body|<script|window\.__NUXT__/i.test(String(s)) }
+
+/* mdast -> plain text (Nuxt Content body) */
+function mdastToText(node: any): string {
+  if (!node) return ''
+  const t = node.type
+  if (t === 'text') return node.value || ''
+  if (t === 'inlineCode') return '`' + (node.value || '') + '`'
+  if (t === 'code') return '\n\n' + (node.value || '') + '\n\n'
+  if (t === 'link' || t === 'emphasis' || t === 'strong' || t === 'delete' || t === 'span') {
+    return (node.children || []).map(mdastToText).join('')
+  }
+  if (t === 'list') return '\n' + (node.children || []).map(mdastToText).join('\n') + '\n'
+  if (t === 'listItem' || t === 'paragraph') return (node.children || []).map(mdastToText).join('') + '\n'
+  if (t === 'heading' || t === 'blockquote') return '\n' + (node.children || []).map(mdastToText).join('') + '\n'
+  if (t === 'table') return '\n' + (node.children || []).map(mdastToText).join('\n') + '\n'
+  if (t === 'tableRow' || t === 'tableCell') return (node.children || []).map(mdastToText).join(' | ')
+  if (t === 'image') return node.alt ? `[Image: ${node.alt}]` : ''
+  if (Array.isArray(node)) return node.map(mdastToText).join('')
+  if (t === 'root') return (node.children || []).map(mdastToText).join('')
+  return ''
 }
+async function loadPageContext() {
+  try {
+    const doc: any = await queryContent(route.path).findOne()
+    pageTitle.value = doc?.title || doc?.head?.title || 'This page'
+    let text = ''
+    if (doc?.body) text = mdastToText(doc.body)
+    if (!text && typeof window !== 'undefined') {
+      const el = document.querySelector('main, article, .prose') as HTMLElement | null
+      if (el) text = el.innerText || ''
+    }
+    text = stripTags(text)
+      .replace(/\r\n/g, '\n').replace(/\r/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim()
+    // keep within budget (server clamps anyway)
+    pageText.value = text.slice(0, CONTEXT_BUDGET)
+  } catch {
+    pageTitle.value = 'This page'
+    pageText.value = ''
+  }
+}
+watch(() => route.fullPath, () => { loadPageContext() }, { immediate: true })
 
 /* ---------- ui ---------- */
 const toggle = () => {
@@ -134,10 +210,8 @@ const toggle = () => {
   if (isOpen.value) nextTick(() => taRef.value?.focus())
 }
 const canSend = computed(() => normalizeInput(draft.value).length > 0)
-
 function autoGrow() {
-  const ta = taRef.value
-  if (!ta) return
+  const ta = taRef.value; if (!ta) return
   ta.style.height = 'auto'
   const max = Math.max(200, Math.round(window.innerHeight * 0.5))
   ta.style.height = Math.min(max, ta.scrollHeight) + 'px'
@@ -183,12 +257,12 @@ function loadHistory() {
   }
 }
 
-/* ---------- streaming helper ---------- */
-async function streamAnswer() {
+/* ---------- streaming helper (now accepts payload messages) ---------- */
+async function streamAnswer(payloadMessages: ChatMessage[]) {
   const res = await fetch('/api/chat-stream', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ messages: messages.value }),
+    body: JSON.stringify({ messages: payloadMessages }),
   })
   if (!res.ok || !res.body) throw new Error(`HTTP ${res.status}`)
 
@@ -196,7 +270,6 @@ async function streamAnswer() {
   const decoder = new TextDecoder()
   let buffer = ''
 
-  // create empty assistant bubble to append into
   messages.value.push({ role: 'assistant', content: '' })
   const idx = messages.value.length - 1
 
@@ -219,7 +292,7 @@ async function streamAnswer() {
           messages.value[idx].content += token
           saveHistory()
           requestAnimationFrame(() => {
-            scrollEl.value?.scrollTo({ top: scrollEl.value.scrollHeight })
+            scrollEl.value?.scrollTo({ top: scrollEl.value!.scrollHeight })
           })
         }
         if (evt.error) throw new Error(evt.error)
@@ -233,7 +306,7 @@ async function streamAnswer() {
   }
 }
 
-/* ---------- send (stream with fallback) ---------- */
+/* ---------- send (stream with fallback), injecting page context ---------- */
 async function onSend() {
   if (!canSend.value || loading.value) return
   const raw = draft.value
@@ -250,20 +323,40 @@ async function onSend() {
   trimHistory(); saveHistory()
   loading.value = true; error.value = null
 
+  // Build payload messages: add a system instruction and include page context with the question
+  const systemMsg: ChatMessage = {
+    role: 'system',
+    content:
+      'You are a helpful docs assistant. Use ONLY the provided page content to answer. If the answer is not present, say you cannot find it on this page.',
+  }
+  const contextBlock =
+    useContext.value && pageText.value
+      ? `<<<PAGE_CONTENT_START>>>\n${pageText.value}\n<<<PAGE_CONTENT_END>>>`
+      : '(No page content provided.)'
+
+  const payloadMessages: ChatMessage[] = [
+    systemMsg,
+    // include prior turns (sanitized on server) so follow-ups work
+    ...messages.value.map(m => ({ role: m.role, content: m.content })),
+    // augment the latest user turn with the context block
+    { role: 'user', content: `Question: ${text}\n\n${contextBlock}` },
+  ]
+
   try {
-    await streamAnswer()
+    await streamAnswer(payloadMessages)
     trimHistory(); saveHistory()
   } catch (e: any) {
+    // Fallback to non-streaming endpoint (e.g., if streaming 504s on Vercel)
     try {
       const res = await $fetch<{ reply: string } | { error: string }>('/api/chat', {
         method: 'POST',
-        body: { messages: messages.value },
+        body: { messages: payloadMessages },
       })
       if ('error' in res) throw new Error(res.error)
       messages.value.push({ role: 'assistant', content: normalizeReply(res.reply) })
       trimHistory(); saveHistory()
       requestAnimationFrame(() => {
-        scrollEl.value?.scrollTo({ top: scrollEl.value.scrollHeight, behavior: 'smooth' })
+        scrollEl.value?.scrollTo({ top: scrollEl.value!.scrollHeight, behavior: 'smooth' })
       })
     } catch (e2: any) {
       error.value = e2?.message ?? e?.message ?? 'Something went wrong.'
@@ -274,9 +367,7 @@ async function onSend() {
 }
 
 /* ---------- actions ---------- */
-function clearChat() {
-  messages.value = []; saveHistory()
-}
+function clearChat() { messages.value = []; saveHistory() }
 function hardReset() {
   localStorage.removeItem(STORAGE_KEY)
   localStorage.removeItem(STORAGE_OPEN)
@@ -284,16 +375,11 @@ function hardReset() {
   location.reload()
 }
 
-/* Start taller & keep synced + Esc to close */
-function onKey(e: KeyboardEvent) {
-  if (e.key === 'Escape' && isOpen.value) toggle()
-}
+/* Start taller & keep synced */
 onMounted(() => {
   loadHistory()
   nextTick(() => autoGrow())
-  window.addEventListener('keydown', onKey)
 })
-onUnmounted(() => window.removeEventListener('keydown', onKey))
 watch(draft, () => nextTick(() => autoGrow()))
 watch(messages, saveHistory, { deep: true })
 </script>
@@ -304,6 +390,7 @@ watch(messages, saveHistory, { deep: true })
 .chat-slide-fade-enter-from { opacity: 0; transform: translateY(8px) scale(.98); }
 .chat-slide-fade-leave-to { opacity: 0; transform: translateY(8px) scale(.98); }
 </style>
+
 
 
 
