@@ -1,6 +1,7 @@
 <template>
-  <!-- Floating Button -->
+  <!-- Floating Button (hidden when panel is open) -->
   <button
+    v-if="!isOpen"
     :aria-expanded="isOpen ? 'true' : 'false'"
     aria-controls="nuxt-ai-chat"
     class="fixed bottom-4 right-6 md:right-8 z-[1000] inline-flex items-center gap-2 rounded-full border bg-background/90 dark:bg-neutral-900/90 backdrop-blur px-4 py-2 shadow-lg hover:shadow-xl transition focus:outline-none focus:ring focus:ring-primary"
@@ -16,7 +17,7 @@
       v-if="isOpen"
       id="nuxt-ai-chat"
       class="chat-panel fixed bottom-4 right-4 md:right-8 z-[1000] isolate
-             w-[min(92vw,420px)] max-h-[80vh] md:max-h-[85vh]
+             w-[min(95vw,480px)] max-h-[80vh] md:max-h-[85vh]
              rounded-2xl border bg-background/95 dark:bg-neutral-900/95
              backdrop-blur supports-[backdrop-filter]:bg-background/70
              shadow-2xl ring-1 ring-black/5 dark:ring-white/10
@@ -39,12 +40,7 @@
           >
             <Icon name="lucide:file-text" class="h-3.5 w-3.5" />
             <span class="max-w-[12rem] truncate">{{ pageTitle || 'This page' }}</span>
-            <span
-              class="ml-1 rounded bg-muted px-1.5 py-0.5 text-[10px]"
-              :class="useContext ? 'opacity-100' : 'opacity-60'"
-            >
-              {{ useContext ? 'ON' : 'OFF' }}
-            </span>
+            <span class="ml-1 rounded bg-muted px-1.5 py-0.5 text-[10px]">{{ useContext ? 'ON' : 'OFF' }}</span>
           </button>
 
           <button class="rounded-md p-1 hover:bg-muted" @click="hardReset" title="Hard reset (clear storage)">
@@ -63,9 +59,12 @@
         ref="scrollEl"
         class="flex-1 overflow-y-auto overscroll-contain p-3 pr-4 space-y-3 bg-background/50"
       >
-        <div v-if="useContext" class="text-[11px] opacity-70 -mb-1">
-          <Icon name="lucide:info" class="inline h-3.5 w-3.5 mr-1 -mt-0.5" />
-          Answering from <span class="font-medium">this page</span>. ({{ contextChars }} chars)
+        <!-- ✅ No negative margin; renders as a chip so it won't overlap the question -->
+        <div v-if="useContext" class="mb-2">
+          <span class="inline-flex items-center gap-1 text-[11px] rounded-md bg-muted/70 px-2 py-1">
+            <Icon name="lucide:info" class="h-3.5 w-3.5" />
+            <span>Answering from this page. ({{ contextChars }} chars)</span>
+          </span>
         </div>
 
         <MessageBubble
@@ -400,7 +399,6 @@ watch(messages, saveHistory, { deep: true })
 </script>
 
 <style scoped>
-/* Smooth open/close */
 .chat-slide-fade-enter-active,
 .chat-slide-fade-leave-active { transition: all .2s ease; }
 .chat-slide-fade-enter-from { opacity: 0; transform: translateY(8px) scale(.98); }
@@ -408,9 +406,6 @@ watch(messages, saveHistory, { deep: true })
 
 /* Make sure nothing on the page overlaps; create a high stacking context */
 .chat-panel { pointer-events: auto; }
-
-/* Defensive: if any global “copy” widgets use outrageous z-index, keep our surface on top */
-:where(.chat-panel, .chat-panel *) { z-index: auto; }
 </style>
 
 
