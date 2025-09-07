@@ -49,8 +49,7 @@
             </span>
           </button>
 
-          <button class="rounded-md p-1 hover:bg-background/20" @click="hardReset" title="Hard reset (clear storage)">
-            <Icon name="lucide:trash-2" class="h-4 w-4" />
+
           </button>
           <button class="rounded-md p-1 hover:bg-background/20" @click="clearChat" title="Clear conversation">
             <Icon name="lucide:rotate-ccw" class="h-4 w-4" />
