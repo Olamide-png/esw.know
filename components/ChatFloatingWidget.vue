@@ -22,14 +22,14 @@
       id="nuxt-ai-chat"
       class="chat-panel fixed bottom-4 right-4 md:right-8 z-[1000] isolate
              w-[min(95vw,480px)] max-h-[80vh] md:max-h-[85vh]
-             rounded-2xl border bg-background/25 backdrop-blur-lg
+             rounded-2xl border bg-background/25 backdrop-blur-md
              shadow-2xl ring-1 ring-black/5 dark:ring-white/10
              flex flex-col overflow-hidden"
       role="dialog"
       aria-label="AI assistant chat"
     >
       <!-- Header -->
-      <header class="flex items-center justify-between px-4 py-3 border-b bg-background/20 backdrop-blur-lg">
+      <header class="flex items-center justify-between px-4 py-3 border-b bg-background/20 backdrop-blur-md">
         <div class="flex items-center gap-2">
           <Icon name="lucide:sparkles" class="h-4 w-4" />
           <p class="font-medium">AI Assistant</p>
@@ -49,8 +49,6 @@
             </span>
           </button>
 
-
-          </button>
           <button class="rounded-md p-1 hover:bg-background/20" @click="clearChat" title="Clear conversation">
             <Icon name="lucide:rotate-ccw" class="h-4 w-4" />
           </button>
