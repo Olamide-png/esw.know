@@ -153,7 +153,6 @@ ESW Shopify integration leverages Shopify's native checkout to handle shopper's 
   </div>
 </div>
 
-::AISearchBar{ placeholder="Ask our docs…" system="You are a concise assistant. Answer in 3–6 sentences." }
-::
+
 
 
