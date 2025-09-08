@@ -77,7 +77,7 @@ function applyGlossary(el: Element, terms: Record<string, string>) {
 
   const makeNode = (original: string, term: string, def: string) => {
     const span = document.createElement('span')
-    span.className = 'group relative inline-block md:cursor-help underline decoration-dotted underline-offset-4'
+    span.className = 'group relative inline-block md:cursor-help underline decoration-dotted underline-offset-6'
     span.setAttribute('aria-label', `Definition: ${def}`)
     span.innerHTML = `
   <span>${original}</span>
