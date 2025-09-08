@@ -3,7 +3,7 @@
     <!-- Trigger (uses default slot as the anchor text) -->
     <button
       type="button"
-      class="cursor-help underline decoration-dotted underline-offset-2 hover:opacity-80 focus:outline-none focus:ring focus:ring-primary/40 rounded"
+      class="md:cursor-help underline decoration-dotted underline-offset-4 hover:opacity-80 focus:outline-none focus:ring focus:ring-primary/40 rounded"
       :aria-expanded="open ? 'true' : 'false'"
       :aria-controls="panelId"
       @click="open = true"
