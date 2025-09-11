@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import StepCodeWalkthrough from '~/components/StepCodeWalkthrough.vue'
+import StepCodeGroupWalkthrough from '~/components/StepCodeGroupWalkthrough.vue'
 import WorkbenchDrawer from '~/components/WorkbenchDrawer.vue'
 
 const wbOpen = ref(false)
 
-// Walkthrough steps
+// Steps (driven by inline markers in each code block)
 const steps = [
-  { id: 1, title: 'Install Stripe SDK', body: 'Add Stripe server + client SDK.' },
+  { id: 1, title: 'Install SDKs', body: 'Install server + client SDK.' },
   { id: 2, title: 'Create Checkout Session (server)', body: 'Return the session ID.' },
   { id: 3, title: 'Redirect to Checkout (client)', body: 'Use redirectToCheckout.' },
   { id: 4, title: 'Handle Webhook', body: 'Verify signature and fulfill.' }
 ]
 
-// Single code sample with inline markers. (Markers are stripped from display)
-const sampleCode = `// Install packages [1]
+// ——— JavaScript (with markers) ———
+const codeJS = `// Install packages [1]
 //   npm i stripe [1]
 //   npm i @stripe/stripe-js [1]
 
@@ -38,7 +38,7 @@ export async function goToCheckout() { // [3]
   await stripe?.redirectToCheckout({ sessionId: id }) // [3]
 } // [3:end]
 
-// Server webhook handler [4:start]
+// Webhook [4:start]
 export async function webhookHandler(req, res) { // [4]
   const sig = req.headers['stripe-signature'] // [4]
   let event // [4]
@@ -54,6 +54,53 @@ export async function webhookHandler(req, res) { // [4]
   res.json({ received: true }) // [4]
 } // [4:end]
 `
+
+// ——— TypeScript (reusing JS sample for demo) ———
+const codeTS = codeJS
+
+// ——— Python ———
+const codePY = `# Install [1]
+#   pip install stripe [1]
+
+import os  # [2:start]
+import stripe  # [2]
+stripe.api_key = os.getenv("STRIPE_SECRET")  # [2]
+from flask import Flask, request, jsonify  # [2]
+app = Flask(__name__)  # [2]
+
+@app.post("/create-checkout-session")  # [2]
+def create_checkout_session():  # [2]
+    session = stripe.checkout.Session.create(  # [2]
+        mode="payment",  # [2]
+        success_url="https://example.com/success",  # [2]
+        cancel_url="https://example.com/cancel",  # [2]
+        line_items=[{"price": "price_123", "quantity": 1}],  # [2]
+    )  # [2]
+    return jsonify(id=session.id)  # [2]  # [2:end]
+
+# Client redirect [3:start]
+# Use fetch('/create-checkout-session') to get session.id and redirect via client SDK.  # [3:end]
+
+# Webhook [4:start]
+from flask import Response  # [4]
+@app.post("/webhook")  # [4]
+def webhook():  # [4]
+    sig = request.headers.get("stripe-signature")  # [4]
+    try:  # [4]
+        event = stripe.Webhook.construct_event(request.data, sig, os.getenv("STRIPE_WEBHOOK_SECRET"))  # [4]
+    except Exception as e:  # [4]
+        return Response(f"Webhook Error: {str(e)}", status=400)  # [4]
+    if event["type"] == "checkout.session.completed":  # [4]
+        session = event["data"]["object"]  # [4]
+        # TODO: fulfill order  # [4]
+    return jsonify(received=True)  # [4]  # [4:end]
+`
+
+const blocks = [
+  { key: 'js', label: 'JavaScript', language: 'js', code: codeJS },
+  { key: 'ts', label: 'TypeScript', language: 'ts', code: codeTS },
+  { key: 'py', label: 'Python', language: 'py', code: codePY },
+]
 
 // Workbench demo spec (unchanged)
 const customsSpec = {
@@ -85,9 +132,9 @@ const customsSpec = {
   <div class="mx-auto max-w-6xl p-6 space-y-4">
     <div class="flex items-start justify-between">
       <div>
-        <h1 class="text-2xl font-bold">Step ⇄ Code Walkthrough</h1>
+        <h1 class="text-2xl font-bold">Tabbed Step ⇄ Code Walkthrough</h1>
         <p class="text-neutral-600 dark:text-neutral-400">
-          Click a step to highlight the matching lines.
+          Click a step to highlight the matching lines. Switch tabs to see the same steps in different languages.
         </p>
       </div>
 
@@ -102,13 +149,13 @@ const customsSpec = {
       </button>
     </div>
 
-    <!-- Single-code walkthrough -->
-    <StepCodeWalkthrough
+    <!-- Tabbed walkthrough -->
+    <StepCodeGroupWalkthrough
       :steps="steps"
-      :code="sampleCode"
-      language="js"
+      :blocks="blocks"
       :parse-markers="true"
       :initial-step="0"
+      :initial-block="0"
     />
 
     <!-- floating fab (optional) -->
@@ -122,8 +169,9 @@ const customsSpec = {
       Workbench
     </button>
 
-    <!-- Drawer (left exactly as you had it) -->
+    <!-- Drawer (unchanged) -->
     <WorkbenchDrawer v-model:open="wbOpen" :spec="customsSpec" />
   </div>
 </template>
+
 
