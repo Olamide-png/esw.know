@@ -1,14 +1,5 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useToast } from '@/components/ui/use-toast'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Input } from '@/components/ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Badge } from '@/components/ui/badge'
-import KeyValueEditor from '@/components/tryit/KeyValueEditor.vue'
-import JsonEditor from '@/components/tryit/JsonEditor.vue'
 
 const props = withDefaults(defineProps<{
   title?: string
@@ -31,8 +22,6 @@ const props = withDefaults(defineProps<{
   defaultQuery: () => ({}),
   defaultHeaders: () => ({})
 })
-
-const { toast } = useToast()
 
 // state
 const envIdx = ref(0)
@@ -86,7 +75,6 @@ async function send() {
     respHeaders.value = {}
     respCookies.value = []
 
-    // prepare headers
     const h: Record<string, string> = {}
     headers.value.filter(hh => hh.enabled && hh.key).forEach(hh => { h[hh.key] = hh.value })
     if (props.auth === 'bearer' && bearer.value) h['Authorization'] = `Bearer ${bearer.value}`
@@ -115,7 +103,6 @@ async function send() {
   } catch (e: any) {
     status.value = 0
     respBody.value = e?.data?.message || e?.message || 'Request failed'
-    ;(toast as any)({ title: 'Request failed', description: String(respBody.value) })
   } finally {
     sending.value = false
   }
@@ -136,101 +123,98 @@ function loadExample(label: string) {
 </script>
 
 <template>
-  <Card class="w-full">
-    <CardHeader class="gap-2">
+  <div class="w-full rounded-xl border bg-background shadow-sm">
+    <div class="p-4 border-b">
       <div class="flex flex-wrap items-center gap-2">
-        <Badge :variant="status === 0 ? 'destructive' : 'secondary'" class="uppercase tracking-wide">{{ method }}</Badge>
-        <CardTitle class="truncate">{{ title || path }}</CardTitle>
+        <span class="px-2 py-1 text-xs uppercase tracking-wide rounded bg-muted text-foreground">
+          {{ method }}
+        </span>
+        <h2 class="font-semibold truncate">{{ title || path }}</h2>
       </div>
 
-      <div class="flex flex-wrap items-center gap-2 mt-2">
-        <Select v-model="envIdx">
-          <SelectTrigger class="w-[320px]">
-            <SelectValue placeholder="Environment" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem v-for="(env,i) in environments" :key="i" :value="i">
-              {{ env.label }} — {{ env.baseUrl }}
-            </SelectItem>
-          </SelectContent>
-        </Select>
-        <Input :value="urlPreview" readonly class="flex-1 font-mono" />
-        <Button :disabled="sending" @click="send">{{ sending ? 'Sending…' : 'Send' }}</Button>
+      <div class="mt-3 flex flex-wrap items-center gap-2">
+        <select v-model="envIdx" class="w-80 px-2 py-2 rounded border bg-background">
+          <option v-for="(env,i) in environments" :key="i" :value="i">
+            {{ env.label }} — {{ env.baseUrl }}
+          </option>
+        </select>
+
+        <input :value="urlPreview" readonly class="flex-1 min-w-[240px] px-2 py-2 rounded border font-mono bg-muted/30" />
+        <button :disabled="sending" @click="send"
+                class="px-3 py-2 rounded bg-primary text-primary-foreground disabled:opacity-50">
+          {{ sending ? 'Sending…' : 'Send' }}
+        </button>
       </div>
 
-      <div class="flex flex-wrap gap-3 text-sm text-muted-foreground mt-1">
-        <span>cURL preview: <code class="font-mono break-all">{{ curl }}</code></span>
+      <div class="mt-2 text-sm text-muted-foreground">
+        cURL: <code class="font-mono break-all">{{ curl }}</code>
       </div>
-    </CardHeader>
+    </div>
 
-    <CardContent>
-      <Tabs default-value="body" class="w-full">
-        <TabsList>
-          <TabsTrigger value="body">Body</TabsTrigger>
-          <TabsTrigger value="query">Query</TabsTrigger>
-          <TabsTrigger value="headers">Headers</TabsTrigger>
-          <TabsTrigger value="cookies">Auth</TabsTrigger>
-        </TabsList>
+    <div class="p-4">
+      <div class="flex gap-2 text-sm font-medium mb-3">
+        <a href="#try-body" class="px-2 py-1 rounded bg-muted">Body</a>
+        <a href="#try-query" class="px-2 py-1 rounded bg-muted">Query</a>
+        <a href="#try-headers" class="px-2 py-1 rounded bg-muted">Headers</a>
+        <a href="#try-auth" class="px-2 py-1 rounded bg-muted">Auth</a>
+      </div>
 
-        <!-- Body Tab -->
-        <TabsContent value="body" class="mt-4">
-          <div v-if="['POST','PUT','PATCH'].includes(method)" class="space-y-3">
-            <div class="flex flex-wrap items-center gap-2">
-              <label class="text-sm">Content-Type</label>
-              <Select v-model="selectedContentType">
-                <SelectTrigger class="w-[320px]"><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem v-for="ct in contentTypes" :key="ct" :value="ct">{{ ct }}</SelectItem>
-                </SelectContent>
-              </Select>
+      <!-- Body -->
+      <section id="try-body" class="space-y-3 mb-6">
+        <h3 class="font-semibold">Body</h3>
+        <div v-if="['POST','PUT','PATCH'].includes(method)" class="space-y-3">
+          <div class="flex flex-wrap items-center gap-3">
+            <label class="text-sm">Content-Type</label>
+            <select v-model="selectedContentType" class="w-80 px-2 py-2 rounded border bg-background">
+              <option v-for="ct in contentTypes" :key="ct" :value="ct">{{ ct }}</option>
+            </select>
 
-              <div v-if="exampleLabels.length" class="flex items-center gap-2">
-                <span class="text-sm">Pick an example</span>
-                <Select @update:modelValue="loadExample">
-                  <SelectTrigger class="w-[260px]">
-                    <SelectValue placeholder="Choose…" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem v-for="lbl in exampleLabels" :key="lbl" :value="lbl">{{ lbl }}</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+            <div v-if="exampleLabels.length" class="flex items-center gap-2">
+              <span class="text-sm">Pick example</span>
+              <select class="w-64 px-2 py-2 rounded border bg-background"
+                      @change="loadExample(($event.target as HTMLSelectElement).value)">
+                <option value="" selected disabled>Choose…</option>
+                <option v-for="lbl in exampleLabels" :key="lbl" :value="lbl">{{ lbl }}</option>
+              </select>
             </div>
-            <JsonEditor v-model="body" />
           </div>
-          <div v-else class="text-sm text-muted-foreground">No body for {{ method }}.</div>
-        </TabsContent>
+          <JsonEditor v-model="body" />
+        </div>
+        <div v-else class="text-sm text-muted-foreground">No body for {{ method }}.</div>
+      </section>
 
-        <!-- Query Tab -->
-        <TabsContent value="query" class="mt-4">
-          <KeyValueEditor v-model:rows="query" add-label="Add query" />
-        </TabsContent>
+      <!-- Query -->
+      <section id="try-query" class="mb-6">
+        <h3 class="font-semibold mb-2">Query</h3>
+        <KeyValueEditor v-model:rows="query" add-label="Add query" />
+      </section>
 
-        <!-- Headers Tab -->
-        <TabsContent value="headers" class="mt-4">
-          <KeyValueEditor v-model:rows="headers" add-label="Add header" />
-        </TabsContent>
+      <!-- Headers -->
+      <section id="try-headers" class="mb-6">
+        <h3 class="font-semibold mb-2">Headers</h3>
+        <KeyValueEditor v-model:rows="headers" add-label="Add header" />
+      </section>
 
-        <!-- Auth Tab -->
-        <TabsContent value="cookies" class="mt-4">
-          <div v-if="auth==='bearer'" class="space-y-2">
-            <label class="text-sm">Bearer token</label>
-            <Input v-model="bearer" type="password" placeholder="Paste token…" />
-          </div>
-          <div v-else-if="auth==='apikey'" class="space-y-2">
-            <label class="text-sm">API key ({{ apikeyHeader }})</label>
-            <Input v-model="apikey" type="password" placeholder="Paste key…" />
-          </div>
-          <div v-else class="text-sm text-muted-foreground">No auth required.</div>
-        </TabsContent>
-      </Tabs>
+      <!-- Auth -->
+      <section id="try-auth" class="mb-6">
+        <h3 class="font-semibold mb-2">Auth</h3>
+        <div v-if="auth==='bearer'" class="space-y-2">
+          <label class="text-sm">Bearer token</label>
+          <input v-model="bearer" type="password" class="w-full px-2 py-2 rounded border bg-background" placeholder="Paste token…" />
+        </div>
+        <div v-else-if="auth==='apikey'" class="space-y-2">
+          <label class="text-sm">API key ({{ apikeyHeader }})</label>
+          <input v-model="apikey" type="password" class="w-full px-2 py-2 rounded border bg-background" placeholder="Paste key…" />
+        </div>
+        <div v-else class="text-sm text-muted-foreground">No auth required.</div>
+      </section>
 
-      <!-- Response panel -->
-      <div class="mt-6 rounded-lg border p-4">
-        <div class="flex flex-wrap items-center gap-3">
-          <Badge v-if="status!==null" :variant="status>=200 && status<300 ? 'default' : 'secondary'">Status: {{ status }}</Badge>
-          <Badge>Time: {{ timeMs ?? '—' }} ms</Badge>
-          <Badge>Size: {{ bytesFmt(sizeBytes) }}</Badge>
+      <!-- Response -->
+      <section class="mt-6 rounded-lg border p-4">
+        <div class="flex flex-wrap items-center gap-3 text-sm">
+          <span v-if="status!==null" class="px-2 py-1 rounded bg-muted">Status: {{ status }}</span>
+          <span class="px-2 py-1 rounded bg-muted">Time: {{ timeMs ?? '—' }} ms</span>
+          <span class="px-2 py-1 rounded bg-muted">Size: {{ bytesFmt(sizeBytes) }}</span>
         </div>
         <div class="grid md:grid-cols-2 gap-4 mt-4">
           <div>
@@ -244,7 +228,8 @@ function loadExample(label: string) {
             <pre class="bg-muted rounded p-3 overflow-auto text-sm"><code>{{ respCookies }}</code></pre>
           </div>
         </div>
-      </div>
-    </CardContent>
-  </Card>
+      </section>
+    </div>
+  </div>
 </template>
+
