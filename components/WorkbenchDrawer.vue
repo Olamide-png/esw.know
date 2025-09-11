@@ -285,8 +285,11 @@ function onKey(e: KeyboardEvent) {
 onMounted(() => window.addEventListener('keydown', onKey))
 onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
 
-/** -------- resizable height -------- */
-const height = ref<number>(Math.min(560, Math.round(window.innerHeight * 0.7)))
++/** -------- resizable height (SSR-safe) -------- */
++const height = ref<number>(560) // default for SSR
++onMounted(() => {
++  height.value = Math.min(560, Math.round(window.innerHeight * 0.7))
++})
 const heightPx = computed(() => `${height.value}px`)
 let dragging = false
 let startY = 0
