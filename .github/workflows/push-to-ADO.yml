@@ -13,9 +13,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Remove .github folder
-        run: rm -rf .github
+      
+      - name: filter out .github folder
+        run: git filter-branch --force --index-filter "git rm --cached --ignore-unmatch .github*" --prune-empty --tag-name-filter cat -- --all
 
       - name: Push to Azure DevOps repository
         env:
@@ -26,6 +26,6 @@ jobs:
           ADO_PAT: ${{ secrets.ADO_PAT }}
         run: |
           git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.email "vpalomares@eshopworld.com"
           git remote add target https://${ADO_ORG}:${ADO_PAT}@dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_git/${ADO_REPO}
           git push --force target HEAD:${ADO_BRANCH}
