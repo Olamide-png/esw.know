@@ -22,6 +22,7 @@
             type="button"
             @click="setActive(i)"
             @mouseenter="preview(i)"
+            @mouseleave="previewIndex = null"
             class="w-full text-left"
             :aria-current="activeIndex === i ? 'step' : undefined"
           >
@@ -113,13 +114,18 @@
                bg-neutral-50/70 dark:bg-neutral-950/70
                max-h-[560px] shadow-inner"
       >
-        <pre :class="['m-0 p-4 text-sm leading-6', blocks[activeBlockIndex]?.language ? `language-${blocks[activeBlockIndex]?.language}` : '']">
+        <pre
+          :key="'code-'+activeBlockIndex"
+          :class="['m-0 p-4 text-sm leading-6', blocks[activeBlockIndex]?.language ? `language-${blocks[activeBlockIndex]?.language}` : '']"
+        >
           <code>
             <template v-for="(line, i) in displayLines" :key="i">
               <div
                 :ref="el => (lineEls[i] = el)"
-                class="group flex gap-4 pr-4 -mr-4 rounded-md"
-                :class="isHighlighted(i+1) ? 'bg-primary/10 dark:bg-primary/20 ring-1 ring-primary/30' : ''"
+                class="group relative flex gap-4 pr-4 -mr-4 rounded-md transition-colors"
+                :class="isHighlighted(i+1)
+                  ? 'bg-primary/10 dark:bg-primary/20 ring-1 ring-primary/30 border-l-2 border-primary/60'
+                  : 'border-l-2 border-transparent'"
               >
                 <span class="select-none w-10 shrink-0 text-right pr-2 opacity-50 tabular-nums font-mono">{{ i + 1 }}</span>
                 <span class="whitespace-pre-wrap font-mono">{{ line }}</span>
@@ -238,6 +244,9 @@ function rebuildForBlock(idx: number) {
   const text = (block?.code || '').replace(/\r\n/g, '\n')
   rawLines.value = text.split('\n')
 
+  // reset element refs so scroll/highlight binds to the new DOM
+  lineEls.value = []
+
   if (props.parseMarkers) {
     const map = buildFromMarkers(rawLines.value)
     parsedMapPerBlock.value.set(String(idx), map)
@@ -349,8 +358,7 @@ function preview(i: number) {
 
 function setActiveBlock(i: number) {
   activeBlockIndex.value = clamp(i, 0, props.blocks.length - 1)
-  // reset preview to avoid stale highlight
-  previewIndex.value = null
+  previewIndex.value = null // avoid stale highlight
   scrollToFirstHighlighted()
 }
 
@@ -358,7 +366,6 @@ function goNext() { setActive(activeIndex.value + 1) }
 function goPrev() { setActive(activeIndex.value - 1) }
 
 function scrollToFirstHighlighted(isPreview = false) {
-  // center the first highlighted line
   const total = displayLines.value.length
   for (let i = 0; i < total; i++) {
     if (isHighlighted(i + 1)) {
@@ -385,3 +392,4 @@ function languageLabel(lang?: string) {
 
 function clamp(n: number, a: number, b: number) { return Math.min(Math.max(n, a), b) }
 </script>
+
