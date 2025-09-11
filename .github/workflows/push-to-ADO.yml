@@ -1,0 +1,31 @@
+name: Push to ADO
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  push-to-other-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Remove .github folder
+        run: rm -rf .github
+
+      - name: Push to Azure DevOps repository
+        env:
+          ADO_ORG: ${{ secrets.ADO_ORG }}
+          ADO_PROJECT: ${{ secrets.ADO_PROJECT }}
+          ADO_REPO: ${{ secrets.ADO_REPO }}
+          ADO_BRANCH: ${{ secrets.ADO_BRANCH }}
+          ADO_PAT: ${{ secrets.ADO_PAT }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote add target https://${ADO_ORG}:${ADO_PAT}@dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_git/${ADO_REPO}
+          git push --force target HEAD:${ADO_BRANCH}
