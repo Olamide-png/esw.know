@@ -17,7 +17,9 @@ function sample() { model.value ||= '{\n  "example": true\n}' }
       <button class="underline" @click="minify">Minify</button>
       <button class="underline" @click="sample">Sample</button>
     </div>
-    <textarea v-model="model" class="w-full min-h-[220px] font-mono text-sm rounded border p-2"
+    <textarea v-model="model"
+              class="w-full min-h-[220px] font-mono text-sm rounded border p-2 bg-background"
               spellcheck="false" />
   </div>
 </template>
+

@@ -22,12 +22,13 @@ function setRow(i:number, patch: Partial<{enabled:boolean;key:string;value:strin
     <div v-for="(r,i) in rows" :key="i" class="grid grid-cols-[auto,1fr,1fr,auto] items-center gap-2">
       <input type="checkbox" :checked="r.enabled"
              @change="setRow(i,{enabled:($event.target as HTMLInputElement).checked})" />
-      <input class="border rounded px-2 py-1 text-sm font-mono" :value="r.key" placeholder="key"
+      <input class="border rounded px-2 py-2 text-sm font-mono bg-background" :value="r.key" placeholder="key"
              @input="setRow(i,{key:($event.target as HTMLInputElement).value})">
-      <input class="border rounded px-2 py-1 text-sm font-mono" :value="r.value" placeholder="value"
+      <input class="border rounded px-2 py-2 text-sm font-mono bg-background" :value="r.value" placeholder="value"
              @input="setRow(i,{value:($event.target as HTMLInputElement).value})">
-      <button class="text-xs text-destructive" @click="delRow(i)">Remove</button>
+      <button class="text-xs text-red-600 hover:underline" @click="delRow(i)">Remove</button>
     </div>
     <button class="text-sm underline" @click="addRow">+ {{ addLabel }}</button>
   </div>
 </template>
+
