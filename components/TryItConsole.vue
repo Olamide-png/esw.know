@@ -4,9 +4,11 @@ import { ref, computed } from 'vue'
 const props = withDefaults(defineProps<{
   title?: string
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
-  /** Optional: if provided, used only as initial value; otherwise starts empty. */
+  /** Optional initial value only; starts blank if omitted. */
   path?: string
   environments: { label: string; baseUrl: string }[]
+  /** Optional list of suggested paths for the datalist (purely suggestions, not a dropdown). */
+  paths?: string[]
   auth?: 'none' | 'bearer' | 'apikey'
   apikeyHeader?: string
   contentTypes?: string[]
@@ -21,12 +23,13 @@ const props = withDefaults(defineProps<{
   contentTypes: () => ['application/json'],
   defaultBody: '',
   defaultQuery: () => ({}),
-  defaultHeaders: () => ({})
+  defaultHeaders: () => ({}),
+  paths: () => []
 })
 
 // state
 const envIdx = ref(0)
-/** Editable Resource/Path input (starts blank by default). */
+/** Editable Resource/Path input (blank by default). */
 const pathInput = ref(props.path ?? '')
 
 const selectedContentType = ref(props.contentTypes[0])
@@ -155,18 +158,26 @@ function loadExample(label: string) {
       </div>
 
       <div class="mt-3 grid gap-2 md:grid-cols-[auto,1fr,auto] items-center">
+        <!-- Environment dropdown (kept as a select) -->
         <select v-model="envIdx" class="w-80 px-2 py-2 rounded border bg-background">
           <option v-for="(env,i) in environments" :key="i" :value="i">
             {{ env.label }} — {{ env.baseUrl }}
           </option>
         </select>
 
-        <!-- Editable Resource / Path (blank by default) -->
-        <input
-          v-model="pathInput"
-          class="w-full px-2 py-2 rounded border font-mono bg-muted/30"
-          placeholder="/api/v2/endpoint or https://api.example.com/api/v2/endpoint"
-        />
+        <!-- ✅ Editable text input (NOT a select). Optional suggestions via datalist. -->
+        <div class="relative w-full">
+          <input
+            v-model="pathInput"
+            :list="props.paths?.length ? 'tryit-paths' : undefined"
+            class="w-full px-2 py-2 rounded border font-mono bg-muted/30"
+            placeholder="/api/v2/endpoint or https://api.example.com/api/v2/endpoint"
+            autocomplete="off"
+          />
+          <datalist id="tryit-paths" v-if="props.paths?.length">
+            <option v-for="p in props.paths" :key="p" :value="p"></option>
+          </datalist>
+        </div>
 
         <button :disabled="sending" @click="send"
                 class="px-3 py-2 rounded bg-primary text-primary-foreground disabled:opacity-50">
@@ -263,6 +274,7 @@ function loadExample(label: string) {
     </div>
   </div>
 </template>
+
 
 
 
