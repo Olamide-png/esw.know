@@ -4,7 +4,8 @@ import { ref, computed } from 'vue'
 const props = withDefaults(defineProps<{
   title?: string
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
-  path: string
+  /** Optional. If provided, it's used only as the initial value (no prefill required). */
+  path?: string
   environments: { label: string; baseUrl: string }[]
   auth?: 'none' | 'bearer' | 'apikey'
   apikeyHeader?: string
@@ -25,7 +26,9 @@ const props = withDefaults(defineProps<{
 
 // state
 const envIdx = ref(0)
-const urlPreview = computed(() => `${props.environments[envIdx.value]?.baseUrl?.replace(/\/$/, '')}${props.path}`)
+/** Editable Resource/Path input; defaults to empty (no prefill). */
+const pathInput = ref(props.path ?? '')
+
 const selectedContentType = ref(props.contentTypes[0])
 const body = ref(props.defaultBody)
 const query = ref(Object.entries(props.defaultQuery).map(([k, v]) => ({ enabled: true, key: k, value: v })))
@@ -44,14 +47,35 @@ const respBody = ref('')
 const respHeaders = ref<Record<string, string>>({})
 const respCookies = ref<{ name: string; value: string }[]>([])
 
+function buildBase() {
+  return props.environments[envIdx.value]?.baseUrl?.replace(/\/$/, '') || ''
+}
+
+function joinUrlAndQuery(u: string, q: string) {
+  if (!q) return u
+  return u.includes('?') ? `${u}&${q}` : `${u}?${q}`
+}
+
 function computeURL() {
-  const base = props.environments[envIdx.value]?.baseUrl?.replace(/\/$/, '') || ''
+  const p = (pathInput.value || '').trim()
   const q = query.value
     .filter(r => r.enabled && r.key)
     .map(r => `${encodeURIComponent(r.key)}=${encodeURIComponent(r.value ?? '')}`)
     .join('&')
-  return q ? `${base}${props.path}?${q}` : `${base}${props.path}`
+
+  // If user pasted a full absolute URL, use it directly.
+  if (/^https?:\/\//i.test(p)) {
+    return joinUrlAndQuery(p, q)
+  }
+
+  const base = buildBase()
+  if (!p) return joinUrlAndQuery(base, q) // allow calling just the base if desired
+
+  const withSlash = p.startsWith('/') ? p : `/${p}`
+  return joinUrlAndQuery(`${base}${withSlash}`, q)
 }
+
+const urlPreview = computed(() => computeURL())
 
 const curl = computed(() => {
   const url = computeURL()
@@ -129,17 +153,23 @@ function loadExample(label: string) {
         <span class="px-2 py-1 text-xs uppercase tracking-wide rounded bg-muted text-foreground">
           {{ method }}
         </span>
-        <h2 class="font-semibold truncate">{{ title || path }}</h2>
+        <h2 class="font-semibold truncate">{{ title || (pathInput || 'Enter Resource Path') }}</h2>
       </div>
 
-      <div class="mt-3 flex flex-wrap items-center gap-2">
+      <div class="mt-3 grid gap-2 md:grid-cols-[auto,1fr,auto] items-center">
         <select v-model="envIdx" class="w-80 px-2 py-2 rounded border bg-background">
           <option v-for="(env,i) in environments" :key="i" :value="i">
             {{ env.label }} — {{ env.baseUrl }}
           </option>
         </select>
 
-        <input :value="urlPreview" readonly class="flex-1 min-w-[240px] px-2 py-2 rounded border font-mono bg-muted/30" />
+        <!-- Editable Resource / Path (now empty by default) -->
+        <input
+          v-model="pathInput"
+          class="w-full px-2 py-2 rounded border font-mono bg-muted/30"
+          placeholder="/api/v2/YourEndpoint or https://api.example.com/api/v2/YourEndpoint"
+        />
+
         <button :disabled="sending" @click="send"
                 class="px-3 py-2 rounded bg-primary text-primary-foreground disabled:opacity-50">
           {{ sending ? 'Sending…' : 'Send' }}
@@ -147,6 +177,9 @@ function loadExample(label: string) {
       </div>
 
       <div class="mt-2 text-sm text-muted-foreground">
+        Resolved URL: <code class="font-mono break-all">{{ urlPreview }}</code>
+      </div>
+      <div class="mt-1 text-sm text-muted-foreground">
         cURL: <code class="font-mono break-all">{{ curl }}</code>
       </div>
     </div>
@@ -232,4 +265,5 @@ function loadExample(label: string) {
     </div>
   </div>
 </template>
+
 
