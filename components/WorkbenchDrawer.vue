@@ -112,19 +112,16 @@
         <section v-show="activeTab==='API Explorer'" class="col-span-12 lg:col-span-12 grid h-full grid-cols-12">
           <!-- Left: Operation picker -->
           <div class="col-span-12 lg:col-span-4 border-r border-neutral-200 dark:border-neutral-800 overflow-auto p-4 space-y-4">
+            <!-- EDITABLE Resource / Path -->
             <div class="space-y-1">
               <label class="text-xs opacity-70">Resource / Path</label>
-              <select
+              <input
                 v-model="currentPathKey"
-                class="w-full rounded-md border px-2 py-1.5 text-sm
+                class="w-full rounded-md border px-2 py-1.5 text-sm font-mono
                        border-neutral-200 dark:border-neutral-800
                        bg-white dark:bg-neutral-900"
-              >
-                <option
-                  v-for="(p, key) in spec.paths"
-                  :key="key"
-                >{{ key }}</option>
-              </select>
+                placeholder="/customs/items or /anything/123?limit=10"
+              />
             </div>
 
             <div class="space-y-1">
@@ -318,24 +315,16 @@ function stopDrag() {
 const tabs = ['Shell', 'API Explorer'] as const
 const activeTab = ref<typeof tabs[number]>('Shell')
 
-/** ==========================================================
- *  SHELL (minimal CLI to hit your API)
- *  Commands:
- *   - help
- *   - set base <url>
- *   - get|post|put|delete <path> [json]
- * ========================================================== */
+/** ================= SHELL ================= */
 type ShellLine = { kind: 'in' | 'out'; text: string }
 const shellLines = ref<ShellLine[]>([
   { kind: 'out', text: 'Welcome to ESW Catalog Shell!' },
   { kind: 'out', text: 'Type "help" to see available commands.' }
 ])
 const shellInput = ref('')
-const baseUrl = ref('https://httpbin.org') // change on page via prop if you like
-
+const baseUrl = ref('https://httpbin.org')
 function pushIn(t = '') { shellLines.value.push({ kind: 'in', text: t }) }
 function pushOut(t = '') { shellLines.value.push({ kind: 'out', text: t }) }
-
 async function runShell() {
   const cmd = shellInput.value.trim()
   if (!cmd) return
@@ -374,9 +363,7 @@ async function runShell() {
   try {
     const res = await fetch(baseUrl.value.replace(/\/+$/,'') + path, {
       method,
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: body ? JSON.stringify(body) : undefined
     })
     const text = await res.text()
@@ -388,36 +375,32 @@ async function runShell() {
   }
 }
 
-/** ==========================================================
- *  API EXPLORER (very small, schema-driven)
- *  Props: spec (optional) — if not provided, we use a tiny demo spec.
- * ========================================================== */
+/** ================= API EXPLORER ================= */
 type ParamGroup = Record<string, string>
 type Operation = {
   summary?: string
   description?: string
   params?: { path?: ParamGroup; query?: ParamGroup }
   headers?: ParamGroup
-  body?: any // JSON schema-ish (not enforced here)
+  body?: any
 }
 type Spec = {
   baseUrl?: string
   paths: Record<string, Partial<Record<'GET'|'POST'|'PUT'|'DELETE', Operation>>>
 }
 
-const props = withDefaults(defineProps<{
-  spec?: Spec
-}>(), {})
-
+const props = withDefaults(defineProps<{ spec?: Spec }>(), {})
 const spec = computed<Spec>(() => props.spec || demoSpec())
 
-const currentPathKey = ref<string>(Object.keys(spec.value.paths)[0] || '/')
+// Editable path: start empty (no prefill)
+const currentPathKey = ref<string>('')
+
+// Default method is GET if path isn't in spec
 const method = ref<'GET'|'POST'|'PUT'|'DELETE'>(firstMethodFor(currentPathKey.value))
 
 watch(spec, () => {
-  const first = Object.keys(spec.value.paths)[0] || '/'
-  currentPathKey.value = first
-  method.value = firstMethodFor(first)
+  // keep user's typed path; just adjust method based on what's available for that path
+  method.value = firstMethodFor(currentPathKey.value)
 })
 
 watch(currentPathKey, (k) => {
@@ -429,7 +412,14 @@ function firstMethodFor(k: string): 'GET'|'POST'|'PUT'|'DELETE' {
   return (Object.keys(ops)[0] as any) || 'GET'
 }
 
-const availableMethods = computed(() => Object.keys(spec.value.paths[currentPathKey.value] || {}) as Array<'GET'|'POST'|'PUT'|'DELETE'>)
+// If the path isn't in the spec, offer a standard set of methods
+const availableMethods = computed(
+  () => {
+    const ops = spec.value.paths[currentPathKey.value]
+    return (ops ? Object.keys(ops) : ['GET','POST','PUT','DELETE']) as Array<'GET'|'POST'|'PUT'|'DELETE'>
+  }
+)
+
 const operation = computed<Operation>(() => (spec.value.paths[currentPathKey.value] || {})[method.value] || {})
 
 const paramValues = ref<{ path: Record<string,string>, query: Record<string,string> }>({ path: {}, query: {} })
@@ -437,14 +427,11 @@ const headerValues = ref<Record<string,string>>({})
 const bodyText = ref<string>('')
 
 watch(operation, (op) => {
-  // init params
   paramValues.value = {
     path: Object.fromEntries(Object.keys(op.params?.path || {}).map(k => [k, ''])),
     query: Object.fromEntries(Object.keys(op.params?.query || {}).map(k => [k, '']))
   }
-  // init headers
   headerValues.value = Object.fromEntries(Object.keys(op.headers || {}).map(k => [k, (op.headers as any)[k] || '']))
-  // init body
   bodyText.value = op.body ? JSON.stringify(op.body, null, 2) : ''
 }, { immediate: true })
 
@@ -453,7 +440,7 @@ const queryParamKeys = computed(() => Object.keys(operation.value.params?.query 
 const supportsBody = computed(() => method.value === 'POST' || method.value === 'PUT' || method.value === 'DELETE')
 
 function buildPath() {
-  let p = currentPathKey.value
+  let p = currentPathKey.value || ''
   for (const k of Object.keys(paramValues.value.path)) {
     p = p.replace(new RegExp('\\{' + k + '\\}', 'g'), encodeURIComponent(paramValues.value.path[k] || ''))
   }
@@ -560,3 +547,4 @@ function demoSpec(): Spec {
 .slide-up-enter-active, .slide-up-leave-active { transition: transform .2s ease, opacity .2s ease; }
 .slide-up-enter-from, .slide-up-leave-to { transform: translateY(12px); opacity: 0; }
 </style>
+
