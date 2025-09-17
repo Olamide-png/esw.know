@@ -4,7 +4,7 @@ import { ref, computed } from 'vue'
 const props = withDefaults(defineProps<{
   title?: string
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
-  /** Optional. If provided, it's used only as the initial value (no prefill required). */
+  /** Optional: if provided, used only as initial value; otherwise starts empty. */
   path?: string
   environments: { label: string; baseUrl: string }[]
   auth?: 'none' | 'bearer' | 'apikey'
@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<{
   defaultBody?: string
   defaultQuery?: Record<string, string>
   defaultHeaders?: Record<string, string>
-  examplePicker?: { [label: string]: string } // label -> body string
+  examplePicker?: { [label: string]: string }
 }>(), {
   title: undefined,
   auth: 'none',
@@ -26,7 +26,7 @@ const props = withDefaults(defineProps<{
 
 // state
 const envIdx = ref(0)
-/** Editable Resource/Path input; defaults to empty (no prefill). */
+/** Editable Resource/Path input (starts blank by default). */
 const pathInput = ref(props.path ?? '')
 
 const selectedContentType = ref(props.contentTypes[0])
@@ -50,12 +50,10 @@ const respCookies = ref<{ name: string; value: string }[]>([])
 function buildBase() {
   return props.environments[envIdx.value]?.baseUrl?.replace(/\/$/, '') || ''
 }
-
 function joinUrlAndQuery(u: string, q: string) {
   if (!q) return u
   return u.includes('?') ? `${u}&${q}` : `${u}?${q}`
 }
-
 function computeURL() {
   const p = (pathInput.value || '').trim()
   const q = query.value
@@ -63,14 +61,12 @@ function computeURL() {
     .map(r => `${encodeURIComponent(r.key)}=${encodeURIComponent(r.value ?? '')}`)
     .join('&')
 
-  // If user pasted a full absolute URL, use it directly.
-  if (/^https?:\/\//i.test(p)) {
-    return joinUrlAndQuery(p, q)
-  }
+  // Allow absolute URLs
+  if (/^https?:\/\//i.test(p)) return joinUrlAndQuery(p, q)
 
+  // Relative path against selected env
   const base = buildBase()
-  if (!p) return joinUrlAndQuery(base, q) // allow calling just the base if desired
-
+  if (!p) return joinUrlAndQuery(base, q)
   const withSlash = p.startsWith('/') ? p : `/${p}`
   return joinUrlAndQuery(`${base}${withSlash}`, q)
 }
@@ -153,7 +149,9 @@ function loadExample(label: string) {
         <span class="px-2 py-1 text-xs uppercase tracking-wide rounded bg-muted text-foreground">
           {{ method }}
         </span>
-        <h2 class="font-semibold truncate">{{ title || (pathInput || 'Enter Resource Path') }}</h2>
+        <h2 class="font-semibold truncate">
+          {{ title || (pathInput || 'Enter Resource Path') }}
+        </h2>
       </div>
 
       <div class="mt-3 grid gap-2 md:grid-cols-[auto,1fr,auto] items-center">
@@ -163,11 +161,11 @@ function loadExample(label: string) {
           </option>
         </select>
 
-        <!-- Editable Resource / Path (now empty by default) -->
+        <!-- Editable Resource / Path (blank by default) -->
         <input
           v-model="pathInput"
           class="w-full px-2 py-2 rounded border font-mono bg-muted/30"
-          placeholder="/api/v2/YourEndpoint or https://api.example.com/api/v2/YourEndpoint"
+          placeholder="/api/v2/endpoint or https://api.example.com/api/v2/endpoint"
         />
 
         <button :disabled="sending" @click="send"
@@ -265,5 +263,6 @@ function loadExample(label: string) {
     </div>
   </div>
 </template>
+
 
 
