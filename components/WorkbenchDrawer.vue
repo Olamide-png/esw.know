@@ -254,9 +254,52 @@ curl -X {{ method }} '{{ builtUrl }}'{{ curlHeaders }}{{ curlBody }}
             </div>
 
             <!-- Response -->
-            <div v-if="resp" class="border-t border-neutral-200 dark:border-neutral-800 p-4 overflow-auto max-h-[40vh]">
-              <div class="text-xs mb-2 opacity-70">Response</div>
-              <pre class="text-xs whitespace-pre-wrap break-words">{{ resp }}</pre>
+            <div v-if="respDisplay" class="border-t border-neutral-200 dark:border-neutral-800 p-4 overflow-auto max-h-[40vh]">
+              <div class="mb-2 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs opacity-70">Response</span>
+
+                  <div class="flex items-center gap-1">
+                    <!-- status -->
+                    <span
+                      class="inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-xs
+                             border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900"
+                      :title="'HTTP status ' + (statusCode ?? '')"
+                    >
+                      <span :class="['h-1.5 w-1.5 rounded-full', statusDotClass]"></span>
+                      {{ statusCode }}
+                    </span>
+
+                    <!-- duration -->
+                    <span
+                      class="inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-xs
+                             border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900"
+                      title="Duration"
+                    >
+                      ⏱ {{ elapsedMs ?? 0 }} ms
+                    </span>
+
+                    <!-- size -->
+                    <span
+                      class="inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-xs
+                             border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900"
+                      title="Payload size"
+                    >
+                      ⬇ {{ prettyBytes(respBytes ?? 0) }}
+                    </span>
+                  </div>
+                </div>
+
+                <button
+                  class="rounded-md border px-2.5 py-1 text-xs hover:bg-neutral-50 dark:hover:bg-neutral-900
+                         border-neutral-200 dark:border-neutral-800"
+                  @click="copyResponse"
+                >
+                  Copy
+                </button>
+              </div>
+
+              <pre class="text-xs whitespace-pre-wrap break-words">{{ respDisplay }}</pre>
             </div>
           </div>
         </section>
@@ -399,14 +442,11 @@ const currentPathKey = ref<string>('')
 const method = ref<'GET'|'POST'|'PUT'|'DELETE'>(firstMethodFor(currentPathKey.value))
 
 watch(spec, () => {
-  // keep user's typed path; just adjust method based on what's available for that path
   method.value = firstMethodFor(currentPathKey.value)
 })
-
 watch(currentPathKey, (k) => {
   method.value = firstMethodFor(k)
 })
-
 function firstMethodFor(k: string): 'GET'|'POST'|'PUT'|'DELETE' {
   const ops = spec.value.paths[k] || {}
   return (Object.keys(ops)[0] as any) || 'GET'
@@ -419,7 +459,6 @@ const availableMethods = computed(
     return (ops ? Object.keys(ops) : ['GET','POST','PUT','DELETE']) as Array<'GET'|'POST'|'PUT'|'DELETE'>
   }
 )
-
 const operation = computed<Operation>(() => (spec.value.paths[currentPathKey.value] || {})[method.value] || {})
 
 const paramValues = ref<{ path: Record<string,string>, query: Record<string,string> }>({ path: {}, query: {} })
@@ -485,12 +524,44 @@ async function copyCurl() {
   try { await navigator.clipboard.writeText(cmd) } catch {}
 }
 
+/** ===== Response meta + helpers ===== */
+const statusCode = ref<number | null>(null)
+const elapsedMs = ref<number | null>(null)
+const respBytes = ref<number | null>(null)
+const respDisplay = ref<string>('')   // pretty "HTTP 200\n{...}"
+const respRaw = ref<string>('')       // raw body for copy
+
+const statusDotClass = computed(() => {
+  const s = statusCode.value ?? 0
+  if (s >= 200 && s < 300) return 'bg-emerald-500'
+  if (s >= 300 && s < 400) return 'bg-amber-500'
+  return 'bg-rose-500'
+})
+
+function prettyBytes(n: number) {
+  if (n < 1024) return `${n} B`
+  const kb = n / 1024
+  if (kb < 1024) return `${kb.toFixed(1)} KB`
+  const mb = kb / 1024
+  return `${mb.toFixed(2)} MB`
+}
+
+async function copyResponse() {
+  const text = respRaw.value || ''
+  try { await navigator.clipboard.writeText(text) } catch {}
+}
+
 const loading = ref(false)
-const resp = ref<string>('')
 
 async function runRequest() {
   loading.value = true
-  resp.value = ''
+  respDisplay.value = ''
+  respRaw.value = ''
+  statusCode.value = null
+  elapsedMs.value = null
+  respBytes.value = null
+
+  const t0 = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now()
   try {
     const init: any = {
       method: method.value,
@@ -500,14 +571,26 @@ async function runRequest() {
       init.headers['Content-Type'] = init.headers['Content-Type'] || 'application/json'
       init.body = bodyText.value
     }
+
     const res = await fetch(builtUrl.value, init)
+    const t1 = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now()
+    elapsedMs.value = Math.max(0, Math.round(t1 - t0))
+    statusCode.value = res.status
+
     const text = await res.text()
+    respRaw.value = text
+    respBytes.value = (typeof TextEncoder !== 'undefined') ? new TextEncoder().encode(text).length : text.length
+
     let out = 'HTTP ' + res.status + '\n'
     try { out += JSON.stringify(JSON.parse(text), null, 2) }
     catch { out += text }
-    resp.value = out
+    respDisplay.value = out
   } catch (e: any) {
-    resp.value = 'Error: ' + (e?.message || String(e))
+    const t1 = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now()
+    elapsedMs.value = Math.max(0, Math.round(t1 - t0))
+    statusCode.value = 0
+    respBytes.value = 0
+    respDisplay.value = 'Error: ' + (e?.message || String(e))
   } finally {
     loading.value = false
   }
@@ -547,4 +630,5 @@ function demoSpec(): Spec {
 .slide-up-enter-active, .slide-up-leave-active { transition: transform .2s ease, opacity .2s ease; }
 .slide-up-enter-from, .slide-up-leave-to { transform: translateY(12px); opacity: 0; }
 </style>
+
 
