@@ -1,4 +1,4 @@
-<!-- /components/ApiSnippet.vue – Shiki v3 + sticky header + not-prose -->
+<!-- /components/ApiSnippet.vue – Shiki v3 + sticky header + not-prose + Iconify logos -->
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
 import { codeToHtml } from 'shiki'   // v3 API
@@ -36,12 +36,21 @@ const currentLang = ref(props.initialLanguage)
 const code = computed(() => props.snippets[currentLang.value] ?? '')
 const isResponse = computed(() => props.kind === 'response')
 
-const langIcon = (lang: string) => ({
-  curl: '🌐', bash: '🌐', sh: '🌐',
-  javascript: 'logos:javascript', typescript: '🟦',
-  python: '🐍', php: '🐘', java: '☕',
-  ruby: '💎', go: '🌀', json: '🧩'
-}[lang] || '📄')
+/* Icon mapping (uses @iconify-json/logos). Falls back to vscode/simple-icons where needed. */
+const iconNameFor = (k: string) =>
+  ({
+    curl: 'vscode-icons:file-type-bash',
+    bash: 'vscode-icons:file-type-bash',
+    sh: 'vscode-icons:file-type-bash',
+    javascript: 'logos:javascript',
+    typescript: 'logos:typescript-icon',
+    python: 'logos:python',
+    php: 'logos:php',
+    java: 'logos:java',
+    ruby: 'logos:ruby',
+    go: 'logos:go',
+    json: 'vscode-icons:file-type-json',
+  } as Record<string, string>)[k] || 'vscode-icons:file-type-code'
 
 async function copyCode() {
   try {
@@ -118,14 +127,14 @@ onMounted(async () => {
             <summary
               class="flex items-center gap-1 rounded-md border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 px-2 py-1 text-xs hover:bg-neutral-100 dark:hover:bg-neutral-900 cursor-pointer"
             >
-              <span class="select-none">{{ langIcon(currentLang) }}</span>
+              <Icon :name="iconNameFor(currentLang)" class="h-3.5 w-3.5 shrink-0" />
               <span class="select-none capitalize">{{ currentLang }}</span>
               <svg class="h-3 w-3 opacity-70" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z"/>
               </svg>
             </summary>
             <ul
-              class="absolute right-0 mt-1 w-44 overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 py-1 z-20"
+              class="absolute right-0 mt-1 w-48 overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 py-1 z-20"
             >
               <li v-for="lang in languageOrder" :key="lang">
                 <button
@@ -133,7 +142,7 @@ onMounted(async () => {
                   @click="currentLang = lang"
                   class="flex w-full items-center gap-2 px-2 py-1.5 text-left text-xs hover:bg-neutral-100 dark:hover:bg-neutral-900"
                 >
-                  <span>{{ langIcon(lang) }}</span>
+                  <Icon :name="iconNameFor(lang)" class="h-3.5 w-3.5 shrink-0" />
                   <span class="capitalize">{{ lang }}</span>
                 </button>
               </li>
@@ -197,9 +206,9 @@ onMounted(async () => {
   font-size: 12px;
 }
 :deep(.shiki .line) { min-height: 1.25rem; }
-/* micro-anim for dropdown open */
 details[open] summary ~ * { animation: fadeIn 120ms ease-out; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(-2px); } to { opacity: 1; transform: none; } }
 </style>
+
 
 
