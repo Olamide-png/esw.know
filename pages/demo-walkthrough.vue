@@ -88,3 +88,8 @@ export async function webhookHandler(req, res) { // [4]
 } // [4:end]
 `
 </script>
+
+
+<ClientOnly>
+  <AutoApiDemo />
+</ClientOnly>
