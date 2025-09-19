@@ -570,11 +570,11 @@ const supportsBody = computed(() => method.value === 'POST' || method.value === 
 
 /* Form tabs (Path tab removed) */
 const formTabs = [
-  { key: 'security', label: 'Security', icon: 'lucide:shield' },
+  { key: 'security', label: 'Security', icon: 'lucide:key-square' },
   { key: 'body',     label: 'Body',     icon: 'lucide:code-2' },
   { key: 'query',    label: 'Query',    icon: 'lucide:search' },
   { key: 'headers',  label: 'Headers',  icon: 'lucide:list-plus' },
-  { key: 'cookies',  label: 'Cookies',  icon: 'lucide:cookie' },
+  { key: 'cookies',  label: 'Cookies',  icon: 'fluent:cookies-28-regular' },
 ] as const
 const formTab = ref<typeof formTabs[number]['key']>('body')
 
