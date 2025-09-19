@@ -140,13 +140,15 @@ const customsSpec = {
 
       <!-- Open Workbench -->
       <button
-        class="rounded-lg border px-3 py-2 text-sm hover:bg-neutral-50 dark:hover:bg-neutral-900
-               border-neutral-200 dark:border-neutral-800"
-        title="Open Workbench (Ctrl+`)"
-        @click="wbOpen = true"
-      >
-        Open Workbench
-      </button>
+  class="rounded-lg border px-3 py-2 text-sm hover:bg-neutral-50 dark:hover:bg-neutral-900
+         border-neutral-200 dark:border-neutral-800 flex items-center gap-2"
+  title="Open Workbench (Ctrl+`)"
+  @click="wbOpen = true"
+>
+  <Icon name="clarity:terminal-line" class="h-4 w-4" />
+  Open Workbench
+</button>
+
     </div>
 
     <!-- Tabbed walkthrough -->
@@ -159,15 +161,20 @@ const customsSpec = {
     />
 
     <!-- floating fab (optional) -->
-    <button
-      class="fixed bottom-4 right-4 z-[62] rounded-full px-4 py-3 text-sm shadow-lg
-             border border-neutral-200 dark:border-neutral-800
-             bg-white/90 dark:bg-neutral-950/90 backdrop-blur hover:bg-white dark:hover:bg-neutral-900"
-      title="Open Workbench (Ctrl+`)"
-      @click="wbOpen = true"
-    >
-      Workbench
-    </button>
+    <!-- floating fab -->
+<button
+  class="fixed bottom-4 right-4 z-[62] rounded-full px-4 py-3 text-sm shadow-lg
+         border border-neutral-200 dark:border-neutral-800
+         bg-white/90 dark:bg-neutral-950/90 backdrop-blur hover:bg-white dark:hover:bg-neutral-900
+         flex items-center gap-2"
+  title="Open Workbench (Ctrl+`)"
+  @click="wbOpen = true"
+  aria-label="Open Workbench"
+>
+  <Icon name="clarity:terminal-line" class="h-5 w-5" />
+  <span class="hidden sm:inline">Workbench</span>
+</button>
+
 
     <!-- Drawer (unchanged) -->
     <WorkbenchDrawer v-model:open="wbOpen" :spec="customsSpec" />
