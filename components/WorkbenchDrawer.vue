@@ -124,16 +124,24 @@
               />
             </div>
 
+            <!-- Method picker (color coded) -->
             <div class="space-y-1">
               <label class="text-xs opacity-70">Method</label>
-              <select
-                v-model="method"
-                class="w-full rounded-md border px-2 py-1.5 text-sm
-                       border-neutral-200 dark:border-neutral-800
-                       bg-white dark:bg-neutral-900"
-              >
-                <option v-for="m in availableMethods" :key="m">{{ m }}</option>
-              </select>
+              <div class="flex flex-wrap gap-1.5">
+                <button
+                  v-for="m in availableMethods"
+                  :key="m"
+                  type="button"
+                  class="px-2.5 py-1 text-xs rounded-md border"
+                  :class="[
+                    method === m
+                      ? 'ring-1 ring-primary/40'
+                      : 'opacity-80 hover:opacity-100',
+                    methodClass(m)
+                  ]"
+                  @click="method = m"
+                >{{ m }}</button>
+              </div>
             </div>
 
             <div class="rounded-md border p-3 border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/40">
@@ -152,7 +160,7 @@ curl -X {{ method }} '{{ builtUrl }}'{{ curlHeaders }}{{ curlBody }}
           <!-- Right: Params + Body + Run -->
           <div class="col-span-12 lg:col-span-8 flex flex-col h-full">
             <div class="flex-none border-b border-neutral-200 dark:border-neutral-800 px-4 pt-3">
-              <!-- Sub tabs (icons) -->
+              <!-- Sub tabs -->
               <nav class="flex gap-1">
                 <button
                   v-for="t in formTabs"
@@ -171,18 +179,36 @@ curl -X {{ method }} '{{ builtUrl }}'{{ curlHeaders }}{{ curlBody }}
             </div>
 
             <div class="flex-1 overflow-auto p-4 space-y-4">
-              <!-- SECURITY (placeholder for now, keeps parity with UI) -->
-              <div v-if="formTab==='security'" class="text-xs opacity-70">
-                Add auth headers in <strong>Headers</strong>, or click “{{ hasAuth ? 'Remove Authorization' : 'Add Authorization' }}”.
+              <!-- SECURITY (previous format: only Authorization helper) -->
+              <div v-if="formTab==='security'">
+                <div class="flex items-center justify-between">
+                  <div class="text-xs font-semibold">Headers</div>
+                  <button
+                    class="text-xs opacity-70 hover:opacity-100"
+                    @click="toggleAuth()"
+                  >{{ hasAuth ? 'Remove Authorization' : 'Add Authorization' }}</button>
+                </div>
+
+                <div v-if="hasAuth" class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <label class="text-xs">
+                    <span class="block opacity-70">Authorization</span>
+                    <input
+                      v-model="authValue"
+                      class="mt-1 w-full rounded-md border px-2 py-1.5 text-sm
+                             border-neutral-200 dark:border-neutral-800
+                             bg-white dark:bg-neutral-900"
+                      placeholder="Bearer <token>"
+                    />
+                  </label>
+                </div>
+
+                <p v-else class="mt-2 text-xs opacity-60">Click “Add Authorization” to insert an Authorization header.</p>
               </div>
 
-              <!-- BODY -->
+              <!-- BODY (previous clean format) -->
               <div v-if="formTab==='body' && supportsBody" class="space-y-2">
                 <div class="flex items-center justify-between">
-                  <div class="text-xs font-semibold flex items-center gap-1">
-                    <Icon name="lucide:code-2" class="h-3.5 w-3.5" />
-                    Request Body (JSON)
-                  </div>
+                  <div class="text-xs font-semibold">Request Body (JSON)</div>
                   <button
                     class="text-xs opacity-70 hover:opacity-100"
                     @click="formatBody"
@@ -196,26 +222,6 @@ curl -X {{ method }} '{{ builtUrl }}'{{ curlHeaders }}{{ curlBody }}
                          bg-white dark:bg-neutral-900"
                   placeholder='{ "example": true }'
                 />
-              </div>
-
-              <!-- PATH -->
-              <div v-if="formTab==='path'">
-                <div v-if="pathParamKeys.length" class="space-y-2">
-                  <div class="text-xs font-semibold">Path Parameters</div>
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    <label v-for="k in pathParamKeys" :key="k" class="text-xs">
-                      <span class="block opacity-70">{{ k }}</span>
-                      <input
-                        v-model="paramValues.path[k]"
-                        class="mt-1 w-full rounded-md border px-2 py-1.5 text-sm
-                               border-neutral-200 dark:border-neutral-800
-                               bg-white dark:bg-neutral-900"
-                        placeholder="e.g. 123"
-                      />
-                    </label>
-                  </div>
-                </div>
-                <p v-else class="text-xs opacity-60">No path parameters for this operation.</p>
               </div>
 
               <!-- QUERY -->
@@ -245,7 +251,7 @@ curl -X {{ method }} '{{ builtUrl }}'{{ curlHeaders }}{{ curlBody }}
                 </div>
               </div>
 
-              <!-- HEADERS -->
+              <!-- HEADERS (general headers list) -->
               <div v-if="formTab==='headers'">
                 <div class="flex items-center justify-between">
                   <div class="text-xs font-semibold">Header Parameters</div>
@@ -386,13 +392,13 @@ curl -X {{ method }} '{{ builtUrl }}'{{ curlHeaders }}{{ curlBody }}
 </template>
 
 <script setup lang="ts">
-// v-model:open
+/* v-model:open */
 const open = defineModel<boolean>('open', { default: false })
 const close = () => { open.value = false }
 
 import { computed, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 
-/** -------- keyboard toggle (Ctrl + `) -------- */
+/** keyboard toggle (Ctrl + `) */
 function onKey(e: KeyboardEvent) {
   if (e.ctrlKey && e.key === '`') {
     e.preventDefault()
@@ -402,15 +408,11 @@ function onKey(e: KeyboardEvent) {
 onMounted(() => window.addEventListener('keydown', onKey))
 onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
 
-/** -------- resizable height (SSR-safe) -------- */
+/** resizable height (SSR-safe) */
 const height = ref<number>(560)
-onMounted(() => {
-  height.value = Math.min(560, Math.round(window.innerHeight * 0.7))
-})
+onMounted(() => { height.value = Math.min(560, Math.round(window.innerHeight * 0.7)) })
 const heightPx = computed(() => `${height.value}px`)
-let dragging = false
-let startY = 0
-let startH = 0
+let dragging = false, startY = 0, startH = 0
 function startDrag(e: PointerEvent) {
   dragging = true
   startY = e.clientY
@@ -422,8 +424,7 @@ function startDrag(e: PointerEvent) {
 function onDrag(e: PointerEvent) {
   if (!dragging) return
   const delta = startY - e.clientY
-  const next = Math.max(240, Math.min(window.innerHeight - 64, startH + delta))
-  height.value = next
+  height.value = Math.max(240, Math.min(window.innerHeight - 64, startH + delta))
 }
 function stopDrag() {
   dragging = false
@@ -431,11 +432,11 @@ function stopDrag() {
   window.removeEventListener('pointerup', stopDrag)
 }
 
-/** -------- Tabs -------- */
+/** Tabs */
 const tabs = ['Shell', 'API Explorer'] as const
 const activeTab = ref<typeof tabs[number]>('Shell')
 
-/** ================= SHELL ================= */
+/** ============== SHELL ============== */
 type ShellLine = { kind: 'in' | 'out'; text: string }
 const shellLines = ref<ShellLine[]>([
   { kind: 'out', text: 'Welcome to ESW Catalog Shell!' },
@@ -495,7 +496,7 @@ async function runShell() {
   }
 }
 
-/** ================= API EXPLORER ================= */
+/** ============== API EXPLORER ============== */
 type ParamGroup = Record<string, string>
 type Operation = {
   summary?: string
@@ -512,12 +513,9 @@ type Spec = {
 const props = withDefaults(defineProps<{ spec?: Spec }>(), {})
 const spec = computed<Spec>(() => props.spec || demoSpec())
 
-// Editable path
 const currentPathKey = ref<string>('')
 
-// Default method is GET if path isn't in spec
 const method = ref<'GET'|'POST'|'PUT'|'DELETE'>(firstMethodFor(currentPathKey.value))
-
 watch(spec, () => { method.value = firstMethodFor(currentPathKey.value) })
 watch(currentPathKey, (k) => { method.value = firstMethodFor(k) })
 function firstMethodFor(k: string): 'GET'|'POST'|'PUT'|'DELETE' {
@@ -525,70 +523,100 @@ function firstMethodFor(k: string): 'GET'|'POST'|'PUT'|'DELETE' {
   return (Object.keys(ops)[0] as any) || 'GET'
 }
 
-// Sub-form tabs with icons (Iconify via nuxt-icon, using lucide set)
-const formTabs = [
-  { key: 'security', label: 'Security', icon: 'lucide:shield' },
-  { key: 'body',     label: 'Body',     icon: 'lucide:code-2' },
-  { key: 'path',     label: 'Path',     icon: 'lucide:signpost' },
-  { key: 'query',    label: 'Query',    icon: 'lucide:search' },
-  { key: 'headers',  label: 'Headers',  icon: 'lucide:list-plus' },
-  { key: 'cookies',  label: 'Cookies',  icon: 'lucide:cookie' },
-] as const
-const formTab = ref<typeof formTabs[number]['key']>('body')
+/* color-coded method pills */
+function methodClass(m: string) {
+  switch (m) {
+    case 'GET': return 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300 border-emerald-200/60 dark:border-emerald-800'
+    case 'POST': return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 border-blue-200/60 dark:border-blue-800'
+    case 'PUT': return 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300 border-amber-200/60 dark:border-amber-800'
+    case 'DELETE': return 'bg-rose-100 text-rose-800 dark:bg-rose-900/30 dark:text-rose-300 border-rose-200/60 dark:border-rose-800'
+    default: return ''
+  }
+}
 
-// Spec-driven base values (path/query)
+const availableMethods = computed(
+  () => {
+    const ops = spec.value.paths[currentPathKey.value]
+    const list = (ops ? Object.keys(ops) : ['GET','POST','PUT','DELETE']) as Array<'GET'|'POST'|'PUT'|'DELETE'>
+    // keep a stable order
+    const order = ['GET','POST','PUT','DELETE']
+    return list.sort((a, b) => order.indexOf(a) - order.indexOf(b))
+  }
+)
+
 const operation = computed<Operation>(() => (spec.value.paths[currentPathKey.value] || {})[method.value] || {})
+
+/* path/query seed from spec */
 const paramValues = ref<{ path: Record<string,string>, query: Record<string,string> }>({ path: {}, query: {} })
 
-// Dynamic “slots” lists (query/headers/cookies)
+/* dynamic lists */
 type KVRow = { enabled: boolean; key: string; value: string }
 const queryList  = ref<KVRow[]>([])
 const headerList = ref<KVRow[]>([])
 const cookieList = ref<KVRow[]>([])
 
 watch(operation, (op) => {
-  // seed path + query from spec
   paramValues.value = {
     path: Object.fromEntries(Object.keys(op.params?.path || {}).map(k => [k, ''])),
     query: Object.fromEntries(Object.keys(op.params?.query || {}).map(k => [k, '']))
   }
-  // seed headers from spec as rows
   headerList.value = Object.keys(op.headers || {}).map(k => ({ enabled: true, key: k, value: (op.headers as any)[k] || '' }))
-  // keep any user-added rows by appending a blank at the end
   if (!queryList.value.length) queryList.value.push({ enabled: true, key: '', value: '' })
   if (!headerList.value.length) headerList.value.push({ enabled: true, key: '', value: '' })
   if (!cookieList.value.length) cookieList.value.push({ enabled: true, key: '', value: '' })
 }, { immediate: true })
 
-const pathParamKeys = computed(() => Object.keys(operation.value.params?.path || {}))
 const supportsBody = computed(() => method.value === 'POST' || method.value === 'PUT' || method.value === 'DELETE')
 
-/** ------- add/remove row helpers ------- */
+/* Form tabs (Path tab removed) */
+const formTabs = [
+  { key: 'security', label: 'Security', icon: 'lucide:shield' },
+  { key: 'body',     label: 'Body',     icon: 'lucide:code-2' },
+  { key: 'query',    label: 'Query',    icon: 'lucide:search' },
+  { key: 'headers',  label: 'Headers',  icon: 'lucide:list-plus' },
+  { key: 'cookies',  label: 'Cookies',  icon: 'lucide:cookie' },
+] as const
+const formTab = ref<typeof formTabs[number]['key']>('body')
+
+/* rows helpers */
 function addQuery()  { queryList.value.push({ enabled: true, key: '', value: '' }) }
 function removeQuery(i: number)  { queryList.value.splice(i, 1) }
-
 function addHeader() { headerList.value.push({ enabled: true, key: '', value: '' }) }
 function removeHeader(i: number) { headerList.value.splice(i, 1) }
-
 function addCookie() { cookieList.value.push({ enabled: true, key: '', value: '' }) }
 function removeCookie(i: number) { cookieList.value.splice(i, 1) }
 
-/** ------- build URL / headers / cookies ------- */
+/* Authorization helper (Security tab) */
+const hasAuth = computed(() => headerList.value.some(r => r.enabled && r.key.toLowerCase() === 'authorization'))
+const authRowIndex = computed(() => headerList.value.findIndex(r => r.key.toLowerCase() === 'authorization'))
+const authValue = computed({
+  get: () => {
+    const idx = authRowIndex.value
+    return idx >= 0 ? headerList.value[idx].value : 'Bearer '
+  },
+  set: (v: string) => {
+    const idx = authRowIndex.value
+    if (idx >= 0) headerList.value[idx].value = v
+  }
+})
+function toggleAuth() {
+  const idx = authRowIndex.value
+  if (idx >= 0) headerList.value.splice(idx, 1)
+  else headerList.value.unshift({ enabled: true, key: 'Authorization', value: 'Bearer ' })
+}
+
+/* build URL / headers / cookies */
 function buildPath() {
   let p = currentPathKey.value || ''
-  // replace /{id} with value
   for (const k of Object.keys(paramValues.value.path)) {
     p = p.replace(new RegExp('\\{' + k + '\\}', 'g'), encodeURIComponent(paramValues.value.path[k] || ''))
   }
   const qs = new URLSearchParams()
-  // spec query
   for (const [k, v] of Object.entries(paramValues.value.query)) {
     if (v != null && String(v).length) qs.append(k, String(v))
   }
-  // extra query rows
   for (const row of queryList.value) {
-    if (!row.enabled) continue
-    if (!row.key) continue
+    if (!row.enabled || !row.key) continue
     qs.append(row.key, row.value ?? '')
   }
   const q = qs.toString()
@@ -597,28 +625,19 @@ function buildPath() {
 const builtPath = computed(buildPath)
 const builtUrl = computed(() => (baseUrl.value || spec.value.baseUrl || '').replace(/\/+$/,'') + builtPath.value)
 
-const hasAuth = computed(() => headerList.value.some(r => r.enabled && r.key.toLowerCase() === 'authorization' && r.value !== undefined))
-function toggleAuth() {
-  const idx = headerList.value.findIndex(r => r.key.toLowerCase() === 'authorization')
-  if (idx >= 0) headerList.value.splice(idx, 1)
-  else headerList.value.unshift({ enabled: true, key: 'Authorization', value: 'Bearer ' })
-}
-
+/* Body / code */
+const showCode = ref(false)
+const bodyText = ref<string>('')
 function formatBody() {
   if (!bodyText.value.trim()) return
   try { bodyText.value = JSON.stringify(JSON.parse(bodyText.value), null, 2) } catch {}
 }
-
-const showCode = ref(false)
-const bodyText = ref<string>('')
-
 const curlHeaders = computed(() => {
   const entries: [string,string][] = []
   for (const r of headerList.value) {
     if (!r.enabled || !r.key) continue
     entries.push([r.key, r.value ?? ''])
   }
-  // Cookie header from cookies list (append/merge)
   const cookieStr = cookieList.value
     .filter(r => r.enabled && r.key)
     .map(r => `${r.key}=${r.value ?? ''}`)
@@ -636,13 +655,12 @@ const curlBody = computed(() => {
   const safe = t.replace(/'/g, "'\\''")
   return " \\\n  -d '" + safe + "'"
 })
-
 async function copyCurl() {
   const cmd = "curl -X " + method.value + " '" + builtUrl.value + "'" + curlHeaders.value + curlBody.value
   try { await navigator.clipboard.writeText(cmd) } catch {}
 }
 
-/** ===== Response meta + helpers ===== */
+/* Response meta + helpers */
 const statusCode = ref<number | null>(null)
 const elapsedMs = ref<number | null>(null)
 const respBytes = ref<number | null>(null)
@@ -667,7 +685,6 @@ async function copyResponse() {
 }
 
 const loading = ref(false)
-
 async function runRequest() {
   loading.value = true
   respDisplay.value = ''
@@ -678,13 +695,11 @@ async function runRequest() {
 
   const t0 = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now()
   try {
-    // Build headers from list
     const headers: Record<string,string> = {}
     for (const r of headerList.value) {
       if (!r.enabled || !r.key) continue
       headers[r.key] = r.value ?? ''
     }
-    // Add Cookie header from cookie list
     const cookieStr = cookieList.value
       .filter(r => r.enabled && r.key)
       .map(r => `${r.key}=${r.value ?? ''}`)
@@ -715,13 +730,13 @@ async function runRequest() {
     elapsedMs.value = Math.max(0, Math.round(t1 - t0))
     statusCode.value = 0
     respBytes.value = 0
-    respDisplay.value = 'Error: ' + (e?.message || String(e))
+    respDisplay.value = 'Error: ' + (e?.message || String(e)))
   } finally {
     loading.value = false
   }
 }
 
-/** -------- Tiny demo spec if none passed -------- */
+/** Tiny demo spec if none passed */
 function demoSpec(): Spec {
   return {
     baseUrl: 'https://httpbin.org',
@@ -755,6 +770,7 @@ function demoSpec(): Spec {
 .slide-up-enter-active, .slide-up-leave-active { transition: transform .2s ease, opacity .2s ease; }
 .slide-up-enter-from, .slide-up-leave-to { transform: translateY(12px); opacity: 0; }
 </style>
+
 
 
 
