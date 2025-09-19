@@ -730,7 +730,7 @@ async function runRequest() {
     elapsedMs.value = Math.max(0, Math.round(t1 - t0))
     statusCode.value = 0
     respBytes.value = 0
-    respDisplay.value = 'Error: ' + (e?.message || String(e)))
+    respDisplay.value = 'Error: ' + (e?.message || String(e))
   } finally {
     loading.value = false
   }
