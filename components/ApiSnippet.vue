@@ -38,7 +38,7 @@ const isResponse = computed(() => props.kind === 'response')
 
 const langIcon = (lang: string) => ({
   curl: '🌐', bash: '🌐', sh: '🌐',
-  javascript: '🟨', typescript: '🟦',
+  javascript: 'logos:javascript', typescript: '🟦',
   python: '🐍', php: '🐘', java: '☕',
   ruby: '💎', go: '🌀', json: '🧩'
 }[lang] || '📄')
@@ -60,7 +60,7 @@ const container = ref<HTMLElement | null>(null)
 const highlightedHtml = ref<string>('')
 
 const shikiLangFor = (k: string) => ({ curl: 'bash', sh: 'bash' } as Record<string, string>)[k] || k
-const themes = { light: 'github-light', dark: 'github-dark' }
+const themes = { light: 'github-light', dark: 'dracula' }
 const currentTheme = () =>
   document.documentElement.classList.contains('dark') ? themes.dark : themes.light
 
