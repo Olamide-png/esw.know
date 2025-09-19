@@ -145,7 +145,7 @@ const customsSpec = {
   title="Open Workbench (Ctrl+`)"
   @click="wbOpen = true"
 >
-  <Icon name="clarity:terminal-solid" class="h-10 w-10" />
+  <Icon name="ri:terminal-line" class="h-10 w-10" />
   Open Workbench
 </button>
 
@@ -171,7 +171,7 @@ const customsSpec = {
   @click="wbOpen = true"
   aria-label="Open Workbench"
 >
-  <Icon name="clarity:terminal-solid" class="h-10 w-10" />
+  <Icon name="ri:terminal-line" class="h-10 w-10" />
   <span class="hidden sm:inline">Workbench</span>
 </button>
 
