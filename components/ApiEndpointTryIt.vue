@@ -1,6 +1,6 @@
 <!-- components/ApiEndpointTryIt.vue -->
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 
 // shadcn/ui components (paths align with shadcn-docs-nuxt convention)
 import { Button } from "@/components/ui/button"
@@ -146,6 +146,23 @@ const pathSegments = computed(() => {
   return segs
 })
 
+// ---------- Key rename helper for editable maps ----------
+function renameKv(target: 'query' | 'headers', oldKey: string, newKey: string) {
+  if (!newKey || newKey === oldKey) return
+  const src = target === 'query' ? { ...queryParams.value } : { ...headers.value }
+  if (!Object.prototype.hasOwnProperty.call(src, oldKey)) return
+  const val = src[oldKey]
+  delete src[oldKey]
+  let key = newKey
+  let i = 1
+  while (Object.prototype.hasOwnProperty.call(src, key)) {
+    key = `${newKey}_${i++}`
+  }
+  ;(src as any)[key] = val
+  if (target === 'query') queryParams.value = src
+  else headers.value = src
+}
+
 // ---------- Actions ----------
 async function sendRequest() {
   sending.value = true
@@ -185,7 +202,6 @@ async function sendRequest() {
     responseHeaders.value = hh
     // body text
     const txt = await res.text()
-    // try pretty json
     try {
       const obj = JSON.parse(txt)
       responseText.value = JSON.stringify(obj, null, 2)
@@ -204,7 +220,6 @@ async function sendRequest() {
 
 function addKv(target:'path'|'query'|'headers') {
   const obj = target === 'path' ? pathParams.value : target === 'query' ? queryParams.value : headers.value
-  const key = ''
   const copy = { ...obj }
   let i = 1
   while (copy[`key${i}`] !== undefined) i++
@@ -313,10 +328,11 @@ function copyToClipboard(text:string) {
                 <TabsTrigger value="auth">Auth</TabsTrigger>
               </TabsList>
 
+              <!-- PATH: keys non-editable, values editable -->
               <TabsContent value="path" class="mt-3">
                 <div class="space-y-2">
                   <div v-for="(v,k) in pathParams" :key="k" class="grid grid-cols-5 gap-2">
-                    <Input v-model="(Object.keys(pathParams).includes(k) ? (():any=>k)() : undefined)" :value="k" disabled class="col-span-2 font-mono" />
+                    <Input :value="k" disabled class="col-span-2 font-mono" />
                     <Input v-model="pathParams[k]" class="col-span-3 font-mono" />
                     <div class="col-span-5">
                       <Button variant="secondary" size="sm" @click="removeKv('path', k)">Remove</Button>
@@ -326,10 +342,16 @@ function copyToClipboard(text:string) {
                 </div>
               </TabsContent>
 
+              <!-- QUERY: key editable via renameKv -->
               <TabsContent value="query" class="mt-3">
                 <div class="space-y-2">
                   <div v-for="(v,k) in queryParams" :key="k" class="grid grid-cols-5 gap-2">
-                    <Input v-model="(Object.keys(queryParams).includes(k) ? (():any=>k)() : undefined)" :value="k" class="col-span-2 font-mono" placeholder="key" />
+                    <Input
+                      :value="k"
+                      class="col-span-2 font-mono"
+                      placeholder="key"
+                      @input="renameKv('query', k, ($event.target as HTMLInputElement).value)"
+                    />
                     <Input v-model="queryParams[k]" class="col-span-3 font-mono" placeholder="value" />
                     <div class="col-span-5">
                       <Button variant="secondary" size="sm" @click="removeKv('query', k)">Remove</Button>
@@ -339,10 +361,16 @@ function copyToClipboard(text:string) {
                 </div>
               </TabsContent>
 
+              <!-- HEADERS: key editable via renameKv -->
               <TabsContent value="headers" class="mt-3">
                 <div class="space-y-2">
                   <div v-for="(v,k) in headers" :key="k" class="grid grid-cols-5 gap-2">
-                    <Input v-model="(Object.keys(headers).includes(k) ? (():any=>k)() : undefined)" :value="k" class="col-span-2 font-mono" placeholder="Header" />
+                    <Input
+                      :value="k"
+                      class="col-span-2 font-mono"
+                      placeholder="Header"
+                      @input="renameKv('headers', k, ($event.target as HTMLInputElement).value)"
+                    />
                     <Input v-model="headers[k]" class="col-span-3 font-mono" placeholder="Value" />
                     <div class="col-span-5">
                       <Button variant="secondary" size="sm" @click="removeKv('headers', k)">Remove</Button>
@@ -474,3 +502,4 @@ function copyToClipboard(text:string) {
 /* subtle polish to match your screenshot feel */
 :where(.font-mono){ font-variant-ligatures: none; }
 </style>
+
