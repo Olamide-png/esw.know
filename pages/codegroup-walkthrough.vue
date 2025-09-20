@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import StepCodeGroupWalkthrough from '~/components/StepCodeGroupWalkthrough.vue'
 import WorkbenchDrawer from '~/components/WorkbenchDrawer.vue'
+import ApiEndpointTryIt from '~/components/ApiEndpointTryIt.vue'
 
 const wbOpen = ref(false)
 
@@ -126,10 +127,15 @@ const customsSpec = {
     }
   }
 }
+
+// Demo endpoints for the new Try-It component
+const demoBase = 'https://httpbin.org'           // echoes any request
+const pathList = '/anything/customs/items'       // use /anything to avoid 404s
+const pathById = '/anything/customs/items/{id}'
 </script>
 
 <template>
-  <div class="mx-auto max-w-6xl p-6 space-y-4">
+  <div class="mx-auto max-w-6xl p-6 space-y-6">
     <div class="flex items-start justify-between">
       <div>
         <h1 class="text-2xl font-bold">Tabbed Step ⇄ Code Walkthrough</h1>
@@ -140,15 +146,48 @@ const customsSpec = {
 
       <!-- Open Workbench -->
       <button
-  class="rounded-lg border px-3 py-2 text-sm hover:bg-neutral-50 dark:hover:bg-neutral-900
-         border-neutral-200 dark:border-neutral-800 flex items-center gap-2"
-  title="Open Workbench (Ctrl+`)"
-  @click="wbOpen = true"
->
-  <Icon name="lucide:code-xml" class="h-10 w-10" />
-  Open Workbench
-</button>
+        class="rounded-lg border px-3 py-2 text-sm hover:bg-neutral-50 dark:hover:bg-neutral-900
+               border-neutral-200 dark:border-neutral-800 flex items-center gap-2"
+        title="Open Workbench (Ctrl+`)"
+        @click="wbOpen = true"
+      >
+        <Icon name="lucide:code-xml" class="h-10 w-10" />
+        Open Workbench
+      </button>
+    </div>
 
+    <!-- 🔹 New: Endpoint pills with Try-It modals -->
+    <div class="space-y-3">
+      <ApiEndpointTryIt
+        method="GET"
+        :base-url="demoBase"
+        :allow-method-switch="false"
+        :defaults="{ query: { limit: 10, offset: 0, hsCode: '6104.62' }, headers: { 'X-Env': 'dev' } }"
+        :path="pathList"
+      />
+
+      <ApiEndpointTryIt
+        method="POST"
+        :base-url="demoBase"
+        :allow-method-switch="false"
+        :defaults="{ headers: { 'X-Env': 'dev', 'Content-Type': 'application/json' }, body: { sku: 'SKU-123', hsCode: '9999.99.99', countryOfOrigin: 'IE', description: 'Wool scarf' } }"
+        :path="pathList"
+      />
+
+      <div class="grid gap-3 sm:grid-cols-2">
+        <ApiEndpointTryIt
+          method="GET"
+          :base-url="demoBase"
+          :path="pathById"
+          :defaults="{ path: { id: 'abc-123' } }"
+        />
+        <ApiEndpointTryIt
+          method="PUT"
+          :base-url="demoBase"
+          :path="pathById"
+          :defaults="{ path: { id: 'abc-123' }, headers: { 'Content-Type': 'application/json' }, body: { description: 'Updated description' } }"
+        />
+      </div>
     </div>
 
     <!-- Tabbed walkthrough -->
@@ -160,25 +199,24 @@ const customsSpec = {
       :initial-block="0"
     />
 
-    <!-- floating fab (optional) -->
     <!-- floating fab -->
-<button
-  class="fixed bottom-4 right-4 z-[62] rounded-full px-4 py-3 text-sm shadow-lg
-         border border-neutral-200 dark:border-neutral-800
-         bg-white/90 dark:bg-neutral-950/90 backdrop-blur hover:bg-white dark:hover:bg-neutral-900
-         flex items-center gap-2"
-  title="Open Workbench (Ctrl+`)"
-  @click="wbOpen = true"
-  aria-label="Open Workbench"
->
-  <Icon name="lucide:code-xml" class="h-10 w-10" />
-  <span class="hidden sm:inline">Workbench</span>
-</button>
-
+    <button
+      class="fixed bottom-4 right-4 z-[62] rounded-full px-4 py-3 text-sm shadow-lg
+             border border-neutral-200 dark:border-neutral-800
+             bg-white/90 dark:bg-neutral-950/90 backdrop-blur hover:bg-white dark:hover:bg-neutral-900
+             flex items-center gap-2"
+      title="Open Workbench (Ctrl+`)"
+      @click="wbOpen = true"
+      aria-label="Open Workbench"
+    >
+      <Icon name="lucide:code-xml" class="h-10 w-10" />
+      <span class="hidden sm:inline">Workbench</span>
+    </button>
 
     <!-- Drawer (unchanged) -->
     <WorkbenchDrawer v-model:open="wbOpen" :spec="customsSpec" />
   </div>
 </template>
+
 
 
