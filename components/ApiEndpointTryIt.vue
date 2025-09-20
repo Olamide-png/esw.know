@@ -28,7 +28,10 @@ const props = withDefaults(defineProps<{
 })
 
 const open = ref(false)
-const activeTab = ref<'path'|'query'|'headers'|'auth'|'body'|'headersResp'|'bodyResp'>('path')
+/* 🔹 Split tabs: request editor + response viewer */
+const reqTab = ref<'path'|'query'|'headers'|'auth'>('path')
+const respTab = ref<'body'|'headers'>('body')  // ✅ Body shown by default
+
 const method = ref<HttpMethod>(props.method)
 const envBaseUrl = ref(props.baseUrl || (props.baseUrls[0] || ''))
 const livePath = ref(props.path)
@@ -143,11 +146,14 @@ async function sendRequest() {
     const hh: Dict = {}; res.headers.forEach((v,k)=>{ hh[k]=v }); responseHeaders.value = hh
     const txt = await res.text()
     try { responseText.value = JSON.stringify(JSON.parse(txt), null, 2) } catch { responseText.value = txt }
+    /* After a request, keep Body tab visible */
+    respTab.value = 'body'
   } catch (e:any) {
     const t1 = performance.now()
     responseStatus.value = -1
     responseTimeMs.value = Math.round(t1 - t0)
     responseText.value = `Request failed: ${e?.message || e}`
+    respTab.value = 'body'
   } finally { sending.value = false }
 }
 
@@ -237,14 +243,14 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
             <!-- Tabs -->
             <div>
               <div class="grid grid-cols-4 overflow-hidden rounded-md border border-white/10">
-                <button :class="['px-3 py-2 text-sm', activeTab==='path' ? 'bg-white/10' : 'bg-transparent']" @click="activeTab='path'">Path Params</button>
-                <button :class="['px-3 py-2 text-sm', activeTab==='query' ? 'bg-white/10' : 'bg-transparent']" @click="activeTab='query'">Query</button>
-                <button :class="['px-3 py-2 text-sm', activeTab==='headers' ? 'bg-white/10' : 'bg-transparent']" @click="activeTab='headers'">Headers</button>
-                <button :class="['px-3 py-2 text-sm', activeTab==='auth' ? 'bg-white/10' : 'bg-transparent']" @click="activeTab='auth'">Auth</button>
+                <button :class="['px-3 py-2 text-sm', reqTab==='path' ? 'bg-white/10' : 'bg-transparent']" @click="reqTab='path'">Path Params</button>
+                <button :class="['px-3 py-2 text-sm', reqTab==='query' ? 'bg-white/10' : 'bg-transparent']" @click="reqTab='query'">Query</button>
+                <button :class="['px-3 py-2 text-sm', reqTab==='headers' ? 'bg-white/10' : 'bg-transparent']" @click="reqTab='headers'">Headers</button>
+                <button :class="['px-3 py-2 text-sm', reqTab==='auth' ? 'bg-white/10' : 'bg-transparent']" @click="reqTab='auth'">Auth</button>
               </div>
 
               <!-- PATH -->
-              <div v-show="activeTab==='path'" class="mt-3 space-y-2">
+              <div v-show="reqTab==='path'" class="mt-3 space-y-2">
                 <div v-for="(v,k) in pathParams" :key="k" class="grid grid-cols-5 gap-2">
                   <input :value="k" disabled class="col-span-2 rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono opacity-70" />
                   <input v-model="pathParams[k]" class="col-span-3 rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono" />
@@ -258,7 +264,7 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
               </div>
 
               <!-- QUERY -->
-              <div v-show="activeTab==='query'" class="mt-3 space-y-2">
+              <div v-show="reqTab==='query'" class="mt-3 space-y-2">
                 <div v-for="(v,k) in queryParams" :key="k" class="grid grid-cols-5 gap-2">
                   <input :value="k" class="col-span-2 rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono"
                          placeholder="key"
@@ -274,7 +280,7 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
               </div>
 
               <!-- HEADERS -->
-              <div v-show="activeTab==='headers'" class="mt-3 space-y-2">
+              <div v-show="reqTab==='headers'" class="mt-3 space-y-2">
                 <div v-for="(v,k) in headers" :key="k" class="grid grid-cols-5 gap-2">
                   <input :value="k" class="col-span-2 rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono"
                          placeholder="Header"
@@ -290,7 +296,7 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
               </div>
 
               <!-- AUTH -->
-              <div v-show="activeTab==='auth'" class="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div v-show="reqTab==='auth'" class="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div>
                   <label class="mb-1 block text-xs opacity-80">Type</label>
                   <select v-model="auth.type" class="w-full rounded-md bg-neutral-900 border border-white/10 px-2 py-2">
@@ -373,14 +379,14 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
             </div>
 
             <div class="grid grid-cols-2 gap-2">
-              <button :class="['px-3 py-2 text-sm rounded-md border border-white/10', activeTab==='bodyResp' ? 'bg-white/10' : 'bg-transparent']" @click="activeTab='bodyResp'">Body</button>
-              <button :class="['px-3 py-2 text-sm rounded-md border border-white/10', activeTab==='headersResp' ? 'bg-white/10' : 'bg-transparent']" @click="activeTab='headersResp'">Headers</button>
+              <button :class="['px-3 py-2 text-sm rounded-md border border-white/10', respTab==='body' ? 'bg-white/10' : 'bg-transparent']" @click="respTab='body'">Body</button>
+              <button :class="['px-3 py-2 text-sm rounded-md border border-white/10', respTab==='headers' ? 'bg-white/10' : 'bg-transparent']" @click="respTab='headers'">Headers</button>
             </div>
 
-            <div v-show="activeTab==='bodyResp'" class="h-[420px] overflow-auto">
+            <div v-show="respTab==='body'" class="h-[420px] overflow-auto">
               <pre class="px-3 py-2 text-xs font-mono whitespace-pre-wrap">{{ responseText }}</pre>
             </div>
-            <div v-show="activeTab==='headersResp'" class="h-[420px] overflow-auto">
+            <div v-show="respTab==='headers'" class="h-[420px] overflow-auto">
               <pre class="px-3 py-2 text-xs font-mono whitespace-pre-wrap">{{ tryStringify(responseHeaders) }}</pre>
             </div>
           </div>
@@ -402,5 +408,6 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
 .bg-primary{ background: var(--primary); }
 .text-primary-foreground{ color: var(--primary-foreground); }
 </style>
+
 
 
