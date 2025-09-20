@@ -133,7 +133,7 @@ const demoBase = 'https://httpbin.org'
 const formulaOne = 'https://f1api.dev'           // echoes any request
 const pathList = '/anything/customs/items'       // use /anything to avoid 404s
 const pathById = '/anything/customs/items/{id}'
-const pathYear = '/api/{year}/drivers-championship'
+const pathByYear = '/api/{year}/drivers-championship'
 </script>
 
 <template>
@@ -163,9 +163,8 @@ const pathYear = '/api/{year}/drivers-championship'
       <ApiEndpointTryIt
         method="GET"
         :base-url="formulaOne"
-        :allow-method-switch="false"
+        :path="pathByYear"
         :defaults="{ path: { id: '2021' } }"
-        :path="pathYear"
       />
 
     <div class="space-y-3">
