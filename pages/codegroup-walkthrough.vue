@@ -164,7 +164,7 @@ const pathYear = '/api/{year}/drivers-championship'
         method="GET"
         :base-url="formulaOne"
         :allow-method-switch="false"
-        :defaults="{ path: { year: 2021 }, query: { limit: 5 } }"
+        :defaults="{ path: { id: '2021' } }"
         :path="pathYear"
       />
 
