@@ -129,11 +129,9 @@ const customsSpec = {
 }
 
 // Demo endpoints for the new Try-It component
-const demoBase = 'https://httpbin.org'         // echoes any request
-const formulaOne = 'https://f1api.dev'         
+const demoBase = 'https://httpbin.org'         // echoes any request       
 const pathList = '/anything/customs/items'       // use /anything to avoid 404s
 const pathById = '/anything/customs/items/{id}'
-const pathByYear = '/api/{year}/drivers-championship'
 </script>
 
 <template>
@@ -158,16 +156,16 @@ const pathByYear = '/api/{year}/drivers-championship'
       </button>
     </div>
 
-    <!-- 🔹 New: Endpoint pills with Try-It modals -->
-     <div class="space-y-3">
+    <!-- F1 2021 Drivers' Championship -->
+    <div class="space-y-3">
       <ApiEndpointTryIt
         method="GET"
-        :base-url="formulaOne"
-        :path="pathByYear"
-        :defaults="{ path: { year: '2021' } }"
+        :base-url="'https://f1api.dev'"
+        :allow-method-switch="false"
+        :defaults="{ query: { limit: 30, offset: 0 } }"
+        path="/api/2021/drivers-championship"
       />
 
-    <div class="space-y-3">
       <ApiEndpointTryIt
         method="GET"
         :base-url="demoBase"
