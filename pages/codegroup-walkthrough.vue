@@ -129,8 +129,8 @@ const customsSpec = {
 }
 
 // Demo endpoints for the new Try-It component
-const demoBase = 'https://httpbin.org'
-const formulaOne = 'https://f1api.dev'           // echoes any request
+const demoBase = 'https://httpbin.org'         // echoes any request
+const formulaOne = 'https://f1api.dev'         
 const pathList = '/anything/customs/items'       // use /anything to avoid 404s
 const pathById = '/anything/customs/items/{id}'
 const pathByYear = '/api/{year}/drivers-championship'
