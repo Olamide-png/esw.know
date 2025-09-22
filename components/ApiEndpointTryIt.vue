@@ -394,7 +394,7 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
       </div>
 
       <div class="absolute bottom-0 left-0 right-0 border-t border-white/10 px-4 py-2 text-xs text-neutral-400 flex items-center">
-        <span>Built-in explorer • respects dark mode • <kbd class="px-1 rounded bg-white/10">Esc</kbd> to close</span>
+        <span>Try-it Console • <kbd class="px-1 rounded bg-white/10">Esc</kbd> to close</span>
         <span class="ml-auto"></span>
       </div>
     </div>
