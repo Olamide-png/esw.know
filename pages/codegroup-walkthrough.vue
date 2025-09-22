@@ -168,6 +168,14 @@ const pathById = '/anything/customs/items/{id}'
 
       <ApiEndpointTryIt
         method="GET"
+        :base-url="'https://api.nasa.gov'"
+        :allow-method-switch="false"
+        :defaults="{ query: { api_key: 'DEMO_KEY' } }"
+        path="/planetary/apod"
+      />
+
+      <ApiEndpointTryIt
+        method="GET"
         :base-url="demoBase"
         :allow-method-switch="false"
         :defaults="{ query: { limit: 10, offset: 0, hsCode: '6104.62' }, headers: { 'X-Env': 'dev' } }"
