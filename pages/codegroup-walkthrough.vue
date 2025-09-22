@@ -162,8 +162,8 @@ const pathById = '/anything/customs/items/{id}'
         method="GET"
         :base-url="'https://f1api.dev'"
         :allow-method-switch="false"
-        :defaults="{ query: { limit: 30, offset: 0 } }"
-        path="/api/2021/drivers-championship"
+        :defaults="{ path: { id: '2021' }, query: { limit: 30, offset: 0 } }"
+        path="/api/{year}/drivers-championship"
       />
 
       <ApiEndpointTryIt
