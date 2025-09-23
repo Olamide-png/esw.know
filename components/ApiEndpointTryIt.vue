@@ -1,5 +1,7 @@
+<!-- components/ApiEndpointTryIt.vue -->
 <script setup lang="ts">
 import { ref, computed, watch, nextTick } from 'vue'
+import { useShikiHighlighter } from '~/composables/useShikiHighlighter'
 
 type HttpMethod = 'GET'|'POST'|'PUT'|'PATCH'|'DELETE'
 type Dict = Record<string, any>
@@ -37,12 +39,9 @@ const livePath = ref(props.path)
 const pathParams = ref<Dict>({ ...(props.defaults?.path || {}) })
 const queryParams = ref<Dict>({ ...(props.defaults?.query || {}) })
 const headers = ref<Dict>({ 'Content-Type': 'application/json', ...(props.defaults?.headers || {}) })
-const auth = ref<{type:'none'|'bearer'|'basic', token?:string, username?:string, password?:string}>({
-  type: props.defaults?.auth?.type || 'none',
-  token: props.defaults?.auth?.token,
-  username: props.defaults?.auth?.username,
-  password: props.defaults?.auth?.password
-})
+const auth = ref<{type:'none'|'bearer'|'basic', token?:string, username?:string, password?:string}>(Object.assign({
+  type: 'none', token: undefined, username: undefined, password: undefined
+}, props.defaults?.auth || {}))
 const bodyRaw = ref(typeof props.defaults?.body === 'undefined' ? '' : tryStringify(props.defaults?.body))
 
 const sending = ref(false)
@@ -64,7 +63,7 @@ function parsedBody(): any {
 }
 function buildUrl(): string {
   let p = livePath.value.replace(/\{(\w+)\}/g, (_, k) => {
-    const v = pathParams.value?.[k]
+    const v = (pathParams.value as any)?.[k]
     return encodeURIComponent(v ?? `{${k}}`)
   })
   const entries = Object.entries(queryParams.value || {}).filter(([,v]) => v !== '' && v !== null && typeof v !== 'undefined')
@@ -74,7 +73,7 @@ function buildUrl(): string {
 }
 function sh(s:string){ const q=`'`; return q + String(s).replace(/'/g, `'\\''`) + q }
 
-/* cURL (declare BEFORE any Shiki logic touches it) */
+/* cURL (declare BEFORE Shiki uses it) */
 const curl = computed(() => {
   const h = Object.entries(headers.value || {}).filter(([,v]) => String(v).length).map(([k,v]) => `-H ${sh(`${k}: ${v}`)}`)
   const body = parsedBody()
@@ -156,7 +155,8 @@ async function sendRequest() {
     respTab.value = 'body'
   } finally {
     sending.value = false
-    if (shikiReady.value) renderHighlights() // refresh if Shiki is active
+    // refresh highlighting if Shiki is ready
+    if (shikiReady.value) renderHighlights()
   }
 }
 
@@ -173,59 +173,34 @@ function removeKv(target:'path'|'query'|'headers', k:string) {
 }
 function copyToClipboard(text:string){ if (typeof navigator !== 'undefined') navigator.clipboard?.writeText(text).catch(()=>{}) }
 
-/* ───────── Shiki: client-only, on-demand ───────── */
-const shikiReady = ref(false)
-let shikiHighlighter: any | null = null
-let shikiWatchersSetup = false
+/* ───────── Shiki via composable ───────── */
+const { ready: shikiReady, ensure: ensureShiki, highlight } = useShikiHighlighter()
 const curlHtml = ref<string>('')            // bash
 const responseBodyHtml = ref<string>('')    // json
 const responseHeadersHtml = ref<string>('') // json
 
-function currentTheme() {
-  if (import.meta.client && window.matchMedia?.('(prefers-color-scheme: light)').matches) return 'github-light-default'
-  return 'github-dark-default'
-}
-
-async function ensureShiki() {
-  if (!import.meta.client) return
-  if (shikiHighlighter) { shikiReady.value = true; return }
-  const { getHighlighter } = await import('shiki')
-  const githubDark = (await import('shiki/themes/github-dark-default.mjs')).default
-  const githubLight = (await import('shiki/themes/github-light-default.mjs')).default
-  const bash = (await import('shiki/langs/bash.mjs')).default
-  const json = (await import('shiki/langs/json.mjs')).default
-  shikiHighlighter = await getHighlighter({ themes: [githubDark, githubLight], langs: [bash, json] })
-  shikiReady.value = true
-}
-
 async function renderHighlights() {
-  if (!shikiReady.value || !shikiHighlighter) return
-  const theme = currentTheme()
-  curlHtml.value = shikiHighlighter.codeToHtml(String(curl.value), { lang: 'bash', theme })
+  if (!import.meta.client) return
+  await ensureShiki()
+  curlHtml.value = await highlight(String(curl.value), 'bash')
+
+  // pretty JSON body before highlighting
   let body = responseText.value ?? ''
   try { body = JSON.stringify(JSON.parse(body), null, 2) } catch {}
-  responseBodyHtml.value = shikiHighlighter.codeToHtml(body, { lang: 'json', theme })
-  responseHeadersHtml.value = shikiHighlighter.codeToHtml(tryStringify(responseHeaders.value) || '', { lang: 'json', theme })
+  responseBodyHtml.value = await highlight(body, 'json')
+  responseHeadersHtml.value = await highlight(tryStringify(responseHeaders.value), 'json')
 }
 
-function setupShikiWatchersOnce() {
-  if (shikiWatchersSetup) return
-  shikiWatchersSetup = true
-  // update when modal opens, curl changes, or response changes
-  watch(curl, async () => { await nextTick(); renderHighlights() }, { flush: 'post' })
-  watch([responseText, () => JSON.stringify(responseHeaders.value)], async () => {
-    await nextTick(); renderHighlights()
-  }, { flush: 'post' })
-}
-
-/* Load + highlight only when the modal opens (client only) */
-watch(open, async (val) => {
-  if (!val || !import.meta.client) return
+/* When modal opens, load shiki and render once */
+watch(open, async (v) => {
+  if (!v) return
   await nextTick()
-  await ensureShiki()
-  setupShikiWatchersOnce()
   renderHighlights()
 })
+
+/* Keep highlights fresh when content changes */
+watch(curl, () => renderHighlights(), { flush: 'post' })
+watch([responseText, () => JSON.stringify(responseHeaders.value)], () => renderHighlights(), { flush: 'post' })
 </script>
 
 <template>
@@ -402,7 +377,6 @@ watch(open, async (val) => {
                 <button class="px-2 py-1 rounded hover:bg-white/10" @click="copyToClipboard(curl)">Copy</button>
               </div>
               <div class="h-36 overflow-auto">
-                <!-- Show highlighted if ready; otherwise plain text -->
                 <div v-if="shikiReady && curlHtml" v-html="curlHtml"></div>
                 <pre v-else class="px-3 pb-3 text-xs font-mono whitespace-pre-wrap">{{ curl }}</pre>
               </div>
@@ -474,6 +448,7 @@ watch(open, async (val) => {
 :deep(.shiki){ padding:.5rem .75rem; border-radius:.5rem; background:transparent }
 :deep(.shiki code){ font-variant-ligatures:none; font-size:.75rem }
 </style>
+
 
 
 
