@@ -2,7 +2,7 @@
 title: Localized Shopping Feed Integration
 description:  Generate customized feed files for specific countries and marketplaces.
 icon: 'lucide:shopping-bag'
-toc: false
+toc: true
 ---
 
 The Localized Shopping Feed Job is a powerful feature that allows retailers to generate customized product feed files for specific countries and marketplaces. It ensures that your product listings are:
