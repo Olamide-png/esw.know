@@ -75,9 +75,9 @@ function buildUrl(): string {
 }
 function sh(s:string){ const q=`'`; return q + String(s).replace(/'/g, `'\\''`) + q }
 
-/* cURL string (explicit string to avoid template ref weirdness) */
+/* cURL string */
 const curl = computed(() => {
-  const h = Object.entries(headers.value || {}).filter(([,v]) => String(v).length).map(([k,v]) => `-H ${sh(`${k}: ${v}`)}`)
+  const h = Object.entries(headers.value || {}).filter(([,v]) => String(v).length).map(([k,v]) => `-H ${sh(`${k}: ${v})`)}`)
   const body = parsedBody()
   const bodyPart = (method.value==='GET'||method.value==='DELETE') ? '' :
     (typeof body==='undefined' ? '' : ` \\\n  --data ${sh(isJsonContent()?JSON.stringify(body):String(body))}`)
@@ -175,17 +175,19 @@ function removeKv(target:'path'|'query'|'headers', k:string) {
 }
 function copyToClipboard(text:string){ if (typeof navigator !== 'undefined') navigator.clipboard?.writeText(text).catch(()=>{}) }
 
-/* ───────── Shiki via composable ───────── */
-const { ready: shikiReady, ensure: ensureShiki, highlight } = useShikiHighlighter()
+/* ───────── Shiki via your composable ───────── */
+const { ready: shikiReady, theme: shikiTheme, ensure: ensureShiki, highlight } = useShikiHighlighter()
+
 const curlHtml = ref('')            // bash -> HTML
 const responseBodyHtml = ref('')    // json -> HTML
 const responseHeadersHtml = ref('') // json -> HTML
 
 async function renderHighlights() {
   if (!import.meta.client) return
-  await ensureShiki({ langs: ['bash','json'], themes: ['github-dark-default','github-light-default'] })
+  await ensureShiki()
   // cURL
-  curlHtml.value = await highlight(curlStr.value || '# (empty)', 'bash')
+  const c = curlStr.value || ''
+  curlHtml.value = await highlight(c, 'bash')
   // Body
   let body = responseText.value ?? ''
   try { body = JSON.stringify(JSON.parse(body), null, 2) } catch {}
@@ -194,15 +196,12 @@ async function renderHighlights() {
   responseHeadersHtml.value = await highlight(tryStringify(responseHeaders.value) || '{}', 'json')
 }
 
-/* Load & render when modal opens, and keep updated after */
-watch(open, async (v) => {
-  if (!v) return
-  await nextTick()
-  renderHighlights()
-})
-watch(curlStr, () => renderHighlights(), { flush: 'post', immediate: false })
+/* hydrate highlights when needed and keep them in sync */
+watch(open, async (v) => { if (v) { await nextTick(); renderHighlights() } })
+watch(curlStr, () => renderHighlights(), { flush: 'post' })
 watch([responseText, () => JSON.stringify(responseHeaders.value)], () => renderHighlights(), { flush: 'post' })
 watch(shikiReady, (v) => { if (v) renderHighlights() })
+watch(shikiTheme, () => renderHighlights()) // re-highlight on theme change
 </script>
 
 <template>
@@ -225,22 +224,18 @@ watch(shikiReady, (v) => { if (v) renderHighlights() })
         </template>
       </div>
     </div>
-    <button class="rounded-lg bg-primary text-primary-foreground px-3 py-1.5 hover:opacity-90"
-            @click="open = true">
-      Try it ▶
-    </button>
+    <button class="rounded-lg bg-primary text-primary-foreground px-3 py-1.5 hover:opacity-90" @click="open = true">Try it ▶</button>
   </div>
 
   <!-- Modal -->
   <div v-if="open" class="fixed inset-0 z-[120]">
     <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="open=false" />
-    <div class="absolute inset-x-2 sm:inset-x-8 md:inset-x-16 lg:inset-x-24 top-10 bottom-10
-                rounded-xl bg-neutral-950 text-neutral-100 border border-white/10 shadow-2xl overflow-hidden">
+    <div class="absolute inset-x-2 sm:inset-x-8 md:inset-x-16 lg:inset-x-24 top-10 bottom-10 rounded-xl bg-neutral-950 text-neutral-100 border border-white/10 shadow-2xl overflow-hidden">
       <!-- Header -->
       <div class="flex items-center gap-3 border-b border-white/10 px-4 py-3">
         <span :class="['px-2 py-1 text-xs font-semibold rounded-md', methodColor]">{{ method }}</span>
         <div class="font-mono text-sm truncate">{{ livePath }}</div>
-        <div class="ml-auto flex items-center gap-2">
+        <div class="ml-auto">
           <button class="rounded-md px-2 py-1 text-sm hover:bg-white/5" @click="open=false">Close</button>
         </div>
       </div>
@@ -250,7 +245,118 @@ watch(shikiReady, (v) => { if (v) renderHighlights() })
         <div class="rounded-lg border border-white/10 overflow-hidden flex flex-col">
           <div class="border-b border-white/10 px-4 py-2 text-sm font-semibold">Request</div>
           <div class="p-4 space-y-4 overflow-auto">
-            <!-- …your inputs / tabs remain unchanged… -->
+            <!-- Method / Base URL -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div v-if="allowMethodSwitch">
+                <label class="mb-1 block text-xs opacity-80">Method</label>
+                <select v-model="method" class="w-full rounded-md bg-neutral-900 border border-white/10 px-2 py-2">
+                  <option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option>
+                </select>
+              </div>
+              <div :class="allowMethodSwitch ? 'md:col-span-2' : 'md:col-span-3'">
+                <label class="mb-1 block text-xs opacity-80">Base URL</label>
+                <div class="flex gap-2">
+                  <input v-model="envBaseUrl" placeholder="https://api.example.com" class="w-full rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono" />
+                  <select v-if="baseUrls.length" v-model="envBaseUrl" class="w-40 rounded-md bg-neutral-900 border border-white/10 px-2 py-2">
+                    <option v-for="url in baseUrls" :key="url" :value="url">{{ url }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Path -->
+            <div>
+              <label class="mb-1 block text-xs opacity-80">Path</label>
+              <input v-model="livePath" class="w-full rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono" />
+            </div>
+
+            <!-- Request tabs -->
+            <div>
+              <div class="grid grid-cols-4 overflow-hidden rounded-md border border-white/10">
+                <button :class="['px-3 py-2 text-sm', reqTab==='path' ? 'bg-white/10' : 'bg-transparent']" @click="reqTab='path'">Path Params</button>
+                <button :class="['px-3 py-2 text-sm', reqTab==='query' ? 'bg-white/10' : 'bg-transparent']" @click="reqTab='query'">Query</button>
+                <button :class="['px-3 py-2 text-sm', reqTab==='headers' ? 'bg-white/10' : 'bg-transparent']" @click="reqTab='headers'">Headers</button>
+                <button :class="['px-3 py-2 text-sm', reqTab==='auth' ? 'bg-white/10' : 'bg-transparent']" @click="reqTab='auth'">Auth</button>
+              </div>
+
+              <!-- PATH -->
+              <div v-show="reqTab==='path'" class="mt-3 space-y-2">
+                <div v-for="(v,k) in pathParams" :key="k" class="grid grid-cols-5 gap-2">
+                  <input :value="k" disabled class="col-span-2 rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono opacity-70" />
+                  <input v-model="pathParams[k]" class="col-span-3 rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono" />
+                  <div class="col-span-5">
+                    <button class="text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5" @click="removeKv('path', k)">Remove</button>
+                  </div>
+                </div>
+                <button class="mt-1 text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5" @click="addKv('path')">Add</button>
+              </div>
+
+              <!-- QUERY -->
+              <div v-show="reqTab==='query'" class="mt-3 space-y-2">
+                <div v-for="(v,k) in queryParams" :key="k" class="grid grid-cols-5 gap-2">
+                  <input :value="k" class="col-span-2 rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono" placeholder="key" @input="renameKv('query', k, ($event.target as HTMLInputElement).value)" />
+                  <input v-model="queryParams[k]" class="col-span-3 rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono" placeholder="value" />
+                  <div class="col-span-5">
+                    <button class="text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5" @click="removeKv('query', k)">Remove</button>
+                  </div>
+                </div>
+                <button class="mt-1 text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5" @click="addKv('query')">Add</button>
+              </div>
+
+              <!-- HEADERS -->
+              <div v-show="reqTab==='headers'" class="mt-3 space-y-2">
+                <div v-for="(v,k) in headers" :key="k" class="grid grid-cols-5 gap-2">
+                  <input :value="k" class="col-span-2 rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono" placeholder="Header" @input="renameKv('headers', k, ($event.target as HTMLInputElement).value)" />
+                  <input v-model="headers[k]" class="col-span-3 rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono" placeholder="Value" />
+                  <div class="col-span-5">
+                    <button class="text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5" @click="removeKv('headers', k)">Remove</button>
+                  </div>
+                </div>
+                <button class="mt-1 text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5" @click="addKv('headers')">Add</button>
+              </div>
+
+              <!-- AUTH -->
+              <div v-show="reqTab==='auth'" class="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div>
+                  <label class="mb-1 block text-xs opacity-80">Type</label>
+                  <select v-model="auth.type" class="w-full rounded-md bg-neutral-900 border border-white/10 px-2 py-2">
+                    <option value="none">None</option>
+                    <option value="bearer">Bearer</option>
+                    <option value="basic">Basic</option>
+                  </select>
+                </div>
+                <div v-if="auth.type==='bearer'" class="md:col-span-2">
+                  <label class="mb-1 block text-xs opacity-80">Token</label>
+                  <input v-model="auth.token" placeholder="eyJhbGciOi..." class="w-full rounded-md bg-neutral-900 border border-white/10 px-3 py-2" />
+                </div>
+                <template v-if="auth.type==='basic'">
+                  <div>
+                    <label class="mb-1 block text-xs opacity-80">Username</label>
+                    <input v-model="auth.username" class="w-full rounded-md bg-neutral-900 border border-white/10 px-3 py-2" />
+                  </div>
+                  <div>
+                    <label class="mb-1 block text-xs opacity-80">Password</label>
+                    <input type="password" v-model="auth.password" class="w-full rounded-md bg-neutral-900 border border-white/10 px-3 py-2" />
+                  </div>
+                </template>
+              </div>
+            </div>
+
+            <!-- Body -->
+            <div v-if="!['GET','DELETE'].includes(method)" class="space-y-1">
+              <label class="mb-1 block text-xs opacity-80">Body</label>
+              <textarea v-model="bodyRaw" rows="8" class="w-full rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono" placeholder="{}"></textarea>
+              <p class="text-xs text-neutral-400">TIP: Body is parsed as JSON when <code>Content-Type: application/json</code>.</p>
+            </div>
+
+            <!-- Request URL -->
+            <div class="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs font-mono">
+              <div class="flex items-center justify-between gap-2">
+                <span class="opacity-80">Request URL</span>
+                <button class="px-2 py-1 rounded hover:bg-white/10" @click="copyToClipboard(buildUrl())">Copy</button>
+              </div>
+              <div class="mt-1 overflow-hidden text-ellipsis whitespace-nowrap">{{ buildUrl() }}</div>
+            </div>
 
             <!-- cURL -->
             <div class="rounded-lg border border-white/10 bg-white/5">
@@ -259,10 +365,7 @@ watch(shikiReady, (v) => { if (v) renderHighlights() })
                 <button class="px-2 py-1 rounded hover:bg-white/10" @click="copyToClipboard(curlStr)">Copy</button>
               </div>
               <div class="h-36 overflow-auto">
-                <!-- Show plain text immediately; swap to highlighted when ready -->
-                <pre v-if="!curlHtml" class="px-3 pb-3 text-xs font-mono whitespace-pre-wrap min-h-[2rem]">
-{{ curlStr || '# (empty)' }}
-                </pre>
+                <pre v-if="!curlHtml" class="px-3 pb-3 text-xs font-mono whitespace-pre-wrap min-h-[2rem]">{{ curlStr }}</pre>
                 <div v-else v-html="curlHtml"></div>
               </div>
             </div>
@@ -270,8 +373,7 @@ watch(shikiReady, (v) => { if (v) renderHighlights() })
 
           <div class="border-t border-white/10 px-4 py-3 flex justify-end">
             <button class="rounded-md bg-primary text-primary-foreground px-3 py-1.5 hover:opacity-90 disabled:opacity-50"
-                    :disabled="sending"
-                    @click="sendRequest">
+                    :disabled="sending" @click="sendRequest">
               <span v-if="!sending">Send Request</span>
               <span v-else class="animate-pulse">Sending…</span>
             </button>
@@ -294,8 +396,7 @@ watch(shikiReady, (v) => { if (v) renderHighlights() })
                 {{ responseStatus === -1 ? 'Network Error' : `HTTP ${responseStatus}` }}
               </span>
               <span v-if="responseTimeMs !== null" class="text-neutral-400">Time: {{ responseTimeMs }} ms</span>
-              <button class="ml-auto px-2 py-1 rounded hover:bg-white/10 text-sm"
-                      @click="copyToClipboard(responseText)">Copy Body</button>
+              <button class="ml-auto px-2 py-1 rounded hover:bg-white/10 text-sm" @click="copyToClipboard(responseText)">Copy Body</button>
             </div>
 
             <div class="grid grid-cols-2 gap-2">
@@ -303,18 +404,12 @@ watch(shikiReady, (v) => { if (v) renderHighlights() })
               <button :class="['px-3 py-2 text-sm rounded-md border border-white/10', respTab==='headers' ? 'bg-white/10' : 'bg-transparent']" @click="respTab='headers'">Headers</button>
             </div>
 
-            <!-- Response Body -->
             <div v-show="respTab==='body'" class="h-[420px] overflow-auto">
-              <pre v-if="!responseBodyHtml" class="px-3 py-2 text-xs font-mono whitespace-pre-wrap min-h-[2rem]">
-{{ responseText || '# (no response yet)' }}
-              </pre>
+              <pre v-if="!responseBodyHtml" class="px-3 py-2 text-xs font-mono whitespace-pre-wrap min-h-[2rem]">{{ responseText }}</pre>
               <div v-else v-html="responseBodyHtml"></div>
             </div>
-            <!-- Response Headers -->
             <div v-show="respTab==='headers'" class="h-[420px] overflow-auto">
-              <pre v-if="!responseHeadersHtml" class="px-3 py-2 text-xs font-mono whitespace-pre-wrap min-h-[2rem]">
-{{ tryStringify(responseHeaders) }}
-              </pre>
+              <pre v-if="!responseHeadersHtml" class="px-3 py-2 text-xs font-mono whitespace-pre-wrap min-h-[2rem]">{{ tryStringify(responseHeaders) }}</pre>
               <div v-else v-html="responseHeadersHtml"></div>
             </div>
           </div>
@@ -337,6 +432,8 @@ watch(shikiReady, (v) => { if (v) renderHighlights() })
 :deep(.shiki){ padding:.5rem .75rem; border-radius:.5rem; background:transparent }
 :deep(.shiki code){ font-variant-ligatures:none; font-size:.75rem }
 </style>
+
+
 
 
 
