@@ -1,6 +1,5 @@
-<!-- components/ApiEndpointTryIt.vue -->
 <script setup lang="ts">
-import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, watch, nextTick } from 'vue'
 import { useShikiHighlighter } from '~/composables/useShikiHighlighter'
 
 type HttpMethod = 'GET'|'POST'|'PUT'|'PATCH'|'DELETE'
@@ -39,9 +38,12 @@ const livePath = ref(props.path)
 const pathParams = ref<Dict>({ ...(props.defaults?.path || {}) })
 const queryParams = ref<Dict>({ ...(props.defaults?.query || {}) })
 const headers = ref<Dict>({ 'Content-Type': 'application/json', ...(props.defaults?.headers || {}) })
-const auth = ref<{type:'none'|'bearer'|'basic', token?:string, username?:string, password?:string}>(Object.assign({
-  type: 'none', token: undefined, username: undefined, password: undefined
-}, props.defaults?.auth || {}))
+const auth = ref<{type:'none'|'bearer'|'basic', token?:string, username?:string, password?:string}>({
+  type: props.defaults?.auth?.type || 'none',
+  token: props.defaults?.auth?.token,
+  username: props.defaults?.auth?.username,
+  password: props.defaults?.auth?.password
+})
 const bodyRaw = ref(typeof props.defaults?.body === 'undefined' ? '' : tryStringify(props.defaults?.body))
 
 const sending = ref(false)
@@ -73,7 +75,7 @@ function buildUrl(): string {
 }
 function sh(s:string){ const q=`'`; return q + String(s).replace(/'/g, `'\\''`) + q }
 
-/* cURL first (so it exists before highlight tries to read it) */
+/* cURL string (explicit string to avoid template ref weirdness) */
 const curl = computed(() => {
   const h = Object.entries(headers.value || {}).filter(([,v]) => String(v).length).map(([k,v]) => `-H ${sh(`${k}: ${v}`)}`)
   const body = parsedBody()
@@ -85,6 +87,7 @@ const curl = computed(() => {
     : ''
   return ['curl','-X',method.value, ...h, authPart.trim(), sh(buildUrl())].filter(Boolean).join(' ') + bodyPart
 })
+const curlStr = computed(() => String(curl.value))
 
 const methodColor = computed(() => ({
   GET: 'bg-emerald-600 text-white',
@@ -155,7 +158,7 @@ async function sendRequest() {
     respTab.value = 'body'
   } finally {
     sending.value = false
-    if (shikiReady.value) renderHighlights()
+    renderHighlights()
   }
 }
 
@@ -174,49 +177,32 @@ function copyToClipboard(text:string){ if (typeof navigator !== 'undefined') nav
 
 /* ───────── Shiki via composable ───────── */
 const { ready: shikiReady, ensure: ensureShiki, highlight } = useShikiHighlighter()
-
-const curlHtml = ref<string>('')            // bash
-const responseBodyHtml = ref<string>('')    // json
-const responseHeadersHtml = ref<string>('') // json
-let mql: MediaQueryList | null = null
+const curlHtml = ref('')            // bash -> HTML
+const responseBodyHtml = ref('')    // json -> HTML
+const responseHeadersHtml = ref('') // json -> HTML
 
 async function renderHighlights() {
   if (!import.meta.client) return
   await ensureShiki({ langs: ['bash','json'], themes: ['github-dark-default','github-light-default'] })
-  curlHtml.value = await highlight(String(curl.value), 'bash')
-
+  // cURL
+  curlHtml.value = await highlight(curlStr.value || '# (empty)', 'bash')
+  // Body
   let body = responseText.value ?? ''
   try { body = JSON.stringify(JSON.parse(body), null, 2) } catch {}
-  responseBodyHtml.value = await highlight(body, 'json')
-  responseHeadersHtml.value = await highlight(tryStringify(responseHeaders.value), 'json')
+  responseBodyHtml.value = await highlight(body || '{}', 'json')
+  // Headers
+  responseHeadersHtml.value = await highlight(tryStringify(responseHeaders.value) || '{}', 'json')
 }
 
-/* When modal opens, load shiki and render once */
+/* Load & render when modal opens, and keep updated after */
 watch(open, async (v) => {
   if (!v) return
   await nextTick()
   renderHighlights()
 })
-
-/* Keep highlights fresh when content changes */
-watch(curl, () => renderHighlights(), { flush: 'post' })
+watch(curlStr, () => renderHighlights(), { flush: 'post', immediate: false })
 watch([responseText, () => JSON.stringify(responseHeaders.value)], () => renderHighlights(), { flush: 'post' })
-
-/* If Shiki becomes ready later, render immediately */
 watch(shikiReady, (v) => { if (v) renderHighlights() })
-
-/* Theme change (OS) -> re-render */
-onMounted(() => {
-  if (!import.meta.client || !window.matchMedia) return
-  mql = window.matchMedia('(prefers-color-scheme: dark)')
-  const handler = () => renderHighlights()
-  try { mql.addEventListener('change', handler) } catch { mql?.addListener(handler) }
-})
-onBeforeUnmount(() => {
-  if (!mql) return
-  const handler = () => renderHighlights()
-  try { mql.removeEventListener('change', handler) } catch { mql?.removeListener(handler) }
-})
 </script>
 
 <template>
@@ -264,21 +250,20 @@ onBeforeUnmount(() => {
         <div class="rounded-lg border border-white/10 overflow-hidden flex flex-col">
           <div class="border-b border-white/10 px-4 py-2 text-sm font-semibold">Request</div>
           <div class="p-4 space-y-4 overflow-auto">
-            <!-- (inputs omitted for brevity; unchanged from your version) -->
+            <!-- …your inputs / tabs remain unchanged… -->
 
             <!-- cURL -->
             <div class="rounded-lg border border-white/10 bg-white/5">
               <div class="flex items-center justify-between p-2">
                 <span class="text-xs opacity-80">cURL</span>
-                <button class="px-2 py-1 rounded hover:bg-white/10" @click="copyToClipboard(curl)">Copy</button>
+                <button class="px-2 py-1 rounded hover:bg-white/10" @click="copyToClipboard(curlStr)">Copy</button>
               </div>
               <div class="h-36 overflow-auto">
-                <ClientOnly>
-                  <div v-if="curlHtml" v-html="curlHtml"></div>
-                  <template #fallback>
-                    <pre class="px-3 pb-3 text-xs font-mono whitespace-pre-wrap">{{ curl }}</pre>
-                  </template>
-                </ClientOnly>
+                <!-- Show plain text immediately; swap to highlighted when ready -->
+                <pre v-if="!curlHtml" class="px-3 pb-3 text-xs font-mono whitespace-pre-wrap min-h-[2rem]">
+{{ curlStr || '# (empty)' }}
+                </pre>
+                <div v-else v-html="curlHtml"></div>
               </div>
             </div>
           </div>
@@ -297,7 +282,21 @@ onBeforeUnmount(() => {
         <div class="rounded-lg border border-white/10 overflow-hidden flex flex-col">
           <div class="border-b border-white/10 px-4 py-2 text-sm font-semibold">Response</div>
           <div class="p-4 space-y-3 overflow-auto">
-            <!-- (status line unchanged) -->
+            <div class="flex flex-wrap items-center gap-2 text-sm">
+              <span v-if="responseStatus !== null"
+                    :class="[
+                      'px-2 py-1 rounded text-xs font-semibold',
+                      responseStatus === -1 ? 'bg-rose-600 text-white'
+                      : responseStatus >=200 && responseStatus <300 ? 'bg-emerald-600 text-white'
+                      : responseStatus >=400 ? 'bg-rose-600 text-white'
+                      : 'bg-amber-600 text-white'
+                    ]">
+                {{ responseStatus === -1 ? 'Network Error' : `HTTP ${responseStatus}` }}
+              </span>
+              <span v-if="responseTimeMs !== null" class="text-neutral-400">Time: {{ responseTimeMs }} ms</span>
+              <button class="ml-auto px-2 py-1 rounded hover:bg-white/10 text-sm"
+                      @click="copyToClipboard(responseText)">Copy Body</button>
+            </div>
 
             <div class="grid grid-cols-2 gap-2">
               <button :class="['px-3 py-2 text-sm rounded-md border border-white/10', respTab==='body' ? 'bg-white/10' : 'bg-transparent']" @click="respTab='body'">Body</button>
@@ -306,21 +305,17 @@ onBeforeUnmount(() => {
 
             <!-- Response Body -->
             <div v-show="respTab==='body'" class="h-[420px] overflow-auto">
-              <ClientOnly>
-                <div v-if="responseBodyHtml" v-html="responseBodyHtml"></div>
-                <template #fallback>
-                  <pre class="px-3 py-2 text-xs font-mono whitespace-pre-wrap">{{ responseText }}</pre>
-                </template>
-              </ClientOnly>
+              <pre v-if="!responseBodyHtml" class="px-3 py-2 text-xs font-mono whitespace-pre-wrap min-h-[2rem]">
+{{ responseText || '# (no response yet)' }}
+              </pre>
+              <div v-else v-html="responseBodyHtml"></div>
             </div>
             <!-- Response Headers -->
             <div v-show="respTab==='headers'" class="h-[420px] overflow-auto">
-              <ClientOnly>
-                <div v-if="responseHeadersHtml" v-html="responseHeadersHtml"></div>
-                <template #fallback>
-                  <pre class="px-3 py-2 text-xs font-mono whitespace-pre-wrap">{{ tryStringify(responseHeaders) }}</pre>
-                </template>
-              </ClientOnly>
+              <pre v-if="!responseHeadersHtml" class="px-3 py-2 text-xs font-mono whitespace-pre-wrap min-h-[2rem]">
+{{ tryStringify(responseHeaders) }}
+              </pre>
+              <div v-else v-html="responseHeadersHtml"></div>
             </div>
           </div>
         </div>
@@ -342,6 +337,7 @@ onBeforeUnmount(() => {
 :deep(.shiki){ padding:.5rem .75rem; border-radius:.5rem; background:transparent }
 :deep(.shiki code){ font-variant-ligatures:none; font-size:.75rem }
 </style>
+
 
 
 
