@@ -1,6 +1,6 @@
 <!-- components/ApiEndpointTryIt.vue -->
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
 
 type HttpMethod = 'GET'|'POST'|'PUT'|'PATCH'|'DELETE'
 type Dict = Record<string, any>
@@ -101,11 +101,25 @@ async function renderHighlights() {
   responseHeadersHtml.value = h.codeToHtml(tryStringify(responseHeaders.value) || '', { lang: 'json', theme })
 }
 
-// Re-render on content changes (and when opening modal for the first time)
+// Re-render on mount, when opening modal, and when content changes
 onMounted(renderHighlights)
-watch([() => open.value], (o) => { if (o) renderHighlights() })
-watch([/* cURL deps */], renderHighlights, { flush: 'post' })
-watch([/* response deps */ responseText, responseHeaders], renderHighlights)
+
+watch(open, async (val) => {
+  if (val) {
+    await nextTick()
+    renderHighlights()
+  }
+})
+
+watch(curl, async () => {
+  await nextTick()
+  renderHighlights()
+}, { flush: 'post' })
+
+watch([responseText, () => JSON.stringify(responseHeaders.value)], async () => {
+  await nextTick()
+  renderHighlights()
+}, { flush: 'post' })
 
 /** ───────────────────────── Helpers ───────────────────────── */
 function tryStringify(v:any){ try{ return JSON.stringify(v,null,2) }catch{ return String(v) } }
@@ -396,14 +410,15 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
               <div class="mt-1 overflow-hidden text-ellipsis whitespace-nowrap">{{ buildUrl() }}</div>
             </div>
 
-            <!-- cURL (Shiki) -->
+            <!-- cURL (Shiki + fallback) -->
             <div class="rounded-lg border border-white/10 bg-white/5">
               <div class="flex items-center justify-between p-2">
                 <span class="text-xs opacity-80">cURL</span>
                 <button class="px-2 py-1 rounded hover:bg-white/10" @click="copyToClipboard(curl)">Copy</button>
               </div>
               <div class="h-36 overflow-auto">
-                <div v-html="curlHtml"></div>
+                <div v-if="curlHtml" v-html="curlHtml"></div>
+                <pre v-else class="px-3 pb-3 text-xs font-mono whitespace-pre-wrap">{{ curl }}</pre>
               </div>
             </div>
           </div>
@@ -443,13 +458,15 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
               <button :class="['px-3 py-2 text-sm rounded-md border border-white/10', respTab==='headers' ? 'bg-white/10' : 'bg-transparent']" @click="respTab='headers'">Headers</button>
             </div>
 
-            <!-- Response Body (Shiki) -->
+            <!-- Response Body (Shiki + fallback) -->
             <div v-show="respTab==='body'" class="h-[420px] overflow-auto">
-              <div v-html="responseBodyHtml"></div>
+              <div v-if="responseBodyHtml" v-html="responseBodyHtml"></div>
+              <pre v-else class="px-3 py-2 text-xs font-mono whitespace-pre-wrap">{{ responseText }}</pre>
             </div>
-            <!-- Response Headers (Shiki) -->
+            <!-- Response Headers (Shiki + fallback) -->
             <div v-show="respTab==='headers'" class="h-[420px] overflow-auto">
-              <div v-html="responseHeadersHtml"></div>
+              <div v-if="responseHeadersHtml" v-html="responseHeadersHtml"></div>
+              <pre v-else class="px-3 py-2 text-xs font-mono whitespace-pre-wrap">{{ tryStringify(responseHeaders) }}</pre>
             </div>
           </div>
         </div>
@@ -481,6 +498,7 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
   font-size: 0.75rem;
 }
 </style>
+
 
 
 
