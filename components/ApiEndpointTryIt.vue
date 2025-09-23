@@ -348,15 +348,11 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
             </div>
           </div>
 
-          <div class="px-4 py-3 flex justify-end">
+          <div class="border-t border-white/10 px-4 py-3 flex justify-end">
             <button class="rounded-md bg-primary text-primary-foreground px-3 py-1.5 hover:opacity-90 disabled:opacity-50"
                     :disabled="sending"
                     @click="sendRequest">
-              <span v-if="!sending" class="inline-flex items-center gap-1.5">
-                <!-- Nuxt Icon / lucide icon (globally available) -->
-                <Icon name="lucide:send" class="w-9 h-9" />
-                Send Request
-              </span>
+              <span v-if="!sending">Send Request</span>
               <span v-else class="animate-pulse">Sending…</span>
             </button>
           </div>
@@ -412,6 +408,9 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
 .bg-primary{ background: var(--primary); }
 .text-primary-foreground{ color: var(--primary-foreground); }
 </style>
+
+
+
 
 
 
