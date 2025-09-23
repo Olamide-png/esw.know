@@ -354,7 +354,7 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
                     @click="sendRequest">
               <span v-if="!sending" class="inline-flex items-center gap-1.5">
                 <!-- Nuxt Icon / lucide icon (globally available) -->
-                <Icon name="lucide:send" class="w-7 h-7" />
+                <Icon name="lucide:send" class="w-8 h-8" />
                 Send Request
               </span>
               <span v-else class="animate-pulse">Sending…</span>
