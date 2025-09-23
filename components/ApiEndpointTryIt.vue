@@ -348,7 +348,8 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
             </div>
           </div>
 
-         <div class="px-4 py-3 flex justify-end">
+        <!-- Footer: no border so it doesn't draw a line across the modal -->
+          <div class="px-4 py-3 flex justify-end">
             <button class="rounded-md bg-primary text-primary-foreground px-3 py-1.5 hover:opacity-90 disabled:opacity-50"
                     :disabled="sending"
                     @click="sendRequest">
@@ -397,8 +398,11 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
         </div>
       </div>
 
-      <div class="absolute bottom-0 left-0 right-0 border-t border-white/10 px-4 py-2 text-xs text-neutral-400 flex items-center">
-        <span>Try-it Console • <kbd class="px-1 rounded bg-white/10">Esc</kbd> to close</span>
+      <!-- Subtle helper text, lifted above the modal border (no border line) -->
+      <div class="absolute left-0 right-0 bottom-2 px-4 text-xs text-neutral-400/80 flex items-center pointer-events-none">
+        <span class="pointer-events-auto">
+          Try it Console • <kbd class="px-1 rounded bg-white/10">Esc</kbd> to close
+        </span>
         <span class="ml-auto"></span>
       </div>
     </div>
