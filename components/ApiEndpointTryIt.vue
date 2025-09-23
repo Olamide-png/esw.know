@@ -1,6 +1,6 @@
 <!-- components/ApiEndpointTryIt.vue -->
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 
 type HttpMethod = 'GET'|'POST'|'PUT'|'PATCH'|'DELETE'
 type Dict = Record<string, any>
@@ -52,6 +52,62 @@ const responseTimeMs = ref<number|null>(null)
 const responseHeaders = ref<Dict>({})
 const responseText = ref<string>('')
 
+/** ───────────────────────── Shiki setup (inline singleton) ───────────────────────── */
+let _shikiHighlighter: any | null = null
+let _shikiReady: Promise<any> | null = null
+async function getHighlighterSingleton() {
+  if (_shikiHighlighter) return _shikiHighlighter
+  if (_shikiReady) return _shikiReady
+  _shikiReady = (async () => {
+    const { getHighlighter } = await import('shiki')
+    // Explicit imports so Vite bundles assets
+    const githubDark = (await import('shiki/themes/github-dark-default.mjs')).default
+    const githubLight = (await import('shiki/themes/github-light-default.mjs')).default
+    const bash = (await import('shiki/langs/bash.mjs')).default
+    const json = (await import('shiki/langs/json.mjs')).default
+    const highlighter = await getHighlighter({
+      themes: [githubDark, githubLight],
+      langs: [bash, json],
+    })
+    _shikiHighlighter = highlighter
+    return highlighter
+  })()
+  return _shikiReady
+}
+
+function currentTheme() {
+  // If you have app-level dark mode state, read that instead.
+  return window.matchMedia?.('(prefers-color-scheme: light)').matches
+    ? 'github-light-default'
+    : 'github-dark-default'
+}
+
+// Highlighted HTML containers (Shiki outputs full <pre class="shiki">…</pre>)
+const curlHtml = ref<string>('')            // bash
+const responseBodyHtml = ref<string>('')    // json
+const responseHeadersHtml = ref<string>('') // json
+
+async function renderHighlights() {
+  const h = await getHighlighterSingleton()
+  const theme = currentTheme()
+
+  curlHtml.value = h.codeToHtml(String(curl.value), { lang: 'bash', theme })
+
+  // Pretty-print JSON if possible before highlighting
+  let body = responseText.value ?? ''
+  try { body = JSON.stringify(JSON.parse(body), null, 2) } catch {}
+  responseBodyHtml.value = h.codeToHtml(body, { lang: 'json', theme })
+
+  responseHeadersHtml.value = h.codeToHtml(tryStringify(responseHeaders.value) || '', { lang: 'json', theme })
+}
+
+// Re-render on content changes (and when opening modal for the first time)
+onMounted(renderHighlights)
+watch([() => open.value], (o) => { if (o) renderHighlights() })
+watch([/* cURL deps */], renderHighlights, { flush: 'post' })
+watch([/* response deps */ responseText, responseHeaders], renderHighlights)
+
+/** ───────────────────────── Helpers ───────────────────────── */
 function tryStringify(v:any){ try{ return JSON.stringify(v,null,2) }catch{ return String(v) } }
 function isJsonContent(){
   const ct = String(headers.value['Content-Type'] || headers.value['content-type'] || '').toLowerCase()
@@ -109,7 +165,7 @@ function renameKv(target:'query'|'headers', oldKey:string, newKey:string){
   if (!newKey || newKey === oldKey) return
   const src = target === 'query' ? { ...queryParams.value } : { ...headers.value }
   if (!Object.prototype.hasOwnProperty.call(src, oldKey)) return
-  const val = src[oldKey]; delete src[oldKey]
+  const val = (src as any)[oldKey]; delete (src as any)[oldKey]
   let key = newKey, i = 1
   while (Object.prototype.hasOwnProperty.call(src, key)) key = `${newKey}_${i++}`
   ;(src as any)[key] = val
@@ -146,7 +202,6 @@ async function sendRequest() {
     const hh: Dict = {}; res.headers.forEach((v,k)=>{ hh[k]=v }); responseHeaders.value = hh
     const txt = await res.text()
     try { responseText.value = JSON.stringify(JSON.parse(txt), null, 2) } catch { responseText.value = txt }
-    /* After a request, keep Body tab visible */
     respTab.value = 'body'
   } catch (e:any) {
     const t1 = performance.now()
@@ -154,17 +209,21 @@ async function sendRequest() {
     responseTimeMs.value = Math.round(t1 - t0)
     responseText.value = `Request failed: ${e?.message || e}`
     respTab.value = 'body'
-  } finally { sending.value = false }
+  } finally {
+    sending.value = false
+    // refresh highlights after new content arrives
+    renderHighlights()
+  }
 }
 
 function addKv(target:'path'|'query'|'headers') {
   const obj = target==='path' ? pathParams.value : target==='query' ? queryParams.value : headers.value
-  const copy = { ...obj }; let i = 1; while (copy[`key${i}`] !== undefined) i++; copy[`key${i}`] = ''
+  const copy = { ...obj }; let i = 1; while ((copy as any)[`key${i}`] !== undefined) i++; (copy as any)[`key${i}`] = ''
   if (target==='path') pathParams.value = copy; else if (target==='query') queryParams.value = copy; else headers.value = copy
 }
 function removeKv(target:'path'|'query'|'headers', k:string) {
   const obj = target==='path' ? pathParams.value : target==='query' ? queryParams.value : headers.value
-  const copy: Dict = {}; Object.keys(obj).forEach(key => { if (key !== k) copy[key] = obj[key] })
+  const copy: Dict = {}; Object.keys(obj).forEach(key => { if (key !== k) (copy as any)[key] = (obj as any)[key] })
   if (target==='path') pathParams.value = copy; else if (target==='query') queryParams.value = copy; else headers.value = copy
 }
 function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catch(()=>{}) }
@@ -337,13 +396,14 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
               <div class="mt-1 overflow-hidden text-ellipsis whitespace-nowrap">{{ buildUrl() }}</div>
             </div>
 
+            <!-- cURL (Shiki) -->
             <div class="rounded-lg border border-white/10 bg-white/5">
               <div class="flex items-center justify-between p-2">
                 <span class="text-xs opacity-80">cURL</span>
                 <button class="px-2 py-1 rounded hover:bg-white/10" @click="copyToClipboard(curl)">Copy</button>
               </div>
               <div class="h-36 overflow-auto">
-                <pre class="px-3 pb-3 text-xs font-mono whitespace-pre-wrap">{{ curl }}</pre>
+                <div v-html="curlHtml"></div>
               </div>
             </div>
           </div>
@@ -383,11 +443,13 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
               <button :class="['px-3 py-2 text-sm rounded-md border border-white/10', respTab==='headers' ? 'bg-white/10' : 'bg-transparent']" @click="respTab='headers'">Headers</button>
             </div>
 
+            <!-- Response Body (Shiki) -->
             <div v-show="respTab==='body'" class="h-[420px] overflow-auto">
-              <pre class="px-3 py-2 text-xs font-mono whitespace-pre-wrap">{{ responseText }}</pre>
+              <div v-html="responseBodyHtml"></div>
             </div>
+            <!-- Response Headers (Shiki) -->
             <div v-show="respTab==='headers'" class="h-[420px] overflow-auto">
-              <pre class="px-3 py-2 text-xs font-mono whitespace-pre-wrap">{{ tryStringify(responseHeaders) }}</pre>
+              <div v-html="responseHeadersHtml"></div>
             </div>
           </div>
         </div>
@@ -407,7 +469,19 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
 :root { --primary: #3b82f6; --primary-foreground: #fff; }
 .bg-primary{ background: var(--primary); }
 .text-primary-foreground{ color: var(--primary-foreground); }
+
+/* Optional: tighten Shiki blocks a bit */
+:deep(.shiki) {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background: transparent; /* keep container bg */
+}
+:deep(.shiki code) {
+  font-variant-ligatures: none;
+  font-size: 0.75rem;
+}
 </style>
+
 
 
 
