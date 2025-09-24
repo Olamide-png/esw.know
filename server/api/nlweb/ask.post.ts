@@ -1,85 +1,85 @@
-// server/api/nlweb/ask.post.ts
-type Chunk = {
-  doc_id: string
-  title?: string
-  url?: string
-  content: string
-  embedding: number[]
-}
-type IndexFile = { dim: number; chunks: Chunk[] }
+import { z } from 'zod'
 
-function dot(a:number[], b:number[]) { let s=0; for (let i=0;i<a.length;i++) s += a[i]*b[i]; return s }
-function norm(a:number[]) { return Math.sqrt(dot(a,a)) }
-function cosine(a:number[], b:number[]) { return dot(a,b) / (norm(a)*norm(b) || 1) }
-
-async function embed(texts: string[], model = process.env.OPENAI_EMBED_MODEL || 'text-embedding-3-small') {
-  const res = await $fetch<any>('https://api.openai.com/v1/embeddings', {
-    method: 'POST',
-    headers: {
-      authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-      'content-type': 'application/json'
-    },
-    body: { model, input: texts }
-  })
-  return res.data.map((d:any)=> d.embedding as number[])
-}
+const Body = z.object({
+  query: z.string().min(1, 'query is required'),
+  // optional knobs you might want to pass from the UI later
+  limit: z.number().int().min(1).max(20).optional(),
+  lang: z.string().optional()
+})
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody<{ query?: string; k?: number; limit?: number; lang?: string }>(event)
-  const query = (body?.query||'').trim()
-  if (!query) throw createError({ statusCode: 400, statusMessage: 'query required' })
-  if (!process.env.OPENAI_API_KEY) throw createError({ statusCode: 500, statusMessage: 'OPENAI_API_KEY missing' })
+  const body = Body.parse(await readBody(event))
+  const OPENAI_API_KEY = process.env.OPENAI_API_KEY
+  const OPENAI_MODEL = process.env.OPENAI_MODEL || 'gpt-4.1-mini'
 
-  // 1) Load embedded index (bundled with your app)
-  const idx: IndexFile = await import('~/server/data/index.json').then(m => m.default || m)
-  const k = Math.min(Math.max(body?.k ?? 8, 1), 20)
+  if (!OPENAI_API_KEY) {
+    throw createError({ statusCode: 500, statusMessage: 'OPENAI_API_KEY missing' })
+  }
 
-  // 2) Embed the query
-  const [qVec] = await embed([query])
-
-  // 3) Rank by cosine
-  const scored = idx.chunks
-    .map(c => ({ score: cosine(qVec, c.embedding), ...c }))
-    .sort((a,b)=> b.score - a.score)
-    .slice(0, k)
-
-  // 4) Build grounded prompt
-  const system =
-    `You are a documentation formatter. Return STRICT JSON only.
-     Use Schema.org. Top-level: {"@type":"ItemList","itemListElement":[...]}.
-     Cite only from the provided context. If unknown, say you don't know.` +
-    (body?.limit ? ` Limit to ${body.limit} items.` : '') +
-    (body?.lang ? ` Answer in ${body.lang}.` : '')
-
-  const ctx = scored.map((c,i)=>
-    `### Doc ${i+1} (${c.doc_id})
-TITLE: ${c.title||''}
-URL: ${c.url||''}
-CONTENT:
-${c.content}`).join('\n\n')
+  // Guardrail: force JSON and a predictable Schema.org shape
+  const system = [
+    `You are a web data formatter.`,
+    `Return STRICT JSON (no code fences).`,
+    `Use Schema.org vocabulary on JSON-LD-like objects.`,
+    `Top-level must be {"@type":"ItemList","itemListElement":[...]} where each element is either`,
+    `- {"@type":"ListItem","position":N,"item": <Schema.org Thing> }`,
+    `or a <Schema.org Thing>.`,
+    `Prefer types: Article, NewsArticle, Product, FAQPage, HowTo, Event, Organization, Person, Place.`,
+    `Include useful fields: name, headline, description, url, datePublished/startDate, image, offers, aggregateRating, acceptedAnswer, etc. Only include what makes sense.`,
+    body.limit ? `Limit to ${body.limit} results.` : ``,
+    body.lang ? `Answer in ${body.lang}.` : ``
+  ].filter(Boolean).join(' ')
 
   const messages = [
     { role: 'system', content: system },
-    { role: 'user', content: `Use ONLY this context:\n\n${ctx}\n\n---\nQuestion: ${query}` }
+    { role: 'user', content: body.query }
   ]
 
-  // 5) Call OpenAI for the final answer (JSON only)
-  const model = process.env.OPENAI_MODEL || 'gpt-4.1-mini'
+  // Call OpenAI
   const resp = await $fetch<any>('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
-    headers: { authorization: `Bearer ${process.env.OPENAI_API_KEY}`, 'content-type': 'application/json' },
-    body: { model, messages, temperature: 0.1, response_format: { type: 'json_object' } }
+    headers: {
+      authorization: `Bearer ${OPENAI_API_KEY}`,
+      'content-type': 'application/json'
+    },
+    body: {
+      model: OPENAI_MODEL,
+      messages,
+      temperature: 0.2,
+      response_format: { type: 'json_object' }
+    }
+  }).catch((e: any) => {
+    throw createError({
+      statusCode: e?.status || 502,
+      statusMessage: e?.statusText || 'OpenAI error',
+      data: e?.data
+    })
   })
 
   const content = resp?.choices?.[0]?.message?.content || '{}'
+
+  // Always return valid JSON; normalize minimal fallback
   try {
     const json = JSON.parse(content)
-    ;(json as any)._citations = scored.map(c => ({ doc_id: c.doc_id, title: c.title, url: c.url, score: Number(c.score.toFixed(3)) }))
+    // If it’s not an ItemList, wrap it
+    if (json?.['@type'] !== 'ItemList') {
+      return {
+        '@type': 'ItemList',
+        itemListElement: Array.isArray(json) ? json : [json]
+      }
+    }
     return json
   } catch {
-    return { '@type':'ItemList', itemListElement:[], _citations: scored.map(c => ({ doc_id:c.doc_id, url:c.url, score: Number(c.score.toFixed(3)) })) }
+    return {
+      '@type': 'ItemList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, item: { '@type': 'Thing', name: String(content) } }
+      ]
+    }
   }
 })
+
+
 
 
 
