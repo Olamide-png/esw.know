@@ -8,21 +8,30 @@ const currentDir = dirname(fileURLToPath(import.meta.url));
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
-  // ✅ Server/runtime env for Try-It proxy
+  // ✅ Server/runtime env for Try-It proxy + NLWeb
   runtimeConfig: {
-    // Server-only: comma-separated host allow-list for /api/tryit
+    // Server-only
     TRYIT_ALLOWED_HOSTS: process.env.TRYIT_ALLOWED_HOSTS || '',
+    nlwebBaseUrl: process.env.NLWEB_BASE_URL || '',
+
     public: {
       // (Optional) expose labels/baseUrls if you want to build the env dropdown from env
       TRYIT_LABELS: process.env.TRYIT_LABELS || '',      // e.g. "UAT,Prod"
       TRYIT_BASEURLS: process.env.TRYIT_BASEURLS || ''   // e.g. "https://uat.example.com,https://api.example.com"
+      // You can expose NLWeb too if you want to debug in client (not required):
+      // nlwebBaseUrl: process.env.NLWEB_BASE_URL || ''
     }
   },
 
-  // ✅ Make sure /api/tryit isn't cached and (optionally) allows CORS
+  // ✅ Make sure APIs aren't cached and allow CORS (serverless-safe)
   nitro: {
     routeRules: {
       '/api/tryit': {
+        cors: true,
+        headers: { 'Cache-Control': 'no-store' }
+      },
+      // NLWeb proxy endpoints (you can add more under /api/nlweb/** as needed)
+      '/api/nlweb/**': {
         cors: true,
         headers: { 'Cache-Control': 'no-store' }
       }
@@ -124,6 +133,7 @@ export default defineNuxtConfig({
     }
   }
 });
+
 
 
 
