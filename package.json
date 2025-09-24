@@ -88,7 +88,21 @@
     "vue-router": "^4.5.1",
     "vue-tsc": "^2.2.10"
   },
+  "engines": {
+    "node": "22.x"
+  },
   "pnpm": {
     "onlyBuiltDependencies": [
       "sharp",
+      "@tailwindcss/oxide",
+      "unrs-resolver"
+    ],
+    "ignoredBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild",
+      "vue-demi"
+    ]
+  }
+}
+
 
