@@ -1,38 +1,82 @@
-// server/api/nlweb/ask.post.ts
-export default defineEventHandler(async (event) => {
-  const body = await readBody<any>(event)
-  const { nlwebBaseUrl } = useRuntimeConfig()
+import { z } from 'zod'
 
-  if (!nlwebBaseUrl) {
-    throw createError({ statusCode: 500, statusMessage: 'NLWEB_BASE_URL not configured' })
+const Body = z.object({
+  query: z.string().min(1, 'query is required'),
+  // optional knobs you might want to pass from the UI later
+  limit: z.number().int().min(1).max(20).optional(),
+  lang: z.string().optional()
+})
+
+export default defineEventHandler(async (event) => {
+  const body = Body.parse(await readBody(event))
+  const OPENAI_API_KEY = process.env.OPENAI_API_KEY
+  const OPENAI_MODEL = process.env.OPENAI_MODEL || 'gpt-4.1-mini'
+
+  if (!OPENAI_API_KEY) {
+    throw createError({ statusCode: 500, statusMessage: 'OPENAI_API_KEY missing' })
   }
 
-  // Optional: allow overriding the path if your NLWeb uses a different route
-  const askPath = process.env.NLWEB_ASK_PATH || '/ask'
-  const target = `${nlwebBaseUrl.replace(/\/+$/, '')}${askPath}`
+  // Guardrail: force JSON and a predictable Schema.org shape
+  const system = [
+    `You are a web data formatter.`,
+    `Return STRICT JSON (no code fences).`,
+    `Use Schema.org vocabulary on JSON-LD-like objects.`,
+    `Top-level must be {"@type":"ItemList","itemListElement":[...]} where each element is either`,
+    `- {"@type":"ListItem","position":N,"item": <Schema.org Thing> }`,
+    `or a <Schema.org Thing>.`,
+    `Prefer types: Article, NewsArticle, Product, FAQPage, HowTo, Event, Organization, Person, Place.`,
+    `Include useful fields: name, headline, description, url, datePublished/startDate, image, offers, aggregateRating, acceptedAnswer, etc. Only include what makes sense.`,
+    body.limit ? `Limit to ${body.limit} results.` : ``,
+    body.lang ? `Answer in ${body.lang}.` : ``
+  ].filter(Boolean).join(' ')
 
-  try {
-    const res = await $fetch(target, {
-      method: 'POST',
-      body,
-      headers: { 'content-type': 'application/json' }
-    })
-    return res
-  } catch (err: any) {
-    // Log on server for diagnosis
-    console.error('[NLWEB PROXY ERROR]', {
-      target,
-      status: err?.status,
-      statusText: err?.statusText,
-      data: err?.data,
-      message: err?.message
-    })
-    // Forward useful context to client
+  const messages = [
+    { role: 'system', content: system },
+    { role: 'user', content: body.query }
+  ]
+
+  // Call OpenAI
+  const resp = await $fetch<any>('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      authorization: `Bearer ${OPENAI_API_KEY}`,
+      'content-type': 'application/json'
+    },
+    body: {
+      model: OPENAI_MODEL,
+      messages,
+      temperature: 0.2,
+      response_format: { type: 'json_object' }
+    }
+  }).catch((e: any) => {
     throw createError({
-      statusCode: err?.status || 502,
-      statusMessage: `[NLWeb upstream] ${err?.statusText || err?.message || 'Bad Gateway'}`,
-      data: err?.data || { target, hint: 'Check NLWeb server logs & request body shape' }
+      statusCode: e?.status || 502,
+      statusMessage: e?.statusText || 'OpenAI error',
+      data: e?.data
     })
+  })
+
+  const content = resp?.choices?.[0]?.message?.content || '{}'
+
+  // Always return valid JSON; normalize minimal fallback
+  try {
+    const json = JSON.parse(content)
+    // If it’s not an ItemList, wrap it
+    if (json?.['@type'] !== 'ItemList') {
+      return {
+        '@type': 'ItemList',
+        itemListElement: Array.isArray(json) ? json : [json]
+      }
+    }
+    return json
+  } catch {
+    return {
+      '@type': 'ItemList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, item: { '@type': 'Thing', name: String(content) } }
+      ]
+    }
   }
 })
+
 
