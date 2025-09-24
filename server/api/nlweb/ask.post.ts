@@ -1,11 +1,62 @@
+// server/api/ask.post.ts
 import { z } from 'zod'
+import { serverQueryContent } from '#content/server'
 
 const Body = z.object({
   query: z.string().min(1, 'query is required'),
-  // optional knobs you might want to pass from the UI later
   limit: z.number().int().min(1).max(20).optional(),
   lang: z.string().optional()
 })
+
+/**
+ * Super light retrieval:
+ * - fetches all _partial entries (sections) so we can grab smaller chunks
+ * - scores by simple term overlap (no new deps / embeddings)
+ * - returns top N with a short snippet and path for citation
+ */
+async function retrieveFromDocs(event: any, q: string, k: number) {
+  const terms = q.toLowerCase().split(/\s+/).filter(Boolean)
+  const entries = await serverQueryContent(event).where({ _partial: true }).find()
+
+  type Hit = {
+    _path?: string
+    title?: string
+    description?: string
+    bodyText?: string
+    _id?: string
+    score: number
+    snippet: string
+  }
+
+  const hits: Hit[] = entries.map((doc) => {
+    const text = [
+      doc.title || '',
+      doc.description || '',
+      (doc.bodyText as string) || '',
+      doc._path || ''
+    ].join('\n').toLowerCase()
+
+    const score =
+      (text.includes(q.toLowerCase()) ? 3 : 0) +
+      terms.reduce((s, t) => s + (text.includes(t) ? 1 : 0), 0)
+
+    // pick a short snippet for the prompt
+    const body = (doc.bodyText as string) || ''
+    const idx = Math.max(0, body.toLowerCase().indexOf(terms[0] || '') - 80)
+    const snippet = body.slice(idx, idx + 700)
+
+    return {
+      ...doc,
+      score,
+      snippet
+    }
+  })
+  .filter(h => h.score > 0)
+  .sort((a, b) => b.score - a.score)
+  .slice(0, k)
+
+  return hits
+}
 
 export default defineEventHandler(async (event) => {
   const body = Body.parse(await readBody(event))
@@ -16,68 +67,59 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 500, statusMessage: 'OPENAI_API_KEY missing' })
   }
 
-  // Guardrail: force JSON and a predictable Schema.org shape
+  // 1) retrieve relevant doc chunks
+  const k = body.limit ?? 6
+  const hits = await retrieveFromDocs(event, body.query, k)
+
+  // 2) build context for the LLM
+  const contextBlocks = hits.map((h, i) => {
+    const header = `[[${i + 1}]] ${h.title || h._path || 'Untitled'} — ${h._path ?? ''}`
+    return `${header}\n${h.snippet}`
+  }).join('\n\n---\n\n')
+
   const system = [
-    `You are a web data formatter.`,
-    `Return STRICT JSON (no code fences).`,
-    `Use Schema.org vocabulary on JSON-LD-like objects.`,
-    `Top-level must be {"@type":"ItemList","itemListElement":[...]} where each element is either`,
-    `- {"@type":"ListItem","position":N,"item": <Schema.org Thing> }`,
-    `or a <Schema.org Thing>.`,
-    `Prefer types: Article, NewsArticle, Product, FAQPage, HowTo, Event, Organization, Person, Place.`,
-    `Include useful fields: name, headline, description, url, datePublished/startDate, image, offers, aggregateRating, acceptedAnswer, etc. Only include what makes sense.`,
-    body.limit ? `Limit to ${body.limit} results.` : ``,
-    body.lang ? `Answer in ${body.lang}.` : ``
-  ].filter(Boolean).join(' ')
+    'You are a helpful docs assistant.',
+    'Answer ONLY using the provided CONTEXT. If the answer is not in context, say you do not know.',
+    'Keep answers concise and cite sources like [1], [2] that refer to the items in CONTEXT.',
+  ].join(' ')
 
-  const messages = [
-    { role: 'system', content: system },
-    { role: 'user', content: body.query }
-  ]
+  const user = [
+    `QUESTION: ${body.query}`,
+    '',
+    'CONTEXT:',
+    contextBlocks || '(no context found)'
+  ].join('\n')
 
-  // Call OpenAI
+  // 3) call OpenAI without adding a new SDK dependency
   const resp = await $fetch<any>('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
-      authorization: `Bearer ${OPENAI_API_KEY}`,
-      'content-type': 'application/json'
+      Authorization: `Bearer ${OPENAI_API_KEY}`,
+      'Content-Type': 'application/json'
     },
     body: {
       model: OPENAI_MODEL,
-      messages,
-      temperature: 0.2,
-      response_format: { type: 'json_object' }
+      messages: [
+        { role: 'system', content: system },
+        { role: 'user', content: user }
+      ],
+      temperature: 0.2
     }
-  }).catch((e: any) => {
-    throw createError({
-      statusCode: e?.status || 502,
-      statusMessage: e?.statusText || 'OpenAI error',
-      data: e?.data
-    })
   })
 
-  const content = resp?.choices?.[0]?.message?.content || '{}'
+  const answer = resp?.choices?.[0]?.message?.content?.trim() || 'Sorry, I could not produce an answer.'
 
-  // Always return valid JSON; normalize minimal fallback
-  try {
-    const json = JSON.parse(content)
-    // If it’s not an ItemList, wrap it
-    if (json?.['@type'] !== 'ItemList') {
-      return {
-        '@type': 'ItemList',
-        itemListElement: Array.isArray(json) ? json : [json]
-      }
-    }
-    return json
-  } catch {
-    return {
-      '@type': 'ItemList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, item: { '@type': 'Thing', name: String(content) } }
-      ]
-    }
+  return {
+    answer,
+    sources: hits.map((h, i) => ({
+      index: i + 1,
+      title: h.title || h._path || 'Untitled',
+      path: h._path || '',
+      description: h.description || ''
+    }))
   }
 })
+
 
 
 

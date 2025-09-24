@@ -36,12 +36,15 @@ const price = computed(() => {
   return p ? `${p} ${offers.priceCurrency || ''}`.trim() : undefined
 })
 const qa = computed(() => {
-  // QAPage or FAQPage structures
   const main = t.value.mainEntity
   if (Array.isArray(main)) return main
   if (main) return [main]
   return []
 })
+
+// Ask-mode (answer + sources from /api/ask)
+const answer = computed(() => t.value.answer || t.value.output || t.value.result)
+const sources = computed(() => (Array.isArray(t.value.sources) ? t.value.sources : []))
 </script>
 
 <template>
@@ -49,29 +52,63 @@ const qa = computed(() => {
     <div class="p-4 md:p-6">
       <div class="flex items-start gap-4">
         <div class="min-w-0 flex-1">
-          <div class="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">{{ type }}</div>
-          <h3 class="mt-1 text-lg font-semibold">
-            <a v-if="url" :href="url" target="_blank" rel="noreferrer" class="hover:underline">{{ name || '(no title)' }}</a>
-            <span v-else>{{ name || '(no title)' }}</span>
-          </h3>
-          <p v-if="description" class="mt-2 text-sm text-neutral-700 dark:text-neutral-300 line-clamp-4">{{ description }}</p>
+          <!-- ASK RESULT -->
+          <template v-if="answer">
+            <div class="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">Answer</div>
+            <h3 class="mt-1 text-lg font-semibold">
+              <span>{{ name || '(Ask)' }}</span>
+            </h3>
 
-          <div class="mt-3 flex flex-wrap gap-3 text-xs text-neutral-600 dark:text-neutral-400">
-            <span v-if="when" class="inline-flex items-center rounded-full border px-2 py-1 border-neutral-200 dark:border-neutral-800">📅 {{ when }}</span>
-            <span v-if="where" class="inline-flex items-center rounded-full border px-2 py-1 border-neutral-200 dark:border-neutral-800">📍 {{ where }}</span>
-            <span v-if="price" class="inline-flex items-center rounded-full border px-2 py-1 border-neutral-200 dark:border-neutral-800">💰 {{ price }}</span>
-          </div>
+            <!-- Keep newlines/spaces from the model -->
+            <p class="mt-2 text-sm text-neutral-800 dark:text-neutral-200 whitespace-pre-wrap">
+              {{ answer }}
+            </p>
 
-          <!-- Q&A rendering (FAQPage/QAPage) -->
-          <div v-if="qa.length" class="mt-4 space-y-3">
-            <div v-for="(q, i) in qa" :key="i" class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-3">
-              <p class="font-medium">{{ q.name || q.text }}</p>
-              <p v-if="q.acceptedAnswer?.text" class="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
-                {{ q.acceptedAnswer.text }}
-              </p>
+            <div v-if="sources.length" class="mt-4 text-xs text-neutral-600 dark:text-neutral-400">
+              <span class="font-medium">Sources:</span>
+              <ul class="list-disc ml-5 mt-1 space-y-1">
+                <li v-for="s in sources" :key="s.index">
+                  [{{ s.index }}]
+                  <NuxtLink
+                    v-if="s.path"
+                    :to="s.path"
+                    class="underline hover:no-underline"
+                  >
+                    {{ s.title || s.path }}
+                  </NuxtLink>
+                  <span v-else>{{ s.title || '(untitled)' }}</span>
+                  <span v-if="s.description"> — {{ s.description }}</span>
+                </li>
+              </ul>
             </div>
-          </div>
+          </template>
+
+          <!-- DEFAULT CARD (your original display) -->
+          <template v-else>
+            <div class="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">{{ type }}</div>
+            <h3 class="mt-1 text-lg font-semibold">
+              <a v-if="url" :href="url" target="_blank" rel="noreferrer" class="hover:underline">{{ name || '(no title)' }}</a>
+              <span v-else>{{ name || '(no title)' }}</span>
+            </h3>
+            <p v-if="description" class="mt-2 text-sm text-neutral-700 dark:text-neutral-300 line-clamp-4">{{ description }}</p>
+
+            <div class="mt-3 flex flex-wrap gap-3 text-xs text-neutral-600 dark:text-neutral-400">
+              <span v-if="when" class="inline-flex items-center rounded-full border px-2 py-1 border-neutral-200 dark:border-neutral-800">📅 {{ when }}</span>
+              <span v-if="where" class="inline-flex items-center rounded-full border px-2 py-1 border-neutral-200 dark:border-neutral-800">📍 {{ where }}</span>
+              <span v-if="price" class="inline-flex items-center rounded-full border px-2 py-1 border-neutral-200 dark:border-neutral-800">💰 {{ price }}</span>
+            </div>
+
+            <div v-if="qa.length" class="mt-4 space-y-3">
+              <div v-for="(q, i) in qa" :key="i" class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-3">
+                <p class="font-medium">{{ q.name || q.text }}</p>
+                <p v-if="q.acceptedAnswer?.text" class="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
+                  {{ q.acceptedAnswer.text }}
+                </p>
+              </div>
+            </div>
+          </template>
         </div>
+
         <img
           v-if="image"
           :src="image"
@@ -83,3 +120,4 @@ const qa = computed(() => {
     </div>
   </article>
 </template>
+
