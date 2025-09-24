@@ -91,13 +91,4 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "sharp",
-      "@tailwindcss/oxide",
-      "unrs-resolver"
-    ],
-    "ignoredBuiltDependencies": [
-      "@parcel/watcher",
-      "esbuild",
-      "vue-demi"
-    ]
-  }
-}
+
