@@ -1,124 +1,108 @@
-// server/api/ask.post.ts
-import { z } from 'zod'
+// server/api/nlweb/ask.post.ts
 import { serverQueryContent } from '#content/server'
 
-const Body = z.object({
-  query: z.string().min(1, 'query is required'),
-  limit: z.number().int().min(1).max(20).optional(),
-  lang: z.string().optional()
-})
+type Doc = {
+  _path: string
+  title?: string
+  description?: string
+  image?: string
+  body?: any
+}
 
-/**
- * Super light retrieval:
- * - fetches all _partial entries (sections) so we can grab smaller chunks
- * - scores by simple term overlap (no new deps / embeddings)
- * - returns top N with a short snippet and path for citation
- */
-async function retrieveFromDocs(event: any, q: string, k: number) {
-  const terms = q.toLowerCase().split(/\s+/).filter(Boolean)
-  const entries = await serverQueryContent(event).where({ _partial: true }).find()
+function bodyToText(node: any): string {
+  if (!node) return ''
+  if (typeof node === 'string') return node
+  if (Array.isArray(node)) return node.map(bodyToText).join(' ')
+  // Content v2 MDC AST: text nodes have `value`; element nodes have `children`
+  const val = (node.value ?? '')
+  const kids = Array.isArray(node.children) ? node.children.map(bodyToText).join(' ') : ''
+  return [val, kids].filter(Boolean).join(' ')
+}
 
-  type Hit = {
-    _path?: string
-    title?: string
-    description?: string
-    bodyText?: string
-    _id?: string
-    score: number
-    snippet: string
-  }
-
-  const hits: Hit[] = entries.map((doc) => {
-    const text = [
-      doc.title || '',
-      doc.description || '',
-      (doc.bodyText as string) || '',
-      doc._path || ''
-    ].join('\n').toLowerCase()
-
-    const score =
-      (text.includes(q.toLowerCase()) ? 3 : 0) +
-      terms.reduce((s, t) => s + (text.includes(t) ? 1 : 0), 0)
-
-    // pick a short snippet for the prompt
-    const body = (doc.bodyText as string) || ''
-    const idx = Math.max(0, body.toLowerCase().indexOf(terms[0] || '') - 80)
-    const snippet = body.slice(idx, idx + 700)
-
-    return {
-      ...doc,
-      score,
-      snippet
-    }
-  })
-  .filter(h => h.score > 0)
-  .sort((a, b) => b.score - a.score)
-  .slice(0, k)
-
-  return hits
+function makeSnippet(text: string, q: string, radius = 140): string {
+  const hay = text.replace(/\s+/g, ' ').trim()
+  const i = hay.toLowerCase().indexOf(q.toLowerCase())
+  if (i < 0) return hay.slice(0, radius * 2)
+  const start = Math.max(0, i - radius)
+  const end = Math.min(hay.length, i + q.length + radius)
+  const prefix = start > 0 ? '… ' : ''
+  const suffix = end < hay.length ? ' …' : ''
+  return prefix + hay.slice(start, end) + suffix
 }
 
 export default defineEventHandler(async (event) => {
-  const body = Body.parse(await readBody(event))
-  const OPENAI_API_KEY = process.env.OPENAI_API_KEY
-  const OPENAI_MODEL = process.env.OPENAI_MODEL || 'gpt-4.1-mini'
-
-  if (!OPENAI_API_KEY) {
-    throw createError({ statusCode: 500, statusMessage: 'OPENAI_API_KEY missing' })
+  const body = await readBody<{ query?: string; limit?: number }>(event)
+  const query = (body?.query || '').trim()
+  if (!query) {
+    throw createError({ statusCode: 400, statusMessage: 'Missing "query" in request body' })
   }
 
-  // 1) retrieve relevant doc chunks
-  const k = body.limit ?? 6
-  const hits = await retrieveFromDocs(event, body.query, k)
+  const limit = Math.min(Math.max(Number(body?.limit ?? 8), 1), 25)
 
-  // 2) build context for the LLM
-  const contextBlocks = hits.map((h, i) => {
-    const header = `[[${i + 1}]] ${h.title || h._path || 'Untitled'} — ${h._path ?? ''}`
-    return `${header}\n${h.snippet}`
-  }).join('\n\n---\n\n')
+  // Pull a reasonable batch of docs then rank them in-memory (no new deps).
+  // We only project what we need for speed.
+  const docs = await serverQueryContent(event)
+    .only(['_path', 'title', 'description', 'image', 'body'])
+    .find() as Doc[]
 
-  const system = [
-    'You are a helpful docs assistant.',
-    'Answer ONLY using the provided CONTEXT. If the answer is not in context, say you do not know.',
-    'Keep answers concise and cite sources like [1], [2] that refer to the items in CONTEXT.',
-  ].join(' ')
+  // Very simple scoring: count matches of all query terms in title+body
+  const terms = query.toLowerCase().split(/\s+/).filter(Boolean)
+  function scoreDoc(d: Doc) {
+    const title = (d.title || '').toLowerCase()
+    const text = (title + ' ' + bodyToText(d.body).toLowerCase())
+    let score = 0
+    for (const t of terms) {
+      const rx = new RegExp(`\\b${t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'g')
+      const matches = text.match(rx)
+      score += matches ? matches.length : 0
+    }
+    // small title bonus
+    score += terms.reduce((acc, t) => acc + (title.includes(t) ? 1 : 0), 0)
+    return score
+  }
 
-  const user = [
-    `QUESTION: ${body.query}`,
-    '',
-    'CONTEXT:',
-    contextBlocks || '(no context found)'
-  ].join('\n')
+  const scored = docs
+    .map(d => ({ d, s: scoreDoc(d) }))
+    .filter(x => x.s > 0)
+    .sort((a, b) => b.s - a.s)
+    .slice(0, limit)
 
-  // 3) call OpenAI without adding a new SDK dependency
-  const resp = await $fetch<any>('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${OPENAI_API_KEY}`,
-      'Content-Type': 'application/json'
-    },
-    body: {
-      model: OPENAI_MODEL,
-      messages: [
-        { role: 'system', content: system },
-        { role: 'user', content: user }
-      ],
-      temperature: 0.2
+  const items = scored.map(({ d }, idx) => {
+    const fullText = bodyToText(d.body)
+    const snippet = makeSnippet(fullText || d.description || '', query)
+    return {
+      '@type': 'ListItem',
+      position: idx + 1,
+      item: {
+        '@type': 'Thing',
+        name: d.title || d._path.split('/').pop() || 'Untitled',
+        description: snippet,
+        url: d._path,        // works with <NuxtLink> or <a target="_blank">
+        image: d.image
+      }
     }
   })
 
-  const answer = resp?.choices?.[0]?.message?.content?.trim() || 'Sorry, I could not produce an answer.'
-
-  return {
-    answer,
-    sources: hits.map((h, i) => ({
-      index: i + 1,
-      title: h.title || h._path || 'Untitled',
-      path: h._path || '',
-      description: h.description || ''
-    }))
+  // If no hits, return a gentle empty state the card can show
+  if (!items.length) {
+    return {
+      '@type': 'ItemList',
+      itemListElement: [{
+        '@type': 'ListItem',
+        position: 1,
+        item: {
+          '@type': 'Thing',
+          name: 'No results',
+          description: `I couldn’t find anything in the docs for: "${query}". Try different words.`,
+          url: ''
+        }
+      }]
+    }
   }
+
+  return { '@type': 'ItemList', itemListElement: items }
 })
+
 
 
 
