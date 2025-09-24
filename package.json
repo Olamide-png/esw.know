@@ -90,7 +90,9 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "sharp"
+      "sharp",
+      "@tailwindcss/oxide",
+      "unrs-resolver"
     ],
     "ignoredBuiltDependencies": [
       "@parcel/watcher",
