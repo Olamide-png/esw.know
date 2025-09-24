@@ -66,6 +66,7 @@
     "reka-ui": "^2.3.0",
     "shadcn-nuxt": "^2.2.0",
     "tailwind-merge": "^3.3.0",
+    "minisearch": "^7.1.2",
     "tailwindcss": "^4.1.7",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.8.3"
@@ -79,7 +80,6 @@
     "@vueuse/core": "^13.3.0",
     "@vueuse/nuxt": "^13.3.0",
     "eslint": "^9.27.0",
-    "minisearch": "^7.1.2",
     "nuxt": "^3.17.4",
     "pkg-pr-new": "^0.0.51",
     "shiki": "^3.4.2",
