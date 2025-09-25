@@ -1,23 +1,31 @@
 // nuxt.config.ts
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import tailwindcss from '@tailwindcss/vite';
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import tailwindcss from '@tailwindcss/vite'
 
-const currentDir = dirname(fileURLToPath(import.meta.url));
+const currentDir = dirname(fileURLToPath(import.meta.url))
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
-  // ✅ Server/runtime env for Try-It proxy + NLWeb
+  // ✅ Server/runtime env for Try-It proxy + NLWeb + LLM/Embeddings
   runtimeConfig: {
     // Server-only
     TRYIT_ALLOWED_HOSTS: process.env.TRYIT_ALLOWED_HOSTS || '',
     nlwebBaseUrl: process.env.NLWEB_BASE_URL || '',
 
+    // LLM & embeddings used by /api/nl/*
+    openaiApiKey: process.env.OPENAI_API_KEY || '',
+    openaiModel: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+    embedModel: process.env.EMBED_MODEL || 'text-embedding-3-small',
+    chunkMaxChars: Number(process.env.CHUNK_MAX_CHARS || 2800),
+    chunkOverlap: Number(process.env.CHUNK_OVERLAP || 300),
+    nlwebTimeoutMs: Number(process.env.NLWEB_TIMEOUT_MS || 20000),
+
     public: {
       // (Optional) expose labels/baseUrls if you want to build the env dropdown from env
       TRYIT_LABELS: process.env.TRYIT_LABELS || '',      // e.g. "UAT,Prod"
-      TRYIT_BASEURLS: process.env.TRYIT_BASEURLS || ''   // e.g. "https://uat.example.com,https://api.example.com"
+      TRYIT_BASEURLS: process.env.TRYIT_BASEURLS || '',  // e.g. "https://uat.example.com,https://api.example.com"
       // You can expose NLWeb too if you want to debug in client (not required):
       // nlwebBaseUrl: process.env.NLWEB_BASE_URL || ''
     }
@@ -30,8 +38,13 @@ export default defineNuxtConfig({
         cors: true,
         headers: { 'Cache-Control': 'no-store' }
       },
-      // NLWeb proxy endpoints (you can add more under /api/nlweb/** as needed)
+      // NLWeb proxy endpoints (legacy)
       '/api/nlweb/**': {
+        cors: true,
+        headers: { 'Cache-Control': 'no-store' }
+      },
+      // New NL endpoints powering /api/nl/ask and /api/nl/mcp
+      '/api/nl/**': {
         cors: true,
         headers: { 'Cache-Control': 'no-store' }
       }
@@ -119,7 +132,7 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    plugins: [ tailwindcss() ],
+    plugins: [tailwindcss()],
   },
 
   compatibilityDate: '2025-05-13',
@@ -132,7 +145,8 @@ export default defineNuxtConfig({
       ]
     }
   }
-});
+})
+
 
 
 
