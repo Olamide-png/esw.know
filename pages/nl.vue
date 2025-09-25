@@ -8,15 +8,28 @@ const busy = ref(false)
 const result = ref<any>(null)
 const err = ref<string>('')
 
-const canAsk = computed(() => {
-  return !!path.value && path.value.startsWith('/') && !busy.value
+const canAsk = computed(() => !!path.value && path.value.startsWith('/') && !busy.value)
+
+// Derive values even if API omits them
+const derivedMode = computed(() => {
+  if (!result.value) return '(unknown)'
+  // If server forgot "mode", infer: presence of answer => qa, else context-only
+  return result.value.mode || (result.value.answer ? 'qa' : 'context-only')
+})
+
+const derivedUrl = computed(() => {
+  if (result.value?.url) return result.value.url
+  try {
+    // Fallback: reconstruct from current origin + path input
+    if (path.value?.startsWith('/')) return new URL(path.value, window.location.origin).toString()
+  } catch {}
+  return '(n/a)'
 })
 
 async function ask() {
   if (!canAsk.value) return
   busy.value = true
   err.value = ''
-  // keep previous result visible during refresh; don't null it
   try {
     const res = await $fetch('/api/nl/ask', {
       method: 'POST',
@@ -24,7 +37,6 @@ async function ask() {
     })
     result.value = res
   } catch (e: any) {
-    // Show best-available error message
     err.value = e?.data?.message || e?.message || 'Unknown error'
   } finally {
     busy.value = false
@@ -32,7 +44,6 @@ async function ask() {
 }
 
 function onKeydown(e: KeyboardEvent) {
-  // Cmd/Ctrl+Enter to ask
   if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
     e.preventDefault()
     ask()
@@ -86,29 +97,37 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
 
     <div v-if="result" class="rounded-xl border p-4 space-y-4">
       <div class="text-xs opacity-70">
-        Mode: {{ result.mode || '(unknown)' }} • URL: {{ result.url || '(n/a)' }}
+        Mode: {{ derivedMode }} • URL: {{ derivedUrl }}
       </div>
 
-      <!-- Context-only banner -->
+      <!-- Helpful banner for context-only scenarios -->
       <div
-        v-if="result.mode === 'context-only'"
-        class="rounded-md border-l-4 p-3 text-xs"
-        :class="['border-amber-500 bg-amber-500/10 text-amber-700 dark:text-amber-200']"
+        v-if="derivedMode === 'context-only'"
+        class="rounded-md border-l-4 p-3 text-xs border-amber-500 bg-amber-500/10 text-amber-700 dark:text-amber-200"
       >
-        Model answering is disabled or no question was asked.
-        To get an answer, set <code>OPENAI_API_KEY</code> and <code>DEMO_MODE=false</code>, and include a question.
+        Model answering appears disabled (missing <code>OPENAI_API_KEY</code>, <code>DEMO_MODE=true</code>, or empty question).
+        You’ll still see extracted context below.
       </div>
 
+      <!-- Answer (when present) -->
       <div v-if="result.answer">
         <h2 class="text-lg font-semibold mb-2">Answer</h2>
         <pre class="whitespace-pre-wrap text-sm">{{ result.answer }}</pre>
       </div>
 
-      <details>
+      <!-- Context -->
+      <details open>
         <summary class="cursor-pointer">Context</summary>
-        <pre class="mt-2 whitespace-pre-wrap text-xs">{{ result.context ?? result.contextPreview }}</pre>
+        <pre class="mt-2 whitespace-pre-wrap text-xs">{{ result.context ?? result.contextPreview ?? '(no context returned)' }}</pre>
+      </details>
+
+      <!-- Debug (raw JSON payload) -->
+      <details>
+        <summary class="cursor-pointer text-xs opacity-70">Debug payload</summary>
+        <pre class="mt-2 whitespace-pre-wrap text-xs">{{ JSON.stringify(result, null, 2) }}</pre>
       </details>
     </div>
   </div>
 </template>
+
 
