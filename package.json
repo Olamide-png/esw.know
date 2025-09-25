@@ -46,8 +46,6 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "taze": "taze",
-
-
     "build:index": "tsx scripts/build-index.ts",
     "nl:build-index": "tsx scripts/build-index.ts"
   },
@@ -82,6 +80,7 @@
     "@iconify/utils": "^2.3.0",
     "@nuxt/devtools": "^2.4.1",
     "@nuxt/kit": "^3.17.4",
+    "@nuxt/vite-builder": "^3.19.2",
     "@types/node": "^24.5.2",
     "@vueuse/core": "^13.3.0",
     "@vueuse/nuxt": "^13.3.0",
@@ -93,6 +92,7 @@
     "taze": "^19.1.0",
     "tsx": "^4.20.5",
     "typescript": "^5.8.3",
+    "vite": "^5.4.20",
     "vue": "^3.5.15",
     "vue-router": "^4.5.1",
     "vue-tsc": "^2.2.10"
@@ -108,6 +108,3 @@
     ]
   }
 }
-
-
-
