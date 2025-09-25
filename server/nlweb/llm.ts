@@ -9,8 +9,25 @@ function getClient(apiKey?: string) {
   return client
 }
 
-// ----- NEW: batched embeddings with retry/backoff -----
+// --- utils ---
 const sleep = (ms: number) => new Promise(res => setTimeout(res, ms))
+
+function safeParse(s: string) {
+  if (!s) return null
+  // strip ```json ... ``` just in case
+  const fenced = s.match(/```(?:json)?\s*([\s\S]*?)```/i)
+  if (fenced) s = fenced[1]
+  try { return JSON.parse(s) } catch { return null }
+}
+
+function cleanSnippet(s: string, n = 400) {
+  return (s || '')
+    .replace(/<\/?[^>]+>/g, ' ')              // strip tags
+    .replace(/&(?:nbsp|amp|lt|gt);/g, ' ')    // basic entities
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, n)
+}
 
 /**
  * Create embeddings in batches to avoid token-per-request and rate-limit errors.
@@ -32,20 +49,16 @@ export async function embedMany({
 
   for (let i = 0; i < texts.length; i += batchSize) {
     const batch = texts.slice(i, i + batchSize)
-
     let attempt = 0
-    // retry on transient errors (429/5xx)
     for (;;) {
       try {
         const { data } = await openai.embeddings.create({ model, input: batch })
         for (const d of data) out.push(d.embedding as unknown as number[])
         break
-      } catch (err: any) {
+      } catch (err) {
         attempt++
         if (attempt >= 5) throw err
-        // exponential backoff: 0.5s, 1s, 2s, 4s (cap 4s)
-        const delay = Math.min(4000, 500 * 2 ** (attempt - 1))
-        await sleep(delay)
+        await sleep(Math.min(4000, 500 * 2 ** (attempt - 1))) // 0.5s,1s,2s,4s
       }
     }
   }
@@ -84,7 +97,7 @@ function normalizeCitations(json: any, hits: EmbeddingRow[]) {
         .map((v) => {
           if (typeof v === 'number') return toCW(v)
           if (typeof v === 'string' && /^\d+$/.test(v)) return toCW(parseInt(v, 10))
-          if (v && typeof v === 'object') return v // already a CW-like object
+          if (v && typeof v === 'object') return v
           return null
         })
         .filter(Boolean)
@@ -108,27 +121,33 @@ export async function synthesizeAnswer({
 }: { apiKey: string, model: string, query: string, hits: EmbeddingRow[] }): Promise<any> {
   const openai = getClient(apiKey)
 
-  const context = hits.map((h, i) => `[${i + 1}] ${h.meta.text}`).join('\n\n')
-  const defaultCitations = hits.map((h, i) => ({
+  // Use only the top 6 snippets in prompt to keep tokens tight
+  const top = hits.slice(0, 6)
+  const context = top.map((h, i) => `[${i + 1}] ${h.meta.text}`).join('\n\n')
+
+  const defaultCitations = top.map((h, i) => ({
     '@type': 'CreativeWork',
     url: h.meta.url,
     name: h.meta.title || h.meta.url || `Source ${i + 1}`
   }))
 
   const system = `You are a strict documentation assistant.
-- Answer ONLY from the provided context snippets.
-- If the context is insufficient, return an ItemList of the most relevant items (with url and name).
-- Prefer concise markdown for the Answer.text.
-- Always include citations; you may reference snippets by their bracketed numbers.`
+- Use ONLY the provided context snippets.
+- If the snippets clearly answer the question, return an "Answer".
+- If the context is insufficient, return an "ItemList" of the most relevant items (with url and name).
+- Answer text must be concise Markdown.
+- Return a SINGLE JSON object, no code fences.`
+
   const user = `User question:
 ${query}
 
 Context snippets:
 ${context}
 
-Return a SINGLE JSON object with one of:
-- {"@type":"Answer","text":"...","citation":[...]}
-- {"@type":"ItemList","itemListElement":[{"position":1,"item":{"@type":"Article","name":"...","description":"...","url":"...","image":"..."}}]}`
+Return one of exactly:
+{"@type":"Answer","text":"...","citation":[...]}
+OR
+{"@type":"ItemList","itemListElement":[{"position":1,"item":{"@type":"Article","name":"...","description":"...","url":"...","image":"..."}}]}`
 
   const resp = await openai.chat.completions.create({
     model,
@@ -137,18 +156,19 @@ Return a SINGLE JSON object with one of:
       { role: 'system', content: system },
       { role: 'user', content: user }
     ],
-    temperature: 0.2
+    temperature: 0
   })
 
+  // Robust JSON parse with code-fence stripping
   try {
     const raw = resp.choices[0]?.message?.content || '{}'
-    let json = JSON.parse(raw)
+    let json = safeParse(raw) ?? JSON.parse(raw)
 
     if (json?.['@type'] === 'Answer') {
       if (!json.citation || !Array.isArray(json.citation) || json.citation.length === 0) {
         json.citation = defaultCitations
       }
-      json = normalizeCitations(json, hits)
+      json = normalizeCitations(json, top)
       return json
     }
 
@@ -157,6 +177,7 @@ Return a SINGLE JSON object with one of:
     // fall through to deterministic fallback
   }
 
+  // Deterministic fallback ItemList from hits
   return {
     '@type': 'ItemList',
     'itemListElement': hits.map((h, i) => ({
@@ -164,12 +185,13 @@ Return a SINGLE JSON object with one of:
       item: {
         '@type': h.meta.type || 'Article',
         name: h.meta.title,
-        description: (h.meta.text || '').slice(0, 400),
+        description: cleanSnippet(h.meta.text),
         url: h.meta.url,
         image: h.meta.image
       }
     }))
   }
 }
+
 
 
