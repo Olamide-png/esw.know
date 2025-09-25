@@ -9,12 +9,47 @@ function getClient(apiKey?: string) {
   return client
 }
 
+// ----- NEW: batched embeddings with retry/backoff -----
+const sleep = (ms: number) => new Promise(res => setTimeout(res, ms))
+
+/**
+ * Create embeddings in batches to avoid token-per-request and rate-limit errors.
+ * Tune batch size via EMBED_BATCH (default 128).
+ */
 export async function embedMany({
-  apiKey, model, texts
-}: { apiKey: string, model: string, texts: string[] }): Promise<number[][]> {
+  apiKey,
+  model,
+  texts,
+  batchSize = Number(process.env.EMBED_BATCH || 128)
+}: {
+  apiKey: string
+  model: string
+  texts: string[]
+  batchSize?: number
+}): Promise<number[][]> {
   const openai = getClient(apiKey)
-  const { data } = await openai.embeddings.create({ model, input: texts })
-  return data.map(d => d.embedding as unknown as number[])
+  const out: number[][] = []
+
+  for (let i = 0; i < texts.length; i += batchSize) {
+    const batch = texts.slice(i, i + batchSize)
+
+    let attempt = 0
+    // retry on transient errors (429/5xx)
+    for (;;) {
+      try {
+        const { data } = await openai.embeddings.create({ model, input: batch })
+        for (const d of data) out.push(d.embedding as unknown as number[])
+        break
+      } catch (err: any) {
+        attempt++
+        if (attempt >= 5) throw err
+        // exponential backoff: 0.5s, 1s, 2s, 4s (cap 4s)
+        const delay = Math.min(4000, 500 * 2 ** (attempt - 1))
+        await sleep(delay)
+      }
+    }
+  }
+  return out
 }
 
 export async function embedOne({
@@ -33,8 +68,7 @@ export function searchTopK(queryVec: number[], rows: EmbeddingRow[], k = 8): Emb
 /** Turn numbers like [1,2] (1-based) into CreativeWork citations based on hits. */
 function normalizeCitations(json: any, hits: EmbeddingRow[]) {
   const toCW = (idx: number) => {
-    // models typically index snippets starting at 1
-    const h = hits[idx - 1]
+    const h = hits[idx - 1] // models usually 1-based
     if (!h) return null
     return {
       '@type': 'CreativeWork',
@@ -45,20 +79,17 @@ function normalizeCitations(json: any, hits: EmbeddingRow[]) {
 
   if (json?.['@type'] === 'Answer') {
     const c = json.citation
-    // If citations are numbers (or strings with numbers), expand them.
     if (Array.isArray(c) && c.length) {
       const expanded = c
         .map((v) => {
           if (typeof v === 'number') return toCW(v)
           if (typeof v === 'string' && /^\d+$/.test(v)) return toCW(parseInt(v, 10))
-          // already an object? keep if it looks like a CreativeWork
-          if (v && typeof v === 'object') return v
+          if (v && typeof v === 'object') return v // already a CW-like object
           return null
         })
         .filter(Boolean)
 
       if (expanded.length) {
-        // de-dupe by url
         const seen = new Set<string>()
         json.citation = expanded.filter((cw: any) => {
           const key = cw.url || cw.name
@@ -98,6 +129,7 @@ ${context}
 Return a SINGLE JSON object with one of:
 - {"@type":"Answer","text":"...","citation":[...]}
 - {"@type":"ItemList","itemListElement":[{"position":1,"item":{"@type":"Article","name":"...","description":"...","url":"...","image":"..."}}]}`
+
   const resp = await openai.chat.completions.create({
     model,
     response_format: { type: 'json_object' },
@@ -108,12 +140,10 @@ Return a SINGLE JSON object with one of:
     temperature: 0.2
   })
 
-  // Parse and normalize; fallback to a simple ItemList if anything goes wrong
   try {
     const raw = resp.choices[0]?.message?.content || '{}'
     let json = JSON.parse(raw)
 
-    // Ensure Answer always has citations; normalize numeric ones.
     if (json?.['@type'] === 'Answer') {
       if (!json.citation || !Array.isArray(json.citation) || json.citation.length === 0) {
         json.citation = defaultCitations
@@ -122,13 +152,11 @@ Return a SINGLE JSON object with one of:
       return json
     }
 
-    // If it's already an ItemList, return as-is.
     if (json?.['@type'] === 'ItemList') return json
   } catch {
-    // swallow and return fallback below
+    // fall through to deterministic fallback
   }
 
-  // Fallback: return a deterministic list based on retrieval hits
   return {
     '@type': 'ItemList',
     'itemListElement': hits.map((h, i) => ({
@@ -143,4 +171,5 @@ Return a SINGLE JSON object with one of:
     }))
   }
 }
+
 
