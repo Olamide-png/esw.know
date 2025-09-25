@@ -1,17 +1,28 @@
 // nuxt.config.ts
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import fs from 'node:fs'
 import tailwindcss from '@tailwindcss/vite'
 
 const currentDir = dirname(fileURLToPath(import.meta.url))
 
+// --- Resolve CSS files whether they live at ./assets or ./www/assets ---
+function resolveCss(relA: string, relB: string) {
+  const a = join(currentDir, relA)
+  if (fs.existsSync(a)) return a
+  const b = join(currentDir, relB)
+  if (fs.existsSync(b)) return b
+  // fall back to A; Vite will show a clear error if neither exists
+  return a
+}
+
+const THEMES_CSS   = resolveCss('./assets/css/themes.css',   './www/assets/css/themes.css')
+const TAILWIND_CSS = resolveCss('./assets/css/tailwind.css', './www/assets/css/tailwind.css')
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
-
-  // ✅ make Nuxt use the Vite builder explicitly
   builder: 'vite',
 
-  // ✅ Server/runtime env for Try-It proxy + NLWeb + LLM/Embeddings
   runtimeConfig: {
     TRYIT_ALLOWED_HOSTS: process.env.TRYIT_ALLOWED_HOSTS || '',
     nlwebBaseUrl: process.env.NLWEB_BASE_URL || '',
@@ -30,9 +41,9 @@ export default defineNuxtConfig({
 
   nitro: {
     routeRules: {
-      '/api/tryit': { cors: true, headers: { 'Cache-Control': 'no-store' } },
-      '/api/nlweb/**': { cors: true, headers: { 'Cache-Control': 'no-store' } },
-      '/api/nl/**': { cors: true, headers: { 'Cache-Control': 'no-store' } }
+      '/api/tryit':   { cors: true, headers: { 'Cache-Control': 'no-store' } },
+      '/api/nlweb/**':{ cors: true, headers: { 'Cache-Control': 'no-store' } },
+      '/api/nl/**':   { cors: true, headers: { 'Cache-Control': 'no-store' } }
     }
   },
 
@@ -55,9 +66,7 @@ export default defineNuxtConfig({
   },
 
   components: {
-    dirs: [
-      { path: './components', ignore: ['**/*.ts'] }
-    ]
+    dirs: [{ path: './components', ignore: ['**/*.ts'] }]
   },
 
   i18n: {
@@ -73,16 +82,18 @@ export default defineNuxtConfig({
     disableTransition: true
   },
 
-  css: [
-    join(currentDir, './assets/css/themes.css'),
-    '~/assets/css/tailwind.css'
-  ],
+  // ✅ Use resolved absolute file paths so Vite never guesses
+  css: [THEMES_CSS, TAILWIND_CSS],
 
   content: {
     documentDriven: true,
     highlight: {
       theme: { default: 'light-plus', dark: 'aurora-x' },
-      preload: ['json','js','ts','html','css','vue','diff','shell','markdown','mdc','yaml','bash','ini','dotenv','python','xml','dockerfile','sql','graphql','csharp','java','php','ruby','go','rust','kotlin','swift']
+      preload: [
+        'json','js','ts','html','css','vue','diff','shell','markdown','mdc','yaml','bash',
+        'ini','dotenv','python','xml','dockerfile','sql','graphql','csharp','java','php',
+        'ruby','go','rust','kotlin','swift'
+      ]
     },
     navigation: {
       fields: ['icon','navBadges','navTruncate','badges','toc','sidebar','collapse','editLink','prevNext','breadcrumb','fullpage']
@@ -91,24 +102,33 @@ export default defineNuxtConfig({
   },
 
   icon: { clientBundle: { scan: true, sizeLimitKb: 512 } },
-
   fonts: { defaults: { weights: ['300 800'] } },
-
   typescript: { tsConfig: { compilerOptions: { baseUrl: '.' } } },
 
-  vite: { plugins: [tailwindcss()] },
+  vite: {
+    plugins: [tailwindcss()],
+    resolve: {
+      alias: {
+        '~': currentDir,
+        '@': currentDir,
+        '~assets': join(currentDir, 'assets')
+      }
+    }
+  },
 
   compatibilityDate: '2025-05-13',
 
   app: {
     head: {
       link: [
-        { rel: 'preconnect', href: 'https://eswapis.vercel.app' },
+        { rel: 'preconnect',  href: 'https://eswapis.vercel.app' },
         { rel: 'dns-prefetch', href: 'https://eswapis.vercel.app' }
       ]
     }
   }
 })
+
+
 
 
 
