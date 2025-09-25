@@ -1,178 +1,190 @@
-// server/api/nlweb/ask.post.ts
-import { serverQueryContent } from '#content/server'
+// server/api/nl/ask.post.ts
+import { defineEventHandler, readBody, getHeader, createError } from 'h3'
 
-type Doc = {
-  _path: string
-  title?: string
-  description?: string
-  image?: string
-  body?: any
+type AskBody = {
+  path: string        // e.g. "/shopify/installation/apps"
+  question?: string   // optional; if omitted we just return extracted content
+  maxChars?: number   // optional; default 8000
 }
 
-function bodyToText(node: any): string {
-  if (!node) return ''
-  if (typeof node === 'string') return node
-  if (Array.isArray(node)) return node.map(bodyToText).join(' ')
-  const val = (node.value ?? '')
-  const kids = Array.isArray(node.children) ? node.children.map(bodyToText).join(' ') : ''
-  return [val, kids].filter(Boolean).join(' ')
+function stripTags(html: string) {
+  // remove script/style
+  html = html.replace(/<script[\s\S]*?<\/script>/gi, '')
+             .replace(/<style[\s\S]*?<\/style>/gi, '')
+  // capture code blocks separately as markers to preserve structure
+  const codeBlocks: string[] = []
+  html = html.replace(/<pre[^>]*>\s*<code[^>]*>([\s\S]*?)<\/code>\s*<\/pre>/gi, (_, code) => {
+    codeBlocks.push(code.replace(/<[^>]+>/g, ''))
+    return `\n\n[[[CODEBLOCK_${codeBlocks.length - 1}]]]\n\n`
+  })
+
+  // turn headings into plain text with markers
+  html = html.replace(/<(h[1-6])[^>]*>([\s\S]*?)<\/\1>/gi, (_, tag, inner) => {
+    const level = Number(tag.slice(1))
+    const text = inner.replace(/<[^>]+>/g, '').trim()
+    const prefix = '#'.repeat(Math.min(level, 6))
+    return `\n\n${prefix} ${text}\n\n`
+  })
+
+  // links → text (keep href inline if anchor text is short)
+  html = html.replace(/<a [^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi, (_, href, inner) => {
+    const text = inner.replace(/<[^>]+>/g, '').trim()
+    if (!text) return href
+    return text.length <= 60 ? `${text} (${href})` : text
+  })
+
+  // lists to lines
+  html = html.replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, (_, inner) => `\n• ${inner.replace(/<[^>]+>/g, '').trim()}`)
+
+  // paragraphs and breaks
+  html = html.replace(/<(p|br|hr)[^>]*>/gi, '\n')
+
+  // remove all remaining tags
+  html = html.replace(/<[^>]+>/g, ' ')
+
+  // restore CODEBLOCKS
+  html = html.replace(/\[\[\[CODEBLOCK_(\d+)]]]/g, (_, idx) => {
+    const code = codeBlocks[Number(idx)] ?? ''
+    return `\n\`\`\`\n${code}\n\`\`\`\n`
+  })
+
+  // collapse whitespace
+  return html.replace(/\r/g, '')
+             .replace(/\n{3,}/g, '\n\n')
+             .replace(/[ \t]{2,}/g, ' ')
+             .trim()
 }
 
-function makeSnippet(text: string, q: string, radius = 240): string {
-  const hay = text.replace(/\s+/g, ' ').trim()
-  if (!hay) return ''
-  const i = q ? hay.toLowerCase().indexOf(q.toLowerCase()) : -1
-  if (i < 0) return hay.slice(0, radius * 2)
-  const start = Math.max(0, i - radius)
-  const end = Math.min(hay.length, i + q.length + radius)
-  const prefix = start > 0 ? '… ' : ''
-  const suffix = end < hay.length ? ' …' : ''
-  return prefix + hay.slice(start, end) + suffix
+function splitIntoChunks(text: string, chunkSize = 1200, overlap = 200) {
+  const chunks: string[] = []
+  let i = 0
+  while (i < text.length) {
+    const end = Math.min(i + chunkSize, text.length)
+    let slice = text.slice(i, end)
+    // try to end on a paragraph boundary
+    const lastBreak = slice.lastIndexOf('\n\n')
+    if (lastBreak > chunkSize * 0.6) slice = slice.slice(0, lastBreak)
+    chunks.push(slice.trim())
+    i += Math.max(1, slice.length - overlap)
+  }
+  return chunks.filter(Boolean)
 }
 
-function scoreDoc(d: Doc, terms: string[]) {
-  const title = (d.title || '').toLowerCase()
-  const text = (title + ' ' + bodyToText(d.body).toLowerCase())
+function scoreChunk(chunk: string, q: string) {
+  // naive keyword scoring (boost headings and code fences)
+  const terms = q.toLowerCase().split(/\W+/).filter(Boolean)
   let score = 0
   for (const t of terms) {
-    const rx = new RegExp(`\\b${t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'g')
-    const m = text.match(rx)
-    score += m ? m.length : 0
+    const re = new RegExp(`\\b${t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi')
+    const matches = chunk.match(re)
+    if (matches) score += matches.length
   }
-  score += terms.reduce((acc, t) => acc + (title.includes(t) ? 1 : 0), 0)
+  if (/^#{1,6}\s/m.test(chunk)) score += 1.5
+  if (/```/.test(chunk)) score += 1
   return score
 }
 
-export default defineEventHandler(async (event) => {
-  const { query = '', limit = 8 } = await readBody<{ query?: string; limit?: number }>(event) || {}
-  const q = query.trim()
-  if (!q) {
-    throw createError({ statusCode: 400, statusMessage: 'Missing "query" in request body' })
-  }
+async function callOpenAI(prompt: string) {
+  const apiKey = process.env.OPENAI_API_KEY
+  const model = process.env.OPENAI_MODEL || 'gpt-4o-mini'
+  if (!apiKey) return null
 
-  const k = Math.min(Math.max(Number(limit ?? 8), 1), 25)
-
-  // Fetch docs (project only what we need)
-  const docs = await serverQueryContent(event)
-    .only(['_path', 'title', 'description', 'image', 'body'])
-    .find() as Doc[]
-
-  const terms = q.toLowerCase().split(/\s+/).filter(Boolean)
-  const ranked = docs
-    .map(d => ({ d, s: scoreDoc(d, terms) }))
-    .filter(x => x.s > 0)
-    .sort((a, b) => b.s - a.s)
-    .slice(0, Math.max(k, 5)) // give the model a few sources even if k is small
-
-  // Build sources payload for the model
-  const sources = ranked.map(({ d }, i) => {
-    const text = bodyToText(d.body)
-    return {
-      id: i + 1,
-      title: d.title || d._path,
-      url: d._path,
-      snippet: makeSnippet(text || d.description || '', q)
-    }
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model,
+      messages: [
+        { role: 'system', content: 'You are a helpful, precise documentation assistant. Cite sections by quoting short headings you see in the context.' },
+        { role: 'user', content: prompt }
+      ],
+      temperature: 0.2
+    })
   })
 
-  // If no sources, short-circuit gracefully
-  if (!sources.length) {
+  if (!res.ok) {
+    const text = await res.text().catch(() => '')
+    throw createError({ statusCode: 500, statusMessage: `OpenAI error: ${res.status} ${text}` })
+  }
+  const data = await res.json()
+  return data?.choices?.[0]?.message?.content ?? ''
+}
+
+export default defineEventHandler(async (event) => {
+  const { path, question = '', maxChars = 8000 } = await readBody<AskBody>(event)
+  if (!path || !path.startsWith('/')) {
+    throw createError({ statusCode: 400, statusMessage: 'Provide a site-relative "path" starting with "/"' })
+  }
+
+  const host = getHeader(event, 'host')
+  const origin = process.env.SITE_ORIGIN?.trim() || (host ? `https://${host}` : '')
+  if (!origin) {
+    throw createError({ statusCode: 500, statusMessage: 'Cannot resolve SITE_ORIGIN. Set env SITE_ORIGIN or call behind a real Host.' })
+  }
+
+  // Fetch the live-rendered HTML of the page you want to QA
+  const url = new URL(path, origin).toString()
+  const htmlRes = await fetch(url, { headers: { 'Accept': 'text/html' } })
+  if (!htmlRes.ok) {
+    throw createError({ statusCode: 404, statusMessage: `Failed to fetch ${url} (${htmlRes.status})` })
+  }
+  const html = await htmlRes.text()
+
+  // Extract & normalize
+  const plain = stripTags(html)
+  const limited = plain.slice(0, maxChars)
+
+  // Chunk & select
+  const chunks = splitIntoChunks(limited)
+  let selected = chunks
+  if (question.trim()) {
+    selected = [...chunks]
+      .map(c => ({ c, s: scoreChunk(c, question) }))
+      .sort((a, b) => b.s - a.s)
+      .slice(0, 5)
+      .map(x => x.c)
+  }
+
+  const context = selected.join('\n\n---\n\n')
+
+  // If no model key, just return context so you can test extraction
+  if (!process.env.OPENAI_API_KEY || process.env.DEMO_MODE === 'true') {
     return {
-      '@type': 'ItemList',
-      itemListElement: [{
-        '@type': 'ListItem',
-        position: 1,
-        item: {
-          '@type': 'Thing',
-          name: q,
-          description: `I couldn’t find anything in your docs for: “${q}”. Try different keywords or add content under /content.`,
-          url: ''
-        }
-      }]
+      mode: 'context-only',
+      url,
+      question,
+      tokensApprox: context.length,
+      context
     }
   }
 
-  // Compose system & user messages for strict, grounded answers
-  const system = [
-    'You are a helpful documentation assistant.',
-    'Answer the user using ONLY the provided sources.',
-    'If the answer is not in sources, say you could not find it.',
-    'Cite sources inline as [1], [2] etc. Never fabricate.',
-    'Keep answers concise and actionable.'
-  ].join(' ')
-
-  const user = [
-    `User question: ${q}`,
-    '',
-    'Sources:',
-    ...sources.map(s =>
-      `[${s.id}] ${s.title}\nURL: ${s.url}\nSnippet: ${s.snippet}`
-    )
+  // Ask the model
+  const prompt = [
+    `Answer the question using ONLY the "Context" where possible.`,
+    `If missing, say what is missing and suggest the closest section.`,
+    `Be concise and quote short headings when helpful.`,
+    ``,
+    `Question: ${question}`,
+    ``,
+    `Context:`,
+    context
   ].join('\n')
 
-  // Call OpenAI via plain fetch (no new deps).
-  // Set OPENAI_API_KEY in your environment (Vercel project settings).
-  const OPENAI_API_KEY = process.env.OPENAI_API_KEY
-  let answer = ''
+  const answer = await callOpenAI(prompt)
 
-  if (OPENAI_API_KEY) {
-    try {
-      const resp = await $fetch<any>('https://api.openai.com/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${OPENAI_API_KEY}`,
-          'Content-Type': 'application/json'
-        },
-        body: {
-          model: 'gpt-4o-mini',
-          temperature: 0.2,
-          messages: [
-            { role: 'system', content: system },
-            { role: 'user', content: user }
-          ]
-        }
-      })
-      answer = resp?.choices?.[0]?.message?.content?.trim() || ''
-    } catch (e) {
-      // Fallback to extractive summary if API fails
-      answer = ''
-    }
+  return {
+    mode: 'qa',
+    url,
+    question,
+    answer,
+    contextPreview: context.slice(0, 1200) + (context.length > 1200 ? '…' : '')
   }
-
-  // Fallback: if no API key or error, return a compact extractive blurb
-  if (!answer) {
-    const top = sources.slice(0, 3)
-    answer = top
-      .map(s => `• ${makeSnippet(s.snippet || '', q, 180)} [${s.id}]`)
-      .join('\n')
-      || `I couldn’t reach the AI right now. Here are the most relevant sections in your docs for “${q}”.`
-  }
-
-  // Shape response as ItemList for your existing UI
-  const items = [
-    {
-      '@type': 'ListItem',
-      position: 1,
-      item: {
-        '@type': 'Thing',
-        name: q,
-        description: answer
-      }
-    },
-    ...sources.map((s, idx) => ({
-      '@type': 'ListItem',
-      position: idx + 2,
-      item: {
-        '@type': 'Thing',
-        name: `Source [${s.id}] ${s.title}`,
-        description: s.snippet,
-        url: s.url
-      }
-    }))
-  ]
-
-  return { '@type': 'ItemList', itemListElement: items }
 })
+
+
 
 
 
