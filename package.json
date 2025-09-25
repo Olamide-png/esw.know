@@ -47,7 +47,7 @@
     "lint:fix": "eslint . --fix",
     "taze": "taze",
 
-    // --- NLWeb / embeddings helpers ---
+
     "build:index": "tsx scripts/build-index.ts",
     "nl:build-index": "tsx scripts/build-index.ts"
   },
