@@ -1,38 +1,34 @@
 // server/api/nlweb/[...path].ts
-export const runtime = 'node' // force Node (not Edge)
+import { defineEventHandler, readBody, getMethod, setHeader, createError } from 'h3'
 
-import { defineEventHandler, readBody, setResponseHeader, getRouterParam, createError } from 'h3'
+// Import your concrete handlers directly (no glob)
+import * as Query from '~/server/nlweb/query'
+import * as Search from '~/server/nlweb/search'
 
-// Eagerly include every module in server/nlweb/** so Nitro bundles them for prod
-const nlwebModules = import.meta.glob('~/server/nlweb/**/*.ts', { eager: true }) as Record<
-  string,
-  { default?: Function; handler?: Function }
->
+// Normalise to a callable (default export or named)
+const toFn = (m: any) => m?.default || m?.handler || m?.run || m?.query || m?.search
 
-// Build a registry like: "rag/run" -> exported function from server/nlweb/rag/run.ts
-const registry = new Map<string, Function>()
-for (const [file, mod] of Object.entries(nlwebModules)) {
-  const key = file.split('/server/nlweb/')[1].replace(/\.ts$/, '')
-  const fn = mod.default || mod.handler
-  if (typeof fn === 'function') registry.set(key, fn)
+const handlers: Record<string, (body: any, event: any) => Promise<any>> = {
+  query: toFn(Query),
+  search: toFn(Search),
 }
 
 export default defineEventHandler(async (event) => {
-  setResponseHeader(event, 'Cache-Control', 'no-store')
-
-  const raw = getRouterParam(event, 'path') || ''
-  const key = raw.split('/').filter(Boolean).join('/')
-
-  if (!key) throw createError({ statusCode: 404, statusMessage: 'Missing nlweb action' })
-
-  const fn = registry.get(key)
-  if (!fn) {
-    throw createError({ statusCode: 404, statusMessage: `Unknown nlweb action: ${key}` })
+  if (getMethod(event) !== 'POST') {
+    throw createError({ statusCode: 405, statusMessage: 'Method Not Allowed' })
   }
 
-  const method = (event.method || 'GET').toUpperCase()
-  const input = /^(POST|PUT|PATCH)$/.test(method) ? await readBody(event) : {}
+  const parts = (event.context.params?.path as string[] | undefined) || []
+  const name = parts[0]
+  const fn = name ? handlers[name] : undefined
 
-  // Call your implementation: export default async function (input, event) { ... }
-  return await fn(input, event)
+  if (!fn) {
+    throw createError({ statusCode: 404, statusMessage: `Unknown nlweb route: ${name}` })
+  }
+
+  const body = await readBody(event)
+  setHeader(event, 'Cache-Control', 'no-store')
+
+  return await fn(body, event)
 })
+

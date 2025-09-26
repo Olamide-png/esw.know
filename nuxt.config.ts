@@ -40,12 +40,13 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    routeRules: {
-      '/api/nlweb/**': { cors: true, headers: { 'Cache-Control': 'no-store' }, runtime: 'node' },
-      '/api/nl/**':    { cors: true, headers: { 'Cache-Control': 'no-store' } },
-      '/api/tryit':    { cors: true, headers: { 'Cache-Control': 'no-store' } },
+  routeRules: {
+    '/api/tryit':     { cors: true, headers: { 'Cache-Control': 'no-store' } },
+    '/api/nl/**':     { cors: true, headers: { 'Cache-Control': 'no-store' }, runtime: 'node' },
+    '/api/nlweb/**':  { cors: true, headers: { 'Cache-Control': 'no-store' }, runtime: 'node' },
     }
   },
+
 
   modules: [
     'shadcn-nuxt',
