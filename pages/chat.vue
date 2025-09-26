@@ -98,6 +98,8 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({ ssr: false }) // 👈 make this page client-only
+
 import { ref, watch, nextTick, onMounted } from 'vue'
 import { useChatStore } from '@/composables/useChatStore'
 import MessageBubble from '@/components/MessageBubble.vue'
