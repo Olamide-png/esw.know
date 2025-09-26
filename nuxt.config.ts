@@ -41,12 +41,9 @@ export default defineNuxtConfig({
 
   nitro: {
     routeRules: {
-      // Force Node runtime for AI/backend routes
-      '/api/tryit':    { runtime: 'node', cors: true, headers: { 'Cache-Control': 'no-store' } },
-      '/api/nlweb/**': { runtime: 'node', cors: true, headers: { 'Cache-Control': 'no-store' } },
-      '/api/nl/**':    { runtime: 'node', cors: true, headers: { 'Cache-Control': 'no-store' } }
-      // If you ever want a blanket rule:
-      // '/api/**': { runtime: 'node' }
+      '/api/tryit':   { cors: true, headers: { 'Cache-Control': 'no-store' } },
+      '/api/nlweb/**':{ cors: true, headers: { 'Cache-Control': 'no-store' } },
+      '/api/nl/**':   { cors: true, headers: { 'Cache-Control': 'no-store' } }
     }
   },
 
@@ -130,6 +127,20 @@ export default defineNuxtConfig({
     }
   }
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
