@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
 
   const cfg = useRuntimeConfig()
   const openai = new OpenAI({ apiKey: cfg.openaiApiKey })
-  const model = cfg.openaiModel || 'gpt-4o-mini'
+  const model = cfg.openaiModel || 'gpt-4.1-mini'
 
   // Load the embeddings index you built (same file your non-stream path uses)
   const rows: EmbeddingRow[] = JSON.parse(fs.readFileSync('.data/nlweb-embeddings.json', 'utf8'))

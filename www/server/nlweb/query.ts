@@ -24,7 +24,7 @@ export async function query({ question }: QueryInput): Promise<QueryOutput> {
   const model =
     (cfg.openaiModel as string) ||
     process.env.OPENAI_MODEL ||
-    'gpt-4o-mini'
+    'gpt-4.1-mini'
   const vectorStoreId =
     process.env.VECTOR_STORE_ID ||
     (cfg as any).vectorStoreId // in case you later expose via runtime

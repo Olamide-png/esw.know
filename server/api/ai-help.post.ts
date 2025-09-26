@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
   if (!apiKey) {
     throw createError({ statusCode: 500, statusMessage: 'OPENAI_API_KEY not set' })
   }
-  const model = process.env.OPENAI_MODEL || 'gpt-4o-mini'
+  const model = process.env.OPENAI_MODEL || 'gpt-4.1-mini'
   const baseUrl = (process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1').replace(/\/+$/, '')
   const timeoutMs = Number(process.env.CHAT_TIMEOUT_MS || 20000)
   const demoMode = String(process.env.DEMO_MODE || '').toLowerCase() === 'true'

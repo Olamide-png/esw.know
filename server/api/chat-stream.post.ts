@@ -7,7 +7,7 @@ const MAX_INPUT = Number(process.env.CHAT_MAX_INPUT ?? 1800)
 const MAX_MESSAGES = 50
 const MAX_REPLY = Number(process.env.CHAT_MAX_REPLY ?? 2000)
 const OPENAI_BASE_URL = process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1'
-const OPENAI_MODEL = process.env.OPENAI_MODEL || 'gpt-4o-mini'
+const OPENAI_MODEL = process.env.OPENAI_MODEL || 'gpt-4.1-mini'
 
 function stripTags(s: string) {
   return String(s ?? '')
