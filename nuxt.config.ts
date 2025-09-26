@@ -42,19 +42,18 @@ export default defineNuxtConfig({
   nitro: {
     routeRules: {
       '/api/tryit':    { cors: true, headers: { 'Cache-Control': 'no-store' } },
-      '/api/nlweb/**':{ cors: true, headers: { 'Cache-Control': 'no-store' } },
+      '/api/nlweb/**': { cors: true, headers: { 'Cache-Control': 'no-store' } },
       '/api/nl/**':    { cors: true, headers: { 'Cache-Control': 'no-store' } },
     },
 
-    // 🚫 Disable prerender to avoid build-time memory/SSR crawl
-    prerender: {
-      crawlLinks: false,
-      routes: [],
-      failOnError: false,
-    },
+    // ✅ Bundle embeddings with the server (expects .data/nlweb-embeddings.json)
+    serverAssets: [{ baseName: 'emb', dir: '.data' }],
 
-    // (small build-memory win on some setups)
-    inlineDynamicImports: true,
+    // 🚫 Disable prerender to avoid build-time crawl & memory issues
+    prerender: { crawlLinks: false, routes: [], failOnError: false },
+
+    // small build-memory win on some setups
+    inlineDynamicImports: true
   },
 
   modules: [
@@ -140,6 +139,7 @@ export default defineNuxtConfig({
     }
   }
 })
+
 
 
 
