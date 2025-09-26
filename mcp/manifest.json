@@ -1,0 +1,23 @@
+{
+  "name": "Ask Docs",
+  "version": "1.0.0",
+  "description": "Ask this site's documentation via a unified schema with citations.",
+  "tools": [
+    {
+      "name": "ask_docs",
+      "description": "Ask documentation questions and get an answer plus citations.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "question": { "type": "string" },
+          "path": { "type": "string" },
+          "include": { "type": "array", "items": { "type": "string" } },
+          "exclude": { "type": "array", "items": { "type": "string" } },
+          "maxChars": { "type": "number" },
+          "k": { "type": "number" }
+        },
+        "required": ["question"]
+      }
+    }
+  ]
+}
