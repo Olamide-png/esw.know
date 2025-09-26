@@ -1,45 +1,42 @@
-import { defineEventHandler, readBody } from 'h3'
+// server/api/nl/ask.post.ts
+import { defineEventHandler, readBody, createError } from 'h3'
 import fs from 'node:fs'
 import path from 'node:path'
 import { glob } from 'glob'
-import { AskDocsRequest, AskDocsResponse, AskDocsCitation } from '~/types/ask-docs'
 
-type EmbeddingResponse = { data: { embedding: number[] }[] }
-
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY!
-const EMB_MODEL = process.env.ASKDOCS_EMB_MODEL || 'text-embedding-3-small'
-const CHAT_MODEL = process.env.OPENAI_MODEL || 'gpt-4.1-mini'
-
-// ---- tiny helpers ----------------------------------------------------------
-function cosine(a: number[], b: number[]) {
-  let ab=0, aa=0, bb=0
-  for (let i=0; i<a.length; i++){ ab += a[i]*b[i]; aa+=a[i]*a[i]; bb+=b[i]*b[i] }
-  return ab / (Math.sqrt(aa)*Math.sqrt(bb) + 1e-9)
+// -------- pure helpers (no await outside handler) --------
+function findDocsRoot() {
+  // allow hard override for monorepos
+  const override = process.env.ASKDOCS_ROOT?.trim()
+  if (override) {
+    const full = path.isAbsolute(override) ? override : path.join(process.cwd(), override)
+    if (fs.existsSync(full)) return full
+  }
+  const prefixes = ['', 'www', 'apps/web', 'app', 'site']
+  const dirs = ['content', 'pages', 'docs']
+  for (const p of prefixes) {
+    for (const d of dirs) {
+      const full = path.join(process.cwd(), p, d)
+      if (fs.existsSync(full)) return full
+    }
+  }
+  return process.cwd()
 }
-
-async function embed(texts: string[]): Promise<number[][]> {
-  const r = await $fetch<EmbeddingResponse>('https://api.openai.com/v1/embeddings', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${OPENAI_API_KEY}`, 'Content-Type': 'application/json' },
-    body: { input: texts, model: EMB_MODEL }
-  })
-  return r.data.map(d => d.embedding)
-}
-
-function mdFilesRoot() {
-  // prefer Nuxt Content; fall back to pages
-  const contentDir = path.join(process.cwd(), 'content')
-  if (fs.existsSync(contentDir)) return contentDir
-  return path.join(process.cwd(), 'pages')
-}
-
 function toUrl(filePath: string) {
-  // naive map: /content/x/y.md -> /x/y
-  const root = mdFilesRoot()
+  const root = findDocsRoot()
   const rel = filePath.replace(root, '')
-  return rel.replace(/index\.(md|mdx)$/, '/').replace(/\.(md|mdx)$/, '')
+  return rel.replace(/index\.(md|mdx|markdown)$/, '/').replace(/\.(md|mdx|markdown)$/, '')
 }
-
+function stripMd(s: string) {
+  return String(s ?? '')
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/`[^`]+`/g, ' ')
+    .replace(/!\[[^\]]*]\([^)]+\)/g, ' ')
+    .replace(/\[[^\]]*]\([^)]+\)/g, ' ')
+    .replace(/[#>*_~`]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
 function chunk(text: string, size = 1400, overlap = 200) {
   const out: { start:number; end:number; text:string }[] = []
   let i = 0
@@ -51,118 +48,120 @@ function chunk(text: string, size = 1400, overlap = 200) {
   }
   return out
 }
-
-function stripMd(s: string) {
-  return s
-    .replace(/```[\s\S]*?```/g, ' ')   // code fences
-    .replace(/`[^`]+`/g, ' ')
-    .replace(/!\[[^\]]*]\([^)]+\)/g, ' ')
-    .replace(/\[[^\]]*]\([^)]+\)/g, ' ')
-    .replace(/[#>*_~`]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-}
-
-async function listFiles(include?: string[], exclude?: string[]) {
-  const root = mdFilesRoot()
-  const patterns = include?.length ? include : ['**/*.md', '**/*.mdx']
-  const files = new Set<string>()
-  for (const pat of patterns) {
-    const matches = await glob(pat, { cwd: root, nodir: true, ignore: exclude || [] })
-    matches.forEach(m => files.add(path.join(root, m)))
+function escapeRe(x: string) { return x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') }
+function keywordScore(text: string, q: string) {
+  const qs = q.toLowerCase().split(/\W+/).filter(Boolean)
+  const t = text.toLowerCase()
+  let s = 0
+  for (const tok of qs) {
+    const m = t.match(new RegExp(`\\b${escapeRe(tok)}\\b`, 'g'))
+    s += m ? m.length : 0
   }
-  return Array.from(files)
+  return s
+}
+async function listFiles(include?: string[], exclude?: string[]) {
+  const root = findDocsRoot()
+  const patterns = include?.length ? include : ['**/*.md', '**/*.mdx', '**/*.markdown']
+  const ignore = exclude?.length ? exclude : [
+    '**/node_modules/**','**/.nuxt/**','**/.output/**','**/dist/**','**/public/**'
+  ]
+  const matches = await glob(patterns, { cwd: root, nodir: true, ignore })
+  return matches.map(m => path.join(root, m))
 }
 
-// ---- handler ---------------------------------------------------------------
+// -------- MAIN HANDLER (synchronous helpers; all awaits inside) --------
 export default defineEventHandler(async (event) => {
   const t0 = Date.now()
-  const body = await readBody<AskDocsRequest>(event)
-  const question = (body?.question || '').trim()
-  if (!OPENAI_API_KEY) throw createError({ statusCode: 500, statusMessage: 'Missing OPENAI_API_KEY' })
-  if (!question) throw createError({ statusCode: 400, statusMessage: 'Provide { question }' })
 
-  const maxChars = body.maxChars ?? 12000
-  const k = body.k ?? 6
+  // Parse body + aliases
+  const raw = await readBody(event)
+  const body = typeof raw === 'string' ? JSON.parse(raw || '{}') : (raw ?? {})
+  const question = (body.question ?? body.query ?? body.q ?? '').toString().trim()
+  const rawScope = (body.path ?? body.scope ?? '').toString().trim()
+  const scope = rawScope.replace(/^\/+/, '').replace(/\/+$/, '') || undefined
 
-  const files = await listFiles(body.include, body.exclude)
-  const filtered = body.path
-    ? files.filter(f => f.includes(body.path!))
-    : files
+  const k = Math.max(1, Number(body.k ?? 6))
+  const maxChars = Number(body.maxChars ?? 12000)
 
-  // Read & chunk
+  if (!question) {
+    throw createError({ statusCode: 400, statusMessage: 'Provide { question } (or { query } or { q }) in JSON body' })
+  }
+
+  // ---- file discovery (glob-based scoping) ----
+  const root = findDocsRoot()
+  const rel = (abs: string) => path.relative(root, abs).replace(/\\/g, '/')
+
+  // ✅ include top-level files under the scope folder AND all nested files
+  const scopeInclude = scope
+    ? [
+        `${scope}/*.md`, `${scope}/*.mdx`, `${scope}/*.markdown`,
+        `${scope}/**/*.md`, `${scope}/**/*.mdx`, `${scope}/**/*.markdown`,
+      ]
+    : undefined
+
+  let files = await listFiles(scopeInclude, body.exclude)
+  const fellBackToAll = !!scope && files.length === 0
+  if (fellBackToAll) files = await listFiles(undefined, body.exclude)
+
+  // ---- read + chunk ----
   const chunks: {
     file: string; title: string; text: string; start: number; end: number; id: string
   }[] = []
 
-  for (const file of filtered) {
-    const raw = fs.readFileSync(file, 'utf8')
-    const title = (raw.match(/^#\s+(.+)$/m)?.[1] ?? path.basename(file))
-    const cleaned = stripMd(raw).slice(0, maxChars) // keep it cheap
-    for (const c of chunk(cleaned)) {
-      chunks.push({
-        file,
-        title,
-        text: c.text,
-        start: c.start,
-        end: c.end,
-        id: `${path.basename(file)}:${c.start}-${c.end}`
-      })
-    }
+  for (const file of files) {
+    try {
+      const raw = fs.readFileSync(file, 'utf8')
+      const title = (raw.match(/^#\s+(.+)$/m)?.[1] ?? path.basename(file))
+      const cleaned = stripMd(raw).slice(0, maxChars)
+      if (!cleaned) continue
+      for (const c of chunk(cleaned)) {
+        chunks.push({
+          file,
+          title,
+          text: c.text,
+          start: c.start,
+          end: c.end,
+          id: `${rel(file)}:${c.start}-${c.end}`
+        })
+      }
+    } catch { /* ignore */ }
   }
 
   if (!chunks.length) {
-    return <AskDocsResponse>{
-      answer: "I couldn't find any docs to search. Make sure you have markdown in `content/` or `pages/`.",
+    return {
+      answer: `I couldn’t find any markdown to search in ${scope ? `scope "${scope}"` : 'the project'}.`,
       citations: [],
-      meta: { elapsedMs: Date.now()-t0, source: 'local-fs' }
+      usage: { model: 'keyword-only' },
+      meta: {
+        elapsedMs: Date.now() - t0,
+        source: 'local-fs',
+        scope: scope || null,
+        fellBackToAll,
+        scannedFiles: files.length,
+        retrievalMode: 'keyword-only',
+        k,
+        sampleMatches: files.slice(0, 8).map(rel)
+      }
     }
   }
 
-  // Rank by embeddings
-  const [qEmb] = await embed([question])
-  const embChunks = await embed(chunks.map(c => c.text))
-  const scored = embChunks.map((e, i) => ({ i, score: cosine(qEmb, e) }))
+  // ---- keyword ranking (no network, deterministic) ----
+  const scored = chunks
+    .map((c, i) => ({ i, score: keywordScore(c.text, question) }))
     .sort((a,b) => b.score - a.score)
     .slice(0, k)
 
-  // Build context
-  const contextBlocks = scored.map(s => `# ${chunks[s.i].title}\n${chunks[s.i].text}`).join('\n\n---\n\n')
+  // If all scores are 0 (nothing matched), still give user something: first k chunks
+  const top = scored.length && scored.some(s => s.score > 0)
+    ? scored
+    : chunks.slice(0, Math.min(k, chunks.length)).map((_, i) => ({ i, score: 0 }))
 
-  const system = [
-    'You answer questions about the documentation.',
-    'Cite sources with [^n] footnotes and return a concise, accurate answer.',
-  ].join(' ')
-
-  const prompt = [
-    `Context:`,
-    contextBlocks,
-    `\n\nUser question: ${question}`,
-    `Answer with footnote indices like [^1], [^2] referring to the provided sources.`
-  ].join('\n')
-
-  type ChatRes = { choices: { message: { content: string } }[]; usage?: any }
-
-  const chat = await $fetch<ChatRes>('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${OPENAI_API_KEY}`, 'Content-Type': 'application/json' },
-    body: {
-      model: CHAT_MODEL,
-      messages: [
-        { role: 'system', content: system },
-        { role: 'user', content: prompt }
-      ],
-      temperature: 0.2
-    }
-  })
-
-  const answer = chat.choices[0].message.content || 'No answer.'
-  const citations: AskDocsCitation[] = scored.map((s, idx) => {
+  const citations = top.map((s) => {
     const c = chunks[s.i]
     return {
       title: c.title,
       url: toUrl(c.file),
-      path: c.file,
+      path: rel(c.file),
       score: s.score,
       chunkId: c.id,
       start: c.start,
@@ -171,12 +170,33 @@ export default defineEventHandler(async (event) => {
     }
   })
 
-  const res: AskDocsResponse = {
+  // A tiny, local answer so your UI isn't empty (no model yet)
+  const answer =
+    citations.length
+      ? `Found ${citations.length} relevant section(s). See Sources below.`
+      : `No relevant sections found.`
+
+  return {
     answer,
     citations,
-    usage: { model: CHAT_MODEL, ...chat.usage },
-    meta: { elapsedMs: Date.now() - t0, source: 'local-fs' }
+    usage: { model: 'keyword-only' },
+    meta: {
+      elapsedMs: Date.now() - t0,
+      source: 'local-fs',
+      scope: scope || null,
+      fellBackToAll,
+      scannedFiles: files.length,
+      retrievalMode: 'keyword-only',
+      k,
+      sampleMatches: files.slice(0, 8).map(rel)
+    }
   }
-  return res
 })
+
+
+
+
+
+
+
 
