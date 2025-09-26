@@ -1,15 +1,12 @@
-// Force Node on Vercel/Nitro
 export const runtime = 'nodejs'
 
 import { readBody } from 'h3'
-import { query } from '@/server/nlweb/query'
+import { query } from '~/www/server/nlweb/query'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody<{ question?: string }>(event)
   const question = body?.question?.trim()
-  if (!question) {
-    return { ok: false, error: 'Missing "question"' }
-  }
+  if (!question) return { ok: false, error: 'Missing "question"' }
 
   try {
     const data = await query({ question })
@@ -19,5 +16,3 @@ export default defineEventHandler(async (event) => {
     return { ok: false, error: err?.message || 'Query failed' }
   }
 })
-
-

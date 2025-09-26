@@ -9,37 +9,29 @@ export async function query({ question }: QueryInput): Promise<QueryOutput> {
   const apiKey = cfg.openaiApiKey as string
   const model = (cfg.openaiModel as string) || 'gpt-4o-mini'
 
-  // If no key, return a safe fallback so builds never crash.
   if (!apiKey) {
+    // Safe fallback so dev works even without a key
     return {
       text: `Demo answer (no OPENAI_API_KEY set). You asked: "${question}".`,
       sources: []
     }
   }
 
-  // Lazy import so the module isn't loaded at build time
   const { default: OpenAI } = await import('openai')
   const openai = new OpenAI({ apiKey })
 
-  const sys = `You are a concise documentation assistant. Cite nothing unless you are sure; return plain text.`
-  const user = `Question: ${question}`
-
+  const sys = 'You are a concise documentation assistant. Return plain text.'
   const chat = await openai.chat.completions.create({
     model,
     messages: [
       { role: 'system', content: sys },
-      { role: 'user', content: user }
+      { role: 'user', content: `Question: ${question}` }
     ],
     temperature: 0.2
   })
 
-  const text =
-    chat.choices?.[0]?.message?.content?.trim() ||
-    'No answer generated.'
-
-  // If you later add retrieval, populate real URLs here.
-  const sources: Source[] = []
-
-  return { text, sources }
+  const text = chat.choices?.[0]?.message?.content?.trim() || 'No answer generated.'
+  return { text, sources: [] }
 }
+
 
