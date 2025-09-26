@@ -41,19 +41,10 @@ export default defineNuxtConfig({
 
   nitro: {
     routeRules: {
-      '/api/tryit':    { cors: true, headers: { 'Cache-Control': 'no-store' } },
-      '/api/nlweb/**': { cors: true, headers: { 'Cache-Control': 'no-store' } },
-      '/api/nl/**':    { cors: true, headers: { 'Cache-Control': 'no-store' } },
-    },
-
-    // ✅ Bundle embeddings with the server (expects .data/nlweb-embeddings.json)
-    serverAssets: [{ baseName: 'emb', dir: '.data' }],
-
-    // 🚫 Disable prerender to avoid build-time crawl & memory issues
-    prerender: { crawlLinks: false, routes: [], failOnError: false },
-
-    // small build-memory win on some setups
-    inlineDynamicImports: true
+      '/api/tryit':   { cors: true, headers: { 'Cache-Control': 'no-store' } },
+      '/api/nlweb/**':{ cors: true, headers: { 'Cache-Control': 'no-store' } },
+      '/api/nl/**':   { cors: true, headers: { 'Cache-Control': 'no-store' } }
+    }
   },
 
   modules: [
@@ -105,10 +96,7 @@ export default defineNuxtConfig({
       ]
     },
     navigation: {
-      fields: [
-        'icon','navBadges','navTruncate','badges','toc','sidebar','collapse',
-        'editLink','prevNext','breadcrumb','fullpage'
-      ]
+      fields: ['icon','navBadges','navTruncate','badges','toc','sidebar','collapse','editLink','prevNext','breadcrumb','fullpage']
     },
     experimental: { search: { indexed: true } }
   },
@@ -139,6 +127,20 @@ export default defineNuxtConfig({
     }
   }
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
