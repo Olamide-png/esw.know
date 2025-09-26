@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     TRYIT_ALLOWED_HOSTS: process.env.TRYIT_ALLOWED_HOSTS,
     nlwebBaseUrl: process.env.NLWEB_BASE_URL,
     openaiApiKey: process.env.OPENAI_API_KEY,          // <— no "|| ''"
-    openaiModel: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+    openaiModel: process.env.OPENAI_MODEL || 'gpt-4.1-mini',
     embedModel: process.env.EMBED_MODEL || 'text-embedding-3-small',
     chunkMaxChars: Number(process.env.CHUNK_MAX_CHARS || 2800),
     chunkOverlap: Number(process.env.CHUNK_OVERLAP || 300),
