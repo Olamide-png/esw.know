@@ -1,7 +1,7 @@
 export const runtime = 'nodejs'
 
 import { readBody } from 'h3'
-import { search } from '~/www/server/nlweb/search'
+import { search } from '../../nlweb/search'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody<{ q?: string; mode?: 'list'|'summarize' }>(event)

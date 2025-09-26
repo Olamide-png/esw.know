@@ -25,8 +25,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     TRYIT_ALLOWED_HOSTS: process.env.TRYIT_ALLOWED_HOSTS || '',
-    nlwebBaseUrl: process.env.NLWEB_BASE_URL || '',
-    openaiApiKey: process.env.OPENAI_API_KEY || '',
+    TRYIT_ALLOWED_HOSTS: process.env.TRYIT_ALLOWED_HOSTS,
+    nlwebBaseUrl: process.env.NLWEB_BASE_URL,
+    openaiApiKey: process.env.OPENAI_API_KEY,          // <— no "|| ''"
     openaiModel: process.env.OPENAI_MODEL || 'gpt-4o-mini',
     embedModel: process.env.EMBED_MODEL || 'text-embedding-3-small',
     chunkMaxChars: Number(process.env.CHUNK_MAX_CHARS || 2800),
@@ -35,7 +36,6 @@ export default defineNuxtConfig({
     public: {
       TRYIT_LABELS: process.env.TRYIT_LABELS || '',
       TRYIT_BASEURLS: process.env.TRYIT_BASEURLS || ''
-      // nlwebBaseUrl: process.env.NLWEB_BASE_URL || ''
     }
   },
 
