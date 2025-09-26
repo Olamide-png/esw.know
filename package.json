@@ -47,7 +47,8 @@
     "lint:fix": "eslint . --fix",
     "taze": "taze",
     "build:index:content": "tsx scripts/build-index-content.ts",
-    "nl:build-index": "tsx scripts/build-index.ts"
+    "nl:build-index": "tsx scripts/build-index.ts",
+    "mcp:docs": "tsx mcp-docs.ts"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.45",
@@ -63,15 +64,24 @@
     "@ztl-uwu/nuxt-content": "^2.13.7",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.2",
+    "express": "^5.1.0",
     "fontaine": "^0.6.0",
+    "glob": "^11.0.3",
     "nuxt-og-image": "^5.1.4",
     "openai": "^5.23.0",
+    "pg": "^8.16.3",
+    "pgvector": "^0.2.1",
     "reka-ui": "^2.3.0",
+    "remark": "^15.0.1",
+    "remark-parse": "^11.0.0",
     "shadcn-nuxt": "^2.2.0",
     "tailwind-merge": "^3.3.0",
     "tailwindcss": "^4.1.7",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.13.2",
@@ -81,7 +91,10 @@
     "@nuxt/devtools": "^2.4.1",
     "@nuxt/kit": "^3.17.4",
     "@nuxt/vite-builder": "^3.19.2",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
     "@types/node": "^24.5.2",
+    "@types/pg": "^8.15.5",
     "@vueuse/core": "^13.3.0",
     "@vueuse/nuxt": "^13.3.0",
     "eslint": "^9.27.0",
