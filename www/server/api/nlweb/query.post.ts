@@ -1,7 +1,7 @@
 export const runtime = 'nodejs'
 
 import { readBody } from 'h3'
-import { query } from '~/www/server/nlweb/query'
+import { query } from '../../nlweb/query'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody<{ question?: string }>(event)
