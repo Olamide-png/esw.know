@@ -40,9 +40,12 @@ async function ask() {
     answer.value = res.answer
     sources.value = res.sources || []
   } catch (e: any) {
-    errorMsg.value = e?.data?.message || e?.message || 'Request failed'
-  } finally {
-    loading.value = false
+
+    errorMsg.value =
+      e?.data?.error ||
+      e?.statusMessage ||
+      e?.message ||
+      'Request failed'
   }
 }
 
