@@ -1,0 +1,20 @@
+import { searchRag } from '~/utils/rag'
+
+export default defineEventHandler(async (event) => {
+  try {
+    const body = await readBody<{ query: string; k?: number }>(event)
+    if (!body?.query) {
+      setResponseStatus(event, 400)
+      return { error: 'query required' }
+    }
+    const items = await searchRag(body.query, body.k ?? 8)
+    return { items }
+  } catch (err: any) {
+    console.error('[rag/search]', err)
+    setResponseStatus(event, 500)
+    return { error: err?.message || 'internal error' }
+  }
+})
+
+
+

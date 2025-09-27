@@ -1,0 +1,55 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>MCP Docs Test</title>
+<style>
+  body { font: 14px/1.4 system-ui, sans-serif; margin: 2rem; max-width: 860px; }
+  textarea, input { width: 100%; padding: .6rem; border-radius: .6rem; border: 1px solid #ddd; }
+  pre { background: #0b0b0b; color: #f6f6f6; padding: .8rem; border-radius: .6rem; overflow:auto; }
+  .row { display: grid; grid-template-columns: 1fr auto; gap: .5rem; align-items: center; }
+  button { padding: .55rem .9rem; border-radius: .6rem; border: 1px solid #111; background:#111; color:#fff; }
+</style>
+<h1>Test MCP Tools</h1>
+
+<label>Server origin</label>
+<input id="origin" value="http://localhost:8790">
+
+<label>Bearer token</label>
+<input id="token" value="dev-secret">
+
+<h2>docs.search</h2>
+<div class="row">
+  <input id="q" value="international app">
+  <button onclick="runSearch()">Search</button>
+</div>
+<pre id="out1"></pre>
+
+<h2>docs.answer</h2>
+<div class="row">
+  <input id="question" value="What is the ESW International App?">
+  <button onclick="runAnswer()">Ask</button>
+</div>
+<pre id="out2"></pre>
+
+<script>
+async function postTool(name, body) {
+  const origin = document.getElementById('origin').value;
+  const token  = document.getElementById('token').value;
+  const res = await fetch(`${origin}/tools/${name}`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', 'authorization': `Bearer ${token}` },
+    body: JSON.stringify(body)
+  });
+  const text = await res.text();
+  try { return JSON.parse(text); } catch { return text; }
+}
+async function runSearch() {
+  const q = document.getElementById('q').value;
+  const json = await postTool('docs.search', { query: q, k: 6 });
+  document.getElementById('out1').textContent = JSON.stringify(json, null, 2);
+}
+async function runAnswer() {
+  const question = document.getElementById('question').value;
+  const json = await postTool('docs.answer', { question, k: 6 });
+  document.getElementById('out2').textContent = JSON.stringify(json, null, 2);
+}
+</script>
