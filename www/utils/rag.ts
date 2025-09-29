@@ -1,184 +1,138 @@
 // www/utils/rag.ts
-import 'pgvector/pg'            // registers pgvector with pg
-import { toSql } from 'pgvector/pg'
-import { Pool } from 'pg'
 import OpenAI from 'openai'
+import { Client } from 'pg'
+import { toSql } from 'pgvector/pg'
 
 /**
- * ---------------------------
- * Config (env or defaults)
- * ---------------------------
+ * Env
  */
+const DATABASE_URL = process.env.DATABASE_URL!
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY!
 const OPENAI_MODEL = process.env.OPENAI_MODEL || 'gpt-4o-mini'
-const EMBED_MODEL  = process.env.EMBED_MODEL  || 'text-embedding-3-small' // 1536 dims
-const RERANK_MODEL = process.env.RERANK_MODEL || '' // e.g. 'gpt-4o-mini' (optional)
-const USE_HYDE     = (process.env.RAG_USE_HYDE ?? 'true') === 'true'
-const USE_RERANK   = (process.env.RAG_USE_RERANK ?? 'false') === 'true' && !!RERANK_MODEL
+const EMBED_MODEL = process.env.EMBED_MODEL || 'text-embedding-3-small' // 1536 dims
+const RAG_USE_HYDE = (process.env.RAG_USE_HYDE || 'true').toLowerCase() !== 'false'
 
-const BROADEN_TERMS = process.env.RAG_BROADEN_TERMS ||
-  'internationalization i18n localization multi-country multi region config configuration setup example sample code'
+// Optional rerank (kept off by default to minimize tokens/latency)
+const RAG_USE_RERANK = (process.env.RAG_USE_RERANK || 'false').toLowerCase() === 'true'
 
-const POOL = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  max: 10
-})
+if (!DATABASE_URL) throw new Error('DATABASE_URL missing')
+if (!OPENAI_API_KEY) throw new Error('OPENAI_API_KEY missing')
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+const openai = new OpenAI({ apiKey: OPENAI_API_KEY })
 
 /**
- * ---------------------------
- * Types
- * ---------------------------
+ * PG client helper
  */
-export type RagRow = {
-  doc_id: string
-  chunk_id: string
-  heading: string
-  content: string
-  source_url: string | null
-  url_anchor: string | null
-  title: string
-  score: number
-}
-
-export type RagItem = {
-  id: string
-  doc_id: string
-  heading: string
-  title: string
-  excerpt: string
-  url: string | null
-  score: number
+function pgClient() {
+  return new Client({ connectionString: DATABASE_URL })
 }
 
 /**
- * ---------------------------
- * Helpers
- * ---------------------------
+ * Embed helper
  */
-function softmaxNorm(values: number[]) {
-  if (!values.length) return values
-  const max = Math.max(...values)
-  const exps = values.map(v => Math.exp(v - max))
-  const sum = exps.reduce((a, b) => a + b, 0)
-  return exps.map(v => v / (sum || 1))
-}
-
-/** Reciprocal Rank Fusion (simple & robust). */
-function rrf(...lists: RagRow[][]): RagRow[] {
-  const K = 60
-  const map = new Map<string, RagRow & { _rrf: number }>()
-  lists.forEach(list => {
-    list.forEach((row, idx) => {
-      const key = row.chunk_id
-      const current = map.get(key)
-      const add = 1 / (K + idx + 1)
-      if (!current) map.set(key, { ...row, _rrf: add })
-      else current._rrf += add
-    })
-  })
-  return Array.from(map.values()).sort((a, b) => b._rrf - a._rrf)
-}
-
-/** Simple MMR-ish diversification by doc_id. Keep top N per doc in final list. */
-function diversifyByDoc(rows: RagRow[], perDoc = 3) {
-  const keep: RagRow[] = []
-  const per = new Map<string, number>()
-  for (const r of rows) {
-    const n = per.get(r.doc_id) || 0
-    if (n < perDoc) {
-      keep.push(r)
-      per.set(r.doc_id, n + 1)
-    }
-  }
-  return keep
-}
-
-function cleanExcerpt(s?: string, len = 600) {
-  if (!s) return ''
-  const t = s.replace(/\s+/g, ' ').trim()
-  return t.length > len ? t.slice(0, len - 1) + '…' : t
-}
-
-function stableUrl(source_url?: string | null, anchor?: string | null) {
-  if (!source_url) return null
-  const a = anchor?.startsWith('#') ? anchor : anchor ? `#${anchor}` : ''
-  return `${source_url}${a}`
-}
-
-/** Batch embeddings. */
-async function embed(texts: string[]): Promise<number[][]> {
-  if (!texts.length) return []
+async function embed(text: string): Promise<number[]> {
   const res = await openai.embeddings.create({
     model: EMBED_MODEL,
-    input: texts
+    input: text,
   })
-  return res.data.map(d => d.embedding as unknown as number[])
-}
-
-/** HYDE prompt -> short pseudo-doc. */
-async function hyde(query: string): Promise<string> {
-  const sys =
-    'Generate a short, neutral paragraph that would likely appear in documentation answering the user question.'
-  const r = await openai.chat.completions.create({
-    model: OPENAI_MODEL,
-    temperature: 0.3,
-    messages: [
-      { role: 'system', content: sys },
-      { role: 'user', content: `Question: ${query}\nWrite 2-3 sentences.` }
-    ]
-  })
-  return r.choices?.[0]?.message?.content?.trim() || ''
-}
-
-/** Optional LLM reranker on the topN. Returns new order (descending). */
-async function rerankLLM(query: string, items: RagRow[]): Promise<RagRow[]> {
-  if (!USE_RERANK || !items.length) return items
-  const top = items.slice(0, Math.min(20, items.length))
-  const numbered = top.map((x, i) => `[#${i + 1}] ${x.title} > ${x.heading}\n${cleanExcerpt(x.content, 800)}`).join('\n\n')
-  const sys = 'You are a ranking model. Return a comma-separated list of the item numbers in best-to-worst order.'
-  const prompt = `Query: ${query}\n\nItems:\n${numbered}\n\nReturn only numbers like: "1,5,2,..."`
-
-  const r = await openai.chat.completions.create({
-    model: RERANK_MODEL,
-    temperature: 0.0,
-    messages: [
-      { role: 'system', content: sys },
-      { role: 'user', content: prompt }
-    ]
-  })
-  const text = r.choices?.[0]?.message?.content || ''
-  const order = text.match(/\d+/g)?.map(n => parseInt(n, 10)) || []
-  const byIdx = (i: number) => top[i - 1]?.chunk_id
-  const idOrder = order.map(byIdx).filter(Boolean)
-  const mapped = new Map(top.map(x => [x.chunk_id, x]))
-  const reranked = idOrder.map(id => mapped.get(id)!).filter(Boolean)
-  const rest = top.filter(x => !idOrder.includes(x.chunk_id))
-  const final = [...reranked, ...rest]
-  return [...final, ...items.slice(top.length)]
+  return (res.data[0].embedding as unknown) as number[]
 }
 
 /**
- * ---------------------------
- * searchRag (HYBRID)
- * ---------------------------
- *
- * - vector (query + HYDE) with pgvector param fix (toSql)
- * - keyword (tsvector + trigram)
- * - broaden if thin
- * - RRF fusion + doc diversity
+ * Tiny RRF (reciprocal-rank fusion)
+ * Combine lists and keep top N by fused score
  */
-export async function searchRag(query: string, k = 8): Promise<RagItem[]> {
-  const client = await POOL.connect()
+function rrf<T extends { id: string | number }>(k: number, ...lists: T[][]) {
+  const scores = new Map<string | number, number>()
+  const seen = new Map<string | number, T>()
+  const K = 60 // smoothing constant
+
+  for (const list of lists) {
+    list.forEach((item, idx) => {
+      const add = 1 / (K + idx + 1)
+      scores.set(item.id, (scores.get(item.id) || 0) + add)
+      if (!seen.has(item.id)) seen.set(item.id, item)
+    })
+  }
+  return Array.from(seen.values()).sort((a, b) => (scores.get(b.id)! - scores.get(a.id)!))
+    .slice(0, k)
+}
+
+/**
+ * Shape a DB row into a result item
+ */
+function asItem(r: any) {
+  return {
+    id: r.chunk_id,
+    doc_id: r.doc_id,
+    heading: r.heading,
+    title: r.title || r.heading || 'Untitled',
+    excerpt: (r.content || '').slice(0, 500),
+    url: r.source_url ?? null,
+    score: typeof r.score === 'number' ? r.score : null,
+  }
+}
+
+export type SearchItem = ReturnType<typeof asItem>
+
+/**
+ * Core retriever: vector + (optional) HYDE + BM25/trigram keyword
+ */
+export async function searchRag(query: string, k = 8): Promise<{ items: SearchItem[] }> {
+  const pg = pgClient()
+  await pg.connect()
+
   try {
-    // Embeddings for query (and HYDE if enabled)
-    const hydeText = USE_HYDE ? await hyde(query) : ''
-    const toEmbed = [query, hydeText].filter(Boolean)
-    const [qVec, hyVec] = (await embed(toEmbed)).concat([undefined, undefined]).slice(0, 2)
+    // Embed user query
+    const vec = await embed(query)
+    const vecParam = toSql(vec) // ✅ serialize for pgvector
 
-    // --- VECTOR: original query (use toSql(qVec))
-    const vecRows: RagRow[] = qVec
-      ? (await client.query<RagRow>(
+    // Optional HYDE (hypothetical answer)
+    let hyParam: any = null
+    if (RAG_USE_HYDE) {
+      try {
+        const hy = await openai.chat.completions.create({
+          model: OPENAI_MODEL,
+          messages: [
+            { role: 'system', content: 'Write a concise paragraph that would likely answer the user’s question.' },
+            { role: 'user', content: query }
+          ],
+          temperature: 0.2,
+          max_tokens: 180
+        })
+        const hyText = hy.choices[0]?.message?.content?.trim() || ''
+        if (hyText) {
+          const hyVec = await embed(hyText)
+          hyParam = toSql(hyVec) // ✅
+        }
+      } catch {
+        hyParam = null
+      }
+    }
+
+    // --- Vector search (query)
+    const vecRows = await pg.query(
+      `
+      SELECT
+        c.doc_id,
+        c.chunk_id,
+        c.heading,
+        c.content,
+        c.source_url,
+        c.url_anchor,
+        COALESCE(d.title, c.heading) AS title,
+        1 - (c.embedding <=> $1::vector) AS score
+      FROM rag_chunks c
+      LEFT JOIN rag_documents d ON d.doc_id = c.doc_id
+      ORDER BY c.embedding <=> $1::vector
+      LIMIT $2
+      `,
+      [vecParam, Math.max(k * 4, 32)]
+    )
+
+    // --- Vector search (HYDE)
+    const hyRows = hyParam
+      ? await pg.query(
           `
           SELECT
             c.doc_id,
@@ -194,37 +148,15 @@ export async function searchRag(query: string, k = 8): Promise<RagItem[]> {
           ORDER BY c.embedding <=> $1::vector
           LIMIT $2
           `,
-          [toSql(qVec), Math.max(k * 4, 32)]
-        )).rows
-      : []
+          [hyParam, Math.max(k * 4, 32)]
+        )
+      : { rows: [] }
 
-    // --- VECTOR: HYDE (use toSql(hyVec))
-    const hyRows: RagRow[] = hyVec
-      ? (await client.query<RagRow>(
-          `
-          SELECT
-            c.doc_id,
-            c.chunk_id,
-            c.heading,
-            c.content,
-            c.source_url,
-            c.url_anchor,
-            COALESCE(d.title, c.heading) AS title,
-            1 - (c.embedding <=> $1::vector) AS score
-          FROM rag_chunks c
-          LEFT JOIN rag_documents d ON d.doc_id = c.doc_id
-          ORDER BY c.embedding <=> $1::vector
-          LIMIT $2
-          `,
-          [toSql(hyVec), Math.max(k * 4, 32)]
-        )).rows
-      : []
-
-    // --- KEYWORD: BM25-ish + trigram
-    const kwRows: RagRow[] = (await client.query<RagRow>(
+    // --- Keyword (BM25-ish + trigram)
+    const kwRows = await pg.query(
       `
       WITH q AS (
-        SELECT plainto_tsquery('english', $1) AS tsq, $1::text AS raw
+        SELECT websearch_to_tsquery('english', $1) AS tsq, $1::text AS raw
       )
       SELECT
         c.doc_id,
@@ -236,106 +168,112 @@ export async function searchRag(query: string, k = 8): Promise<RagItem[]> {
         COALESCE(d.title, c.heading) AS title,
         (
           ts_rank(c.tsv, q.tsq) * 1.0
-          + greatest(similarity(c.heading, q.raw), similarity(c.content, q.raw)) * 0.5
+          + GREATEST(similarity(c.heading, q.raw), similarity(c.content, q.raw)) * 0.5
         ) AS score
       FROM rag_chunks c
       LEFT JOIN rag_documents d ON d.doc_id = c.doc_id,
       q
       WHERE c.tsv @@ q.tsq
-         OR similarity(c.heading, q.raw) > 0.15
-         OR similarity(c.content, q.raw) > 0.15
+         OR similarity(c.heading, q.raw) > 0.10
+         OR similarity(c.content, q.raw) > 0.10
       ORDER BY score DESC
       LIMIT $2
       `,
       [query, Math.max(k * 4, 32)]
-    )).rows
+    )
 
-    // If thin, broaden with synonyms and larger k
-    let allLists = [vecRows, hyRows, kwRows]
-    const total = vecRows.length + hyRows.length + kwRows.length
-    if (total < Math.min(5, k)) {
-      const broadenQ = `${query} ${BROADEN_TERMS}`
-      const more: RagRow[] = (await client.query<RagRow>(
+    // Fuse and shape
+    const fused = rrf<SearchItem>(k,
+      vecRows.rows.map(asItem),
+      hyRows.rows.map(asItem),
+      kwRows.rows.map(asItem),
+    )
+
+    // If nothing, broaden (synonyms + bigger K)
+    if (!fused.length) {
+      const broaden = `${query} internationalization i18n localization multi-country multi-market`
+      const vec2 = await embed(broaden)
+      const vecParam2 = toSql(vec2)
+
+      const alt = await pg.query(
         `
-        WITH q AS ( SELECT plainto_tsquery('english', $1) AS tsq, $1::text AS raw )
-        SELECT c.doc_id, c.chunk_id, c.heading, c.content, c.source_url, c.url_anchor,
-               COALESCE(d.title, c.heading) AS title,
-               ( ts_rank(c.tsv, q.tsq) * 1.0
-                 + greatest(similarity(c.heading, q.raw), similarity(c.content, q.raw)) * 0.5 ) AS score
+        SELECT
+          c.doc_id,
+          c.chunk_id,
+          c.heading,
+          c.content,
+          c.source_url,
+          c.url_anchor,
+          COALESCE(d.title, c.heading) AS title,
+          1 - (c.embedding <=> $1::vector) AS score
         FROM rag_chunks c
-        LEFT JOIN rag_documents d ON d.doc_id = c.doc_id, q
-        WHERE c.tsv @@ q.tsq
-           OR similarity(c.heading, q.raw) > 0.12
-           OR similarity(c.content, q.raw) > 0.12
-        ORDER BY score DESC
+        LEFT JOIN rag_documents d ON d.doc_id = c.doc_id
+        ORDER BY c.embedding <=> $1::vector
         LIMIT $2
         `,
-        [broadenQ, Math.max(k * 5, 40)]
-      )).rows
-      allLists = [vecRows, hyRows, kwRows, more]
+        [vecParam2, Math.max(k * 6, 48)]
+      )
+
+      return { items: alt.rows.map(asItem).slice(0, k) }
     }
 
-    // Optional rerank topN (LLM) to polish the head
-    if (USE_RERANK) {
-      const flat = [...vecRows, ...hyRows, ...kwRows]
-      const reranked = await rerankLLM(query, flat)
-      allLists = [reranked]
-    }
-
-    // Fuse + diversify
-    const fused = diversifyByDoc(rrf(...allLists), 3).slice(0, Math.max(k * 2, 20))
-
-    // Normalize scores for UI
-    const norm = softmaxNorm(fused.map(r => r.score ?? 0))
-    const shaped: RagItem[] = fused.map((r, i) => ({
-      id: r.chunk_id,
-      doc_id: r.doc_id,
-      heading: r.heading,
-      title: r.title || r.heading || 'Untitled',
-      excerpt: cleanExcerpt(r.content),
-      url: stableUrl(r.source_url, r.url_anchor),
-      score: norm[i]
-    }))
-
-    return shaped.slice(0, k)
+    return { items: fused.slice(0, k) }
   } finally {
-    client.release()
+    await pg.end()
   }
 }
 
 /**
- * ---------------------------
- * answerRag
- * ---------------------------
- * Uses retrieved items as context; returns a short, cited answer.
+ * Generate an answer using retrieved context.
+ * Returns { answer, sources }.
  */
-export async function answerRag(question: string, k = 8, history: any[] = []) {
-  const items = await searchRag(question, k)
-  const ctx = items
-    .map((s, i) => `[#${i + 1}] ${s.title} > ${s.heading}\n${s.excerpt}\n${s.url ?? ''}`)
-    .join('\n\n')
+export async function answerRag(
+  question: string,
+  k = 8,
+): Promise<{ answer: string; sources: SearchItem[] }> {
+  const { items } = await searchRag(question, k)
+
+  if (!items.length) {
+    return {
+      answer:
+        'I could not find a specific answer in the docs. Try rephrasing or providing more detail.',
+      sources: [],
+    }
+  }
+
+  // Compose context with lightweight citations [#1], [#2], …
+  const top = items.slice(0, k)
+  const context = top
+    .map((it, i) => `[#${i + 1}] ${it.title}\n${it.excerpt}\n${it.url ?? ''}`)
+    .join('\n\n---\n\n')
 
   const sys =
-    'You are a concise, accurate assistant grounded in the supplied docs.\n' +
-    'Only answer using the provided context. Use inline citations like [#n] that refer to the sources list.'
+    'You are a helpful documentation assistant. Answer the question using only the provided context. Use short, direct sentences. Use bracket citations like [#1], [#2] that match the sources list. If you are unsure, say so.'
 
-  const messages: OpenAI.Chat.ChatCompletionMessageParam[] = [
-    { role: 'system', content: sys },
-    ...(history || []).slice(-6),
-    { role: 'user', content: `Question: ${question}\n\nContext:\n${ctx}` }
-  ]
+  const user = `Question: ${question}\n\nContext:\n${context}`
 
-  const r = await openai.chat.completions.create({
+  const chat = await openai.chat.completions.create({
     model: OPENAI_MODEL,
-    temperature: 0.2,
-    messages
+    messages: [
+      { role: 'system', content: sys },
+      { role: 'user', content: user },
+    ],
+    temperature: 0.1,
+    max_tokens: 400,
   })
 
-  const answer = r.choices?.[0]?.message?.content?.trim() || ''
-  const sources = items.map((s, i) => ({ id: i + 1, title: `${s.title} > ${s.heading}`, url: s.url, score: s.score }))
+  const answer = chat.choices[0]?.message?.content?.trim() || ''
+  const sources = top.map(s => ({
+    id: s.id,
+    title: s.title,
+    url: s.url,
+    score: s.score,
+  }))
 
   return { answer, sources }
 }
+
+
 
 
 
