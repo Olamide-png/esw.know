@@ -12,8 +12,10 @@ const OpenAI = require('openai')
 
 const ROOT = path.resolve(process.cwd(), 'www')        // adjust if your docs live elsewhere
 const CONTENT_DIRS = ['content', 'pages', 'docs']      // scanned under /www
-const EMBED_MODEL = process.env.EMBED_MODEL || 'text-embedding-3-large'
-const RAG_DIM = Number(process.env.RAG_DIM || 3072)
+
+// IMPORTANT: keep these in sync with your DB (VECTOR(1536) for text-embedding-3-small)
+const EMBED_MODEL = process.env.EMBED_MODEL || 'text-embedding-3-small'
+const RAG_DIM = Number(process.env.RAG_DIM || 1536)
 
 if (!process.env.DATABASE_URL) {
   console.error('Missing DATABASE_URL in .env'); process.exit(1)
@@ -93,8 +95,13 @@ async function upsertChunks(client, doc_id, chunks, embeddings) {
     if (!e || e.length !== RAG_DIM) {
       throw new Error(`Embedding dim mismatch: got ${e ? e.length : 'null'}, expected ${RAG_DIM}`)
     }
-    const chunk_id = `${doc_id}::${i}`
+
+    const chunk_id = i;                  // <-- INTEGER (fix)
+    const key = `${doc_id}::${i}`;       // optional composite if you ever want to store "key"
     const vec = toVectorLiteral(e)
+
+    // parameter order:
+    // $1=heading, $2=content, $3=doc_id, $4=chunk_id, $5=url_anchor, $6=embedding
     const tsvectorSql = `
       setweight(to_tsvector('english', coalesce($1,'')), 'A') ||
       setweight(to_tsvector('english', coalesce($2,'')), 'B')
@@ -151,3 +158,4 @@ async function main() {
 }
 
 main().catch(err => { console.error(err); process.exit(1) })
+
