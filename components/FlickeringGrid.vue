@@ -43,9 +43,9 @@ interface FlickeringGridProps {
 const props = withDefaults(defineProps<FlickeringGridProps>(), {
   squareSize: 4,
   gridGap: 6,
-  flickerChance: 0.3,
-  color: '#22d3ee',   // tailwind cyan-400-ish
-  maxOpacity: 0.3
+  flickerChance: 0.1,
+  color: '#60A5FA',   // tailwind cyan-400-ish
+  maxOpacity: 0.5
 })
 
 const { squareSize, gridGap, flickerChance, color, maxOpacity, width, height } = toRefs(props)

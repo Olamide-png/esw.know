@@ -1,14 +1,14 @@
 <template>
   <!-- Outer frame with background layers -->
   <section
-    class="relative isolate overflow-hidden w-[100vw] max-w-[100vw] left-1/2 -translate-x-1/2 -ml-[50vw] -mr-[50vw]"
+    class="relative isolate overflow-hidden w-screen left-1/2 -translate-x-1/2"
     :class="outerClass"
   >
     <!-- Canvas background -->
     <div class="absolute inset-0 -z-10">
       <ClientOnly>
         <FlickeringGrid
-          class="absolute inset-0"
+          class="relative inset-0 z-0 [mask-image:radial-gradient(450px_circle_at_center,white,transparent)]"
           :square-size="squareSize"
           :grid-gap="gridGap"
           :flicker-chance="flickerChance"
