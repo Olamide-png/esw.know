@@ -1,7 +1,7 @@
 <template>
   <!-- Outer frame with background layers -->
   <section
-    <div class="relative size-[600px] w-full overflow-hidden">
+    class="relative isolate overflow-hidden w-screen left-1/2 -translate-x-1/2"
     :class="outerClass"
   >
     <!-- Canvas background -->

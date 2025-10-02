@@ -45,8 +45,7 @@ const props = withDefaults(defineProps<FlickeringGridProps>(), {
   gridGap: 6,
   flickerChance: 0.1,
   color: '#60A5FA',   // tailwind cyan-400-ish
-  maxOpacity: 0.5,
-  width: 1000
+  maxOpacity: 0.5
 })
 
 const { squareSize, gridGap, flickerChance, color, maxOpacity, width, height } = toRefs(props)
