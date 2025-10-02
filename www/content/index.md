@@ -32,3 +32,9 @@ Knowledge Centre.
 #description
 Explore our documentation and guides
 ::
+
+::div{class="not-prose mx-auto max-w-[980px] px-4 mt-6"}
+  ::ClientOnly
+    ::SearchButton{ full-width=true }::
+  ::
+::
