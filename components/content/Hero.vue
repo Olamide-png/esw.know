@@ -1,7 +1,7 @@
 <template>
   <!-- Outer frame with background layers -->
   <section
-    class="relative isolate overflow-hidden"
+    class="relative isolate overflow-hidden w-screen left-1/2 -translate-x-1/2"
     :class="outerClass"
   >
     <!-- Canvas background -->
@@ -17,7 +17,7 @@
         />
       </ClientOnly>
       <!-- Optional vignette for contrast -->
-      <div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-black/25" />
+
     </div>
 
     <!-- Your original hero content (unchanged API) -->
