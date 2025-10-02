@@ -30,5 +30,5 @@ actions:
 Knowledge Centre.
 
 #description
-Explore documentation and guides to help you begin your :smart-icon{name="/logo.svg" :size="80"} journey.
+Explore our documentation and guides
 ::
