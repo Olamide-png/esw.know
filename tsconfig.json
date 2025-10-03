@@ -1,4 +1,26 @@
 {
-  // https://nuxt.com/docs/guide/concepts/typescript
-  "extends": "./.nuxt/tsconfig.json"
+  "extends": "./www/.nuxt/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["www/*"],
+      "@/*": ["www/*"]
+    }
+  },
+  "include": [
+    "www/**/*.ts",
+    "www/**/*.tsx",
+    "www/**/*.vue",
+    "www/**/*.mjs",
+    "www/**/*.cjs",
+    "www/**/*.mts",
+    "www/**/*.cts",
+    "www/.nuxt/**/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/dist",
+    "**/.output"
+  ]
 }
+
