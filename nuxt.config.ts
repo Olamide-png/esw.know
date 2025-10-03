@@ -25,8 +25,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     TRYIT_ALLOWED_HOSTS: process.env.TRYIT_ALLOWED_HOSTS || '',
+    TRYIT_ALLOWED_HOSTS: process.env.TRYIT_ALLOWED_HOSTS,
     nlwebBaseUrl: process.env.NLWEB_BASE_URL,
-    openaiApiKey: process.env.OPENAI_API_KEY,          // keep as-is (no fallback)
+    openaiApiKey: process.env.OPENAI_API_KEY,          // <— no "|| ''"
     openaiModel: process.env.OPENAI_MODEL || 'gpt-4.1-mini',
     embedModel: process.env.EMBED_MODEL || 'text-embedding-3-small',
     chunkMaxChars: Number(process.env.CHUNK_MAX_CHARS || 2800),
@@ -42,14 +43,15 @@ export default defineNuxtConfig({
     routeRules: {
       // Force Node runtime for AI/backend routes
       '/api/nlweb/**': { cors: true, headers: { 'Cache-Control': 'no-store' }, experimental: { wasm: false } }
+      // If you ever want a blanket rule:
+      // '/api/**': { runtime: 'node' }
     }
   },
 
   modules: [
-    '@nuxt/content',            // ✅ added: core Content module (enables MDC parsing)
     'shadcn-nuxt',
     '@vueuse/nuxt',
-    '@ztl-uwu/nuxt-content',    // your layer/helper module can still live alongside core
+    '@ztl-uwu/nuxt-content',
     '@nuxt/image',
     '@nuxt/icon',
     '@nuxtjs/color-mode',
@@ -84,12 +86,8 @@ export default defineNuxtConfig({
   // ✅ Use resolved absolute file paths so Vite never guesses
   css: [THEMES_CSS, TAILWIND_CSS],
 
-  // --- @nuxt/content ---
   content: {
     documentDriven: true,
-    markdown: {
-      mdc: true,                // ✅ enable MDC blocks/props: ::Component{prop=...}::
-    },
     highlight: {
       theme: { default: 'light-plus', dark: 'aurora-x' },
       preload: [
@@ -101,9 +99,7 @@ export default defineNuxtConfig({
     navigation: {
       fields: ['icon','navBadges','navTruncate','badges','toc','sidebar','collapse','editLink','prevNext','breadcrumb','fullpage']
     },
-    experimental: {
-      search: { indexed: true } // keep if you rely on content search indexing
-    }
+    experimental: { search: { indexed: true } }
   },
 
   icon: { clientBundle: { scan: true, sizeLimitKb: 512 } },
@@ -132,6 +128,96 @@ export default defineNuxtConfig({
     }
   }
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
