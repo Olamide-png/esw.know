@@ -41,8 +41,8 @@
     "dev": "pnpm run -C www dev",
     "generate": "pnpm run -C www generate",
     "preview": "pnpm run -C www preview",
-    "postinstall": "pnpm -C www exec nuxt prepare",
-    "typecheck": "pnpm -C www exec nuxt typecheck",
+    "postinstall": "nuxt prepare",
+    "typecheck": "nuxt typecheck",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "taze": "taze",
@@ -53,7 +53,6 @@
   "dependencies": {
     "@iconify-json/lucide": "^1.2.45",
     "@iconify-json/vscode-icons": "^1.2.21",
-    "@nuxt/content": "^3.7.1",
     "@nuxt/fonts": "^0.11.4",
     "@nuxt/icon": "^1.13.0",
     "@nuxt/image": "^1.10.0",
@@ -96,7 +95,6 @@
     "@types/pg": "^8.15.5",
     "@vueuse/core": "^13.3.0",
     "@vueuse/nuxt": "^13.3.0",
-    "better-sqlite3": "^12.4.1",
     "dotenv": "^17.2.2",
     "eslint": "^9.27.0",
     "fast-glob": "^3.3.3",
@@ -121,12 +119,8 @@
     "vue-tsc": "^2.2.10"
   },
   "pnpm": {
-    "allowedBuildScripts": [
-      "@tailwindcss/oxide"
-    ],
     "onlyBuiltDependencies": [
-      "sharp",
-      "better-sqlite3"
+      "sharp"
     ],
     "ignoredBuiltDependencies": [
       "@parcel/watcher",
