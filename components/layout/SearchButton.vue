@@ -1,10 +1,11 @@
+<!-- components/SearchButton.vue -->
 <template>
   <template v-if="enable">
     <UiButton
       v-if="style === 'input'"
       variant="outline"
       class="text-muted-foreground hover:text-accent-foreground h-8 w-full self-center rounded-md pr-1.5 font-normal"
-      :class="[inAside ? 'mb-4' : 'md:w-40 lg:w-60']"
+      :class="[(inAside || fullWidth) ? 'mb-4 w-full' : 'md:w-40 lg:w-60']"
       @click="isOpen = true"
     >
       <span class="mr-auto overflow-hidden">
@@ -14,6 +15,7 @@
         <span class="text-xs">⌘</span>K
       </Kbd>
     </UiButton>
+
     <UiButton
       v-else
       variant="ghost"
@@ -30,4 +32,11 @@
 <script setup lang="ts">
 const isOpen = ref<boolean | undefined>(false);
 const { enable, inAside, style, placeholder } = useConfig().value.search;
+
+/** NEW: let pages force full width without touching global config */
+const props = withDefaults(defineProps<{ fullWidth?: boolean }>(), {
+  fullWidth: false
+});
+const { fullWidth } = toRefs(props);
 </script>
+
