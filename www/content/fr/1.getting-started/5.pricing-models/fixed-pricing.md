@@ -147,7 +147,7 @@ Price from the price book: **GBP 201.60**.
 
   ![](/Screenshot2025-07-04132743_PhotoGrid.png){lifted}
   </div>
-  ::
+::
   
 ::GlossaryDrawer{term="Fixed Pricing Model Example B" subtitle="Example B"}
 Example B — Fixed price without override, with FX
@@ -177,6 +177,6 @@ Price in price book: **EUR 92**, Shopper currency: **PLN**.
     <code class="px-1 py-0.5 rounded bg-gray-100 dark:bg-neutral-800 text-xs font-mono">EUR 92 × 4.2191 = PLN 388.16</code>
   </div>
 
-![](/Screenshot2025-07-04143837.png){lifted}
+  ![](/Screenshot2025-07-04143837.png){lifted}
   </div>
 ::
