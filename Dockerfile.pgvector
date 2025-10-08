@@ -1,0 +1,28 @@
+# Postgres 16 base
+FROM postgres:16
+
+# build deps
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential git ca-certificates postgresql-server-dev-16 \
+ && rm -rf /var/lib/apt/lists/*
+
+# build & install pgvector with MAX_DIM=4096 AND HNSW_MAX_DIM=4096
+ARG PGVECTOR_TAG=v0.8.1
+RUN git clone --depth 1 --branch ${PGVECTOR_TAG} https://github.com/pgvector/pgvector.git /tmp/pgvector \
+ && cd /tmp/pgvector \
+ && make clean \
+ && make OPTFLAGS="-O3 -fPIC -DMAX_DIM=4096 -DHNSW_MAX_DIM=4096" \
+ && make install \
+ && ldconfig \
+ && rm -rf /tmp/pgvector
+
+
+
+
+
+
+
+
+
+
+
