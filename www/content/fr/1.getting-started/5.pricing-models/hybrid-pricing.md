@@ -1,6 +1,6 @@
 ---
-title: Fixed Pricing
-description: Configure fixed pricing models per country through the SFCC Business Manager.
+title: Hybrid Pricing
+description: Configure hybrid pricing models per country through the SFCC Business Manager.
 icon: 'lucide:coins'
 toc: false
 ---
