@@ -1,28 +1,37 @@
-# Postgres 16 base
+# Dockerfile.pgvector (patch HNSW max dim to 4096)
 FROM postgres:16
 
-# build deps
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential git ca-certificates postgresql-server-dev-16 \
- && rm -rf /var/lib/apt/lists/*
+      build-essential ca-certificates curl postgresql-server-dev-16 \
+  && rm -rf /var/lib/apt/lists/*
 
-# build & install pgvector with MAX_DIM=4096 AND HNSW_MAX_DIM=4096
-ARG PGVECTOR_TAG=v0.8.1
-RUN git clone --depth 1 --branch ${PGVECTOR_TAG} https://github.com/pgvector/pgvector.git /tmp/pgvector \
- && cd /tmp/pgvector \
- && make clean \
- && make OPTFLAGS="-O3 -fPIC -DMAX_DIM=4096 -DHNSW_MAX_DIM=4096" \
- && make install \
- && ldconfig \
- && rm -rf /tmp/pgvector
+ENV PGVECTOR_VER=v0.8.1
 
+# Download source tarball
+RUN curl -L -o /tmp/pgvector.tgz https://github.com/pgvector/pgvector/archive/refs/tags/${PGVECTOR_VER}.tar.gz \
+  && mkdir -p /opt/pgvector \
+  && tar -xzf /tmp/pgvector.tgz -C /opt/pgvector --strip-components=1
 
+# --- Patch 1: general MAX_DIM (already large in your setup, keep anyway)
+# Try the usual macro via OPTFLAGS, and also patch common header if present.
+RUN set -e; cd /opt/pgvector; \
+  grep -RIl "MAX_DIM" src include || true; \
+  # If a hard-coded MAX_DIM appears in headers, bump it
+  sed -ri 's/(MAX_DIM[^0-9]*)([0-9]+)/\14096/g' $(grep -RIl "MAX_DIM" src include || true) || true
 
+# --- Patch 2: HNSW max dimension (the real blocker)
+# Search for an HNSW dimension limit and bump it from 2000 -> 4096.
+# (Covers common patterns used across pgvector versions)
+RUN set -e; cd /opt/pgvector; \
+  for f in $(grep -RIl "HNSW.*MAX.*DIM|2000" src include || true); do \
+    sed -ri 's/([Hh][Nn][Ss][Ww].{0,40}[Mm][Aa][Xx].{0,5}[Dd][Ii][Mm][^0-9]*)([0-9]{3,4})/\14096/g' "$f" || true; \
+    sed -ri 's/\b2000\b/4096/g' "$f" || true; \
+  done
 
+# Build & install (keep symbols so we can inspect with strings/objdump)
+RUN cd /opt/pgvector && make clean && \
+    make OPTFLAGS="-O3 -DMAX_DIM=4096 -DHNSW_MAX_DIM=4096" && \
+    make install
 
-
-
-
-
-
+# Convenience: keep source for debugging inside image
 
