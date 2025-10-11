@@ -1,0 +1,42 @@
+mode: development
+server:
+  host: 0.0.0.0
+  port: 8000
+  enable_cors: true
+
+features:
+  web_search: false
+  who: false
+  multi_site: false
+  fast_track: false
+  query_rewrite: false
+
+retriever:
+  backend: postgres
+  store: postgres
+
+search:
+  enabled: false
+  provider: none
+
+rag:
+  only: true
+  embeddings:
+    model: text-embedding-3-large
+    dim: 3072
+
+llm:
+  default_provider: openai
+  providers:
+    openai:
+      provider: openai
+      model: gpt-4o-mini
+
+who:
+  enabled: false
+search:
+  enabled: false
+
+
+
+

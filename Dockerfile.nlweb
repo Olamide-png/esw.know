@@ -1,0 +1,14 @@
+# Dockerfile.nlweb
+FROM nlweb:prod
+
+# Keep Python tidy and pip fast
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1
+
+# Bake in the Postgres drivers so they survive restarts
+RUN python3 -m pip install --upgrade pip && \
+    python3 -m pip install --no-cache-dir \
+      psycopg2-binary==2.9.10 \
+      pgvector==0.4.1
+
+# (Don’t override the base image’s CMD/ENTRYPOINT — nlweb already sets it)
