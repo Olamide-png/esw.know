@@ -1,20 +1,93 @@
 services:
   nlweb:
-    image: nlweb:prod
-    env_file: .env
+    image: nlweb:with-pg
+    container_name: eswknow-nlweb-1
     restart: unless-stopped
+
+    # Sidecar port (host 7015 -> container 8000)
     ports:
-      - "127.0.0.1:7015:8000"   # host 7001 -> container 8000
+      - "127.0.0.1:7015:8000"
+
+    # So the container can reach your host Postgres on 5432
     extra_hosts:
       - "host.docker.internal:host-gateway"
+
+    # Mount config + patches
+    volumes:
+      - ./nlweb-config.yaml:/config/config_webserver.yaml:ro
+      - ./nlweb_patches/fastTrack_noop.py:/app/python/core/fastTrack.py:ro
+      - ./nlweb_patches/queryRewrite_noop.py:/app/python/core/query_analysis/query_rewrite.py:ro
+      - ./nlweb_patches/retriever_no_search.py:/app/python/core/retriever.py:ro
+      - ./nlweb_patches/retriever_pg_path_only.py:/app/python/core/retriever.py:ro
+
+      # ⬇️ Critical: place stubs where bare imports will find them
+      - ./nlweb_patches/azure_oai.py:/app/azure_oai.py:ro
+      - ./nlweb_patches/azure_openai.py:/app/azure_openai.py:ro
+      - ./nlweb_patches/custom_stubs/azure_provider_disabled.py:/app/python/llm_providers/azure_oai.py:ro
+      - ./nlweb_patches/custom_stubs/azure_provider_disabled.py:/app/python/llm_providers/azure_llama.py:ro
+      - ./nlweb_patches/custom_stubs/azure_provider_disabled.py:/app/python/llm_providers/azure_deepseek.py:ro
+      - ./nlweb_patches/custom_stubs/azure_provider_skip.py:/app/python/llm_providers/azure_oai.py:ro
+      - ./nlweb_patches/custom_stubs/azure_provider_skip.py:/app/python/llm_providers/azure_llama.py:ro
+      - ./nlweb_patches/custom_stubs/azure_provider_skip.py:/app/python/llm_providers/azure_deepseek.py:ro
+
+      # Proxy Azure providers to OpenAI
+      - ./nlweb_patches/custom_stubs/azure_provider_proxy_to_openai.py:/app/python/llm_providers/azure_oai.py:ro
+      - ./nlweb_patches/custom_stubs/azure_provider_proxy_to_openai.py:/app/python/llm_providers/azure_llama.py:ro
+      - ./nlweb_patches/custom_stubs/azure_provider_proxy_to_openai.py:/app/python/llm_providers/azure_deepseek.py:ro
+
+    # IMPORTANT: everything belongs under `environment:`
     environment:
-      DATABASE_URL: "postgresql://rag:ragpass@host.docker.internal:5432/ragdb?sslmode=disable"
-    healthcheck:
-      test: ["CMD-SHELL", "python -c \"import socket,sys; s=socket.socket(); s.settimeout(2); s.connect(('127.0.0.1',8000)); sys.exit(0)\""]
-      interval: 15s
-      timeout: 5s
-      retries: 8
-      start_period: 20s
+      # RAG / DB
+      NLWEB_STORE: postgres
+      VECTOR_STORE: postgres
+      RAG_STORE: postgres
+      RETRIEVER: postgres
+      RETRIEVAL_BACKEND: postgres
+      DATABASE_URL: postgresql://rag:ragpass@host.docker.internal:5432/ragdb?sslmode=disable
+
+      # Embeddings
+      EMBED_MODEL: text-embedding-3-large
+      EMBED_DIM: "3072"
+      RAG_DIM: "3072"
+
+      # LLM: force OpenAI; key comes from .env in this folder
+      LLM_PROVIDER: openai
+      LLM_MODEL: gpt-4o-mini
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+
+      # Nuke Azure completely (also stubbed by volumes above)
+      AZURE_OPENAI_DISABLE: "1"
+      AZURE_OPENAI_API_KEY: ""
+      AZURE_OPENAI_ENDPOINT: ""
+      AZURE_OPENAI_API_VERSION: ""
+
+      # If supported by your build, these help:
+      LLM_PREFERRED: openai
+      LLM_DISABLED_PROVIDERS: "azure_openai,azure_oai"
+
+      # Disable all web/search
+      ENABLE_WEB: "0"
+      ENABLE_SEARCH: "0"
+      DISABLE_WEB_SEARCH: "1"
+      NLWEB_SEARCH_DISABLE: "1"
+
+      LOG_LEVEL: DEBUG
+      PYTHONUNBUFFERED: "1"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
 
