@@ -48,7 +48,10 @@
     "taze": "taze",
     "build:index:content": "tsx scripts/build-index-content.ts",
     "nl:build-index": "tsx scripts/build-index.ts",
-    "mcp:docs": "tsx mcp-docs.ts"
+    "mcp:docs": "tsx mcp-docs.ts",
+    "mcp:tunnel": "cloudflared tunnel --config \"$HOME/.cloudflared/config.yml\" run mcp-nuxt",
+    "dev:all": "concurrently -k -n nuxt,cf \"pnpm dev\" \"pnpm mcp:tunnel\"",
+    "mcp:ping": "curl -s https://mcp.eswdocs.cc/api/ping || true"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.45",
@@ -84,6 +87,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.13.2",
+    "@flydotio/dockerfile": "^0.7.10",
     "@iconify-json/lucide-lab": "^1.2.3",
     "@iconify/utils": "^2.3.0",
     "@modelcontextprotocol/sdk": "^1.18.2",
@@ -96,6 +100,7 @@
     "@types/pg": "^8.15.5",
     "@vueuse/core": "^13.3.0",
     "@vueuse/nuxt": "^13.3.0",
+    "concurrently": "^9.0.0",
     "dotenv": "^17.2.2",
     "eslint": "^9.27.0",
     "fast-glob": "^3.3.3",
@@ -115,8 +120,6 @@
     "tsx": "^4.20.5",
     "typescript": "^5.8.3",
     "vite": "^5.4.20",
-    "vue": "^3.5.15",
-    "vue-router": "^4.5.1",
     "vue-tsc": "^2.2.10"
   },
   "pnpm": {
@@ -130,4 +133,3 @@
     ]
   }
 }
-
