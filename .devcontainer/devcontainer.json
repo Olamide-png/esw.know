@@ -1,0 +1,24 @@
+{
+  "name": "ESW Docs Dev",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "20" },
+    "ghcr.io/devcontainers/features/python:1": { "version": "3.13" }
+  },
+  "postCreateCommand": "/bin/bash .devcontainer/post-create.sh",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "files.exclude": { "**/.venv": true, "**/__pycache__": true },
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "Vue.volar",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-python.python"
+      ]
+    }
+  },
+  "remoteUser": "vscode"
+}
