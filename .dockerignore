@@ -1,0 +1,8 @@
+node_modules
+.nuxt
+.output
+www/.output
+.git
+**/__pycache__
+**/*.pyc
+

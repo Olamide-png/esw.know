@@ -1,56 +1,97 @@
 // server/api/mcp.post.ts
 import {
-  defineEventHandler,
-  readRawBody,
-  getHeader,
-  setResponseStatus,
-  setResponseHeader,
+  defineEventHandler, readRawBody, getHeader, setResponseStatus
 } from 'h3'
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Config
-// ─────────────────────────────────────────────────────────────────────────────
-
 /**
- * Sidecar target:
- *  - Use /mcp for JSON-RPC servers.
- *  - Use /ask for NLWeb sidecar (adapter mode).
+ * Point this at your sidecar.
+ * - If your sidecar exposes /mcp (JSON-RPC), use that URL.
+ * - If it only has /ask, point to /ask and we'll map simple tool calls.
  */
 const MCP_URL = process.env.MCP_URL || 'http://127.0.0.1:7015/ask'
 const IS_MCP = MCP_URL.endsWith('/mcp')
 
-/** Optional bearer to protect this route (incoming client → Nuxt) */
-const SERVER_BEARER = process.env.MCP_SERVER_BEARER || ''
-
-/** Optional bearer to forward to the sidecar (Nuxt → sidecar) */
-const SIDECAR_BEARER = process.env.MCP_SIDECAR_BEARER || ''
-
-/** Upstream timeout (ms) */
-const MCP_TIMEOUT_MS = Number(process.env.MCP_TIMEOUT_MS || 15000)
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Small helpers
-// ─────────────────────────────────────────────────────────────────────────────
+const MCP_SERVER_BEARER = process.env.MCP_SERVER_BEARER || ''
+const MCP_SIDECAR_BEARER = process.env.MCP_SIDECAR_BEARER || ''
+const MCP_TIMEOUT_MS = Number.parseInt(process.env.MCP_TIMEOUT_MS || '', 10) || 15000
 
 function toUtf8(u?: string | Uint8Array | null) {
   if (!u) return ''
   return typeof u === 'string' ? u : new TextDecoder().decode(u)
 }
 
-function badRequest(event: any, message: string, details?: any) {
-  setResponseStatus(event, 400)
-  return { ok: false, error: 'invalid_params', message, details }
+// Map simple MCP “tool.call” into an /ask body (basic adapter).
+function adaptToolCallToAsk(body: any) {
+  if (!body || body.action !== 'tool.call') return null
+  const { tool, params = {} } = body
+
+  // common hints to stay local, postgres, and disable web search
+  const common = {
+    site: 'local',
+    retriever: 'postgres',
+    store: 'postgres',
+    web: false,
+    disable_search: true,
+    search: { disable: true },
+    source_hints: { mode: 'local', store: 'postgres', web: false }
+  } as const
+
+  if (tool === 'doc_lookup') {
+    const query = params.query ?? params.q ?? ''
+    const path  = params.path ?? params.url ?? ''
+    return {
+      ...common,
+      query,
+      path,
+      handler: 'retriever',
+      tool: 'retriever',
+      chain: 'retriever',
+      mode: 'rag',
+      rag: true,
+      force_path_mode: true,
+      use_path: true,
+      path_only: true,
+      retrieval: { use_path: true }
+    }
+  }
+
+  if (tool === 'doc_search') {
+    const query = params.query ?? params.q ?? ''
+    const k = Math.max(1, Math.min(20, Number(params.k ?? 5) || 5))
+    // Let sidecar pick its search/ranking; still bias to local
+    return {
+      ...common,
+      query,
+      mode: 'rag',
+      rag: true,
+      num_results: k
+    }
+  }
+
+  if (tool === 'doc_extract') {
+    const path = params.path ?? params.url ?? ''
+    // Force a path-based retrieval so the SSE “result” includes schema_object.text
+    return {
+      ...common,
+      query: '', // we only want the doc
+      path,
+      handler: 'retriever',
+      tool: 'retriever',
+      chain: 'retriever',
+      mode: 'rag',
+      rag: true,
+      force_path_mode: true,
+      use_path: true,
+      path_only: true,
+      retrieval: { use_path: true }
+    }
+  }
+
+  // Unknown tool — let the sidecar decide
+  return null
 }
 
-function unauthorized(event: any, message = 'Unauthorized') {
-  setResponseStatus(event, 401)
-  return { ok: false, error: 'unauthorized', message }
-}
-
-function clamp(n: number, lo: number, hi: number) {
-  return Math.max(lo, Math.min(hi, n))
-}
-
+// Parse SSE (server-sent events) into JSON messages
 async function* sseJsonIterator(stream: ReadableStream<Uint8Array>) {
   const reader = stream.getReader()
   const dec = new TextDecoder()
@@ -66,7 +107,7 @@ async function* sseJsonIterator(stream: ReadableStream<Uint8Array>) {
       if (!line.startsWith('data:')) continue
       const json = line.slice(5).trimStart()
       if (!json) continue
-      try { yield JSON.parse(json) } catch { /* ignore partials */ }
+      try { yield JSON.parse(json) } catch { /* ignore partial */ }
     }
   }
   if (buf.startsWith('data:')) {
@@ -75,175 +116,31 @@ async function* sseJsonIterator(stream: ReadableStream<Uint8Array>) {
   }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Tool validators (no external deps)
-// ─────────────────────────────────────────────────────────────────────────────
-
-type Dict = Record<string, any>
-
-function validateDocLookupParams(params: Dict) {
-  const errs: string[] = []
-  if (!params || typeof params !== 'object') errs.push('params must be object')
-  if (typeof params?.path !== 'string' || params.path.length === 0) {
-    errs.push('params.path (string) is required')
-  }
-  if (params?.query != null && typeof params.query !== 'string') {
-    errs.push('params.query must be a string when provided')
-  }
-  return { ok: errs.length === 0, errors: errs }
-}
-
-function validateDocSearchParams(params: Dict) {
-  const errs: string[] = []
-  if (!params || typeof params !== 'object') errs.push('params must be object')
-  if (typeof params?.query !== 'string' || params.query.length === 0) {
-    errs.push('params.query (string) is required')
-  }
-  if (params?.k != null) {
-    if (typeof params.k !== 'number' || !Number.isInteger(params.k)) {
-      errs.push('params.k must be an integer')
-    } else if (params.k < 1 || params.k > 20) {
-      errs.push('params.k must be between 1 and 20')
-    }
-  }
-  return { ok: errs.length === 0, errors: errs }
-}
-
-function validateDocExtractParams(params: Dict) {
-  const errs: string[] = []
-  if (!params || typeof params !== 'object') errs.push('params must be object')
-  if (typeof params?.path !== 'string' || params.path.length === 0) {
-    errs.push('params.path (string) is required')
-  }
-  if (params?.max_chars != null) {
-    if (typeof params.max_chars !== 'number' || !Number.isInteger(params.max_chars)) {
-      errs.push('params.max_chars must be an integer')
-    } else if (params.max_chars < 100 || params.max_chars > 200000) {
-      errs.push('params.max_chars must be between 100 and 200000')
-    }
-  }
-  return { ok: errs.length === 0, errors: errs }
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Adapter: MCP “tool.call” -> sidecar /ask payload
-// ─────────────────────────────────────────────────────────────────────────────
-
-function adaptToolCallToAsk(event: any, body: any) {
-  if (!body || body.action !== 'tool.call') return { outbound: null }
-
-  const { tool, params = {} } = body as { tool: string, params: Dict }
-
-  // Force local Postgres retrieval; no web.
-  const base = {
-    site: 'local',
-    retriever: 'postgres',
-    store: 'postgres',
-    web: false,
-    disable_search: true,
-    search: { disable: true },
-    source_hints: { mode: 'local', store: 'postgres', web: false },
-    handler: 'retriever',
-    tool: 'retriever',
-    chain: 'retriever',
-    mode: 'rag',
-    rag: true,
-  }
-
-  if (tool === 'doc_lookup') {
-    const v = validateDocLookupParams(params)
-    if (!v.ok) return { error: badRequest(event, 'Invalid doc_lookup params', v.errors) }
-
-    const query = params.query ?? ''
-    const path = params.path
-    return {
-      outbound: {
-        ...base,
-        query,
-        path,
-        force_path_mode: true,
-        use_path: true,
-        path_only: true,
-        retrieval: { use_path: true },
-      }
-    }
-  }
-
-  if (tool === 'doc_search') {
-    const v = validateDocSearchParams(params)
-    if (!v.ok) return { error: badRequest(event, 'Invalid doc_search params', v.errors) }
-
-    const k = clamp(params.k ?? 5, 1, 20)
-    const query = params.query
-    return {
-      outbound: {
-        ...base,
-        query,
-        top_k: k,
-        use_path: false,
-        path_only: false,
-        retrieval: { use_path: false, top_k: k },
-      }
-    }
-  }
-
-  if (tool === 'doc_extract') {
-    const v = validateDocExtractParams(params)
-    if (!v.ok) return { error: badRequest(event, 'Invalid doc_extract params', v.errors) }
-
-    const path = params.path
-    const maxChars = clamp(params.max_chars ?? 12000, 100, 200000)
-    return {
-      outbound: {
-        ...base,
-        query: '',
-        path,
-        force_path_mode: true,
-        use_path: true,
-        path_only: true,
-        retrieval: { use_path: true, return_text: true, maxChars },
-        maxChars,
-      }
-    }
-  }
-
-  // Unknown tool — in adapter mode this won’t be mapped.
-  return { outbound: null }
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Handler
-// ─────────────────────────────────────────────────────────────────────────────
-
 export default defineEventHandler(async (event) => {
-  // Security: optional bearer on this route
-  if (SERVER_BEARER) {
+  // --- Auth (optional) ---
+  if (MCP_SERVER_BEARER) {
     const auth = getHeader(event, 'authorization') || ''
     const token = auth.startsWith('Bearer ') ? auth.slice(7) : ''
-    if (token !== SERVER_BEARER) {
-      return unauthorized(event)
+    if (token !== MCP_SERVER_BEARER) {
+      setResponseStatus(event, 401)
+      return { ok: false, error: 'unauthorized', message: 'Unauthorized' }
     }
   }
 
-  // Diagnostics
-  setResponseHeader(event, 'x-mcp-url', MCP_URL)
-  setResponseHeader(event, 'x-mcp-mode', IS_MCP ? 'jsonrpc' : 'ask-adapter')
-  setResponseHeader(event, 'x-mcp-timeout-ms', String(MCP_TIMEOUT_MS))
-
-  // Request parsing
+  // 0) Read body (and smoke fast-path)
   const raw = await readRawBody(event)
   const text = toUtf8(raw)
   let body: any = {}
   try { body = text ? JSON.parse(text) : {} } catch { body = {} }
 
-  // local smoke
   if (body?.__smoke) {
     return { ok: true, route: '/api/mcp', ts: new Date().toISOString(), raw: text || null }
   }
 
-  // Local synthetic ping
   const accept = getHeader(event, 'accept') || ''
   const wantSSE = accept.includes('text/event-stream')
+
+  // Local synthetic ping so clients can self-test even if sidecar has no /mcp ping
   if (body?.action === 'ping') {
     if (wantSSE) {
       const res = event.node.res
@@ -254,37 +151,38 @@ export default defineEventHandler(async (event) => {
       // @ts-ignore
       if (typeof (res as any).flushHeaders === 'function') (res as any).flushHeaders()
       const now = Date.now()
+      // one-shot SSE “pong”
       res.write(`data: ${JSON.stringify({ jsonrpc: '2.0', id: null, result: { ok: true, ts: now } })}\n\n`)
       res.end()
       return
     }
+    // JSON clients
     return { ok: true, route: '/api/mcp', ts: new Date().toISOString() }
   }
 
-  // Build outbound request
+  // 1) Build outbound request
   let target = MCP_URL
   let outbound: any = body
+  const mode = IS_MCP ? 'mcp' : 'ask-adapter'
 
   if (!IS_MCP) {
-    const adapted = adaptToolCallToAsk(event, body)
-    if ((adapted as any)?.error) return (adapted as any).error
-    if (adapted.outbound) outbound = adapted.outbound
+    // Sidecar doesn’t have /mcp. Try to adapt tool.call → /ask
+    const maybeAsk = adaptToolCallToAsk(body)
+    if (maybeAsk) outbound = maybeAsk
+    target = MCP_URL // e.g., http://127.0.0.1:7015/ask
   }
 
-  // Abort/timeout controls
+  // Helpful headers so clients can introspect
+  event.node.res.setHeader('x-mcp-url', target)
+  event.node.res.setHeader('x-mcp-mode', mode)
+  event.node.res.setHeader('x-mcp-timeout-ms', String(MCP_TIMEOUT_MS))
+
+  // 2) Abort if client disconnects or timeout
   const controller = new AbortController()
   const onClose = () => controller.abort()
   event.node.req.on('close', onClose)
   event.node.req.on('aborted', onClose)
-
   const timeout = setTimeout(() => controller.abort(), MCP_TIMEOUT_MS)
-
-  // Propagate trace + auth to sidecar
-  const clientTraceId = getHeader(event, 'x-trace-id') || crypto.randomUUID()
-  const incomingAuth = getHeader(event, 'authorization') || ''
-  const sidecarAuth =
-    SIDECAR_BEARER ? `Bearer ${SIDECAR_BEARER}` :
-    incomingAuth.startsWith('Bearer ') ? incomingAuth : ''
 
   let res: Response
   try {
@@ -292,29 +190,32 @@ export default defineEventHandler(async (event) => {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
+        // Ask the sidecar for SSE always; we’ll convert if client wants JSON
         'accept': 'text/event-stream',
-        ...(sidecarAuth ? { 'authorization': sidecarAuth } : {}),
-        'x-trace-id': clientTraceId,
+        ...(MCP_SIDECAR_BEARER ? { 'authorization': `Bearer ${MCP_SIDECAR_BEARER}` } : {})
       },
       body: JSON.stringify(outbound),
-      signal: controller.signal,
+      signal: controller.signal
     })
   } catch (e: any) {
     clearTimeout(timeout)
     event.node.req.off('close', onClose)
     event.node.req.off('aborted', onClose)
-    const aborted = e?.name === 'AbortError'
-    setResponseStatus(event, aborted ? 504 : 502)
-    return { ok: false, error: aborted ? 'upstream_timeout' : 'upstream_unavailable' }
-  } finally {
-    clearTimeout(timeout)
-    event.node.req.off('close', onClose)
-    event.node.req.off('aborted', onClose)
+    if (e?.name === 'AbortError') {
+      setResponseStatus(event, 504)
+      return { ok: false, error: 'timeout', message: `Upstream timed out after ${MCP_TIMEOUT_MS}ms` }
+    }
+    setResponseStatus(event, 502)
+    return { ok: false, error: 'upstream_unavailable', message: 'Upstream unavailable' }
   }
+
+  clearTimeout(timeout)
+  event.node.req.off('close', onClose)
+  event.node.req.off('aborted', onClose)
 
   setResponseStatus(event, res.status)
 
-  // SSE passthrough
+  // 3) SSE passthrough when caller asked for it
   if (wantSSE) {
     const h = event.node.res
     h.setHeader('Content-Type', 'text/event-stream; charset=utf-8')
@@ -326,7 +227,7 @@ export default defineEventHandler(async (event) => {
 
     const stream = res.body
     if (!stream) { h.end(); return }
-    const reader = stream.getReader()
+    const reader = (stream as ReadableStream<Uint8Array>).getReader()
     try {
       while (true) {
         const { value, done } = await reader.read()
@@ -342,29 +243,67 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  // Aggregate SSE → JSON
+  // 4) JSON callers → aggregate SSE into one JSON object
   const stream = res.body
-  if (!stream) {
-    return { ok: false, error: 'no_body', status: res.status }
-  }
+  if (!stream) return { ok: false, reason: 'no-body' }
 
   const messages: any[] = []
-  for await (const msg of sseJsonIterator(stream)) messages.push(msg)
+  for await (const msg of sseJsonIterator(stream as ReadableStream<Uint8Array>)) messages.push(msg)
 
-  // If upstream is non-2xx and we saw no frames, surface an error
-  if (!res.ok && messages.length === 0) {
-    return { ok: false, error: 'upstream_error', status: res.status }
+  // If this was a doc_extract request, transform to { path, title, text }
+  const isDocExtract =
+    body &&
+    body.action === 'tool.call' &&
+    body.tool === 'doc_extract'
+
+  if (isDocExtract) {
+    let out: any = { ok: true, path: null, title: null, text: '' }
+    try {
+      const resultMsg =
+        messages.find(m => m.message_type === 'result') ||
+        messages
+          .slice()
+          .reverse()
+          .find(m => m.message_type === 'result')
+
+      const item =
+        resultMsg?.content?.[0] && typeof resultMsg.content[0] === 'object'
+          ? resultMsg.content[0]
+          : null
+
+      const schema = item?.schema_object || {}
+      const path = schema.path || item?.url || null
+      const title = schema.title || item?.name || null
+      let text: string = schema.text || ''
+
+      const maxChars =
+        typeof body.params?.max_chars === 'number'
+          ? Math.max(1, Math.min(200000, body.params.max_chars))
+          : 14000
+
+      if (text && text.length > maxChars) text = text.slice(0, maxChars)
+
+      out = { ok: true, path, title, text }
+    } catch {
+      out = { ok: true, messages }
+    }
+
+    event.node.res.setHeader('Content-Type', 'application/json; charset=utf-8')
+    return out
   }
 
+  // Normal (non-extract) path → return a helpful last object
   const final =
-    messages.find(m => m.message_type === 'final_answer') ??
-    messages.find(m => m.message_type === 'result') ??
-    messages.find(m => m.message_type === 'end-nlweb-response') ??
-    { messages }
+    messages.find(m => m.message_type === 'final_answer') ||
+    messages.find(m => m.message_type === 'result') ||
+    messages.find(m => m.message_type === 'end-nlweb-response') ||
+    { ok: true, messages }
 
   event.node.res.setHeader('Content-Type', 'application/json; charset=utf-8')
-  return { ok: true, result: final, mode: IS_MCP ? 'jsonrpc' : 'ask-adapter' }
+  return final
 })
+
+
 
 
 

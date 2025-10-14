@@ -1,0 +1,43 @@
+# fly.toml app configuration file generated for esw-nuxt on 2025-10-13T14:49:14Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'esw-nuxt'
+primary_region = 'lhr'
+
+[build]
+
+[env]
+  MCP_TIMEOUT_MS = '12000'
+  MCP_URL = 'https://sidecar.eswdocs.cc/ask'
+  NITRO_HOST = '0.0.0.0'
+  NITRO_PORT = '3000'
+  NODE_ENV = 'production'
+  PORT = '3000'
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = 'off'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[services]]
+  protocol = 'tcp'
+  internal_port = 3000
+  auto_stop_machines = 'stop'
+  min_machines_running = 0
+
+  [[services.ports]]
+    port = 80
+    handlers = ['http']
+
+  [[services.ports]]
+    port = 443
+    handlers = ['tls', 'http']
+
+[[vm]]
+  size = 'shared-cpu-1x'
+
