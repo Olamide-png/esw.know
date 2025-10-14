@@ -1,0 +1,26 @@
+tunnel: c3a98442-bf63-42e3-91bc-7911ac5668e8
+credentials-file: /home/codespace/.cloudflared/c3a98442-bf63-42e3-91bc-7911ac5668e8.json
+
+ingress:
+  - hostname: sidecar.eswdocs.cc
+    service: http://127.0.0.1:7015
+    originRequest:
+      httpHostHeader: 127.0.0.1:7015
+      connectTimeout: 10s
+      keepAliveTimeout: 30s
+      noHappyEyeballs: true
+
+  - hostname: mcp.eswdocs.cc
+    service: http://127.0.0.1:3000
+    originRequest:
+      connectTimeout: 10s
+      keepAliveTimeout: 30s
+      noHappyEyeballs: true
+
+  - service: http_status:404
+
+
+
+
+
+
