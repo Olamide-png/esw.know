@@ -38,6 +38,12 @@
   ],
   "scripts": {
     "build": "pnpm run -C www build",
+    "dev:adapter": "node adapter-server.mjs",
+    "dev:sidecar": "node sse-sidecar.mjs",
+    "dev:tunnel": "cloudflared --config \"$HOME/.cloudflared/config2.yml\" --cred-file \"$HOME/.cloudflared/$CF_TUNNEL_ID.json\" tunnel run mcp-nuxt-2",
+    "dev:up": "bash ./scripts/dev-up.sh",
+    "dev:down": "bash ./scripts/dev-down.sh",
+    "health": "bash ./scripts/health.sh",
     "dev": "pnpm run -C www dev",
     "generate": "pnpm run -C www generate",
     "preview": "pnpm run -C www preview",
@@ -83,7 +89,9 @@
     "tailwindcss": "^4.1.7",
     "tailwindcss-animate": "^1.0.7",
     "unified": "^11.0.5",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.0.0",
+    "vue": "^3.5.22",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.13.2",
