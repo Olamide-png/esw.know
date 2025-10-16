@@ -21,7 +21,7 @@
     "nuxt-content",
     "shadcn-vue"
   ],
-  "main": "./nuxt.config.ts",
+  "main": "index.js",
   "files": [
     "app",
     "app.vue",
@@ -48,7 +48,6 @@
     "dev": "pnpm run -C www dev",
     "generate": "pnpm run -C www generate",
     "preview": "pnpm run -C www preview",
-    "postinstall": "nuxt prepare",
     "typecheck": "nuxt typecheck",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
