@@ -59,7 +59,8 @@
     "dev:all": "concurrently -k -n nuxt,cf \"pnpm dev\" \"pnpm mcp:tunnel\"",
     "mcp:ping": "curl -s https://mcp.eswdocs.cc/api/ping || true",
     "prod:up": "bash ./scripts/start-prod.sh",
-    "prod:down": "bash ./scripts/stop-prod.sh"
+    "prod:down": "bash ./scripts/stop-prod.sh",
+    "postinstall": "pnpm rebuild better-sqlite3 || true"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.45",
@@ -134,7 +135,8 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "sharp"
+      "sharp",
+      "better-sqlite3"
     ],
     "ignoredBuiltDependencies": [
       "@parcel/watcher",
