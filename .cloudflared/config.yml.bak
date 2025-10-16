@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 tunnel: c3a98442-bf63-42e3-91bc-7911ac5668e8
-credentials-file: /home/codespace/.cloudflared/c3a98442-bf63-42e3-91bc-7911ac5668e8.json
-=======
-tunnel: 43ba73d8-0290-40ab-ac40-f1922c75eee6
-credentials-file: /home/vscode/.cloudflared/43ba73d8-0290-40ab-ac40-f1922c75eee6.json
->>>>>>> 1a18cf54b11b5f56120d3529f0648f3dc1a363de
+credentials-file: /home/codespace/.cloudflared/43ba73d8-0290-40ab-ac40-f1922c75eee6.json
 
 ingress:
   - hostname: sidecar.eswdocs.cc
@@ -23,12 +18,3 @@ ingress:
       noHappyEyeballs: true
 
   - service: http_status:404
-<<<<<<< HEAD
-
-
-
-
-
-
-=======
->>>>>>> 1a18cf54b11b5f56120d3529f0648f3dc1a363de

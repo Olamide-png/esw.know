@@ -98,6 +98,15 @@ importers:
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
+<<<<<<< HEAD
+=======
+      vue:
+        specifier: ^3.5.22
+        version: 3.5.22(typescript@5.9.2)
+      vue-router:
+        specifier: ^4.5.1
+        version: 4.5.1(vue@3.5.22(typescript@5.9.2))
+>>>>>>> 1a18cf54b11b5f56120d3529f0648f3dc1a363de
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^4.13.2

@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 # fly.toml app configuration file generated for esw-nuxt on 2025-10-13T14:49:14Z
+=======
+# fly.toml app configuration file generated for esw-nuxt-old-sun-2789 on 2025-10-15T09:41:14Z
+>>>>>>> 1a18cf54b11b5f56120d3529f0648f3dc1a363de
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
+<<<<<<< HEAD
 app = 'esw-nuxt'
+=======
+app = 'esw-nuxt-old-sun-2789'
+>>>>>>> 1a18cf54b11b5f56120d3529f0648f3dc1a363de
 primary_region = 'lhr'
 
 [build]
@@ -40,4 +48,7 @@ primary_region = 'lhr'
 
 [[vm]]
   size = 'shared-cpu-1x'
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1a18cf54b11b5f56120d3529f0648f3dc1a363de
