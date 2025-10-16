@@ -22,3 +22,18 @@ Notes:
 - Logs: `/tmp/adapter.log`, `/tmp/cloudflared.log`, `/tmp/sidecar.log`.
 
 If you later want to expose the full Nuxt app in production, build `www` on a machine with sufficient RAM and deploy its preview/static output, then change `.cloudflared/config.yml` to point the hostname at the Nuxt server instead of the adapter.
+
+Systemd example
+----------------
+
+Copy `deploy/adapter.service` to `/etc/systemd/system/adapter.service` on the host and enable it to run the adapter+cloudflared on boot:
+
+```bash
+# copy the unit
+sudo cp deploy/adapter.service /etc/systemd/system/adapter.service
+sudo systemctl daemon-reload
+sudo systemctl enable --now adapter.service
+sudo journalctl -u adapter.service -f
+```
+
+The unit expects the repository to live at `/workspaces/esw.know` and assumes a `vscode` user; edit the unit before installing if different.

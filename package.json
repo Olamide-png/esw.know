@@ -39,7 +39,7 @@
   "scripts": {
     "build": "pnpm run -C www build",
     "dev:adapter": "node adapter-server.mjs",
-  "start:adapter": "node adapter-server.mjs",
+    "start:adapter": "node adapter-server.mjs",
     "dev:sidecar": "node sse-sidecar.mjs",
     "dev:tunnel": "cloudflared --config \"$HOME/.cloudflared/config2.yml\" --cred-file \"$HOME/.cloudflared/$CF_TUNNEL_ID.json\" tunnel run mcp-nuxt-2",
     "dev:up": "bash ./scripts/dev-up.sh",
@@ -58,8 +58,8 @@
     "mcp:docs": "tsx mcp-docs.ts",
     "mcp:tunnel": "cloudflared tunnel --config \"$HOME/.cloudflared/config.yml\" run mcp-nuxt",
     "dev:all": "concurrently -k -n nuxt,cf \"pnpm dev\" \"pnpm mcp:tunnel\"",
-    "mcp:ping": "curl -s https://mcp.eswdocs.cc/api/ping || true"
-    ,"prod:up": "bash ./scripts/start-prod.sh",
+    "mcp:ping": "curl -s https://mcp.eswdocs.cc/api/ping || true",
+    "prod:up": "bash ./scripts/start-prod.sh",
     "prod:down": "bash ./scripts/stop-prod.sh"
   },
   "dependencies": {

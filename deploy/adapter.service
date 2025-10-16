@@ -1,0 +1,15 @@
+[Unit]
+Description=ESW Know Adapter + Cloudflared
+After=network.target
+
+[Service]
+Type=simple
+User=vscode
+WorkingDirectory=/workspaces/esw.know
+ExecStart=/bin/bash /workspaces/esw.know/scripts/start-prod.sh
+ExecStop=/bin/bash /workspaces/esw.know/scripts/stop-prod.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

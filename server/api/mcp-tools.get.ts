@@ -66,7 +66,7 @@ export default defineEventHandler(() => {
             max_chars: {
               type: 'integer',
               minimum: 100,
-              maximum: 200000,
+              maximum: 20000,
               default: 12000,
               description: 'Maximum characters of text to return (default 12000)',
             },
@@ -81,8 +81,44 @@ export default defineEventHandler(() => {
           },
         ],
       },
+      {
+        name: 'ask_llm',
+        title: 'Ask across docs (RAG)',
+        description: 'Search docs, extract context, and synthesize an answer with an LLM. Returns an answer plus sources.',
+        input_schema: {
+          type: 'object',
+          required: ['query'],
+          properties: {
+            query: { type: 'string', description: 'User question' },
+            k: { type: 'integer', minimum: 1, maximum: 10, default: 4, description: 'Top-K documents to retrieve' },
+            max_chars_per_doc: {
+              type: 'integer',
+              minimum: 500,
+              maximum: 20000,
+              default: 4000,
+              description: 'Max characters pulled from each doc',
+            },
+            llm: {
+              type: 'object',
+              properties: {
+                enabled: { type: 'boolean', default: true },
+                model: { type: 'string', default: 'gpt-4o-mini' },
+              },
+            },
+          },
+          additionalProperties: false,
+        },
+        examples: [
+          {
+            action: 'tool.call',
+            tool: 'ask_llm',
+            params: { query: 'How do I compute shopper price with Pricing Advisor?', k: 3 },
+          },
+        ],
+      },
     ],
   }
 })
+
 
 

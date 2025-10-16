@@ -58,7 +58,6 @@ function adaptToolCallToAsk(body: any) {
   if (tool === 'doc_search') {
     const query = params.query ?? params.q ?? ''
     const k = Math.max(1, Math.min(20, Number(params.k ?? 5) || 5))
-    // Let sidecar pick its search/ranking; still bias to local
     return {
       ...common,
       query,
@@ -70,10 +69,9 @@ function adaptToolCallToAsk(body: any) {
 
   if (tool === 'doc_extract') {
     const path = params.path ?? params.url ?? ''
-    // Force a path-based retrieval so the SSE “result” includes schema_object.text
     return {
       ...common,
-      query: '', // we only want the doc
+      query: '',
       path,
       handler: 'retriever',
       tool: 'retriever',
@@ -302,6 +300,7 @@ export default defineEventHandler(async (event) => {
   event.node.res.setHeader('Content-Type', 'application/json; charset=utf-8')
   return final
 })
+
 
 
 
