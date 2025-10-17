@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     experimental: { sqliteConnector: 'native' } // avoids native addon headaches
   },
 
-  // keep any legacy useConfig() calls working
+  // keep any legacy useRuntimeConfig() calls working
   imports: {
     presets: [
       { from: '#imports', imports: [{ name: 'useRuntimeConfig', as: 'useConfig' }] }
