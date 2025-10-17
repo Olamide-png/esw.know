@@ -25,7 +25,6 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     TRYIT_ALLOWED_HOSTS: process.env.TRYIT_ALLOWED_HOSTS || '',
-    TRYIT_ALLOWED_HOSTS: process.env.TRYIT_ALLOWED_HOSTS,
     nlwebBaseUrl: process.env.NLWEB_BASE_URL,
     openaiApiKey: process.env.OPENAI_API_KEY,          // <— no "|| ''"
     openaiModel: process.env.OPENAI_MODEL || 'gpt-4o-mini',
