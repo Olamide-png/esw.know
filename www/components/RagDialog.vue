@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, computed, nextTick, watch } from 'vue'
-import { X, Wand2, Copy, Check, ExternalLink, Loader2 } from 'lucide-vue-next'
 import MarkdownIt from 'markdown-it'
 import footnote from 'markdown-it-footnote'
 import linkAttrs from 'markdown-it-link-attributes'
