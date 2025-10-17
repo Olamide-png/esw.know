@@ -1,25 +1,33 @@
-import { defineNuxtConfig } from 'nuxt/config'
-
+// https://nuxt.com/docs/api/configuration/nuxt-config
+// /www/nuxt.config.ts
 export default defineNuxtConfig({
-  modules: [
-    '@nuxt/content',
-    '@nuxtjs/i18n',
-    '@nuxtjs/color-mode',
-    '@nuxt/icon',
-    '@nuxt/fonts'
-  ],
+  devtools: { enabled: true },
 
-  // let Content turn markdown into routes (so "/" => content/index.md)
-  content: {
-    documentDriven: true,
-    experimental: { sqliteConnector: 'native' } // avoids native addon headaches
+  // Inherit everything (including runtimeConfig) from the repo root
+  extends: ['..'],
+
+  // If you’re using @nuxtjs/i18n via the root config/modules, this merges in cleanly.
+  i18n: {
+    defaultLocale: 'en',
+    locales: [
+      { code: 'en', name: 'English', language: 'en-US' },
+      { code: 'fr', name: 'Français', language: 'fr-FR' },
+    ],
   },
 
-  // keep any legacy useRuntimeConfig() calls working
-  imports: {
-    presets: [
-      { from: '#imports', imports: [{ name: 'useRuntimeConfig', as: 'useConfig' }] }
-    ]
-  }
+  // Lock features to a predictable baseline
+  compatibilityDate: '2025-05-13',
+
+  app: {
+    head: {
+      link: [
+        { rel: 'preconnect', href: 'https://eswapis.vercel.app' },
+        { rel: 'dns-prefetch', href: 'https://eswapis.vercel.app' },
+      ],
+    },
+  },
 })
+
+
+
 
