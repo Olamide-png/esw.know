@@ -69,7 +69,10 @@ export default defineNuxtConfig({
   },
 
   // ✅ Use resolved absolute file paths so Vite never guesses
-  css: [THEMES_CSS, TAILWIND_CSS],
+  css: [
+    join(currentDir, './assets/css/themes.css'),
+    '~/assets/css/tailwind.css',
+  ],
 
   content: {
     documentDriven: true,
