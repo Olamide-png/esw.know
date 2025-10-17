@@ -1,0 +1,26 @@
+app = "esw-adapter"
+primary_region = "lhr"
+
+[build]
+
+[env]
+  PORT = "3000"
+  NODE_ENV = "production"
+  # Point at sidecar Fly hostname by default
+  MCP_URL = "https://esw-sidecar.fly.dev/ask"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+
+[[services]]
+  internal_port = 3000
+  protocol = "tcp"
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
