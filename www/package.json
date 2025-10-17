@@ -7,7 +7,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "true"
   },
   "dependencies": {
     "@iconify-json/simple-icons": "^1.2.36",
