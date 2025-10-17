@@ -16,8 +16,10 @@ The workflow runs the following smoke tests after deployment:
 
 **Request:**
 ```bash
-curl -fsS "https://esw-adapter.fly.dev/api/ping"
+curl -fsS "https://${ADAPTER_URL}/api/ping"
 ```
+
+Replace `${ADAPTER_URL}` with your adapter hostname (e.g., `esw-adapter.fly.dev`)
 
 **Expected Response:**
 ```json
@@ -33,7 +35,7 @@ Tests the tool discovery endpoint that lists available MCP tools.
 
 **Request:**
 ```bash
-curl -fsS "https://esw-adapter.fly.dev/api/mcp-tools"
+curl -fsS "https://${ADAPTER_URL}/api/mcp-tools"
 ```
 
 **Expected Response:**
@@ -54,7 +56,7 @@ Tests a realistic document search query that gets forwarded to the sidecar.
 
 **Request:**
 ```bash
-curl -fsS -X POST "https://esw-adapter.fly.dev/api/mcp-tools" \
+curl -fsS -X POST "https://${ADAPTER_URL}/api/mcp-tools" \
   -H "Authorization: Bearer $MCP_SERVER_BEARER" \
   -H "Content-Type: application/json" \
   -d '{
@@ -128,17 +130,18 @@ The adapter is a lightweight proxy that:
 You can run these smoke tests manually against any deployed adapter:
 
 ```bash
-# Set your bearer token
+# Set your adapter URL and bearer token
+export ADAPTER_URL="esw-adapter.fly.dev"  # Replace with your adapter hostname
 export MCP_SERVER_BEARER="your-token-here"
 
 # Test ping
-curl -fsS "https://esw-adapter.fly.dev/api/ping" | jq .
+curl -fsS "https://${ADAPTER_URL}/api/ping" | jq .
 
 # Test discovery
-curl -fsS "https://esw-adapter.fly.dev/api/mcp-tools" | jq .
+curl -fsS "https://${ADAPTER_URL}/api/mcp-tools" | jq .
 
 # Test realistic query
-curl -fsS -X POST "https://esw-adapter.fly.dev/api/mcp-tools" \
+curl -fsS -X POST "https://${ADAPTER_URL}/api/mcp-tools" \
   -H "Authorization: Bearer $MCP_SERVER_BEARER" \
   -H "Content-Type: application/json" \
   -d '{"action":"tool.call","tool":"doc_search","args":{"q":"rounding","k":3}}' \
