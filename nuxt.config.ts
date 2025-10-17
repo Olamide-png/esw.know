@@ -68,10 +68,9 @@ export default defineNuxtConfig({
     disableTransition: true
   },
 
-  // ✅ Use resolved absolute file paths so Vite never guesses
   css: [
-    join(currentDir, './assets/css/themes.css'),
-    '~/assets/css/tailwind.css',
+    ~/assets/css/tailwind.css',
+    '~/assets/css/themes.css', // remove this line if you don't have it
   ],
 
   content: {
