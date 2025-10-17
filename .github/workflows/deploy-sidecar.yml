@@ -1,0 +1,116 @@
+name: Deploy sidecar to Fly and smoke test
+
+on:
+  push:
+    paths:
+      - 'sidecar/**'
+      - 'NLWeb/**'
+      - .github/workflows/deploy-sidecar.yml
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Install flyctl
+        run: |
+          curl -L https://fly.io/install.sh | sh
+          echo "$HOME/.fly/bin" >> $GITHUB_PATH
+
+      - name: Authenticate to Fly
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: |
+          flyctl auth token >/dev/null
+
+      - name: Build context debug
+        run: |
+          echo "Listing repo root files to verify NLWeb presence"
+          ls -la
+          echo "NLWeb exists:" && [ -d NLWeb ] && echo yes || echo no
+
+      - name: Build and push image
+        run: |
+          docker build -t registry.fly.io/${{ secrets.FLY_APP_NAME }}:latest -f sidecar/Dockerfile .
+          docker push registry.fly.io/${{ secrets.FLY_APP_NAME }}:latest
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      - name: Deploy to Fly
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: |
+          flyctl deploy --app ${{ secrets.FLY_APP_NAME }} --image registry.fly.io/${{ secrets.FLY_APP_NAME }}:latest
+
+      - name: Wait for service
+        run: sleep 8
+
+      - name: Wait for /healthz (poll until healthy)
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: |
+          set -e
+          URL=$(flyctl status -a ${{ secrets.FLY_APP_NAME }} --json | jq -r '.Hostname')
+          echo "Polling $URL/healthz for up to 60s (try HTTPS first, then HTTP)..."
+
+          # Try HTTPS with retries and capture curl errors for debug
+          for i in $(seq 1 6); do
+            echo "HTTPS attempt $i"
+            if curl -fsS "https://$URL/healthz" >/dev/null 2>https_err; then
+              echo "service healthy (HTTPS)"
+              exit 0
+            else
+              echo "HTTPS attempt $i failed; error:" && cat https_err || true
+              sleep 5
+            fi
+          done
+
+          echo "HTTPS health check failed after retries; falling back to HTTP (less secure)"
+          for i in $(seq 1 6); do
+            echo "HTTP attempt $i"
+            if curl -fsS "http://$URL/healthz" >/dev/null 2>http_err; then
+              echo "service healthy (HTTP)"
+              exit 0
+            else
+              echo "HTTP attempt $i failed; error:" && cat http_err || true
+              sleep 5
+            fi
+          done
+
+          echo "service did not become healthy in time (HTTPS+HTTP)" >&2
+          exit 1
+
+      - name: Smoke test /healthz
+        run: |
+          set -e
+          URL=$(flyctl info -a ${{ secrets.FLY_APP_NAME }} --json | jq -r '.Hostname')
+          echo "Testing health at $URL"
+          curl -fsS "https://$URL/healthz" | jq .
+
+      - name: Smoke test /ask
+        env:
+          MCP_SIDECAR_BEARER: ${{ secrets.MCP_SIDECAR_BEARER }}
+        run: |
+          set -e
+          URL=$(flyctl info -a ${{ secrets.FLY_APP_NAME }} --json | jq -r '.Hostname')
+          echo "Testing ask at $URL"
+          curl -fsS -X POST "https://$URL/ask" -H "Authorization: Bearer $MCP_SIDECAR_BEARER" -H "Content-Type: application/json" -d '{"action":"tool.call","tool":"doc_search","params":{"query":"Rounding Rules","k":1}}' | jq .
+
+      - name: Check `rag_chunks` row count (optional)
+        if: ${{ secrets.DATABASE_URL != '' }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          set -e
+          echo "Checking rag_chunks row count using DATABASE_URL (secrets must be configured)"
+          sudo apt-get update -y
+          sudo apt-get install -y postgresql-client
+          # Query the rag_chunks table; this will fail fast if the DB is unreachable or creds are invalid
+          psql "$DATABASE_URL" -t -c "SELECT count(*) FROM rag_chunks;" | sed -n '1p'
