@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
+    "preview": "nuxt prepare -c ./nuxt.config.ts",
     "postinstall": "true"
   },
   "dependencies": {
