@@ -1,0 +1,34 @@
+[Unit]
+Description=ESW Know Adapter
+After=network.target
+
+[Service]
+Type=simple
+User=%i
+EnvironmentFile=/etc/esw_know.env
+WorkingDirectory=/opt/esw.know
+ExecStart=/usr/bin/node /opt/esw.know/adapter-server.mjs
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
+[Unit]
+Description=ESW Adapter (adapter-server.mjs)
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/workspaces/esw.know
+EnvironmentFile=/etc/esw_know.env
+ExecStart=/usr/bin/env node /workspaces/esw.know/adapter-server.mjs
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

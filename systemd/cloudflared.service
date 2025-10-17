@@ -1,0 +1,35 @@
+[Unit]
+Description=Cloudflared tunnel for ESW Know
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=%i
+EnvironmentFile=/etc/esw_know.env
+WorkingDirectory=/opt/esw.know
+ExecStart=/usr/bin/cloudflared tunnel --config /opt/esw.know/.cloudflared/config.yml run
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+[Unit]
+Description=Cloudflared Tunnel (eswdocs)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/workspaces/esw.know
+EnvironmentFile=/etc/esw_know.env
+ExecStart=/workspaces/esw.know/cloudflared --config /workspaces/esw.know/.cloudflared/config.yml tunnel run 43ba73d8-0290-40ab-ac40-f1922c75eee6
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,8 @@
+{
+  "name": "esw-agent-client",
+  "type": "module",
+  "version": "0.0.0",
+  "dependencies": {
+    "node-fetch": "^3.4.1"
+  }
+}
