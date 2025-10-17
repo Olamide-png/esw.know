@@ -1,23 +1,9 @@
 // nuxt.config.ts
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import fs from 'node:fs'
 import tailwindcss from '@tailwindcss/vite'
 
 const currentDir = dirname(fileURLToPath(import.meta.url))
-
-// --- Resolve CSS files whether they live at ./assets or ./www/assets ---
-function resolveCss(relA: string, relB: string) {
-  const a = join(currentDir, relA)
-  if (fs.existsSync(a)) return a
-  const b = join(currentDir, relB)
-  if (fs.existsSync(b)) return b
-  // fall back to A; Vite will show a clear error if neither exists
-  return a
-}
-
-const THEMES_CSS   = resolveCss('./assets/css/themes.css',   './www/assets/css/themes.css')
-const TAILWIND_CSS = resolveCss('./assets/css/tailwind.css', './www/assets/css/tailwind.css')
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
