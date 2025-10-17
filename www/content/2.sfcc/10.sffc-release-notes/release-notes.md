@@ -46,7 +46,7 @@ icon: 'lucide:notebook-pen'
                 <div class="mt-2 text-gray-700 dark:text-neutral-300">
                   <ul>
             <li>ABTasty integration: Retailers can define and manage their A/B tests and personalization campaigns directly within the AB Tasty platform. Once configured, these tests and campaigns are seamlessly applied to the storefront, enabling dynamic content adjustments and user experience optimizations.</li>
-            <li>Net and Gross site taxation support for ESW orders: ESW cartridge now supports both net and gross site taxation models.</li>
+            <li>Net and Gross site taxation support for ESW orders: ESW cartridge now supports both net and gross site taxation models</li>
           </ul>
                 </div>
               </div>
