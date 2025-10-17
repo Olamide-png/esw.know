@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt prepare -c ./nuxt.config.ts",
-    "postinstall": "true"
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare -c ./nuxt.config.ts",
   },
   "dependencies": {
     "@iconify-json/simple-icons": "^1.2.36",
