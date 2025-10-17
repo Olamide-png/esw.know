@@ -70,7 +70,7 @@ export default defineNuxtConfig({
 
   css: [
     ~/assets/css/tailwind.css',
-    '~/assets/css/themes.css', // remove this line if you don't have it
+    '~/assets/css/themes.css', 
   ],
 
   content: {
