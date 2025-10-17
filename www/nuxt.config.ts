@@ -18,6 +18,14 @@ export default defineNuxtConfig({
   // Lock features to a predictable baseline
   compatibilityDate: '2025-05-13',
 
+  site: {
+      name: 'Knowledge Centre',
+      description: 'ESW Knowledge Centre',
+      ogImage: '/Screenshot 2025-07-04 144755.png',
+      ogImageComponent: 'ShadcnDocs',
+      ogImageColor: 'light',
+  },
+
   app: {
     head: {
       link: [
