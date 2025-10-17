@@ -9,17 +9,17 @@ export default defineNuxtConfig({
     '@nuxt/fonts'
   ],
 
-  // Make your Markdown power the routes (so `/` renders your MD home)
+  // let Content turn markdown into routes (so "/" => content/index.md)
   content: {
     documentDriven: true,
-    // avoids native addon hassles; works on Vercel
-    experimental: { sqliteConnector: 'native' }
+    experimental: { sqliteConnector: 'native' } // avoids native addon headaches
   },
 
-  // Keep existing code that calls useConfig() working in Nuxt 3
+  // keep any legacy useConfig() calls working
   imports: {
     presets: [
       { from: '#imports', imports: [{ name: 'useRuntimeConfig', as: 'useConfig' }] }
     ]
   }
 })
+
