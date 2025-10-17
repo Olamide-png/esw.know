@@ -55,6 +55,8 @@ function json(res, code, obj) {
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
 
+  // (debug endpoint removed)
+
   // ── /api/ping ────────────────────────────────────────────────────────────────
   if (req.method === 'GET' && url.pathname === '/api/ping') {
     return json(res, 200, { ok: true, ts: Date.now() });

@@ -1,0 +1,13 @@
+/var/log/esw-know/*.log {
+    daily
+    rotate 14
+    compress
+    missingok
+    notifempty
+    copytruncate
+}
+
+# journald retention suggestion (place into /etc/systemd/journald.conf.d/esw-keep.conf)
+## [Journal]
+## SystemMaxUse=200M
+## RuntimeMaxUse=200M

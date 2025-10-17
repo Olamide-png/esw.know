@@ -1,0 +1,82 @@
+{
+  "displayName": "ESW Know Docs Agent",
+  "description": "Agent that can search and extract documentation from ESW Know via the adapter.",
+  "version": "1.0.0",
+  "tools": [
+    {
+      "name": "doc_search",
+      "title": "Search docs",
+      "description": "Search docs by query and return top-k items.",
+      "input": {
+        "type": "object",
+        "required": ["query"],
+        "properties": {
+          "query": { "type": "string", "description": "Search query" },
+          "k": { "type": "integer", "default": 5 }
+        }
+      },
+      "invoke": {
+        "http": {
+          "method": "POST",
+          "url": "https://mcp.eswdocs.cc/api/mcp-tools",
+          "headers": {
+            "Authorization": "Bearer ${MCP_SERVER_BEARER}",
+            "Content-Type": "application/json"
+          },
+          "bodyTemplate": "{\"action\":\"tool.call\",\"tool\":\"doc_search\",\"params\":{{INPUT}}}"
+        }
+      }
+    },
+    {
+      "name": "doc_extract",
+      "title": "Extract doc",
+      "description": "Extract full text for a doc path.",
+      "input": {
+        "type": "object",
+        "required": ["path"],
+        "properties": {
+          "path": { "type": "string" },
+          "max_chars": { "type": "integer", "default": 4000 }
+        }
+      },
+      "invoke": {
+        "http": {
+          "method": "POST",
+          "url": "https://mcp.eswdocs.cc/api/mcp-tools",
+          "headers": {
+            "Authorization": "Bearer ${MCP_SERVER_BEARER}",
+            "Content-Type": "application/json"
+          },
+          "bodyTemplate": "{\"action\":\"tool.call\",\"tool\":\"doc_extract\",\"params\":{{INPUT}}}"
+        }
+      }
+    },
+    {
+      "name": "ask_llm",
+      "title": "Ask LLM (RAG)",
+      "description": "Search, extract, and synthesize an answer using the LLM.",
+      "input": {
+        "type": "object",
+        "required": ["query"],
+        "properties": {
+          "query": { "type": "string" },
+          "k": { "type": "integer", "default": 3 },
+          "max_chars_per_doc": { "type": "integer", "default": 2000 },
+          "llm": { "type": "object" }
+        }
+      },
+      "invoke": {
+        "http": {
+          "method": "POST",
+          "url": "https://mcp.eswdocs.cc/api/mcp-tools",
+          "headers": {
+            "Authorization": "Bearer ${MCP_SERVER_BEARER}",
+            "Content-Type": "application/json",
+            "Accept": "text/event-stream"
+          },
+          "bodyTemplate": "{\"action\":\"tool.call\",\"tool\":\"ask_llm\",\"params\":{{INPUT}}}"
+        }
+      }
+    }
+  ]
+}
