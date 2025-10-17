@@ -1,17 +1,25 @@
 /**
- * Registers <GlossaryInline> if the component file exists.
- * If it's missing (e.g. different branch or case mismatch), the build won't fail.
+ * Registers <GlossaryInline> only if the file exists.
+ * Uses import.meta.glob so missing files don't fail build.
  */
 export default defineNuxtPlugin(async (nuxtApp) => {
+  // Match the exact component, if present. If it's missing, this is just {}.
+  const matches = import.meta.glob('~/components/GlossaryInline.client.vue')
+
+  const keys = Object.keys(matches)
+  if (!keys.length) {
+    console.warn('[glossary] GlossaryInline.client.vue not found; skipping registration')
+    return
+  }
+
   try {
-    // dynamic import so Vite doesn't resolve at build time
-    const mod = await import('~/components/GlossaryInline.client.vue')
-    // defensive: only register if default export exists
+    // Load the first (and only) match
+    const load = matches[keys[0]]
+    const mod = await load()
     if (mod && mod.default) {
       nuxtApp.vueApp.component('GlossaryInline', mod.default)
     }
   } catch (e) {
-    // keep deploys green when the component isn't present
-    console.warn('[glossary] GlossaryInline.client.vue not found; skipping registration')
+    console.warn('[glossary] Failed to load GlossaryInline.client.vue; skipping', e)
   }
 })
