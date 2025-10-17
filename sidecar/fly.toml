@@ -1,0 +1,23 @@
+app = "esw-sidecar"
+
+[build]
+  image = ""
+
+[env]
+  PORT = "7015"
+
+[[services]]
+  internal_port = 7015
+  protocol = "tcp"
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 25
+    soft_limit = 20
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    # Allow Fly to terminate TLS for this app (handlers: tls + http)
+    handlers = ["tls", "http"]
+    port = 443
