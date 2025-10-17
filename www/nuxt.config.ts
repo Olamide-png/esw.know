@@ -24,6 +24,7 @@ export default defineNuxtConfig({
       ogImage: '/Screenshot 2025-07-04 144755.png',
       ogImageComponent: 'ShadcnDocs',
       ogImageColor: 'light',
+      url: 'https://esw-know.vercel.app'
   },
 
   app: {
