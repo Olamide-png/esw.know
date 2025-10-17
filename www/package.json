@@ -3,10 +3,10 @@
   "name": "www",
   "packageManager": "pnpm@10.11.0",
   "scripts": {
-    "postinstall": "true",
-    "build": "pnpm -C www build",
-    "dev": "pnpm -C www dev",
-    "preview": "pnpm -C www preview"
+    "postinstall": "nuxt prepare -c ./nuxt.config.ts || true",
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "preview": "nuxt preview"
   },
   "dependencies": {
     "@iconify-json/simple-icons": "^1.2.36",
