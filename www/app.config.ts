@@ -6,6 +6,8 @@ export default defineAppConfig({
       ogImage: '/Screenshot 2025-07-04 144755.png',
       ogImageComponent: 'ShadcnDocs',
       ogImageColor: 'light',
+      url: 'https://esw-know.vercel.app',
+      links: { github: 'https://github.com/Olamide-png/esw.know' },
       umami: {
         enable: false,
         src: 'https://cloud.umami.is/script.js',
