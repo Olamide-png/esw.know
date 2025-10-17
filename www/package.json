@@ -1,18 +1,17 @@
 {
-  "name": "www",
-  "type": "module",
   "private": true,
+  "name": "www",
+  "packageManager": "pnpm@10.11.0",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "true",
+    "build": "pnpm -C www build",
+    "dev": "pnpm -C www dev",
+    "preview": "pnpm -C www preview"
   },
   "dependencies": {
     "@iconify-json/simple-icons": "^1.2.36",
     "nuxt": "^3.17.4",
     "vue": "^3.5.15",
     "vue-router": "^4.5.1"
+    }
   }
-}
