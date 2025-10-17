@@ -1,0 +1,97 @@
+name: Deploy adapter to Fly and smoke test
+
+on:
+  push:
+    paths:
+      - 'adapter/**'
+      - .github/workflows/deploy-adapter.yml
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Install flyctl
+        run: |
+          curl -L https://fly.io/install.sh | sh
+          echo "$HOME/.fly/bin" >> $GITHUB_PATH
+
+      - name: Authenticate to Fly
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: |
+          flyctl auth token >/dev/null
+
+      - name: Build and push image
+        run: |
+          cd adapter
+          docker build -t registry.fly.io/esw-adapter:latest -f Dockerfile .
+          docker push registry.fly.io/esw-adapter:latest
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      - name: Deploy to Fly
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: |
+          cd adapter
+          flyctl deploy --app esw-adapter --image registry.fly.io/esw-adapter:latest
+
+      - name: Wait for service
+        run: sleep 8
+
+      - name: Wait for /api/ping (poll until healthy)
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: |
+          set -e
+          URL=$(flyctl status -a esw-adapter --json | jq -r '.Hostname')
+          echo "Polling $URL/api/ping for up to 60s..."
+
+          # Try HTTPS with retries
+          for i in $(seq 1 12); do
+            echo "HTTPS attempt $i"
+            if curl -fsS "https://$URL/api/ping" >/dev/null 2>https_err; then
+              echo "service healthy (HTTPS)"
+              exit 0
+            else
+              echo "HTTPS attempt $i failed; error:" && cat https_err || true
+              sleep 5
+            fi
+          done
+
+          echo "service did not become healthy in time" >&2
+          exit 1
+
+      - name: Smoke test /api/ping
+        run: |
+          set -e
+          URL=$(flyctl info -a esw-adapter --json | jq -r '.Hostname')
+          echo "Testing ping at $URL"
+          curl -fsS "https://$URL/api/ping" | jq .
+
+      - name: Smoke test /api/mcp-tools (GET - discovery)
+        run: |
+          set -e
+          URL=$(flyctl info -a esw-adapter --json | jq -r '.Hostname')
+          echo "Testing mcp-tools discovery at $URL"
+          curl -fsS "https://$URL/api/mcp-tools" | jq .
+
+      - name: Smoke test /api/mcp-tools (POST - realistic query)
+        env:
+          MCP_SERVER_BEARER: ${{ secrets.MCP_SERVER_BEARER }}
+        run: |
+          set -e
+          URL=$(flyctl info -a esw-adapter --json | jq -r '.Hostname')
+          echo "Testing mcp-tools with realistic doc_search query at $URL"
+          curl -fsS -X POST "https://$URL/api/mcp-tools" \
+            -H "Authorization: Bearer $MCP_SERVER_BEARER" \
+            -H "Content-Type: application/json" \
+            -d '{"action":"tool.call","tool":"doc_search","args":{"q":"rounding","k":3}}' | jq .
