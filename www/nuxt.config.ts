@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   // Inherit everything (including runtimeConfig) from the repo root
-  extends: ['..'],
+  extends: "./.nuxt/tsconfig.json",
 
   // If you’re using @nuxtjs/i18n via the root config/modules, this merges in cleanly.
   i18n: {
