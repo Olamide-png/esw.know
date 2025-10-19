@@ -15,6 +15,25 @@ export default defineNuxtConfig({
     ],
   },
 
+  nitro: {
+    rollupConfig: {
+      plugins: [
+        {
+          name: 'trace-app-config-importer',
+          resolveId(id, importer) {
+            // When the server build tries to pull the Vue app config file,
+            // print the importer so we know who is at fault.
+            if (id.startsWith('#build/app.config.mjs')) {
+              this.warn(`[#build/app.config.mjs] imported by: ${importer}`)
+              // Don’t stub yet—let it fail so the log shows up clearly
+            }
+            return null
+          }
+        }
+      ]
+    }
+  },
+
   // Lock features to a predictable baseline
   compatibilityDate: '2025-05-13',
 
