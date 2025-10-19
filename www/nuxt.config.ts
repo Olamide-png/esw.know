@@ -21,10 +21,11 @@ export default defineNuxtConfig({
         process.env.VERCEL && {
           name: 'stub-vue-app-aliases-in-nitro',
           resolveId(id: string) {
+            // Anything from the client-side Vue app that Nitro must not touch
             if (
               id === 'nuxt/app' ||
-              id.startsWith('#app') ||      // includes '#app/config'
-              id.startsWith('#build/')      // '#build/*' like app/nuxt.config/app.config
+              id.startsWith('#app') ||
+              id.startsWith('#build/')
             ) {
               return '\0stub:' + id
             }
@@ -33,29 +34,24 @@ export default defineNuxtConfig({
             if (!id.startsWith('\0stub:')) return
             const orig = id.slice('\0stub:'.length)
 
-            // ----- build-time client files: provide empties -----
-            if (orig === '#build/nuxt.config.mjs') return 'export default {}'
-            if (orig === '#build/app.config.mjs')  return 'export default {}'
-
-            // ----- server-safe stub for #app/config -----
-            if (orig === '#app/config') {
-              return `
-                export default {}
-                export const _replaceAppConfig = () => {}
-                export const updateAppConfig = () => {}
-                export const useAppConfig = () => ({})
-              `
+            // Minimal, safe stubs per alias
+            if (orig === '#build/nuxt.config.mjs') {
+              // Server doesn't need the client app's nuxt.config
+              return 'export default {}'
             }
-
-            // ----- generic stubs for any other app alias pulled into server -----
+            if (orig === '#build/app.config.mjs') {
+              // Server doesn't need the client app-config either
+              return 'export default {}'
+            }
             if (orig === 'nuxt/app' || orig.startsWith('#app')) {
+              // Block any other app-runtime imports in server
               return `
                 export default {}
                 export const defineNuxtPlugin = () => {}
                 export const useAppConfig = () => ({})
               `
             }
-
+            // Fallback
             return 'export default {}'
           }
         }
