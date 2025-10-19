@@ -18,20 +18,19 @@ export default defineNuxtConfig({
   nitro: {
     rollupConfig: {
       plugins: [
-        // ⬇️ Stub app-config only in Nitro server (vercel build)
-        process.env.VERCEL && {
-          name: 'stub-nuxt-app-config-on-nitro',
-          resolveId(id) {
-            if (id === '#build/app.config.mjs') return '\0nitro-app-config-stub'
-          },
-          load(id) {
-            if (id === '\0nitro-app-config-stub') {
-              // Empty server app-config; safe because server code shouldn't use useAppConfig()
-              return 'export default {}'
+        {
+          name: 'trace-app-config-importer',
+          resolveId(id, importer) {
+            // When the server build tries to pull the Vue app config file,
+            // print the importer so we know who is at fault.
+            if (id.startsWith('#build/app.config.mjs')) {
+              this.warn(`[#build/app.config.mjs] imported by: ${importer}`)
+              // Don’t stub yet—let it fail so the log shows up clearly
             }
+            return null
           }
         }
-      ].filter(Boolean)
+      ]
     }
   },
 
