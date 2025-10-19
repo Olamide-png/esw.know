@@ -1,4 +1,14 @@
 export default defineAppConfig({
+   // 👇 add this block
+  site: {
+    name: 'Knowledge Centre',
+    description: 'ESW Knowledge Centre',
+    url: 'https://esw-know.vercel.app',
+    ogImage: '/Screenshot 2025-07-04 144755.png',
+    defaultLocale: 'en',
+    links: { github: 'https://github.com/Olamide-png/esw.know' }
+  },
+  
   shadcnDocs: {
     site: {
       name: 'Knowledge Centre',
