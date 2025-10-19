@@ -1,13 +1,6 @@
-// tsconfig.json (at repo root)
 {
-  "files": [],
-  "references": [{ "path": "./www" }],
-  "compilerOptions": {
-    "strict": true,
-    "skipLibCheck": true
-  },
-  "exclude": ["node_modules", ".nuxt", ".output", "www/.nuxt", "www/.output"]
+  // https://nuxt.com/docs/guide/concepts/typescript
+  "extends": "./.nuxt/tsconfig.json"
 }
-
 
 
