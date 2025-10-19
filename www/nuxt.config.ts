@@ -18,41 +18,17 @@ export default defineNuxtConfig({
   nitro: {
     rollupConfig: {
       plugins: [
+        // ⬇️ Stub app-config only in Nitro server (vercel build)
         process.env.VERCEL && {
-          name: 'stub-vue-app-aliases-in-nitro',
-          resolveId(id: string) {
-            // Anything from the client-side Vue app that Nitro must not touch
-            if (
-              id === 'nuxt/app' ||
-              id.startsWith('#app') ||
-              id.startsWith('#build/')
-            ) {
-              return '\0stub:' + id
-            }
+          name: 'stub-nuxt-app-config-on-nitro',
+          resolveId(id) {
+            if (id === '#build/app.config.mjs') return '\0nitro-app-config-stub'
           },
-          load(id: string) {
-            if (!id.startsWith('\0stub:')) return
-            const orig = id.slice('\0stub:'.length)
-
-            // Minimal, safe stubs per alias
-            if (orig === '#build/nuxt.config.mjs') {
-              // Server doesn't need the client app's nuxt.config
+          load(id) {
+            if (id === '\0nitro-app-config-stub') {
+              // Empty server app-config; safe because server code shouldn't use useAppConfig()
               return 'export default {}'
             }
-            if (orig === '#build/app.config.mjs') {
-              // Server doesn't need the client app-config either
-              return 'export default {}'
-            }
-            if (orig === 'nuxt/app' || orig.startsWith('#app')) {
-              // Block any other app-runtime imports in server
-              return `
-                export default {}
-                export const defineNuxtPlugin = () => {}
-                export const useAppConfig = () => ({})
-              `
-            }
-            // Fallback
-            return 'export default {}'
           }
         }
       ].filter(Boolean)
