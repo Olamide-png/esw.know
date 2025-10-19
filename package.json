@@ -1,17 +1,11 @@
 {
   "private": true,
-  "workspaces": [
-    "www"
-  ],
+  "workspaces": ["www"],
   "packageManager": "pnpm@10.11.0",
   "scripts": {
     "postinstall": "true",
     "build": "pnpm -C www build",
     "dev": "pnpm -C www dev",
     "preview": "pnpm -C www preview"
-  },
-  "dependencies": {
-    "pg": "^8.16.3",
-    "pgvector": "^0.2.1"
   }
 }
