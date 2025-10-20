@@ -1,13 +1,11 @@
+// www/plugins/umami.client.ts
 export default defineNuxtPlugin(() => {
-  const { enable, dataWebsiteId, src } = useRuntimeConfig().value.site.umami;
+  const site = useSite()
+  const u = site.umami || {}
 
-  if (enable && !import.meta.dev) {
-    useScriptUmamiAnalytics({
-      scriptInput: {
-        src,
-        defer: true,
-      },
-      websiteId: dataWebsiteId,
-    });
-  }
-});
+  if (!u.enable || !u.src || !u.dataWebsiteId) return
+
+  // … inject Umami script with u.src & u.dataWebsiteId …
+})
+
+
