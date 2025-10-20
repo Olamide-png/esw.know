@@ -1,10 +1,7 @@
 {
   "version": 2,
   "git": {
-    // Don’t create *Production* deployments from `main`
-    "deploymentEnabled": { "main": false },
-
-    // Make `prod` the Production branch (you can name it whatever)
     "productionBranch": "prod"
   }
 }
+
