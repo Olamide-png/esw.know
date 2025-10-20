@@ -62,7 +62,34 @@ export default defineNuxtConfig({
     componentDir: join(currentDir, './components/ui'),
   },
 
-  components: { dirs: [{ path: './components', ignore: ['**/*.ts'] }] },
+  components: {
+    dirs: [
+      // 1) UI (shadcn) — import as <UiButton/>, <UiAccordion/>, etc.
+      {
+        path: './components/ui',
+        extensions: ['vue'],
+        prefix: 'Ui',
+        pathPrefix: false, // don’t include folder in the tag (keeps <UiButton/>)
+      },
+
+      // 2) Content components — import as <CntAccordion/>, <CntTabs/>, etc.
+      {
+        path: './components/content',
+        extensions: ['vue'],
+        prefix: 'Cnt',
+        pathPrefix: false,
+      },
+
+      // 3) App components (root) — no prefix
+      {
+        path: './components',
+        extensions: ['vue'],
+        pathPrefix: false,
+        // do NOT auto-import subfolders we’ve already defined above
+        ignore: ['ui/**', 'content/**', '**/*.ts', '**/*.tsx'],
+      },
+    ],
+  },
 
   i18n: {
     bundle: { optimizeTranslationDirective: false },
