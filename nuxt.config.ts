@@ -80,14 +80,13 @@ export default defineNuxtConfig({
         pathPrefix: false,
       },
 
-      // 3) App components (root) — no prefix
+      // 3) App components (root) — no prefix, top-level only
       {
         path: './components',
         extensions: ['vue'],
         pathPrefix: false,
-        // do NOT auto-import subfolders we’ve already defined above
-        ignore: ['ui/**', 'content/**', '**/*.ts', '**/*.tsx'],
-      },
+        pattern: ['*.vue'] // only files directly under /components, not subfolders
+      },        
     ],
   },
 
