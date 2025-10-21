@@ -1,7 +1,6 @@
 title: Finance
-icon: lucide:landmark
-navigation.redirect: /content/finance/settlement-and-billing
-navigation: true
+icon: emojione:bank
+navigation.redirect: /finance/settlement-and-billing/reconciliation-process
 
 
 
