@@ -203,21 +203,22 @@ Making worldwide commerce simple.
   </div>
 </div>
 
-<!-- Localised payment processing -->
-<section class="w-full bg-[#0CA6A6] text-white dark:text-white">
+<br>
+
+<!-- Localised payment processing (theme-inheriting) -->
+<section class="w-full bg-primary text-primary-foreground">
   <div class="mx-auto max-w-6xl px-6 py-14">
-    <!-- Header -->
+    <!-- Title -->
     <h1 class="text-4xl sm:text-5xl font-semibold leading-tight tracking-tight">
       Localised payment<br class="hidden sm:block" />
       processing
     </h1>
 
-<!-- Underline -->
-  <div class="mt-5 h-0.5 w-28 bg-white/70"></div>
+  <!-- Underline -->
+  <div class="mt-5 h-[3px] w-28 rounded-full bg-primary-foreground/70"></div>
 
-<!-- Content -->
-  <div class="mt-8 grid gap-10 lg:grid-cols-12">
-      <!-- Left: bullets -->
+  <div class="mt-10 grid gap-10 lg:grid-cols-12">
+      <!-- Left copy -->
       <div class="lg:col-span-7 space-y-6">
         <h2 class="text-xl sm:text-2xl font-semibold">
           Enable your shoppers to pay with the most popular
@@ -226,35 +227,33 @@ Making worldwide commerce simple.
 
   <ul class="space-y-3 text-lg/7">
           <li class="flex gap-3">
-            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-white/80"></span>
+            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary-foreground/80"></span>
             <span><span class="font-semibold">95+</span> <a class="underline underline-offset-4">localised</a> payment methods.</span>
           </li>
           <li class="flex gap-3">
-            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-white/80"></span>
+            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary-foreground/80"></span>
             <span>ESW's local entities understand the market well, enabling shoppers to pay with the most popular payment methods in their country.</span>
           </li>
           <li class="flex gap-3">
-            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-white/80"></span>
+            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary-foreground/80"></span>
             <span>Intelligent payment routing to the most likely successful processor, increasing payment success rates.</span>
           </li>
         </ul>
       </div>
 
-  <!-- Right: stat card -->
+  <!-- Right stat -->
   <div class="lg:col-span-5">
-        <div class="flex items-center gap-6">
-          <!-- 80% Donut -->
-          <div class="relative h-36 w-36">
-            <svg viewBox="0 0 100 100" class="h-full w-full"><!-- track -->
-              <circle cx="50" cy="50" r="42" stroke="white/30" stroke-width="10" fill="none" /><!-- progress (80%) -->
-              <circle
-                cx="50" cy="50" r="42" fill="none" stroke="white"
-                stroke-width="10" stroke-linecap="round"
-                stroke-dasharray="263.89"   <!-- 2πr -->
-                stroke-dashoffset="52.78"   <!-- (1-0.8)*2πr -->
-                transform="rotate(-90 50 50)"
-              />
-            </svg>
+        <div class="flex items-center gap-7">
+          <!-- Elegant conic-gradient ring (80%) -->
+          <div
+            class="relative h-36 w-36 shrink-0 rounded-full
+                   [background:conic-gradient(currentColor_0_80%,_rgb(255_255_255_/_0.25)_80%_100%)]
+                   text-primary-foreground"
+            aria-hidden="true"
+          >
+            <!-- inner cut-out that inherits section background -->
+            <div class="absolute inset-2 rounded-full bg-inherit"></div>
+            <!-- center value -->
             <div class="absolute inset-0 grid place-items-center">
               <span class="text-3xl font-bold">80%</span>
             </div>
@@ -263,17 +262,18 @@ Making worldwide commerce simple.
   <!-- Copy -->
   <div class="max-w-sm">
             <p class="text-lg">
-              Nearly <span class="font-semibold">80% of consumers</span> are more likely to
-              purchase from brands offering <a class="underline underline-offset-4">personalised</a>
+              Nearly <span class="font-semibold">80% of consumers</span> are more likely to purchase
+              from brands offering <span class="underline underline-offset-4">personalised</span>
               payment experiences.
             </p>
-            <p class="mt-2 text-xs uppercase tracking-wide text-white/70">Source: McKinsey</p>
+            <p class="mt-2 text-xs uppercase tracking-wide text-primary-foreground/70">Source: McKinsey</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
 
 
