@@ -9,17 +9,16 @@ toc: false
 ::hero
 ---
 announcement:
-  title: 'Integration Features Matrix'
-  to: https://esw-know.vercel.app/#integration-features-matrix
-  icon: 'noto:shopping-cart'
+  title: 'ESW Benefits'
+  icon: 'streamline-ultimate-color:laptop-help-message'
 actions:
   - name: Get Started
-    to: /shopify/getting-started-guide
-    leftIcon: 'lucide:footprints'
-  - name: Installation
+    to: /finance/settlement-and-billing/reconciliation-process
+    leftIcon: 'lucide:receipts'
+  - name: Pricing
     variant: ghost
-    to: /shopify/installation/apps
-    leftIcon: 'lucide:plug'
+    to: /finance/pricing/pricing-advisor-example-to-settlement
+    leftIcon: 'lucide:coins'
   - name: Configuration
     variant: ghost
     to: /shopify/configuration/configure-new-markets
@@ -33,7 +32,11 @@ ESW Finance
 Making worldwide commerce simple.
 ::
 
-
+::card
+---
+img: /financial-management-illustration-concept-on-white-background-vector.jpg
+---
+::
 
 <!-- Features (theme-aware, dark-ready) — image removed -->
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto text-foreground">
@@ -203,94 +206,40 @@ Making worldwide commerce simple.
   </div>
 </div>
 
+---
+
+::card-group
+  ::card
+  ---
+  title: Flexibility
+  icon: streamline-ultimate-color:browser-page-media
+  icon-size: 50
+  ---
+  Flexible settlement cadences to match your internal requirements: 
+  - Weekly
+  - Fortnightly
+  - Monthly
+  ::
+
+  ::card
+  ---
+  title: Cashflow
+  icon: streamline-ultimate-color:saving-money-flower
+  icon-size: 50
+  ---
+  - There is no payout threshold in ESW
+  - ESW will remit the full value of your settlement net of our feed in the agreed settlement period
+  ::
+::
+
+
 <br>
 
-<!-- Localised payment processing (integrated with 80% radial gauge) -->
-<section class="w-full">
-  <div class="mx-auto max-w-6xl px-6 py-14">
-    <!-- Title -->
-    <h1 class="text-4xl sm:text-5xl font-semibold leading-tight tracking-tight text-foreground">
-      Localised payment<br class="hidden sm:block" />
-      processing
-    </h1>
-
-<!-- Accent underline -->
-  <div class="mt-4 h-[3px] w-24 rounded-full bg-primary"></div>
-
-  <div class="mt-10 grid gap-10 lg:grid-cols-12">
-      <!-- Left copy -->
-      <div class="lg:col-span-7 space-y-6">
-        <h2 class="text-xl sm:text-2xl font-semibold text-foreground">
-          Enable your shoppers to pay with the most popular
-          payment methods in their country
-        </h2>
-
-  <ul class="space-y-3 text-lg/7 text-muted-foreground">
-          <li class="flex gap-3">
-            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary"></span>
-            <span><span class="font-semibold text-foreground">95+</span> <span class="underline underline-offset-4">localised</span> payment methods.</span>
-          </li>
-          <li class="flex gap-3">
-            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary"></span>
-            <span>ESW's local entities understand the market well, enabling shoppers to pay with the most popular payment methods in their country.</span>
-          </li>
-          <li class="flex gap-3">
-            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary"></span>
-            <span>Intelligent payment routing to the most likely successful processor, increasing payment success rates.</span>
-          </li>
-        </ul>
-      </div>
-
-<!-- Right: 80% Radial Progress + copy -->
-  <div class="lg:col-span-5">
-        <div class="flex items-center gap-7">
-          <!-- 80% Radial Progress Indicator (your SVG pattern) -->
-          <div class="relative size-40">
-            <svg
-              class="size-full -rotate-90"
-              viewBox="0 0 36 36"
-              role="img"
-              aria-label="Progress 80 percent"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <!-- Track -->
-              <circle
-                cx="18" cy="18" r="16" fill="none"
-                class="stroke-current text-muted-foreground/30"
-                stroke-width="2" stroke-linecap="round"
-                stroke-dasharray="100 100"
-              ></circle>
-
-  <!-- Progress (80%) -->
-  <circle
-                cx="18" cy="18" r="16" fill="none"
-                class="stroke-current text-primary"
-                stroke-width="2.5" stroke-linecap="round"
-                stroke-dasharray="80 100"
-              ></circle>
-            </svg>
-
-  <!-- Center value -->
-  <div class="absolute inset-0 grid place-items-center text-center leading-none">
-              <span class="text-3xl font-bold text-primary">80%</span>
-              <span class="mt-1 text-xs text-muted-foreground">Likely to purchase</span>
-            </div>
-          </div>
-
-<!-- Supporting copy -->
-  <div class="max-w-sm text-foreground">
-            <p class="text-lg">
-              Nearly <span class="font-semibold">80% of consumers</span> are more likely to purchase
-              from brands offering <span class="underline underline-offset-4">personalised</span>
-              payment experiences.
-            </p>
-            <p class="mt-2 text-xs uppercase tracking-wide text-muted-foreground">Source: McKinsey</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+::card
+---
+img: /Picture8.png
+---
+::
 
 
 
