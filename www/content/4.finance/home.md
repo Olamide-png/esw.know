@@ -33,11 +33,7 @@ ESW Finance
 Making worldwide commerce simple.
 ::
 
-::card
----
-img: /Picture8.png
----
-::
+
 
 <!-- Features (theme-aware, dark-ready) — image removed -->
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto text-foreground">
@@ -114,85 +110,170 @@ img: /Picture8.png
 
 
 
-<!-- What this means + Reconciliation cards -->
-<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-  <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
-
-<!-- Card: What this means -->
-  <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-3xl p-8 sm:p-10">
-      <h3 class="text-slate-900 dark:text-white text-lg font-semibold mb-4">What this means</h3>
-      <ul class="space-y-5">
-        <li class="flex items-start text-[15px] text-slate-600 dark:text-slate-300 font-medium">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-500 dark:text-emerald-400 fill-current" viewBox="0 0 24 24">
-            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
-          </svg>
-          One payment to your chosen bank account on your chosen day, in line with flexible payment terms.
-        </li>
-        <li class="flex items-start text-[15px] text-slate-600 dark:text-slate-300 font-medium">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-500 dark:text-emerald-400 fill-current" viewBox="0 0 24 24">
-            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
-          </svg>
-          ESW deducts the agreed checkout fee (per contract).
-        </li>
-        <li class="flex items-start text-[15px] text-slate-600 dark:text-slate-300 font-medium">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-500 dark:text-emerald-400 fill-current" viewBox="0 0 24 24">
-            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
-          </svg>
-          ESW handles all relevant tax returns and compliance.
-        </li>
-        <li class="flex items-start text-[15px] text-slate-600 dark:text-slate-300 font-medium">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-500 dark:text-emerald-400 fill-current" viewBox="0 0 24 24">
-            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
-          </svg>
-          ESW deals directly with the (number) payment providers offered.
-        </li>
-      </ul>
-    </div>
-
-  <!-- Card: For your team - ease of reconciliation -->
-  <div class="bg-slate-900 dark:bg-slate-900 border border-gray-900 dark:border-slate-800 shadow-xl rounded-3xl p-8 sm:p-10 relative md:right-1">
-      <h3 class="text-white text-lg font-semibold mb-4">For your team — ease of reconciliation</h3>
-      <ul class="space-y-5">
-        <li class="flex items-start text-[15px] text-slate-300 font-medium">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-400 fill-current" viewBox="0 0 24 24">
-            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
-          </svg>
-          One file with all transaction types, broken down to SKU / Order / Package level.
-        </li>
-        <li class="flex items-start text-[15px] text-slate-300 font-medium">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-400 fill-current" viewBox="0 0 24 24">
-            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
-          </svg>
-          One fee invoiced for checkout services.
-        </li>
-        <li class="flex items-start text-[15px] text-slate-300 font-medium">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-400 fill-current" viewBox="0 0 24 24">
-            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
-          </svg>
-          One payment to reconcile.
-        </li>
-        <li class="flex items-start text-[15px] text-slate-300 font-medium">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-400 fill-current" viewBox="0 0 24 24">
-            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
-          </svg>
-          Option to choose currency/currencies — ESW takes the FX exposure.
-        </li>
-        <li class="flex items-start text-[15px] text-slate-300 font-medium">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-400 fill-current" viewBox="0 0 24 24">
-            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
-          </svg>
-          Dedicated ESW finance contact for any payment/order queries.
-        </li>
-        <li class="flex items-start text-[15px] text-slate-300 font-medium">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-400 fill-current" viewBox="0 0 24 24">
-            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
-          </svg>
-          Reconciliation reports via Email/SFTP; ad-hoc analysis in Looker at any time.
-        </li>
-      </ul>
+<div class="px-4 py-8 bg-white dark:bg-neutral-900">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center">
+      <h2 class="text-3xl font-bold leading-tight text-gray-900 dark:text-white sm:text-4xl lg:text-5xl">What this means</h2>
+      <p class="text-[15px] text-slate-600 dark:text-slate-300">ESW benefits for you and your team.</p>
     </div>
   </div>
 </div>
+
+  <div class="grid md:grid-cols-2 items-center gap-y-6 mt-12 max-md:max-w-md max-md:mx-auto">
+      <!-- Shopify Card -->
+      <div class="bg-white border border-gray-300 shadow-lg md:rounded-tl-3xl md:rounded-bl-3xl max-md:rounded-3xl p-8 sm:p-10">
+        <h3 class="text-slate-900 text-lg font-semibold mb-4">For you</h3>
+        <ul class="space-y-5">
+          <li class="flex items-center text-[15px] text-slate-600 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            Receive a single payment to your chosen bank account on your selected day, in line with our flexible payment terms.
+          </li>
+          <li class="flex items-center text-[15px] text-slate-600 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            ESW deducts a checkout fee from this as agreed per the contract.
+          </li>
+          <li class="flex items-center text-[15px] text-slate-600 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            ESW takes care of all relevant tax returns and compliance on your behalf.
+          </li>
+          <li class="flex items-center text-[15px] text-slate-600 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            ESW deals directly with every payment provider we support.
+          </li>
+        </ul>
+      </div>
+
+  <!-- ESW Card -->
+  <div class="bg-slate-900 border border-gray-900 shadow-xl rounded-3xl p-8 sm:p-10 relative md:right-1">
+        <h3 class="text-white text-lg font-semibold mb-4">For your team</h3>
+        <ul class="space-y-5">
+          <li class="flex items-center text-[15px] text-slate-300 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            Ease of reconciliation.
+          </li>
+          <li class="flex items-center text-[15px] text-slate-300 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            A single file containing all transaction types, broken down by SKU, Order, and Package level.
+          </li>
+          <li class="flex items-center text-[15px] text-slate-300 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            One single fee invoiced for checkout services.
+          </li>
+          <li class="flex items-center text-[15px] text-slate-300 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            One payment to reconcile.
+          </li>
+          <li class="flex items-center text-[15px] text-slate-300 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            Select the currencies that suit you while ESW handles all FX exposure.
+          </li>
+          <li class="flex items-center text-[15px] text-slate-300 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            A dedicated ESW finance contact to assist with any payment or order queries.
+          </li>
+          <li class="flex items-center text-[15px] text-slate-300 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+              <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
+            </svg>
+            Get reconciliation reports by email or SFTP, with on-demand analysis available in Looker.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Localised payment processing -->
+<section class="w-full bg-[#0CA6A6] text-white dark:text-white">
+  <div class="mx-auto max-w-6xl px-6 py-14">
+    <!-- Header -->
+    <h1 class="text-4xl sm:text-5xl font-semibold leading-tight tracking-tight">
+      Localised payment<br class="hidden sm:block" />
+      processing
+    </h1>
+
+<!-- Underline -->
+  <div class="mt-5 h-0.5 w-28 bg-white/70"></div>
+
+<!-- Content -->
+  <div class="mt-8 grid gap-10 lg:grid-cols-12">
+      <!-- Left: bullets -->
+      <div class="lg:col-span-7 space-y-6">
+        <h2 class="text-xl sm:text-2xl font-semibold">
+          Enable your shoppers to pay with the most popular
+          payment methods in their country
+        </h2>
+
+  <ul class="space-y-3 text-lg/7">
+          <li class="flex gap-3">
+            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-white/80"></span>
+            <span><span class="font-semibold">95+</span> <a class="underline underline-offset-4">localised</a> payment methods.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-white/80"></span>
+            <span>ESW's local entities understand the market well, enabling shoppers to pay with the most popular payment methods in their country.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-white/80"></span>
+            <span>Intelligent payment routing to the most likely successful processor, increasing payment success rates.</span>
+          </li>
+        </ul>
+      </div>
+
+  <!-- Right: stat card -->
+  <div class="lg:col-span-5">
+        <div class="flex items-center gap-6">
+          <!-- 80% Donut -->
+          <div class="relative h-36 w-36">
+            <svg viewBox="0 0 100 100" class="h-full w-full"><!-- track -->
+              <circle cx="50" cy="50" r="42" stroke="white/30" stroke-width="10" fill="none" /><!-- progress (80%) -->
+              <circle
+                cx="50" cy="50" r="42" fill="none" stroke="white"
+                stroke-width="10" stroke-linecap="round"
+                stroke-dasharray="263.89"   <!-- 2πr -->
+                stroke-dashoffset="52.78"   <!-- (1-0.8)*2πr -->
+                transform="rotate(-90 50 50)"
+              />
+            </svg>
+            <div class="absolute inset-0 grid place-items-center">
+              <span class="text-3xl font-bold">80%</span>
+            </div>
+          </div>
+
+  <!-- Copy -->
+  <div class="max-w-sm">
+            <p class="text-lg">
+              Nearly <span class="font-semibold">80% of consumers</span> are more likely to
+              purchase from brands offering <a class="underline underline-offset-4">personalised</a>
+              payment experiences.
+            </p>
+            <p class="mt-2 text-xs uppercase tracking-wide text-white/70">Source: McKinsey</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 
