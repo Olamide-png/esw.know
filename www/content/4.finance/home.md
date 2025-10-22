@@ -205,74 +205,84 @@ Making worldwide commerce simple.
 
 <br>
 
-<!-- Localised payment processing (theme-inheriting) -->
-<section class="w-full bg-primary text-primary-foreground">
+<!-- Localised payment processing (no background, theme-inheriting) -->
+<section class="w-full">
   <div class="mx-auto max-w-6xl px-6 py-14">
     <!-- Title -->
-    <h1 class="text-4xl sm:text-5xl font-semibold leading-tight tracking-tight">
+    <h1 class="text-4xl sm:text-5xl font-semibold leading-tight tracking-tight text-foreground">
       Localised payment<br class="hidden sm:block" />
       processing
     </h1>
 
-  <!-- Underline -->
-  <div class="mt-5 h-[3px] w-28 rounded-full bg-primary-foreground/70"></div>
+  <!-- Accent underline -->
+  <div class="mt-4 h-[3px] w-24 rounded-full bg-primary"></div>
 
   <div class="mt-10 grid gap-10 lg:grid-cols-12">
       <!-- Left copy -->
       <div class="lg:col-span-7 space-y-6">
-        <h2 class="text-xl sm:text-2xl font-semibold">
+        <h2 class="text-xl sm:text-2xl font-semibold text-foreground">
           Enable your shoppers to pay with the most popular
           payment methods in their country
         </h2>
 
-  <ul class="space-y-3 text-lg/7">
+  <ul class="space-y-3 text-lg/7 text-muted-foreground">
           <li class="flex gap-3">
-            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary-foreground/80"></span>
-            <span><span class="font-semibold">95+</span> <a class="underline underline-offset-4">localised</a> payment methods.</span>
+            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary"></span>
+            <span><span class="font-semibold text-foreground">95+</span> <span class="underline underline-offset-4">localised</span> payment methods.</span>
           </li>
           <li class="flex gap-3">
-            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary-foreground/80"></span>
+            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary"></span>
             <span>ESW's local entities understand the market well, enabling shoppers to pay with the most popular payment methods in their country.</span>
           </li>
           <li class="flex gap-3">
-            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary-foreground/80"></span>
+            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary"></span>
             <span>Intelligent payment routing to the most likely successful processor, increasing payment success rates.</span>
           </li>
         </ul>
       </div>
 
-  <!-- Right stat -->
+  <!-- Right: 80% Gauge and copy -->
   <div class="lg:col-span-5">
         <div class="flex items-center gap-7">
-          <!-- Elegant conic-gradient ring (80%) -->
-          <div
-            class="relative h-36 w-36 shrink-0 rounded-full
-                   [background:conic-gradient(currentColor_0_80%,_rgb(255_255_255_/_0.25)_80%_100%)]
-                   text-primary-foreground"
-            aria-hidden="true"
-          >
-            <!-- inner cut-out that inherits section background -->
-            <div class="absolute inset-2 rounded-full bg-inherit"></div>
-            <!-- center value -->
-            <div class="absolute inset-0 grid place-items-center">
-              <span class="text-3xl font-bold">80%</span>
+          <!-- Gauge Component (80%) -->
+          <div class="relative size-40">
+            <svg class="size-full rotate-180" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><!-- Track -->
+              <circle
+                cx="18" cy="18" r="16" fill="none"
+                class="stroke-current text-muted-foreground/30"
+                stroke-width="1.25" stroke-dasharray="100 100" stroke-linecap="round">
+              </circle>
+
+  <!-- Progress (80%) -->
+  <circle
+                cx="18" cy="18" r="16" fill="none"
+                class="stroke-current text-primary"
+                stroke-width="1.75" stroke-dasharray="80 100" stroke-linecap="round">
+              </circle>
+            </svg>
+
+  <!-- Center value -->
+  <div class="absolute inset-0 grid place-items-center text-center">
+              <span class="text-4xl font-bold text-primary">80%</span>
+              <span class="text-sm text-muted-foreground">Likely to purchase</span>
             </div>
           </div>
 
   <!-- Copy -->
-  <div class="max-w-sm">
+<div class="max-w-sm text-foreground">
             <p class="text-lg">
               Nearly <span class="font-semibold">80% of consumers</span> are more likely to purchase
               from brands offering <span class="underline underline-offset-4">personalised</span>
               payment experiences.
             </p>
-            <p class="mt-2 text-xs uppercase tracking-wide text-primary-foreground/70">Source: McKinsey</p>
+            <p class="mt-2 text-xs uppercase tracking-wide text-muted-foreground">Source: McKinsey</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
 
 
