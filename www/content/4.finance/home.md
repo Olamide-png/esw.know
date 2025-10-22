@@ -27,13 +27,17 @@ actions:
 ---
 
 #title
-Shopify Native.
+ESW Finance
 
 #description
-The ESW integration with Shopify enables merchants to expand globally, process payments in multiple currencies, accurately calculate duties and taxes, streamline shipping, comply with regulations, and make data-driven optimizations.
+Making worldwide commerce simple.
 ::
 
-
+::card
+---
+img: /Picture8.png
+---
+::
 
 <!-- Features (theme-aware, dark-ready) — image removed -->
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto text-foreground">
@@ -41,10 +45,10 @@ The ESW integration with Shopify enables merchants to expand globally, process p
   <div class="grid lg:grid-cols-3 gap-8 lg:gap-12">
     <div class="lg:col-span-1">
       <h2 class="font-bold text-2xl md:text-3xl text-foreground">
-        We tackle the challenges start-ups face
+        ESW believes in making worldwide commerce simple
       </h2>
       <p class="mt-2 md:mt-4 text-muted-foreground">
-        Besides working with start-up enterprises as a partner for digitalization, we have built enterprise products for common pain points that we have encountered in various products and projects.
+        Our finance solutions are designed to streamline cross-border transactions, ensuring seamless settlements and transparent billing processes for retailers and shoppers alike.
       </p>
     </div>
     <!-- End Col -->
@@ -61,8 +65,8 @@ The ESW integration with Shopify enables merchants to expand globally, process p
             <line x1="16" x2="16" y1="16" y2="16" />
           </svg>
           <div class="grow">
-            <h3 class="text-lg font-semibold text-foreground">Creative minds</h3>
-            <p class="mt-1 text-muted-foreground">We choose our teams carefully. Our people are the secret to great work.</p>
+            <h3 class="text-lg font-semibold text-foreground">Decrease complexity</h3>
+            <p class="mt-1 text-muted-foreground">ESW decreases complexity to provide a seamless experience to shoppers everywhere.</p>
           </div>
         </div><!-- End Icon Block -->
 
@@ -73,8 +77,8 @@ The ESW integration with Shopify enables merchants to expand globally, process p
             <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z" />
           </svg>
           <div class="grow">
-            <h3 class="text-lg font-semibold text-foreground">Simple and affordable</h3>
-            <p class="mt-1 text-muted-foreground">From boarding passes to movie tickets, there's pretty much nothing you can't store with Preline.</p>
+            <h3 class="text-lg font-semibold text-foreground">Shared revenue model</h3>
+            <p class="mt-1 text-muted-foreground">ESW has a shared revenue model and a vested interest in your growth and cross border potential.</p>
           </div>
         </div><!-- End Icon Block -->
 
@@ -85,8 +89,8 @@ The ESW integration with Shopify enables merchants to expand globally, process p
             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
           </svg>
           <div class="grow">
-            <h3 class="text-lg font-semibold text-foreground">Industry-leading documentation</h3>
-            <p class="mt-1 text-muted-foreground">Our documentation and extensive Client libraries contain everything a business needs to build a custom integration.</p>
+            <h3 class="text-lg font-semibold text-foreground">Tax and compliance</h3>
+            <p class="mt-1 text-muted-foreground">ESW handles tax, compliance and collection of money from PSPs.</p>
           </div>
         </div><!-- End Icon Block -->
 
@@ -99,8 +103,8 @@ The ESW integration with Shopify enables merchants to expand globally, process p
             <path d="M16 3.13a4 4 0 0 1 0 7.75" />
           </svg>
           <div class="grow">
-            <h3 class="text-lg font-semibold text-foreground">Designing for people</h3>
-            <p class="mt-1 text-muted-foreground">We actively pursue the right balance between functionality and aesthetics, creating delightful experiences.</p>
+            <h3 class="text-lg font-semibold text-foreground">Flexibility</h3>
+            <p class="mt-1 text-muted-foreground">Flexible settlement cadences to match your internal requirements: weekly, fortnightly, or monthly.</p>
           </div>
         </div><!-- End Icon Block -->
       </div>
@@ -110,6 +114,85 @@ The ESW integration with Shopify enables merchants to expand globally, process p
 
 
 
+<!-- What this means + Reconciliation cards -->
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+
+<!-- Card: What this means -->
+  <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-3xl p-8 sm:p-10">
+      <h3 class="text-slate-900 dark:text-white text-lg font-semibold mb-4">What this means</h3>
+      <ul class="space-y-5">
+        <li class="flex items-start text-[15px] text-slate-600 dark:text-slate-300 font-medium">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-500 dark:text-emerald-400 fill-current" viewBox="0 0 24 24">
+            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
+          </svg>
+          One payment to your chosen bank account on your chosen day, in line with flexible payment terms.
+        </li>
+        <li class="flex items-start text-[15px] text-slate-600 dark:text-slate-300 font-medium">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-500 dark:text-emerald-400 fill-current" viewBox="0 0 24 24">
+            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
+          </svg>
+          ESW deducts the agreed checkout fee (per contract).
+        </li>
+        <li class="flex items-start text-[15px] text-slate-600 dark:text-slate-300 font-medium">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-500 dark:text-emerald-400 fill-current" viewBox="0 0 24 24">
+            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
+          </svg>
+          ESW handles all relevant tax returns and compliance.
+        </li>
+        <li class="flex items-start text-[15px] text-slate-600 dark:text-slate-300 font-medium">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-500 dark:text-emerald-400 fill-current" viewBox="0 0 24 24">
+            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
+          </svg>
+          ESW deals directly with the (number) payment providers offered.
+        </li>
+      </ul>
+    </div>
+
+  <!-- Card: For your team - ease of reconciliation -->
+  <div class="bg-slate-900 dark:bg-slate-900 border border-gray-900 dark:border-slate-800 shadow-xl rounded-3xl p-8 sm:p-10 relative md:right-1">
+      <h3 class="text-white text-lg font-semibold mb-4">For your team — ease of reconciliation</h3>
+      <ul class="space-y-5">
+        <li class="flex items-start text-[15px] text-slate-300 font-medium">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-400 fill-current" viewBox="0 0 24 24">
+            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
+          </svg>
+          One file with all transaction types, broken down to SKU / Order / Package level.
+        </li>
+        <li class="flex items-start text-[15px] text-slate-300 font-medium">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-400 fill-current" viewBox="0 0 24 24">
+            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
+          </svg>
+          One fee invoiced for checkout services.
+        </li>
+        <li class="flex items-start text-[15px] text-slate-300 font-medium">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-400 fill-current" viewBox="0 0 24 24">
+            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
+          </svg>
+          One payment to reconcile.
+        </li>
+        <li class="flex items-start text-[15px] text-slate-300 font-medium">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-400 fill-current" viewBox="0 0 24 24">
+            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
+          </svg>
+          Option to choose currency/currencies — ESW takes the FX exposure.
+        </li>
+        <li class="flex items-start text-[15px] text-slate-300 font-medium">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-400 fill-current" viewBox="0 0 24 24">
+            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
+          </svg>
+          Dedicated ESW finance contact for any payment/order queries.
+        </li>
+        <li class="flex items-start text-[15px] text-slate-300 font-medium">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="mr-3 shrink-0 text-emerald-400 fill-current" viewBox="0 0 24 24">
+            <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"/>
+          </svg>
+          Reconciliation reports via Email/SFTP; ad-hoc analysis in Looker at any time.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 
 
 
