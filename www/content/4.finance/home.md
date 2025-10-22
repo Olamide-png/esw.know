@@ -205,7 +205,7 @@ Making worldwide commerce simple.
 
 <br>
 
-<!-- Localised payment processing (no background, theme-inheriting) -->
+<!-- Localised payment processing (integrated with 80% radial gauge) -->
 <section class="w-full">
   <div class="mx-auto max-w-6xl px-6 py-14">
     <!-- Title -->
@@ -214,7 +214,7 @@ Making worldwide commerce simple.
       processing
     </h1>
 
-  <!-- Accent underline -->
+<!-- Accent underline -->
   <div class="mt-4 h-[3px] w-24 rounded-full bg-primary"></div>
 
   <div class="mt-10 grid gap-10 lg:grid-cols-12">
@@ -241,35 +241,44 @@ Making worldwide commerce simple.
         </ul>
       </div>
 
-  <!-- Right: 80% Gauge and copy -->
+<!-- Right: 80% Radial Progress + copy -->
   <div class="lg:col-span-5">
         <div class="flex items-center gap-7">
-          <!-- Gauge Component (80%) -->
+          <!-- 80% Radial Progress Indicator (your SVG pattern) -->
           <div class="relative size-40">
-            <svg class="size-full rotate-180" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><!-- Track -->
+            <svg
+              class="size-full -rotate-90"
+              viewBox="0 0 36 36"
+              role="img"
+              aria-label="Progress 80 percent"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <!-- Track -->
               <circle
                 cx="18" cy="18" r="16" fill="none"
                 class="stroke-current text-muted-foreground/30"
-                stroke-width="1.25" stroke-dasharray="100 100" stroke-linecap="round">
-              </circle>
+                stroke-width="2" stroke-linecap="round"
+                stroke-dasharray="100 100"
+              ></circle>
 
   <!-- Progress (80%) -->
   <circle
                 cx="18" cy="18" r="16" fill="none"
                 class="stroke-current text-primary"
-                stroke-width="1.75" stroke-dasharray="80 100" stroke-linecap="round">
-              </circle>
+                stroke-width="2.5" stroke-linecap="round"
+                stroke-dasharray="80 100"
+              ></circle>
             </svg>
 
   <!-- Center value -->
-  <div class="absolute inset-0 grid place-items-center text-center">
-              <span class="text-4xl font-bold text-primary">80%</span>
-              <span class="text-sm text-muted-foreground">Likely to purchase</span>
+  <div class="absolute inset-0 grid place-items-center text-center leading-none">
+              <span class="text-3xl font-bold text-primary">80%</span>
+              <span class="mt-1 text-xs text-muted-foreground">Likely to purchase</span>
             </div>
           </div>
 
-  <!-- Copy -->
-<div class="max-w-sm text-foreground">
+<!-- Supporting copy -->
+  <div class="max-w-sm text-foreground">
             <p class="text-lg">
               Nearly <span class="font-semibold">80% of consumers</span> are more likely to purchase
               from brands offering <span class="underline underline-offset-4">personalised</span>
@@ -283,60 +292,6 @@ Making worldwide commerce simple.
   </div>
 </section>
 
-
-<!-- Gauge Component -->
-<div class="relative size-40">
-  <svg class="rotate-[135deg] size-full" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-    <!-- Background Circle (Gauge) -->
-    <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-purple-200 dark:text-neutral-700" stroke-width="1" stroke-dasharray="75 100"></circle>
-
-    <!-- Gauge Progress -->
-    <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-purple-600 dark:text-purple-500" stroke-width="2" stroke-dasharray="18.75 100"></circle>
-  </svg>
-
-  <!-- Value Text -->
-  <div class="absolute top-1/2 start-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-    <span class="text-4xl font-bold text-purple-600 dark:text-purple-500">25</span>
-    <span class="text-purple-600 dark:text-purple-500 block">mph</span>
-  </div>
-</div>
-<!-- End Gauge Component -->
-
-<!-- Gauge Component -->
-<div class="relative size-40">
-  <svg class="rotate-[135deg] size-full" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-    <!-- Background Circle (Gauge) -->
-    <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-green-200 dark:text-neutral-700" stroke-width="1" stroke-dasharray="75 100" stroke-linecap="round"></circle>
-
-    <!-- Gauge Progress -->
-    <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-green-500 dark:text-green-500" stroke-width="2" stroke-dasharray="56.25 100" stroke-linecap="round"></circle>
-  </svg>
-
-  <!-- Value Text -->
-  <div class="absolute top-1/2 start-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-    <span class="text-4xl font-bold text-green-600 dark:text-green-500">75</span>
-    <span class="text-green-600 dark:text-green-500 block">Score</span>
-  </div>
-</div>
-<!-- End Gauge Component -->
-
-<!-- Gauge Component -->
-<div class="relative size-40">
-  <svg class="size-full rotate-180" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-    <!-- Background Circle (Gauge) -->
-    <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-orange-100 dark:text-neutral-700" stroke-width="3" stroke-dasharray="50 100" stroke-linecap="round"></circle>
-
-    <!-- Gauge Progress -->
-    <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-orange-600 dark:text-orange-500" stroke-width="1" stroke-dasharray="25 100" stroke-linecap="round"></circle>
-  </svg>
-
-  <!-- Value Text -->
-  <div class="absolute top-9 start-1/2 transform -translate-x-1/2 text-center">
-    <span class="text-2xl font-bold text-orange-600 dark:text-orange-500">50</span>
-    <span class="text-xs text-orange-600 dark:text-orange-500 block">Average</span>
-  </div>
-</div>
-<!-- End Gauge Component -->
 
 
 
