@@ -12,7 +12,8 @@ announcement:
   title: 'ESW Benefits'
   icon: 'streamline-ultimate-color:laptop-help-message'
 actions:
-  - name: Get Started
+  - name: Reconciliation
+    variant: ghost
     to: /finance/settlement-and-billing/reconciliation-process
     leftIcon: 'lucide:receipts'
   - name: Pricing
@@ -34,7 +35,7 @@ Making worldwide commerce simple.
 
 ::card
 ---
-img: /financial-management-illustration-concept-on-white-background-vector.jpg
+img: /investor-with-laptop-monitoring-growth-dividends-trader-sitting-stack-money-investing-capital-analyzing-profit-graphs-vector-illustration-finance-stock-trading-investment_74855-8432.jpg
 ---
 ::
 
@@ -206,7 +207,7 @@ img: /financial-management-illustration-concept-on-white-background-vector.jpg
   </div>
 </div>
 
----
+<br>
 
 ::card-group
   ::card
@@ -230,6 +231,19 @@ img: /financial-management-illustration-concept-on-white-background-vector.jpg
   - There is no payout threshold in ESW
   - ESW will remit the full value of your settlement net of our feed in the agreed settlement period
   ::
+::
+
+::card
+---
+icon: 'lucide:hand-coins'
+icon-size: 50
+---
+
+#title
+Payment processing
+
+#description
+ESW will remit payment within **two business days** of your selected settlement period, via bank transfer or ACH to your designated account.
 ::
 
 
