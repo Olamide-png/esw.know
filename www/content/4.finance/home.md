@@ -10,6 +10,7 @@ toc: false
 ---
 announcement:
   title: 'ESW Benefits'
+  to: /finance/home/#what-this-means
   icon: 'streamline-ultimate-color:laptop-help-message'
 actions:
   - name: Reconciliation
@@ -118,7 +119,7 @@ img: /business-finance-illustration-concept-flat-illustration-isolated-on-white-
   <div class="max-w-4xl mx-auto">
     <div class="text-center">
       <h2 class="text-3xl font-bold leading-tight text-gray-900 dark:text-white sm:text-4xl lg:text-5xl">What this means</h2>
-      <p class="text-[15px] text-slate-600 dark:text-slate-300">ESW benefits for you and your team.</p>
+      <p class="text-[15px] text-slate-600 dark:text-slate-300">ESW benefits.</p>
     </div>
   </div>
 </div>
@@ -126,7 +127,7 @@ img: /business-finance-illustration-concept-flat-illustration-isolated-on-white-
   <div class="grid md:grid-cols-2 items-center gap-y-6 mt-12 max-md:max-w-md max-md:mx-auto">
       <!-- Shopify Card -->
       <div class="bg-white border border-gray-300 shadow-lg md:rounded-tl-3xl md:rounded-bl-3xl max-md:rounded-3xl p-8 sm:p-10">
-        <h3 class="text-slate-900 text-lg font-semibold mb-4">For you</h3>
+        <h3 class="text-slate-900 text-lg font-semibold mb-4"></h3>
         <ul class="space-y-5">
           <li class="flex items-center text-[15px] text-slate-600 font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
