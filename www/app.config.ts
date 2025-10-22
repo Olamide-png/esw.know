@@ -45,33 +45,26 @@ export default defineAppConfig({
         triggerType: 'icon',
         dropdownType: 'select',
       },
-      nav: [
-        {
-          title: 'Docs',
-          links: [
-            {
-              title: 'Shopify',
-              to: '/shopify/installation/payments-app',
-              description: 'Install the ESW Shopify Apps.',
-              icon: 'lucide:shopping-bag',
-            },
-            {
-              title: 'Finance',
-              to: '/finance/settlement-and-billing/reconciliation-process',
-              description: 'Explore Finance and Settlement Docs.',
-              icon: 'lucide:landmark',
-            },
-            {
-              title: 'API References',
-              to: 'https://eswapis.vercel.app',
-              target: '_blank',
-              showLinkIcon: true,
-              description: 'API documentation for ESW services',
-              icon: 'lucide:code',
-            },
-          ],
-        },
-      ],
+      nav: [{
+        title: 'Docs',
+        links: [{
+          title: 'Shopify',
+          to: '/shopify/installation/payments-app',
+          description: 'Install the ESW Shopify Apps.',
+          icon: 'lucide:shopping-bag',
+        }, {
+          title: 'Finance',
+          to: '/finance/settlement-and-billing/reconciliation-process',
+          description: 'Explore our Finance Docs.',
+          icon: 'lucide:landmark',
+      }, {
+        title: 'API References',
+        to: 'https://eswapis.vercel.app',
+        target: '_blank',
+        showLinkIcon: true,
+        description: 'API documentation for ESW services',
+        icon: 'lucide:code',
+      }],
       links: [
         {
           title: 'API References',
