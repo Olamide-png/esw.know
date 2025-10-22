@@ -15,15 +15,15 @@ actions:
   - name: Reconciliation
     variant: ghost
     to: /finance/settlement-and-billing/reconciliation-process
-    leftIcon: 'lucide:receipts'
+    leftIcon: 'lucide:badge-dollar-sign'
   - name: Pricing
     variant: ghost
     to: /finance/pricing/pricing-advisor-example-to-settlement
     leftIcon: 'lucide:coins'
-  - name: Configuration
+  - name: Order Flow
     variant: ghost
-    to: /shopify/configuration/configure-new-markets
-    leftIcon: 'lucide:wrench'
+    to: /finance/order-flow/Flow-to-order-confirmation-payloads
+    leftIcon: 'lucide:arrow-down-up'
 ---
 
 #title
@@ -233,9 +233,11 @@ img: /investor-with-laptop-monitoring-growth-dividends-trader-sitting-stack-mone
   ::
 ::
 
+<br>
+
 ::card
 ---
-icon: 'lucide:hand-coins'
+icon: 'streamline-ultimate-color:data-transfer-circle'
 icon-size: 50
 ---
 
