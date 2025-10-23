@@ -23,7 +23,7 @@ actions:
     leftIcon: 'lucide:coins'
   - name: Order Flow
     variant: ghost
-    to: /finance/order-flow/Flow-to-order-confirmation-payloads
+    to: /finance/order-flow/flow-to-order-confirmation-payloads
     leftIcon: 'lucide:arrow-down-up'
 ---
 

@@ -21,7 +21,7 @@ actions:
     leftIcon: 'lucide:receipt'
   - name: FAQs
     variant: ghost
-    to: /finance/FAQs-and-customization
+    to: /finance/faqs-and-customization
     leftIcon: 'lucide:badge-question-mark'
 ---
 
