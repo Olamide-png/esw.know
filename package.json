@@ -11,6 +11,7 @@
     "preview": "pnpm -C www preview"
   },
   "dependencies": {
+    "@nuxt/content": "^3.7.1",
     "@scalar/api-reference": "^1.38.1",
     "pg": "^8.16.3",
     "pgvector": "^0.2.1",
