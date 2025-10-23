@@ -9,21 +9,21 @@ toc: false
 ::hero
 ---
 announcement:
-  title: 'Integration Features Matrix'
-  to: https://esw-know.vercel.app/#integration-features-matrix
-  icon: 'noto:shopping-cart'
+  title: 'Docs and Guides'
+  to: /index/#docs-and-guides
+  icon: 'streamline-ultimate-color:app-window-text'
 actions:
   - name: Get Started
-    to: /shopify/getting-started-guide
-    leftIcon: 'lucide:footprints'
-  - name: Settlement and Billing
+    to: /shopify/home
+    leftIcon: 'lucide:store'
+  - name: Finance & Settlement
     variant: ghost
-    to: /finance/settlement-and-billing/reconciliation-process
-    leftIcon: 'lucide:plug'
+    to: /finance/home
+    leftIcon: 'lucide:receipt'
   - name: FAQs
     variant: ghost
     to: /finance/FAQs-and-customization
-    leftIcon: 'lucide:wrench'
+    leftIcon: 'lucide:badge-question-mark'
 ---
 
 #title
@@ -35,10 +35,11 @@ Explore our documentation and guides
 
 ::card
 ---
-img: /Picture11.png
+img: /people-concept-illustration-of-grow-up-idea-concept-business-presentation-and-marketing-material-vector (1).jpg
 ---
 ::
 
+# Docs and Guides
 
 ::card-group
   ::card
@@ -46,8 +47,8 @@ img: /Picture11.png
   title: Shopify Native
   icon: logos:shopify
   icon-size: 50
-  to: /shopify/home
-  target: _blank
+  to: /shopify/getting-started-guide
+  target: _self
   ---
   The ESW integration with Shopify enables merchants to expand globally
   ::
@@ -57,8 +58,8 @@ img: /Picture11.png
   title: Finance and Settlement
   icon: emojione:bank
   icon-size: 50
-  to: /finance/home
-  target: _blank
+  to: /finance/reconciliation-process
+  target: _self
   ---
   Making worldwide commerce simple.
   ::
