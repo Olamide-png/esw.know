@@ -10,7 +10,6 @@ toc: false
 ---
 announcement:
   title: 'Docs and Guides'
-  to: /index/#docs-and-guides
   icon: 'streamline-ultimate-color:app-window-text'
 actions:
   - name: Get Started
@@ -39,7 +38,9 @@ img: /people-concept-illustration-of-grow-up-idea-concept-business-presentation-
 ---
 ::
 
-# Docs and Guides
+---
+
+### Docs and Guides
 
 ::card-group
   ::card
@@ -58,7 +59,7 @@ img: /people-concept-illustration-of-grow-up-idea-concept-business-presentation-
   title: Finance and Settlement
   icon: emojione:bank
   icon-size: 50
-  to: /finance/reconciliation-process
+  to: /finance/settlement-and-billing/reconciliation-process
   target: _self
   ---
   Making worldwide commerce simple.
