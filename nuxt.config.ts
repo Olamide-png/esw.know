@@ -5,13 +5,11 @@ import fs from 'node:fs'
 
 const currentDir = dirname(fileURLToPath(import.meta.url))
 
-// --- Resolve CSS files whether they live at ./assets or ./www/assets ---
 function resolveCss(relA: string, relB: string) {
   const a = join(currentDir, relA)
   if (fs.existsSync(a)) return a
   const b = join(currentDir, relB)
   if (fs.existsSync(b)) return b
-  // fall back to A; Vite will show a clear error if neither exists
   return a
 }
 
@@ -19,18 +17,21 @@ const THEMES_CSS   = resolveCss('./assets/css/themes.css',   './www/assets/css/t
 const TAILWIND_CSS = resolveCss('./assets/css/tailwind.css', './www/assets/css/tailwind.css')
 
 export default defineNuxtConfig(async () => {
-  // ✅ Dynamic import keeps Vercel/JITI happy for ESM-only packages
-  const tailwindVite = (await import('@tailwindcss/vite')).default
+  // 🔐 Try to import @tailwindcss/vite, but don’t fail the build if it’s missing/broken on CI
+  let tailwindVite: any = null
+  try {
+    tailwindVite = (await import('@tailwindcss/vite')).default
+  } catch (e) {
+    console.warn('[nuxt] @tailwindcss/vite not loaded; continuing without the Vite plugin on this environment.')
+  }
 
   return {
     devtools: { enabled: true },
-    // builder: 'vite', // optional; Vite is default in Nuxt 3
 
     runtimeConfig: {
-      // ✅ removed duplicate TRYIT_ALLOWED_HOSTS
       TRYIT_ALLOWED_HOSTS: process.env.TRYIT_ALLOWED_HOSTS || '',
       nlwebBaseUrl: process.env.NLWEB_BASE_URL,
-      openaiApiKey: process.env.OPENAI_API_KEY, // no fallback to ''
+      openaiApiKey: process.env.OPENAI_API_KEY,
       openaiModel: process.env.OPENAI_MODEL || 'gpt-4.1-mini',
       embedModel: process.env.EMBED_MODEL || 'text-embedding-3-small',
       chunkMaxChars: Number(process.env.CHUNK_MAX_CHARS || 2800),
@@ -44,9 +45,7 @@ export default defineNuxtConfig(async () => {
 
     nitro: {
       routeRules: {
-        // Force Node runtime–like behavior/CORS headers where needed
         '/api/nlweb/**': { cors: true, headers: { 'Cache-Control': 'no-store' } }
-        // '/api/**': { runtime: 'node' } // optional blanket rule
       }
     },
 
@@ -85,7 +84,6 @@ export default defineNuxtConfig(async () => {
       disableTransition: true
     },
 
-    // ✅ Use resolved absolute file paths so Vite never guesses
     css: [THEMES_CSS, TAILWIND_CSS],
 
     content: {
@@ -109,7 +107,9 @@ export default defineNuxtConfig(async () => {
     typescript: { tsConfig: { compilerOptions: { baseUrl: '.' } } },
 
     vite: {
-      plugins: [tailwindVite()],
+      plugins: [
+        ...(tailwindVite ? [tailwindVite()] : [])
+      ],
       resolve: {
         alias: {
           '~': currentDir,
@@ -124,13 +124,14 @@ export default defineNuxtConfig(async () => {
     app: {
       head: {
         link: [
-          { rel: 'preconnect', href: 'https://eswapis.vercel.app' },
+          { rel: 'preconnect',  href: 'https://eswapis.vercel.app' },
           { rel: 'dns-prefetch', href: 'https://eswapis.vercel.app' }
         ]
       }
     }
   }
 })
+
 
 
 
