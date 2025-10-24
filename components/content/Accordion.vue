@@ -16,3 +16,4 @@ const { type = 'single' } = defineProps<{
   defaultValue: string | string[];
 }>();
 </script>
+

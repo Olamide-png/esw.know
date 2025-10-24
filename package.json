@@ -17,8 +17,6 @@
     "swagger-ui-dist": "^5.29.5"
   },
   "devDependencies": {
-    "@redocly/cli": "^2.8.0",
-    "js-yaml": "^4.1.0",
-    "ts-node": "^10.9.2"
+    "@redocly/cli": "^2.8.0"
   }
 }
