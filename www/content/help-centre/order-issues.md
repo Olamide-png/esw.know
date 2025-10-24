@@ -35,7 +35,7 @@ toc: true
           <div class="text-sm text-gray-400">Series</div>
           <div class="text-lg text-gray-800">2019</div>
         </div>
-          <p class=" text-gray-400 max-h-40 overflow-y-hidden">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p class=" text-gray-400 max-h-40 overflow-y-hidden">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..</p>
         <div class="flex text-2xl font-bold text-a">$83.90</div>
     </div>
   </div>
