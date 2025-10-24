@@ -1,6 +1,6 @@
 // types/reka-ui-shim.d.ts
 declare module 'reka-ui' {
-  // Extend these if other components need more types.
+  // Expand these as needed for other components.
   export interface ScrollAreaScrollbarProps {
     orientation?: 'vertical' | 'horizontal'
   }
@@ -10,5 +10,6 @@ declare module 'reka-ui' {
   export interface ScrollAreaViewportProps {}
   export interface ScrollAreaThumbProps {}
 }
+
 
 
