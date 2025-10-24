@@ -1,8 +1,14 @@
 // types/reka-ui-shim.d.ts
 declare module 'reka-ui' {
-  // minimum props used by your ScrollArea pieces
+  // Extend these if other components need more types.
   export interface ScrollAreaScrollbarProps {
     orientation?: 'vertical' | 'horizontal'
   }
-  // Add more interfaces here if other components need them
+  export interface ScrollAreaProps {
+    type?: 'auto' | 'always' | 'scroll' | 'hover'
+  }
+  export interface ScrollAreaViewportProps {}
+  export interface ScrollAreaThumbProps {}
 }
+
+
