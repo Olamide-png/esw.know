@@ -10,16 +10,15 @@
 
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
-import type { ScrollAreaScrollbarProps } from 'reka-ui' // will hit your shim
+import type { ScrollAreaScrollbarProps } from './reka-props-shim' // ⬅️ local shim (no external resolution)
+
 import { computed } from 'vue'
 import { cn } from '@/lib/utils'
-import { ScrollAreaScrollbar, ScrollAreaThumb } from 'reka-ui'
+import { ScrollAreaScrollbar, ScrollAreaThumb } from 'reka-ui' // ✅ runtime stays
 
 type Props = ScrollAreaScrollbarProps & { class?: HTMLAttributes['class'] }
 
-const props = withDefaults(defineProps<Props>(), {
-  orientation: 'vertical'
-})
+const props = withDefaults(defineProps<Props>(), { orientation: 'vertical' })
 
 const base =
   'flex touch-none select-none transition-colors ' +
