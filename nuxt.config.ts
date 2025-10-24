@@ -104,7 +104,12 @@ export default defineNuxtConfig(async () => {
 
     icon: { clientBundle: { scan: true, sizeLimitKb: 512 } },
     fonts: { defaults: { weights: ['300 800'] } },
-    typescript: { tsConfig: { compilerOptions: { baseUrl: '.' } } },
+    typescript: {
+    tsConfig: {
+      compilerOptions: { baseUrl: '.' },
+      include: ['types/**/*.d.ts']
+    }
+  },
 
     vite: {
       plugins: [
