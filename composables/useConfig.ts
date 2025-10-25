@@ -1,71 +1,66 @@
-// composables/useConfig.ts
+// composables/useContent.ts
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-async function safeFetchNavigation() {
-  try {
-    // Works on SSR & CSR when @nuxt/content is installed
-    return await $fetch<any[]>('/api/_content/navigation')
-  } catch (e) {
-    console.error('[content] navigation fetch failed:', e)
-    return [] as any[]
-  }
+type NavNode = {
+  _path: string
+  title?: string
+  children?: NavNode[]
+  [k: string]: any
 }
 
-export function useConfig() {
-  const appConfig = computed(() => useAppConfig()?.shadcnDocs || {})
+function flatten(nav: NavNode[] = []) {
+  const out: NavNode[] = []
+  const stack = [...nav]
+  while (stack.length) {
+    const n = stack.shift()!
+    out.push(n)
+    if (Array.isArray(n.children)) stack.unshift(...n.children)
+  }
+  return out
+}
+
+// SSR: call module helper; CSR: call the API
+async function fetchNavigation() {
+  if (process.server) {
+    const mod = await import('#content') as any
+    return mod.fetchContentNavigation()
+  }
+  return $fetch<NavNode[]>('/api/_content/navigation')
+}
+
+export function useContent() {
   const route = useRoute()
 
-  // Current page (front-matter) – tolerate errors
+  // current page doc
   const { data: page } = useAsyncData(
     () => `content:page:${route.fullPath}`,
-    async () => {
-      try {
-        return await queryContent().where({ _path: route.path }).findOne()
-      } catch (e) {
-        console.error('[content] page query failed:', e)
-        return {} as any
-      }
-    },
+    () => queryContent().where({ _path: route.path }).findOne(),
     { watch: [() => route.fullPath] }
   )
 
-  // Full nav (SSR via Nitro endpoint; CSR too)
-  const { data: navigation } = useAsyncData('content:navigation', safeFetchNavigation)
+  // full navigation
+  const { data: navigation } = useAsyncData('content:navigation', fetchNavigation)
 
-  // Replacement for navKeyFromPath
-  function navKeyFromPath<T = any>(
-    path: string,
-    key: string,
-    nav: any[] | null | undefined
-  ): Partial<T> {
-    if (!Array.isArray(nav)) return {}
-    const stack: any[] = [...nav]
-    while (stack.length) {
-      const node = stack.shift()
-      if (node?._path === path && node?.[key] != null) return node[key] as T
-      if (Array.isArray(node?.children)) stack.push(...node.children)
-    }
-    return {}
+  // prev/next from flat nav order
+  const flat = computed(() => flatten(navigation.value || []))
+  const index = computed(() => flat.value.findIndex(n => n._path === route.path))
+  const prev  = computed(() => (index.value > 0 ? flat.value[index.value - 1] : null))
+  const next  = computed(() => (index.value >= 0 && index.value < flat.value.length - 1 ? flat.value[index.value + 1] : null))
+
+  // toc: prefer page.front-matter, else build shallow from headings if present
+  const toc = computed(() => (page.value?.toc ? page.value.toc : { links: [] }))
+
+  return {
+    // api shape compatible with the old @nuxt/content composable
+    page,            // Ref<any|null>
+    navigation,      // Ref<NavNode[]|null>
+    prev,            // Ref<NavNode|null>
+    next,            // Ref<NavNode|null>
+    toc              // Ref<{ links: any[] }>
   }
-
-  return computed(() => {
-    const processed = customDefu(appConfig.value, defaultConfig)
-    const nav = navigation.value || []
-    const p = (page.value || {}) as any
-
-    return {
-      ...appConfig.value,
-      ...processed,
-      header: { ...processed.header, ...navKeyFromPath(route.path, 'header', nav), ...(p.header || {}) } as typeof processed.header,
-      banner: { ...processed.banner, ...navKeyFromPath(route.path, 'banner', nav), ...(p.banner || {}) } as typeof processed.banner,
-      main:   { ...processed.main,   ...navKeyFromPath(route.path, 'main', nav),   ...(p.main   || {}) } as typeof processed.main,
-      aside:  { ...processed.aside,  ...navKeyFromPath(route.path, 'aside', nav),  ...(p.aside  || {}) } as typeof processed.aside,
-      toc:    { ...processed.toc,    ...navKeyFromPath(route.path, 'toc', nav),    ...(p.toc    || {}) } as typeof processed.toc,
-      footer: { ...processed.footer, ...navKeyFromPath(route.path, 'footer', nav), ...(p.footer || {}) } as typeof processed.footer,
-    }
-  })
 }
+
 
 
 
