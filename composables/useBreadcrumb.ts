@@ -1,26 +1,33 @@
 // composables/useBreadcrumb.ts
-interface BreadcrumbItem { title: string; href: string }
+interface BreadcrumbItem {
+  title: string
+  href: string
+}
+
+// One function to get navigation on both SSR and CSR without top-level #content imports
+async function getNavigation() {
+  if (import.meta.server) {
+    const mod = await import('#content') as any
+    return mod.fetchContentNavigation()
+  }
+  // Client: use the Nuxt Content endpoint
+  return $fetch('/api/_content/navigation')
+}
 
 export function useBreadcrumb(url: string): BreadcrumbItem[] {
-  const items: BreadcrumbItem[] = []
-  const segments = url.split('/').filter(Boolean)
-  let href = ''
+  // fetch nav once (cached by key)
+  const { data: navigation } = useAsyncData('content:navigation', getNavigation)
 
-  // we need the full nav tree to resolve titles along the path
-  const { data: navigation } = useAsyncData('content:navigation', async () => {
-    if (import.meta.server) {
-      const mod = await import('#content') as any
-      return mod.fetchContentNavigation()
-    }
-    return $fetch('/api/_content/navigation')
-  })
+  const items: BreadcrumbItem[] = []
+  const segs = url.split('/').filter(Boolean)
 
   const nav = navigation.value
-  if (!Array.isArray(nav)) return []
+  if (!Array.isArray(nav)) return items
 
-  // walk the tree by segments and pick titles
+  let href = ''
   let cursor: any[] | undefined = nav
-  for (const seg of segments) {
+
+  for (const seg of segs) {
     href += `/${seg}`
     const node = cursor?.find(n => n?._path === href)
     items.push({ title: node?.title ?? seg, href })
@@ -29,5 +36,6 @@ export function useBreadcrumb(url: string): BreadcrumbItem[] {
 
   return items
 }
+
 
 
