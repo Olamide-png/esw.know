@@ -3,6 +3,9 @@
   "type": "module",
   "version": "1.0.0",
   "packageManager": "pnpm@10.19.0",
+  "engines": {
+    "node": "20.x"
+  },
   "description": "Effortless and beautiful docs template built with Nuxt Content & shadcn-vue.",
   "author": "Tony Zhang <zhangtianli2006@gmail.com>",
   "license": "MIT",
