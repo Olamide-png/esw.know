@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref, watch, computed, nextTick, onMounted, onBeforeUnmount } from 'vue'
-// ✅ Use Nuxt auto-imports, NOT `#content`
-import { useContent } from '#imports'
 
 const props = withDefaults(defineProps<{
   title: string
@@ -18,6 +16,7 @@ const panelEl = ref<HTMLElement | null>(null)
 const closeBtn = ref<HTMLButtonElement | null>(null)
 const panelId = computed(() => props.id ?? `ctx-${Math.random().toString(36).slice(2, 8)}`)
 
+/* ✅ useContent() is auto-imported by @nuxt/content */
 const { page } = useContent()
 const resolvedMarkdown = computed(() => {
   const panels = (page.value as any)?.contextPanels
@@ -31,10 +30,7 @@ function close() { open.value = false }
 
 watch(open, async (val) => {
   lockScroll(val)
-  if (val) {
-    await nextTick()
-    closeBtn.value?.focus()
-  }
+  if (val) { await nextTick(); closeBtn.value?.focus() }
 })
 
 function trapFocus(e: FocusEvent) {
@@ -53,4 +49,3 @@ onBeforeUnmount(() => {
   document.removeEventListener('focusin', trapFocus)
 })
 </script>
-
