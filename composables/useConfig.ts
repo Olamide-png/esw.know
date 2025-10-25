@@ -6,7 +6,7 @@ import { useRoute } from 'vue-router'
 async function getNavigation() {
   // On server, dynamically import the server helper
   if (process.server) {
-    const mod = await import('#content/server') as any
+    const mod = await import('#content') as any
     return mod.fetchContentNavigation()
   }
   // On client, call the Nuxt Content built-in endpoint
