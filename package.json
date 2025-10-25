@@ -53,7 +53,6 @@
   "dependencies": {
     "@iconify-json/lucide": "^1.2.45",
     "@iconify-json/vscode-icons": "^1.2.21",
-    "@nuxt/content": "^3.7.1",
     "@nuxt/fonts": "^0.11.4",
     "@nuxt/icon": "^1.13.0",
     "@nuxt/image": "^1.10.0",
@@ -87,7 +86,8 @@
     "@iconify-json/lucide-lab": "^1.2.3",
     "@iconify/utils": "^2.3.0",
     "@modelcontextprotocol/sdk": "^1.18.2",
-    "@nuxt/devtools": "^2.4.1",
+    "@nuxt/content": "^3.7.1",
+    "@nuxt/devtools": "^2.6.3",
     "@nuxt/kit": "^3.17.4",
     "@nuxt/vite-builder": "^3.19.2",
     "@types/cors": "^2.8.19",
@@ -114,7 +114,6 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.20.5",
     "typescript": "^5.8.3",
-    "vite": "^5.4.20",
     "vue": "^3.5.15",
     "vue-router": "^4.5.1",
     "vue-tsc": "^2.2.10"
