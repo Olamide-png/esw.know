@@ -6,13 +6,11 @@ import tailwindcss from '@tailwindcss/vite'
 
 const currentDir = dirname(fileURLToPath(import.meta.url))
 
-// --- Resolve CSS files whether they live at ./assets or ./www/assets ---
 function resolveCss(relA: string, relB: string) {
   const a = join(currentDir, relA)
   if (fs.existsSync(a)) return a
   const b = join(currentDir, relB)
   if (fs.existsSync(b)) return b
-  // fall back to A; Vite will show a clear error if neither exists
   return a
 }
 
@@ -25,9 +23,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     TRYIT_ALLOWED_HOSTS: process.env.TRYIT_ALLOWED_HOSTS || '',
-    TRYIT_ALLOWED_HOSTS: process.env.TRYIT_ALLOWED_HOSTS,
     nlwebBaseUrl: process.env.NLWEB_BASE_URL,
-    openaiApiKey: process.env.OPENAI_API_KEY,          // <— no "|| ''"
+    openaiApiKey: process.env.OPENAI_API_KEY,
     openaiModel: process.env.OPENAI_MODEL || 'gpt-4.1-mini',
     embedModel: process.env.EMBED_MODEL || 'text-embedding-3-small',
     chunkMaxChars: Number(process.env.CHUNK_MAX_CHARS || 2800),
@@ -41,10 +38,7 @@ export default defineNuxtConfig({
 
   nitro: {
     routeRules: {
-      // Force Node runtime for AI/backend routes
       '/api/nlweb/**': { cors: true, headers: { 'Cache-Control': 'no-store' }, experimental: { wasm: false } }
-      // If you ever want a blanket rule:
-      // '/api/**': { runtime: 'node' }
     }
   },
 
@@ -55,6 +49,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/icon',
     '@nuxtjs/color-mode',
+    '@nuxt/content',
     'nuxt-og-image',
     '@nuxt/scripts',
     '@nuxtjs/i18n',
@@ -66,8 +61,12 @@ export default defineNuxtConfig({
     componentDir: join(currentDir, './components/ui')
   },
 
+  // ⬇️ Auto-import components, no path prefix → ::api-endpoint-try-it::
   components: {
-    dirs: [{ path: './components', ignore: ['**/*.ts'] }]
+    dirs: [
+      { path: './components', pathPrefix: false, ignore: ['**/*.ts'] },
+      { path: './components/ui', pathPrefix: false, ignore: ['**/*.ts'] }
+    ]
   },
 
   i18n: {
@@ -83,11 +82,12 @@ export default defineNuxtConfig({
     disableTransition: true
   },
 
-  // ✅ Use resolved absolute file paths so Vite never guesses
   css: [THEMES_CSS, TAILWIND_CSS],
 
+  // ⬇️ Enable MDC for ::component:: syntax inside .md
   content: {
     documentDriven: true,
+    markdown: { mdc: true },
     highlight: {
       theme: { default: 'light-plus', dark: 'aurora-x' },
       preload: [
@@ -128,6 +128,7 @@ export default defineNuxtConfig({
     }
   }
 })
+
 
 
 
