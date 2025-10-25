@@ -1,47 +1,33 @@
 // composables/useBreadcrumb.ts
-interface BreadcrumbItem {
-  title: string
-  href: string
-}
+interface BreadcrumbItem { title: string; href: string }
 
-/**
- * Returns a ref of breadcrumb items for a given URL path.
- * No #content import. Queries @nuxt/content per segment.
- */
-export function useBreadcrumb(url: string) {
-  // normalize the path into segments
+export function useBreadcrumb(url: string): BreadcrumbItem[] {
+  const items: BreadcrumbItem[] = []
   const segments = url.split('/').filter(Boolean)
+  let href = ''
 
-  const key = `breadcrumb:${url}`
+  // we need the full nav tree to resolve titles along the path
+  const { data: navigation } = useAsyncData('content:navigation', async () => {
+    if (import.meta.server) {
+      const mod = await import('#content') as any
+      return mod.fetchContentNavigation()
+    }
+    return $fetch('/api/_content/navigation')
+  })
 
-  const { data } = useAsyncData<BreadcrumbItem[]>(
-    key,
-    async () => {
-      const items: BreadcrumbItem[] = []
-      let href = ''
+  const nav = navigation.value
+  if (!Array.isArray(nav)) return []
 
-      for (const raw of segments) {
-        const seg = raw.replace('.html', '')
-        href += `/${seg}`
+  // walk the tree by segments and pick titles
+  let cursor: any[] | undefined = nav
+  for (const seg of segments) {
+    href += `/${seg}`
+    const node = cursor?.find(n => n?._path === href)
+    items.push({ title: node?.title ?? seg, href })
+    cursor = node?.children
+  }
 
-        // fetch the doc for this path (title + path only)
-        const doc = await queryContent()
-          .where({ _path: href })
-          .only(['title', '_path'])
-          .findOne()
-
-        items.push({
-          title: doc?.title ?? seg,
-          href
-        })
-      }
-
-      return items
-    },
-    { watch: [() => url] }
-  )
-
-  // return a Ref<BreadcrumbItem[]>
-  return data
+  return items
 }
+
 

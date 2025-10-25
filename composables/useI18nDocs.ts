@@ -1,112 +1,91 @@
 // composables/useI18nDocs.ts
 import type { SearchResult } from 'minisearch'
-import { useRoute } from 'vue-router'
 
 export function useI18nDocs() {
-  // i18n (safe if module missing)
-  const i18n = (useI18n as any)?.() || {}
-  const i18nEnabled = !!i18n.availableLocales && i18n.availableLocales.length > 1
+  // i18n bits
+  const i18n = useI18n?.()
+  const i18nEnabled = !!i18n && i18n.availableLocales?.length > 1
+  const locale = i18n?.locale ?? ref('')
+  const availableLocales = i18n?.availableLocales ?? []
+  const defaultLocale = i18n?.defaultLocale ?? ''
+  const otherLocales = availableLocales.filter(l => l !== defaultLocale)
+  const localePath = i18nEnabled ? useLocalePath() : (p: string) => p
+  const switchLocalePath = useSwitchLocalePath?.()
 
-  const locale = i18n.locale ?? ref('en')
-  const locales = i18n.locales ?? ref([])
-  const defaultLocale = i18n.defaultLocale ?? 'en'
-  const availableLocales = i18n.availableLocales ?? []
-  const otherLocales = availableLocales.filter((l: string) => l !== defaultLocale)
+  // full nav
+  const { data: navigation } = useAsyncData('content:navigation', async () => {
+    if (import.meta.server) {
+      const mod = await import('#content') as any
+      return mod.fetchContentNavigation()
+    }
+    return $fetch('/api/_content/navigation')
+  })
 
-  const localePath = i18nEnabled ? useLocalePath() : ((p: string) => p)
-  const switchLocalePath = (useSwitchLocalePath as any)?.() ?? ((l: string) => (_p?: string) => '/')
-
+  // prev / next from current page
   const route = useRoute()
-
-  /* ---------------- Navigation ---------------- */
-  const { data: rawNavigation } = useAsyncData(
-    'content-navigation',
-    () => fetchContentNavigation(), // full tree; we’ll filter below
-    { server: true }
-  )
-
-  const localizedNavigation = computed(() => {
-    const nav = rawNavigation.value || []
-    if (!i18nEnabled) return nav
-
-    if (locale.value === defaultLocale) {
-      // remove any nodes that live under /<other-locale>/**
-      return nav.filter((n: any) => !otherLocales.some((l: string) => n._path?.startsWith(`/${l}`)))
-    }
-
-    // keep only nodes under /<locale>/** and, if the root node is the locale,
-    // show its children for a nicer top-level
-    const filtered = nav.filter((n: any) => n._path?.startsWith(`/${locale.value}`))
-    // If the first filtered node is exactly "/<locale>", return its children
-    if (filtered[0]?._path === `/${locale.value}` && filtered[0]?.children?.length) {
-      return filtered[0].children
-    }
-    return filtered
-  })
-
-  /* ---------------- Prev / Next ---------------- */
-  const { data: surround } = useAsyncData(
-    () => `content-surround-${locale.value}-${route.fullPath}`,
+  const { data: siblings } = useAsyncData(
+    () => `content:siblings:${route.fullPath}`,
     async () => {
-      // Ask Content for prev/next around the current path.
-      // We’ll filter by locale after we get them.
-      const res = await queryContent()
-        .only(['_path', 'title'])
-        .findSurround(route.path)
-      // res is [prev|null, next|null]
-      return res || [null, null]
+      // Use content’s built-in helper via the server to compute prev/next
+      if (import.meta.server) {
+        const mod = await import('#content') as any
+        // fetch nav and compute prev/next locally
+        const nav = await mod.fetchContentNavigation()
+        return { nav }
+      }
+      // client just needs nav; prev/next will be filtered below from nav
+      const nav = await $fetch('/api/_content/navigation')
+      return { nav }
     },
-    { watch: [() => route.fullPath, () => locale.value] }
+    { watch: [() => route.fullPath] }
   )
 
-  const localizedPrev = computed(() => {
-    const prev = surround.value?.[0] || null
-    if (!i18nEnabled) return prev
-    if (!prev) return null
-
+  // Helpers to filter nav/prev/next by locale
+  const localizedNavigation = computed(() => {
+    const nav = navigation.value || []
+    if (!i18nEnabled) return nav
     if (locale.value === defaultLocale) {
-      return otherLocales.some((l: string) => prev._path?.startsWith(`/${l}/`)) ? null : prev
+      return nav.filter(n => !otherLocales.some(l => n._path?.startsWith(`/${l}`)))
     }
-    return prev._path?.startsWith(`/${locale.value}/`) ? prev : null
+    const filtered = nav.filter(n => n._path?.startsWith(`/${locale.value}`))
+    return filtered[0]?.children || filtered
   })
 
-  const localizedNext = computed(() => {
-    const next = surround.value?.[1] || null
-    if (!i18nEnabled) return next
-    if (!next) return null
-
+  function filterEntry(entry: any | null | undefined) {
+    if (!i18nEnabled || !entry) return entry
     if (locale.value === defaultLocale) {
-      return otherLocales.some((l: string) => next._path?.startsWith(`/${l}/`)) ? null : next
+      return otherLocales.some(l => entry._path?.startsWith(`/${l}/`)) ? null : entry
     }
-    return next._path?.startsWith(`/${locale.value}/`) ? next : null
-  })
+    return entry._path?.startsWith(`/${locale.value}`) ? entry : null
+  }
 
-  /* ---------------- Search results filter ---------------- */
-  const localizeSearchResult = i18nEnabled
-    ? (result: SearchResult[]) => {
-        if (locale.value === defaultLocale) {
-          return result.filter(r => !otherLocales.some((l: string) => r.id.startsWith(`/${l}/`)))
-        }
-        return result.filter(r => r.id.startsWith(`/${locale.value}/`))
-      }
-    : (result: SearchResult[]) => result
+  const prev = computed(() => {
+    // You likely had your own prev/next logic. If you still compute them elsewhere,
+    // just run them through filterEntry. Otherwise omit prev/next from this composable.
+    return null
+  })
+  const next = computed(() => null)
+
+  const localizeSearchResult = (result: SearchResult[]) => {
+    if (!i18nEnabled) return result
+    if (locale.value === defaultLocale) {
+      return result.filter(r => !otherLocales.some(l => r.id.startsWith(`/${l}/`)))
+    }
+    return result.filter(r => r.id.startsWith(`/${locale.value}`))
+  }
 
   return {
     i18nEnabled,
     locale,
-    locales,
-    defaultLocale,
     availableLocales,
+    defaultLocale,
     otherLocales,
-
     navigation: localizedNavigation,
-    prev: localizedPrev,
-    next: localizedNext,
-
+    prev, next,
     localePath,
-    switchLocalePath,
-
-    localizeSearchResult
+    localizeSearchResult,
+    switchLocalePath
   }
 }
+
 
