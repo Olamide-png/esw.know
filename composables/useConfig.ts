@@ -2,33 +2,35 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-/** Get full content navigation without statically importing #content */
-async function getNavigation() {
-  // On server, dynamically import the server helper
-  if (process.server) {
-    const mod = await import('#content') as any
-    return mod.fetchContentNavigation()
-  }
-  // On client, call the Nuxt Content built-in endpoint
-  return $fetch('/api/_content/navigation')
+// ⛔️ Do NOT import from `#content` here.
+
+// Fetch the content navigation without touching `#content`
+async function fetchNavigation() {
+  // Works on both server and client
+  return await $fetch<any[]>('/api/_content/navigation')
 }
 
 export function useConfig() {
+  // Your app-level config stays the same
   const appConfig = computed(() => useAppConfig()?.shadcnDocs || {})
   const route = useRoute()
 
-  // current page doc (front-matter) for the current route
+  // Current page front-matter (uses queryContent only)
   const { data: page } = useAsyncData(
     () => `content:page:${route.fullPath}`,
     () => queryContent().where({ _path: route.path }).findOne(),
     { watch: [() => route.fullPath] }
   )
 
-  // full nav (SSR via server helper, CSR via endpoint)
-  const { data: navigation } = useAsyncData('content:navigation', getNavigation)
+  // Full navigation tree (public endpoint; no #content import)
+  const { data: navigation } = useAsyncData('content:navigation', fetchNavigation)
 
-  // ----- same as you had -----
-  function navKeyFromPath<T = any>(path: string, key: string, nav: any[] | null | undefined): Partial<T> {
+  // Minimal replacement for useContentHelpers().navKeyFromPath
+  function navKeyFromPath<T = any>(
+    path: string,
+    key: string,
+    nav: any[] | null | undefined
+  ): Partial<T> {
     if (!Array.isArray(nav)) return {}
     const stack: any[] = [...nav]
     while (stack.length) {
@@ -40,29 +42,26 @@ export function useConfig() {
   }
 
   return computed(() => {
+    // `customDefu` and `defaultConfig` are the same ones you already have defined.
+    // (If they live in another file, import them from there.)
     const processed = customDefu(appConfig.value, defaultConfig)
     const nav = navigation.value || []
-
-    const headerNav = navKeyFromPath<typeof processed.header>(route.path, 'header', nav)
-    const bannerNav = navKeyFromPath<typeof processed.banner>(route.path, 'banner', nav)
-    const mainNav   = navKeyFromPath<typeof processed.main>(route.path, 'main', nav)
-    const asideNav  = navKeyFromPath<typeof processed.aside>(route.path, 'aside', nav)
-    const tocNav    = navKeyFromPath<typeof processed.toc>(route.path, 'toc', nav)
-    const footerNav = navKeyFromPath<typeof processed.footer>(route.path, 'footer', nav)
-
-    const p = page.value || {}
+    const p: any = page.value || {}
 
     return {
       ...appConfig.value,
       ...processed,
-      header: { ...processed.header, ...headerNav, ...(p.header || {}) } as typeof processed.header,
-      banner: { ...processed.banner, ...bannerNav, ...(p.banner || {}) } as typeof processed.banner,
-      main:   { ...processed.main,   ...mainNav,   ...(p.main   || {}) } as typeof processed.main,
-      aside:  { ...processed.aside,  ...asideNav,  ...(p.aside  || {}) } as typeof processed.aside,
-      toc:    { ...processed.toc,    ...tocNav,    ...(p.toc    || {}) } as typeof processed.toc,
-      footer: { ...processed.footer, ...footerNav, ...(p.footer || {}) } as typeof processed.footer,
+
+      header: { ...processed.header, ...navKeyFromPath(route.path, 'header', nav), ...(p.header || {}) } as typeof processed.header,
+      banner: { ...processed.banner, ...navKeyFromPath(route.path, 'banner', nav), ...(p.banner || {}) } as typeof processed.banner,
+      main:   { ...processed.main,   ...navKeyFromPath(route.path, 'main', nav),   ...(p.main   || {}) } as typeof processed.main,
+      aside:  { ...processed.aside,  ...navKeyFromPath(route.path, 'aside', nav),  ...(p.aside  || {}) } as typeof processed.aside,
+      toc:    { ...processed.toc,    ...navKeyFromPath(route.path, 'toc', nav),    ...(p.toc    || {}) } as typeof processed.toc,
+      footer: { ...processed.footer, ...navKeyFromPath(route.path, 'footer', nav), ...(p.footer || {}) } as typeof processed.footer,
     }
   })
 }
+
+
 
 
