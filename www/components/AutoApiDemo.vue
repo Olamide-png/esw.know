@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useOpenApiSnippets } from '~/composables/useOpenApiSnippets'
+import { useOpenApiSnippets } from '~/www/composables/useOpenApiSnippets'
 import ApiSnippet from '~/components/ApiSnippet.vue'
 
 // Minimal inline OpenAPI sample; replace with your loaded spec (runtime fetch or import)

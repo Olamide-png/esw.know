@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TryItConsole from '@/components/TryItConsole.vue'
+import TryItConsole from '~/www/components/TryItConsole.vue'
 
 const environments = [
   { label: 'UAT — https://logistics.example.com', baseUrl: 'https://logistics.example.com' },

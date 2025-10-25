@@ -102,8 +102,8 @@ definePageMeta({ ssr: false })
 
 
 import { ref, watch, nextTick, onMounted } from 'vue'
-import { useChatStore } from '@/composables/useChatStore'
-import MessageBubble from '@/components/MessageBubble.vue'
+import { useChatStore } from '~/www/composables/useChatStore'
+import MessageBubble from '~/www/components/MessageBubble.vue'
 
 const { threads, current, currentId, loading, error, newThread, selectThread, deleteThread, send } = useChatStore()
 

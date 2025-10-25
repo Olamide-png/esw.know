@@ -7,7 +7,7 @@ import {
   SheetTitle,
   SheetDescription,
   SheetClose,
-} from "@/components/ui/sheet"
+} from "~/www/components/ui/sheet"
 
 const props = withDefaults(defineProps<{
   term: string

@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { useToast } from '@/components/ui/toast/use-toast';
+import { useToast } from '~/www/components/ui/toast/use-toast';
 
 const { code } = defineProps<{
   code: string;

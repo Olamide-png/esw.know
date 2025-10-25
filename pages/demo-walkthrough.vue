@@ -25,8 +25,8 @@
 </template>
 
 <script setup lang="ts">
-import StepCodeWalkthrough from '~/components/StepCodeWalkthrough.vue'
-import AutoApiDemo from '~/components/AutoApiDemo.vue'
+import StepCodeWalkthrough from '~/www/components/StepCodeWalkthrough.vue'
+import AutoApiDemo from '~/www/components/AutoApiDemo.vue'
 
 const steps = [
   {

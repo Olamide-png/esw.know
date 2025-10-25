@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import RagModal from '~/components/RagModal.vue'
+import RagModal from '~/www/components/RagModal.vue'
 const show = ref(false)
 const prefill = 'Ask the docs'
 </script>
