@@ -1,4 +1,6 @@
 // nuxt.config.ts (root)
+import tailwindcss from '@tailwindcss/vite' // ✅ import the plugin (ESM)
+
 export default defineNuxtConfig({
   // Treat /www as the app
   srcDir: 'www',
@@ -70,7 +72,6 @@ export default defineNuxtConfig({
     disableTransition: true,
   },
 
-  // ⬅️ No absolute FS paths; use aliases relative to srcDir ('www')
   css: [
     '~/assets/css/tailwind.css',
     '~/assets/css/themes.css',
@@ -97,7 +98,7 @@ export default defineNuxtConfig({
   fonts: { defaults: { weights: ['300 800'] } },
 
   vite: {
-    plugins: [require('@tailwindcss/vite')()],
+    plugins: [tailwindcss()], // ✅ call the imported function
   },
 
   compatibilityDate: '2025-05-13',
@@ -111,6 +112,7 @@ export default defineNuxtConfig({
     },
   },
 })
+
 
 
 

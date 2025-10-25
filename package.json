@@ -44,7 +44,7 @@
     "dev": "pnpm run -C www dev",
     "generate": "pnpm run -C www generate",
     "preview": "pnpm run -C www preview",
-    "postinstall": "nuxt prepare",
+    "postinstall": "true",
     "typecheck": "nuxt typecheck",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
