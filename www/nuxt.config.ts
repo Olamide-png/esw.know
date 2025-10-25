@@ -1,12 +1,18 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 // /www/nuxt.config.ts
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
-  // Inherit everything (including runtimeConfig) from the repo root
+  // inherit from root
   extends: ['..'],
 
-  // If you’re using @nuxtjs/i18n via the root config/modules, this merges in cleanly.
+  // 👇 allow auto-imports from /www/composables and ../composables (repo root)
+  imports: {
+    dirs: [
+      'composables',
+      '../composables'
+    ]
+  },
+
   i18n: {
     defaultLocale: 'en',
     locales: [
@@ -15,7 +21,6 @@ export default defineNuxtConfig({
     ],
   },
 
-  // Lock features to a predictable baseline
   compatibilityDate: '2025-05-13',
 
   app: {
@@ -27,6 +32,7 @@ export default defineNuxtConfig({
     },
   },
 })
+
 
 
 

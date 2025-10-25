@@ -70,6 +70,7 @@
 </template>
 
 <script setup lang="ts">
+import { useConfig } from '#imports'
 import { computed } from 'vue'
 import Toaster from '@/components/ui/toast/Toaster.vue'
 
