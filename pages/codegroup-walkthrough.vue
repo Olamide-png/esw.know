@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import StepCodeGroupWalkthrough from '~/components/StepCodeGroupWalkthrough.vue'
 import WorkbenchDrawer from '~/components/WorkbenchDrawer.vue'
-import ApiEndpointTryIt from '~/components/ApiEndpointTryIt.vue'
+import ApiEndpointTryIt from '~/components/content/ApiEndpointTryIt.client.vue'
 
 const wbOpen = ref(false)
 
