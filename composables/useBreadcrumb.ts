@@ -1,47 +1,47 @@
 // composables/useBreadcrumb.ts
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-import { fetchContentNavigation } from '#content'
-
-export interface BreadcrumbItem {
+interface BreadcrumbItem {
   title: string
   href: string
 }
 
-export function useBreadcrumb(url?: string) {
-  const route = useRoute()
-  const targetUrl = url || route.path
+/**
+ * Returns a ref of breadcrumb items for a given URL path.
+ * No #content import. Queries @nuxt/content per segment.
+ */
+export function useBreadcrumb(url: string) {
+  // normalize the path into segments
+  const segments = url.split('/').filter(Boolean)
 
-  // Load the navigation tree (cached by useAsyncData)
-  const { data: navigation } = useAsyncData(
-    'content:navigation',
-    () => fetchContentNavigation()
+  const key = `breadcrumb:${url}`
+
+  const { data } = useAsyncData<BreadcrumbItem[]>(
+    key,
+    async () => {
+      const items: BreadcrumbItem[] = []
+      let href = ''
+
+      for (const raw of segments) {
+        const seg = raw.replace('.html', '')
+        href += `/${seg}`
+
+        // fetch the doc for this path (title + path only)
+        const doc = await queryContent()
+          .where({ _path: href })
+          .only(['title', '_path'])
+          .findOne()
+
+        items.push({
+          title: doc?.title ?? seg,
+          href
+        })
+      }
+
+      return items
+    },
+    { watch: [() => url] }
   )
 
-  const items = computed<BreadcrumbItem[]>(() => {
-    const nav = navigation.value
-    if (!nav || !targetUrl) return []
-
-    // Normalize: split and drop empty segments
-    const segments = String(targetUrl)
-      .split('/')
-      .filter(Boolean)
-      .map(s => s.replace('.html', ''))
-
-    const crumbs: BreadcrumbItem[] = []
-    let href = ''
-    // We’ll descend the tree level by level like your original logic
-    let currentLevel: any[] | undefined = nav
-
-    for (const seg of segments) {
-      href += `/${seg}`
-      const page = currentLevel?.find((n: any) => n?._path === href)
-      crumbs.push({ title: page?.title ?? seg, href })
-      currentLevel = page?.children
-    }
-
-    return crumbs
-  })
-
-  return items
+  // return a Ref<BreadcrumbItem[]>
+  return data
 }
+
