@@ -99,7 +99,7 @@ export default defineNuxtConfig({
     navigation: {
       fields: ['icon','navBadges','navTruncate','badges','toc','sidebar','collapse','editLink','prevNext','breadcrumb','fullpage']
     },
-    experimental: { search: { indexed: true } }
+    experimental: { search: { indexed: false } }
   },
 
   icon: { clientBundle: { scan: true, sizeLimitKb: 512 } },
