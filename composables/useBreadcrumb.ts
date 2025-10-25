@@ -4,22 +4,23 @@ interface BreadcrumbItem {
   href: string
 }
 
-// One function to get navigation on both SSR and CSR without top-level #content imports
+/** Get navigation without any top-level #content imports */
 async function getNavigation() {
+  // Server: dynamically import to keep it out of the client bundle
   if (import.meta.server) {
-    const mod = await import('#content') as any
+    const mod = (await import('#content')) as any
     return mod.fetchContentNavigation()
   }
-  // Client: use the Nuxt Content endpoint
+  // Client: call the built-in Nuxt Content API
   return $fetch('/api/_content/navigation')
 }
 
 export function useBreadcrumb(url: string): BreadcrumbItem[] {
-  // fetch nav once (cached by key)
+  // Cached once by key
   const { data: navigation } = useAsyncData('content:navigation', getNavigation)
 
   const items: BreadcrumbItem[] = []
-  const segs = url.split('/').filter(Boolean)
+  const segments = url.split('/').filter(Boolean)
 
   const nav = navigation.value
   if (!Array.isArray(nav)) return items
@@ -27,7 +28,7 @@ export function useBreadcrumb(url: string): BreadcrumbItem[] {
   let href = ''
   let cursor: any[] | undefined = nav
 
-  for (const seg of segs) {
+  for (const seg of segments) {
     href += `/${seg}`
     const node = cursor?.find(n => n?._path === href)
     items.push({ title: node?.title ?? seg, href })
@@ -36,6 +37,7 @@ export function useBreadcrumb(url: string): BreadcrumbItem[] {
 
   return items
 }
+
 
 
 
