@@ -29,6 +29,13 @@ export default defineNuxtConfig({
     },
   },
 
+// 👇 make unimport provide useColorMode()
+  imports: {
+    presets: [
+      { from: '@nuxtjs/color-mode', imports: ['useColorMode'] },
+    ],
+  },
+
   modules: [
     'shadcn-nuxt',
     '@vueuse/nuxt',
