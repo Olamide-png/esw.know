@@ -2,30 +2,38 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-// ⛔️ Do NOT import from `#content` here.
-
-// Fetch the content navigation without touching `#content`
-async function fetchNavigation() {
-  // Works on both server and client
-  return await $fetch<any[]>('/api/_content/navigation')
+async function safeFetchNavigation() {
+  try {
+    // Works on SSR & CSR when @nuxt/content is installed
+    return await $fetch<any[]>('/api/_content/navigation')
+  } catch (e) {
+    console.error('[content] navigation fetch failed:', e)
+    return [] as any[]
+  }
 }
 
 export function useConfig() {
-  // Your app-level config stays the same
   const appConfig = computed(() => useAppConfig()?.shadcnDocs || {})
   const route = useRoute()
 
-  // Current page front-matter (uses queryContent only)
+  // Current page (front-matter) – tolerate errors
   const { data: page } = useAsyncData(
     () => `content:page:${route.fullPath}`,
-    () => queryContent().where({ _path: route.path }).findOne(),
+    async () => {
+      try {
+        return await queryContent().where({ _path: route.path }).findOne()
+      } catch (e) {
+        console.error('[content] page query failed:', e)
+        return {} as any
+      }
+    },
     { watch: [() => route.fullPath] }
   )
 
-  // Full navigation tree (public endpoint; no #content import)
-  const { data: navigation } = useAsyncData('content:navigation', fetchNavigation)
+  // Full nav (SSR via Nitro endpoint; CSR too)
+  const { data: navigation } = useAsyncData('content:navigation', safeFetchNavigation)
 
-  // Minimal replacement for useContentHelpers().navKeyFromPath
+  // Replacement for navKeyFromPath
   function navKeyFromPath<T = any>(
     path: string,
     key: string,
@@ -42,16 +50,13 @@ export function useConfig() {
   }
 
   return computed(() => {
-    // `customDefu` and `defaultConfig` are the same ones you already have defined.
-    // (If they live in another file, import them from there.)
     const processed = customDefu(appConfig.value, defaultConfig)
     const nav = navigation.value || []
-    const p: any = page.value || {}
+    const p = (page.value || {}) as any
 
     return {
       ...appConfig.value,
       ...processed,
-
       header: { ...processed.header, ...navKeyFromPath(route.path, 'header', nav), ...(p.header || {}) } as typeof processed.header,
       banner: { ...processed.banner, ...navKeyFromPath(route.path, 'banner', nav), ...(p.banner || {}) } as typeof processed.banner,
       main:   { ...processed.main,   ...navKeyFromPath(route.path, 'main', nav),   ...(p.main   || {}) } as typeof processed.main,
@@ -61,6 +66,7 @@ export function useConfig() {
     }
   })
 }
+
 
 
 
