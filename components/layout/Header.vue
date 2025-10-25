@@ -46,13 +46,26 @@
 
 
 <script setup lang="ts">
-const config = useConfig();
-const { i18nEnabled, localePath } = useI18nDocs();
-const { page } = useContent();
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+
+const config = useConfig()
+const { i18nEnabled, localePath } = useI18nDocs()
+const route = useRoute()
+
+// Fetch the current content doc for this route (SSR-safe)
+const { data: page } = await useAsyncData(
+  () => `content:page:${route.fullPath}`,
+  () => queryContent(route.path).findOne(),
+  { watch: [() => route.fullPath] }
+)
 
 const showToc = computed(() => {
-  return config.value.toc.enable
-    && config.value.toc.enableInMobile
-    && (page.value?._path === '/' ? config.value.toc.enableInHomepage : true);
-});
+  return (
+    config.value.toc.enable &&
+    config.value.toc.enableInMobile &&
+    (page.value?._path === '/' ? config.value.toc.enableInHomepage : true)
+  )
+})
 </script>
+

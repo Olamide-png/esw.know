@@ -57,42 +57,52 @@
 </template>
 
 <script setup lang="ts">
-import Toaster from '@/components/ui/toast/Toaster.vue';
+import { computed } from 'vue'
+import Toaster from '@/components/ui/toast/Toaster.vue'
 
-const { page } = useContent();
-const config = useConfig();
-const route = useRoute();
-const { themeClass, radius } = useThemes();
+const config = useConfig()
+const route = useRoute()
+const { themeClass, radius } = useThemes()
+
+/**
+ * Fetch the current content document (front-matter + body)
+ * and refetch when the route changes.
+ */
+const { data: page } = await useAsyncData(
+  () => `content:page:${route.fullPath}`,
+  () => queryContent(route.path).findOne(),
+  { watch: [() => route.fullPath] }
+)
+
+/** Optional: hydrate <head> from page front-matter */
+if (page.value) useContentHead(page.value)
 
 const isSidebarPage = computed(() => {
-  return !route.path.startsWith('/payments') && route.path !== '/' && !(page?.fullpage ?? false);
-});
-
+  return !route.path.startsWith('/payments') &&
+         route.path !== '/' &&
+         !(page.value?.fullpage ?? false)
+})
 
 useSeoMeta({
   description: config.value.site.description,
   ogDescription: config.value.site.description,
   twitterCard: 'summary_large_image',
-});
+})
 
 useServerHead({
   bodyAttrs: {
     class: themeClass.value,
     style: `--radius: ${radius.value}rem;`,
   },
-});
+})
 
-// ✅ Add favicon here
 useHead({
   link: [
-    {
-      rel: 'icon',
-      type: 'image/x-icon',
-      href: '/ESW favicon.svg',
-    },
+    { rel: 'icon', type: 'image/x-icon', href: '/ESW favicon.svg' },
   ],
 })
 </script>
+
 
 
 

@@ -1,28 +1,47 @@
-interface BreadcrumbItem {
-  title: string;
-  href: string;
+// composables/useBreadcrumb.ts
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { fetchContentNavigation } from '#content'
+
+export interface BreadcrumbItem {
+  title: string
+  href: string
 }
 
-export function useBreadcrumb(url: string): BreadcrumbItem[] {
-  const { navigation } = useContent();
+export function useBreadcrumb(url?: string) {
+  const route = useRoute()
+  const targetUrl = url || route.path
 
-  const breadcrumbItems: BreadcrumbItem[] = [];
-  // Remove empty segments
-  const segments = url.split('/').filter(segment => segment !== '');
+  // Load the navigation tree (cached by useAsyncData)
+  const { data: navigation } = useAsyncData(
+    'content:navigation',
+    () => fetchContentNavigation()
+  )
 
-  // Construct breadcrumb for each segment
-  let href = '';
-  let nav = navigation.value;
+  const items = computed<BreadcrumbItem[]>(() => {
+    const nav = navigation.value
+    if (!nav || !targetUrl) return []
 
-  if (!nav)
-    return [];
+    // Normalize: split and drop empty segments
+    const segments = String(targetUrl)
+      .split('/')
+      .filter(Boolean)
+      .map(s => s.replace('.html', ''))
 
-  for (let i = 0; i < segments.length; i++) {
-    const segment = segments[i].replace('.html', '');
-    href += `/${segment}`;
-    const page = nav?.find(x => (x._path as string) === href);
-    nav = page?.children;
-    breadcrumbItems.push({ title: page?.title ?? segment, href });
-  }
-  return breadcrumbItems;
+    const crumbs: BreadcrumbItem[] = []
+    let href = ''
+    // We’ll descend the tree level by level like your original logic
+    let currentLevel: any[] | undefined = nav
+
+    for (const seg of segments) {
+      href += `/${seg}`
+      const page = currentLevel?.find((n: any) => n?._path === href)
+      crumbs.push({ title: page?.title ?? seg, href })
+      currentLevel = page?.children
+    }
+
+    return crumbs
+  })
+
+  return items
 }

@@ -1,212 +1,99 @@
-import { createDefu } from 'defu';
-
-const customDefu = createDefu((obj, key, value) => {
-  if (Array.isArray(value) && value.every((x: any) => typeof x === 'string')) {
-    obj[key] = value;
-    return true;
-  }
-});
-
-const defaultConfig: DefaultConfig = {
-  site: {
-    name: 'Knowledge Centre',
-    description: "ESW Shopify leverages Shopify's native checkout to handle shopper's purchase flow.",
-    ogImage: '/hero.png',
-    ogImageComponent: 'ShadcnDocs',
-    ogImageColor: 'light',
-    umami: {
-      enable: false,
-      src: 'https://cloud.umami.is/script.js',
-      dataWebsiteId: '',
-    },
-  },
-  theme: {
-    customizable: true,
-    color: 'teal',
-    radius: 0.5,
-  },
-  banner: {
-    enable: false,
-    showClose: true,
-    content: 'Welcome to **shadcn-docs-nuxt**',
-    to: '',
-    target: '_blank',
-    border: true,
-  },
-  header: {
-    showLoadingIndicator: true,
-    title: 'Knowledge Centre',
-    showTitle: true,
-    logo: {
-      light: '/logo-dark.svg',
-      dark: '/logo.svg',
-    },
-    showTitleInMobile: false,
-    border: false,
-    darkModeToggle: true,
-    languageSwitcher: {
-      enable: true,
-      triggerType: 'icon',
-      dropdownType: 'select',
-    },
-    nav: [],
-    links: [],
-  },
-  aside: {
-    useLevel: true,
-    collapse: false,
-    collapseLevel: 1,
-    folderStyle: 'default',
-  },
-  main: {
-    breadCrumb: true,
-    showTitle: true,
-    codeCopyToast: true,
-    codeCopyIcon: 'lucide:clipboard',
-    codeCopyToastText: 'Copied to clipboard!',
-    fieldRequiredText: 'required',
-    padded: true,
-    editLink: {
-      enable: false,
-      pattern: '',
-      text: 'Edit this page',
-      icon: 'lucide:square-pen',
-      placement: ['docsFooter'],
-    },
-    backToTop: true,
-    pm: ['npm', 'pnpm', 'bun', 'yarn'],
-    imageZoom: true,
-    codeIcon: {
-      'package.json': 'vscode-icons:file-type-node',
-      'tsconfig.json': 'vscode-icons:file-type-tsconfig',
-      '.npmrc': 'vscode-icons:file-type-npm',
-      '.editorconfig': 'vscode-icons:file-type-editorconfig',
-      '.eslintrc': 'vscode-icons:file-type-eslint',
-      '.eslintrc.cjs': 'vscode-icons:file-type-eslint',
-      '.eslintignore': 'vscode-icons:file-type-eslint',
-      'eslint.config.js': 'vscode-icons:file-type-eslint',
-      'eslint.config.mjs': 'vscode-icons:file-type-eslint',
-      'eslint.config.cjs': 'vscode-icons:file-type-eslint',
-      '.gitignore': 'vscode-icons:file-type-git',
-      'yarn.lock': 'vscode-icons:file-type-yarn',
-      '.env': 'vscode-icons:file-type-dotenv',
-      '.env.example': 'vscode-icons:file-type-dotenv',
-      '.vscode/settings.json': 'vscode-icons:file-type-vscode',
-      'nuxt': 'vscode-icons:file-type-nuxt',
-      '.nuxtrc': 'vscode-icons:file-type-nuxt',
-      '.nuxtignore': 'vscode-icons:file-type-nuxt',
-      'nuxt.config.js': 'vscode-icons:file-type-nuxt',
-      'nuxt.config.ts': 'vscode-icons:file-type-nuxt',
-      'nuxt.schema.ts': 'vscode-icons:file-type-nuxt',
-      'tailwind.config.js': 'vscode-icons:file-type-tailwind',
-      'tailwind.config.ts': 'vscode-icons:file-type-tailwind',
-      'vue': 'vscode-icons:file-type-vue',
-      'ts': 'vscode-icons:file-type-typescript',
-      'tsx': 'vscode-icons:file-type-typescript',
-      'mjs': 'vscode-icons:file-type-js',
-      'cjs': 'vscode-icons:file-type-js',
-      'js': 'vscode-icons:file-type-js',
-      'jsx': 'vscode-icons:file-type-js',
-      'md': 'vscode-icons:file-type-markdown',
-      'mdc': 'vscode-icons:file-type-markdown',
-      'css': 'vscode-icons:file-type-css',
-      'py': 'vscode-icons:file-type-python',
-      'npm': 'vscode-icons:file-type-npm',
-      'pnpm': 'vscode-icons:file-type-pnpm',
-      'pnpm-lock.yaml': 'vscode-icons:file-type-pnpm',
-      'pnpm-workspace.yaml': 'vscode-icons:file-type-pnpm',
-      'npx': 'vscode-icons:file-type-npm',
-      'yarn': 'vscode-icons:file-type-yarn',
-      'bun': 'vscode-icons:file-type-bun',
-      'bun.lock': 'vscode-icons:file-type-bun',
-      'deno': 'vscode-icons:file-type-deno',
-      'yml': 'vscode-icons:file-type-light-yaml',
-      'json': 'vscode-icons:file-type-json',
-      'terminal': 'lucide:terminal',
-    },
-  },
-  footer: {
-    credits: '',
-    links: [],
-  },
-  toc: {
-    enable: true,
-    enableInMobile: false,
-    enableInHomepage: false,
-    title: 'On This Page',
-    links: [],
-    iconLinks: [],
-    carbonAds: {
-      enable: false,
-      disableInDev: true,
-      disableInMobile: true,
-      fallback: false,
-      fallbackMessage: 'Please support us by disabling your ad blocker.',
-      code: '',
-      placement: '',
-      format: 'cover',
-    },
-  },
-  search: {
-    enable: true,
-    inAside: false,
-    style: 'input',
-    placeholder: 'Search...',
-    placeholderDetailed: 'Search documentation...',
-  },
-};
+// composables/useConfig.ts (only the function below needs to change)
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { fetchContentNavigation } from '#content'
 
 export function useConfig() {
-  const appConfig = computed(() => useAppConfig()?.shadcnDocs || {});
+  // keep pulling app-level config the same way
+  const appConfig = computed(() => useAppConfig()?.shadcnDocs || {})
+  const route = useRoute()
 
-  const { navKeyFromPath } = useContentHelpers();
-  const { navigation, page } = useContent();
-  const route = useRoute();
+  // fetch current page doc (front-matter) reactively for the route
+  const { data: page } = useAsyncData(
+    () => `content:page:${route.fullPath}`,
+    () => queryContent().where({ _path: route.path }).findOne(),
+    { watch: [() => route.fullPath] }
+  )
 
-  return computed(
-    () => {
-      const processedConfig = customDefu(appConfig.value, defaultConfig);
-      const header = processedConfig.header;
-      const main = processedConfig.main;
-      const aside = processedConfig.aside;
-      const banner = processedConfig.banner;
-      const footer = processedConfig.footer;
-      const toc = processedConfig.toc;
+  // fetch the full navigation tree once (it’s static at build/runtime)
+  const { data: navigation } = useAsyncData(
+    'content:navigation',
+    () => fetchContentNavigation()
+  )
 
-      return {
-        ...appConfig.value,
-        ...processedConfig,
-        header: {
-          ...header,
-          ...navKeyFromPath(route.path, 'header', navigation.value || []),
-          ...page.value?.header,
-        } as (typeof header & DefaultConfig['header']),
-        banner: {
-          ...banner,
-          ...navKeyFromPath(route.path, 'banner', navigation.value || []),
-          ...page.value?.banner,
-        } as (typeof banner & DefaultConfig['banner']),
-        main: {
-          ...main,
-          ...navKeyFromPath(route.path, 'main', navigation.value || []),
-          ...page.value?.main,
-        } as (typeof main & DefaultConfig['main']),
-        aside: {
-          ...aside,
-          ...navKeyFromPath(route.path, 'aside', navigation.value || []),
-          ...page.value?.aside,
-        } as (typeof aside & DefaultConfig['aside']),
-        toc: {
-          ...toc,
-          ...navKeyFromPath(route.path, 'toc', navigation.value || []),
-          ...page.value?.toc,
-        } as (typeof toc & DefaultConfig['toc']),
-        footer: {
-          ...footer,
-          ...navKeyFromPath(route.path, 'footer', navigation.value || []),
-          ...page.value?.footer,
-        } as (typeof footer & DefaultConfig['footer']),
-      };
-    },
-  );
+  // Minimal replacement for useContentHelpers().navKeyFromPath
+  function navKeyFromPath<T = any>(
+    path: string,
+    key: string,
+    nav: any[] | null | undefined
+  ): Partial<T> {
+    if (!Array.isArray(nav)) return {}
+    const stack: any[] = [...nav]
+    while (stack.length) {
+      const node = stack.shift()
+      if (node?._path === path && node?.[key] != null) {
+        return node[key] as T
+      }
+      if (Array.isArray(node?.children)) stack.push(...node.children)
+    }
+    return {}
+  }
+
+  return computed(() => {
+    const processed = customDefu(appConfig.value, defaultConfig)
+
+    // read per-section overrides from navigation (by current route)
+    const nav = navigation.value || []
+    const headerNav = navKeyFromPath<typeof processed.header>(route.path, 'header', nav)
+    const bannerNav = navKeyFromPath<typeof processed.banner>(route.path, 'banner', nav)
+    const mainNav   = navKeyFromPath<typeof processed.main>(route.path, 'main', nav)
+    const asideNav  = navKeyFromPath<typeof processed.aside>(route.path, 'aside', nav)
+    const tocNav    = navKeyFromPath<typeof processed.toc>(route.path, 'toc', nav)
+    const footerNav = navKeyFromPath<typeof processed.footer>(route.path, 'footer', nav)
+
+    // page front-matter overrides
+    const p = page.value || {}
+
+    return {
+      ...appConfig.value,
+      ...processed,
+
+      header: {
+        ...processed.header,
+        ...headerNav,
+        ...(p.header || {})
+      } as typeof processed.header,
+
+      banner: {
+        ...processed.banner,
+        ...bannerNav,
+        ...(p.banner || {})
+      } as typeof processed.banner,
+
+      main: {
+        ...processed.main,
+        ...mainNav,
+        ...(p.main || {})
+      } as typeof processed.main,
+
+      aside: {
+        ...processed.aside,
+        ...asideNav,
+        ...(p.aside || {})
+      } as typeof processed.aside,
+
+      toc: {
+        ...processed.toc,
+        ...tocNav,
+        ...(p.toc || {})
+      } as typeof processed.toc,
+
+      footer: {
+        ...processed.footer,
+        ...footerNav,
+        ...(p.footer || {})
+      } as typeof processed.footer
+    }
+  })
 }
+

@@ -1,111 +1,112 @@
-import type { SearchResult } from 'minisearch';
+// composables/useI18nDocs.ts
+import type { SearchResult } from 'minisearch'
+import { useRoute } from 'vue-router'
 
-/**
- * A wrapper around useI18n that provides safe internationalization utilities
- * and handles navigation filtering based on the current locale.
- * Falls back gracefully when i18n is not configured.
- */
 export function useI18nDocs() {
-  // Check if i18n is enabled by verifying config exists and there are multiple locales
-  const i18nEnabled = !!useI18n() && useI18n().availableLocales?.length > 1;
+  // i18n (safe if module missing)
+  const i18n = (useI18n as any)?.() || {}
+  const i18nEnabled = !!i18n.availableLocales && i18n.availableLocales.length > 1
 
-  // Get content navigation and i18n utilities
-  const { navigation, next, prev } = useContent();
-  const { locale, locales, defaultLocale, availableLocales } = useI18n();
+  const locale = i18n.locale ?? ref('en')
+  const locales = i18n.locales ?? ref([])
+  const defaultLocale = i18n.defaultLocale ?? 'en'
+  const availableLocales = i18n.availableLocales ?? []
+  const otherLocales = availableLocales.filter((l: string) => l !== defaultLocale)
 
-  // Get all locales except the default one
-  const otherLocales = availableLocales.filter(l => l !== defaultLocale);
+  const localePath = i18nEnabled ? useLocalePath() : ((p: string) => p)
+  const switchLocalePath = (useSwitchLocalePath as any)?.() ?? ((l: string) => (_p?: string) => '/')
 
-  /**
-   * Filters navigation items based on the current locale
-   * - For default locale: shows only default paths (no locale prefix)
-   * - For other locales: shows only paths with matching locale prefix
-   */
+  const route = useRoute()
+
+  /* ---------------- Navigation ---------------- */
+  const { data: rawNavigation } = useAsyncData(
+    'content-navigation',
+    () => fetchContentNavigation(), // full tree; we’ll filter below
+    { server: true }
+  )
+
   const localizedNavigation = computed(() => {
-    if (!i18nEnabled)
-      return navigation.value;
-    const filteredNav = navigation.value.filter((nav) => {
-      if (locale.value === defaultLocale) {
-        return !otherLocales.some(l => nav._path.startsWith(`/${l}`));
-      }
-      return nav._path.startsWith(`/${locale.value}`);
-    });
-    return locale.value === defaultLocale ? filteredNav : filteredNav[0].children;
-  });
+    const nav = rawNavigation.value || []
+    if (!i18nEnabled) return nav
 
-  /**
-   * Filters previous navigation item based on the current locale
-   * - For default locale: shows only prev if page exists with default paths (no locale prefix)
-   * - For other locales: shows only prev if page exists with matching locale prefix
-   */
+    if (locale.value === defaultLocale) {
+      // remove any nodes that live under /<other-locale>/**
+      return nav.filter((n: any) => !otherLocales.some((l: string) => n._path?.startsWith(`/${l}`)))
+    }
+
+    // keep only nodes under /<locale>/** and, if the root node is the locale,
+    // show its children for a nicer top-level
+    const filtered = nav.filter((n: any) => n._path?.startsWith(`/${locale.value}`))
+    // If the first filtered node is exactly "/<locale>", return its children
+    if (filtered[0]?._path === `/${locale.value}` && filtered[0]?.children?.length) {
+      return filtered[0].children
+    }
+    return filtered
+  })
+
+  /* ---------------- Prev / Next ---------------- */
+  const { data: surround } = useAsyncData(
+    () => `content-surround-${locale.value}-${route.fullPath}`,
+    async () => {
+      // Ask Content for prev/next around the current path.
+      // We’ll filter by locale after we get them.
+      const res = await queryContent()
+        .only(['_path', 'title'])
+        .findSurround(route.path)
+      // res is [prev|null, next|null]
+      return res || [null, null]
+    },
+    { watch: [() => route.fullPath, () => locale.value] }
+  )
+
   const localizedPrev = computed(() => {
-    if (!i18nEnabled)
-      return prev.value;
-    if (locale.value === defaultLocale) {
-      if (otherLocales.some(l => prev.value?._path.startsWith(`/${l}/`)))
-        return null;
-    } else {
-      if (!prev.value?._path.startsWith(`/${locale.value}`)) {
-        return null;
-      }
-    }
-    return prev.value;
-  });
+    const prev = surround.value?.[0] || null
+    if (!i18nEnabled) return prev
+    if (!prev) return null
 
-  /**
-   * Filters next navigation item based on the current locale
-   * - For default locale: shows only next if page exists with default paths (no locale prefix)
-   * - For other locales: shows only next if page exists with matching locale prefix
-   */
+    if (locale.value === defaultLocale) {
+      return otherLocales.some((l: string) => prev._path?.startsWith(`/${l}/`)) ? null : prev
+    }
+    return prev._path?.startsWith(`/${locale.value}/`) ? prev : null
+  })
+
   const localizedNext = computed(() => {
-    if (!i18nEnabled)
-      return next.value;
+    const next = surround.value?.[1] || null
+    if (!i18nEnabled) return next
+    if (!next) return null
+
     if (locale.value === defaultLocale) {
-      if (otherLocales.some(l => next.value?._path.startsWith(`/${l}/`)))
-        return null;
-    } else {
-      if (!next.value?._path.startsWith(`/${locale.value}`)) {
-        return null;
-      }
+      return otherLocales.some((l: string) => next._path?.startsWith(`/${l}/`)) ? null : next
     }
-    return next.value;
-  });
+    return next._path?.startsWith(`/${locale.value}/`) ? next : null
+  })
 
-  /**
-   * Safe wrapper for useLocalePath
-   * Returns original path if i18n is not enabled
-   */
-  const localePath = i18nEnabled ? useLocalePath() : (path: string) => path;
-
-  /**
-   * Filters search results based on the current locale
-   * - For default locale: shows only default results (no locale prefix)
-   * - For other locales: shows only results with matching locale prefix
-   */
+  /* ---------------- Search results filter ---------------- */
   const localizeSearchResult = i18nEnabled
-    ? (result: SearchResult[]) => result.filter((r) => {
+    ? (result: SearchResult[]) => {
         if (locale.value === defaultLocale) {
-          return !otherLocales.some(l => r.id.startsWith(`/${l}/`));
+          return result.filter(r => !otherLocales.some((l: string) => r.id.startsWith(`/${l}/`)))
         }
-        return r.id.startsWith(`/${locale.value}`);
-      })
-    : (result: SearchResult[]) => result;
-
-  // Get the locale switcher utility
-  const switchLocalePath = useSwitchLocalePath();
+        return result.filter(r => r.id.startsWith(`/${locale.value}/`))
+      }
+    : (result: SearchResult[]) => result
 
   return {
-    i18nEnabled, // Whether i18n is enabled and configured
-    locale, // Current locale
-    locales, // All locales
-    defaultLocale, // Default locale from config
-    availableLocales, // All available locales
-    otherLocales, // All locales except default
-    navigation: localizedNavigation, // Navigation filtered by current locale
-    prev: localizedPrev, // Previous page navigation filtered by current locale
-    next: localizedNext, // Next page navigation filtered by current locale
-    localePath, // Safe path localization function
-    localizeSearchResult, // Search results filter by locale
-    switchLocalePath, // Function to switch between locales
-  };
+    i18nEnabled,
+    locale,
+    locales,
+    defaultLocale,
+    availableLocales,
+    otherLocales,
+
+    navigation: localizedNavigation,
+    prev: localizedPrev,
+    next: localizedNext,
+
+    localePath,
+    switchLocalePath,
+
+    localizeSearchResult
+  }
 }
+

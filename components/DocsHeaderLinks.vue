@@ -2,33 +2,49 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-// Uses your layer's auto-imported useContent()
-const { page } = useContent()
 const route = useRoute()
 
-const prompt = computed(() => {
-  const title = page.value?.title || page.value?.head?.title || 'this page'
-  const url = typeof window !== 'undefined' ? `${location.origin}${route.fullPath}` : route.fullPath
-  return `Please fetch and read "${title}" from ${url}
+// Fetch current page's content document by route path
+const { data: page } = await useAsyncData(
+  () => `content:page:${route.fullPath}`,
+  () => queryContent(route.path).findOne(),
+  { watch: [() => route.fullPath] }
+)
+
+// Build an absolute URL that works in SSR and client
+const reqURL = useRequestURL()
+const origin = `${reqURL.protocol}//${reqURL.host}`
+const absoluteUrl = computed(() =>
+  // On client, prefer window.location.origin; on SSR, fall back to request origin
+  (process.client ? window.location.origin : origin) + route.fullPath
+)
+
+const titleFromPage = computed(() =>
+  (page.value?.title as string) ||
+  (page.value?.head as any)?.title ||
+  'this page'
+)
+
+const prompt = computed(() =>
+  `Please fetch and read "${titleFromPage.value}" from ${absoluteUrl.value}
 So I can ask questions about it.`
-})
+)
 
 const openaiUrl = computed(
   () => `https://chat.openai.com/?q=${encodeURIComponent(prompt.value)}`
 )
 
-// ✅ Prefill first message in Claude via ?q=
 const claudeUrl = computed(
   () => `https://claude.ai/new?q=${encodeURIComponent(prompt.value)}`
 )
 
-// ✅ Prefill Perplexity via /search?q=
 const perplexityUrl = computed(
   () => `https://www.perplexity.ai/search/?q=${encodeURIComponent(prompt.value)}`
 )
 
 const goClaude = () => window.open(claudeUrl.value, '_blank', 'noopener')
 </script>
+
 
 <template>
   <UiDropdownMenu>

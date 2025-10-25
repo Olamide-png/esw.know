@@ -119,7 +119,10 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, computed, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
+import { queryContent } from '#content'
 import MessageBubble from '~/components/MessageBubble.vue'
+
+defineOptions({ name: 'AiChatDrawer' })
 
 interface ChatMessage { role: 'system'|'user'|'assistant'; content: string }
 
@@ -142,13 +145,17 @@ const scrollEl = ref<HTMLElement | null>(null)
 const taRef = ref<HTMLTextAreaElement | null>(null)
 
 const route = useRoute()
-const { page } = useContent()
 
-/* ---------- page context ---------- */
+/* ---------- page context (replaces useContent()) ---------- */
 const useContext = ref(true)
 const pageTitle = ref('')
 const pageText = ref('')
 const contextChars = computed(() => pageText.value.length)
+
+const { data: pageData } = await useAsyncData(
+  () => `content:page:${route.fullPath}`,
+  () => queryContent(route.fullPath).findOne()
+)
 
 function stripTags(s: string) {
   return String(s ?? '')
@@ -188,9 +195,10 @@ function mdastToText(node: any): string {
   if (t === 'root') return (node.children || []).map(mdastToText).join('')
   return ''
 }
+
 async function loadPageContext() {
   try {
-    const doc: any = page?.value
+    const doc: any = pageData.value
     pageTitle.value = doc?.title || doc?.head?.title || 'This page'
     let text = ''
     if (doc?.body) text = mdastToText(doc.body)
@@ -209,7 +217,7 @@ async function loadPageContext() {
   }
 }
 watch(() => route.fullPath, () => { loadPageContext() }, { immediate: true })
-watch(page, () => { loadPageContext() })
+watch(pageData, () => { loadPageContext() })
 
 /* ---------- ui ---------- */
 const toggle = () => {
@@ -314,7 +322,7 @@ async function streamAnswer(payloadMessages: ChatMessage[]) {
   }
 }
 
-/* ---------- send (stream with fallback), with Generative-UI hint ---------- */
+/* ---------- send (stream with fallback) ---------- */
 async function onSend() {
   if (!canSend.value || loading.value) return
   const raw = draft.value
@@ -335,13 +343,7 @@ async function onSend() {
     role: 'system',
     content:
       'You are a helpful docs assistant. Prefer concise, well-structured answers. Use ONLY the provided page content to answer; ' +
-      'if not present, say you cannot find it on this page. When helpful, append a fenced block ```ui ...``` with JSON for ' +
-      'lightweight UI. Supported types: ' +
-      '{ "type":"cards","cards":[{ "title","description","href" }] }, ' +
-      '{ "type":"steps","items":[ "...", "..." ] }, ' +
-      '{ "type":"callout","variant":"info|success|warning|danger","title","body" }, ' +
-      '{ "type":"kpis","items":[{ "label","value" }] }, ' +
-      '{ "type":"table","headers":[...],"rows":[[...],[...]] }.'
+      'if not present, say you cannot find it on this page.'
   }
 
   const contextBlock =
@@ -380,12 +382,6 @@ async function onSend() {
 
 /* ---------- actions ---------- */
 function clearChat() { messages.value = []; saveHistory() }
-function hardReset() {
-  localStorage.removeItem(STORAGE_KEY)
-  localStorage.removeItem(STORAGE_OPEN)
-  localStorage.setItem(STORAGE_VER_KEY, STORAGE_VER)
-  location.reload()
-}
 
 /* Start taller & keep synced */
 onMounted(() => {
@@ -404,15 +400,3 @@ watch(messages, saveHistory, { deep: true })
 
 .chat-panel { pointer-events: auto; }
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
