@@ -1,6 +1,7 @@
 // www/composables/useThemes.ts
 import { computed } from 'vue'
-import { useCookie, useColorMode } from '#imports'
+import { useCookie } from '#imports'
+import { useColorMode } from '#color-mode'
 import type { Theme } from '@/lib/themes'
 import { themes } from '@/lib/themes'
 
