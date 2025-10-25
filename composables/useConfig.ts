@@ -1,7 +1,7 @@
 // composables/useConfig.ts (only the function below needs to change)
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { fetchContentNavigation } from '#content'
+import { queryContent, fetchContentNavigation } from '#content' // ✅ add queryContent
 
 export function useConfig() {
   // keep pulling app-level config the same way

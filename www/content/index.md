@@ -62,7 +62,7 @@ img: /people-concept-illustration-of-grow-up-idea-concept-business-presentation-
   to: /finance/settlement-and-billing/reconciliation-process
   target: _self
   ---
-  Making worldwide commerce simple.
+  Making worldwide commerce simple
   ::
 ::
 
