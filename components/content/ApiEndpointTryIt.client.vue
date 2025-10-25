@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-
 defineOptions({ name: 'ApiEndpointTryIt' })
+
+import { ref, computed } from 'vue'
 
 type HttpMethod = 'GET'|'POST'|'PUT'|'PATCH'|'DELETE'
 type Dict = Record<string, any>
