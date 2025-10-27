@@ -6,13 +6,11 @@ import tailwindcss from '@tailwindcss/vite'
 
 const currentDir = dirname(fileURLToPath(import.meta.url))
 
-// --- Resolve CSS files whether they live at ./assets or ./www/assets ---
 function resolveCss(relA: string, relB: string) {
   const a = join(currentDir, relA)
   if (fs.existsSync(a)) return a
   const b = join(currentDir, relB)
   if (fs.existsSync(b)) return b
-  // fall back to A; Vite will show a clear error if neither exists
   return a
 }
 
@@ -25,9 +23,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     TRYIT_ALLOWED_HOSTS: process.env.TRYIT_ALLOWED_HOSTS || '',
-    TRYIT_ALLOWED_HOSTS: process.env.TRYIT_ALLOWED_HOSTS,
     nlwebBaseUrl: process.env.NLWEB_BASE_URL,
-    openaiApiKey: process.env.OPENAI_API_KEY,          // <— no "|| ''"
+    openaiApiKey: process.env.OPENAI_API_KEY,
     openaiModel: process.env.OPENAI_MODEL || 'gpt-4.1-mini',
     embedModel: process.env.EMBED_MODEL || 'text-embedding-3-small',
     chunkMaxChars: Number(process.env.CHUNK_MAX_CHARS || 2800),
@@ -41,10 +38,9 @@ export default defineNuxtConfig({
 
   nitro: {
     routeRules: {
-      // Force Node runtime for AI/backend routes
-      '/api/nlweb/**': { cors: true, headers: { 'Cache-Control': 'no-store' }, experimental: { wasm: false } }
-      // If you ever want a blanket rule:
-      // '/api/**': { runtime: 'node' }
+      '/api/nlweb/**': { cors: true, headers: { 'Cache-Control': 'no-store' }, experimental: { wasm: false } },
+      // (Optional) keep llms.txt fresh for LLMs
+      '/llms.txt': { headers: { 'Cache-Control': 'max-age=300, public' } }
     }
   },
 
@@ -58,8 +54,19 @@ export default defineNuxtConfig({
     'nuxt-og-image',
     '@nuxt/scripts',
     '@nuxtjs/i18n',
-    '@nuxt/fonts'
+    '@nuxt/fonts',
+
+    // 👉 add this
+    'nuxt-llms'
   ],
+
+  // 👉 llms.txt content (tailored starter)
+  llms: {
+    // Tip: pull from your app config/site URL if you like.
+    domain: 'https://esw-know.vercel.app',
+    title: 'ESW Knowledge Centre',
+    description: 'Docs, APIs, SDKs, and implementation guides for ESW integrations.',
+  },
 
   shadcn: {
     prefix: 'Ui',
@@ -83,7 +90,6 @@ export default defineNuxtConfig({
     disableTransition: true
   },
 
-  // ✅ Use resolved absolute file paths so Vite never guesses
   css: [THEMES_CSS, TAILWIND_CSS],
 
   content: {
@@ -128,6 +134,7 @@ export default defineNuxtConfig({
     }
   }
 })
+
 
 
 
