@@ -5,31 +5,31 @@ aside: false
 toc: false
 ---
 
-::hero
+::hero-alt
 ---
 announcement:
-  title: 'Help Centre'
-  icon: 'lucide:circle-help'
+  title: 'Introducing Charts'
+  icon: 'lucide:pie-chart'
+  to: /getting-started
 actions:
   - name: Get Started
-  - name: Knowledge Centre
-    variant: outline
-    leftIcon: 'lucide:book-open'
+    to: /getting-started
+  - name: GitHub
+    variant: ghost
+    to: https://github.com/ZTL-UwU/shadcn-docs-nuxt
+mobileRight: 'top' # 'top' | 'bottom'
 ---
 
 #title
-Knowledge Center
+Build your component library
 
 #description
-Explore our guides and documentation.
+Beautifully designed components that you can copy and paste into your apps.
+
+#right
+![logo](/istockphoto-1126879436-612x612.jpg)
 ::
 
-
-::card
----
-img: /istockphoto-1126879436-612x612.jpg
----
-::
 
 
 ::card-group
