@@ -11,25 +11,11 @@ toc: false
     <!-- Copy -->
     <div class="mr-auto place-self-center lg:col-span-7">
       <h1 class="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl text-gray-900 dark:text-white">
-        Building digital <br />products &amp; brands.
+        Knowledge Center.
       </h1>
 
   <p class="max-w-2xl mb-6 font-light text-gray-600 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-300">
-        This free and open-source landing page template was built using the utility classes from
-        <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer"
-           class="underline underline-offset-4 hover:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 dark:focus-visible:ring-gray-600">
-          Tailwind CSS
-        </a>
-        and based on the components from the
-        <a href="https://flowbite.com" target="_blank" rel="noopener noreferrer"
-           class="underline underline-offset-4 hover:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 dark:focus-visible:ring-gray-600">
-          Flowbite Library
-        </a>
-        and the
-        <a href="https://flowbite.com/blocks/" target="_blank" rel="noopener noreferrer"
-           class="underline underline-offset-4 hover:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 dark:focus-visible:ring-gray-600">
-          Blocks System
-        </a>.
+        Explore our documentation and guides to get started. 
       </p>
 
   <!-- Actions -->
@@ -52,31 +38,6 @@ toc: false
           View on GitHub
         </a>
 
-<!-- Figma (outline, no bg) -->
-  <a
-          href="https://www.figma.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Get the Figma file"
-          class="inline-flex items-center justify-center w-full px-5 py-3 text-sm font-medium
-                 text-gray-900 dark:text-gray-200 border border-gray-300 dark:border-gray-600 rounded-lg sm:w-auto
-                 hover:bg-gray-100/60 dark:hover:bg-gray-800/60 focus:outline-none focus-visible:ring-2
-                 focus-visible:ring-gray-300 dark:focus-visible:ring-gray-600"
-        >
-          <svg class="w-4 h-4 mr-2" aria-hidden="true" focusable="false" viewBox="0 0 200 300">
-            <style>.st0{fill:#0acf83}.st1{fill:#a259ff}.st2{fill:#f24e1e}.st3{fill:#ff7262}.st4{fill:#1abcfe}</style>
-            <title>Figma</title>
-            <path class="st0" d="M50 300c27.6 0 50-22.4 50-50v-50H50c-27.6 0-50 22.4-50 50s22.4 50 50 50z"/>
-            <path class="st1" d="M0 150c0-27.6 22.4-50 50-50h50v100H50c-27.6 0-50-22.4-50-50z"/>
-            <path class="st2" d="M0 50C0 22.4 22.4 0 50 0h50v100H50C22.4 100 0 77.6 0 50z"/>
-            <path class="st3" d="M100 0h50c27.6 0 50 22.4 50 50s-22.4 50-50 50h-50V0z"/>
-            <path class="st4" d="M200 150c0 27.6-22.4 50-50 50s-50-22.4-50-50 22.4-50 50-50 50 22.4 50 50z"/>
-          </svg>
-          Get Figma file
-        </a>
-      </div>
-    </div>
-
 <!-- Hero image -->
   <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
       <img
@@ -92,3 +53,36 @@ toc: false
   </div>
 </section>
 
+::card-group
+  ::card
+  ---
+  title: Orders
+  icon: streamline-ultimate-color:app-window-two
+  ---
+  Explore common order queries
+  ::
+
+  ::card
+  ---
+  title: Checkout
+  icon: streamline-ultimate-color:shop-sign-bag
+  ---
+  Explore common checkout queries
+  ::
+
+  ::card
+  ---
+  title: Returns
+  icon: lucide:truck
+  ---
+  Explore common returns queries
+  ::
+
+  ::card
+  ---
+  title: Pricing and Tarriffs
+  icon: lucide:hand-coins
+  ---
+  Explore common pricing and tarriff queries
+  ::
+::
