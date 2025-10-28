@@ -27,7 +27,7 @@ Explore our guides and documentation.
 
 ::card
 ---
-img: /science.png
+img: /istockphoto-1126879436-612x612.jpg
 ---
 ::
 
