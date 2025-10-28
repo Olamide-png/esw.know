@@ -17,14 +17,14 @@ toc: false
 
   <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">This
                 free and open-source landing page template was built using the utility classes from
-                <a target="_blank" class="hover:underline">Tailwind CSS</a> and based on the
+                <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="hover:underline">Tailwind CSS</a> and based on the
                 components from the <a href="#/" class="hover:underline" target="_blank">Flowbite Library</a> and the
                 <a href="https://flowbite.com/blocks/" target="_blank" class="hover:underline">Blocks System</a>.
             </p>
 
   <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
 
-  <a href="" target="_blank"
+  <a href="https://github.com/themesberg/landwind" target="_blank" rel="noopener noreferrer"
                     class="inline-flex items-center justify-center w-full px-5 py-3 text-sm font-medium text-center text-gray-900 border border-gray-200 rounded-lg sm:w-auto hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                     <svg class="w-4 h-4 mr-2 text-gray-500 dark:text-gray-200" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 496 512">
@@ -34,10 +34,10 @@ toc: false
                     </svg> View on GitHub
                 </a>
 
-  <a href="" target="_blank"
+  <a href="#" target="_blank" rel="noopener noreferrer"
                     class="inline-flex items-center justify-center w-full px-5 py-3 mb-2 mr-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:w-auto focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
 
-                    <svg class="w-4 h-4 mr-2" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300"
+  <svg class="w-4 h-4 mr-2" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300"
                         width="1667" height="2500">
                         <style type="text/css">
                             .st0 {
