@@ -34,8 +34,8 @@ Explore our documentation and guides to help you get started.
   ::card{variant="blue"}
   ---
   title: Shopify
-  icon: /online-shop.png
-  icon-size: 65
+  icon: '/online-shop.png'
+  icon-size: 50
   ---
   Expand globally, process payments in multiple currencies.
   ::
@@ -43,8 +43,7 @@ Explore our documentation and guides to help you get started.
   ::card{class="bg-green-50 dark:bg-green-950"}
   ---
   title: Apps and Extensions
-  icon: /shape-design (1).png
-  icon-size: 65
+  icon: '/shape-design (1).png'
   ---
   Integrate with apps and extensions supplied by ESW.
   ::
