@@ -27,7 +27,7 @@ Build your component library
 Beautifully designed components that you can copy and paste into your apps.
 
 #right
-![logo](/istockphoto-1126879436-612x612.jpg)
+![logo](/group-working-together-with-colorful-gear-icons-vector.jpg)
 ::
 
 
