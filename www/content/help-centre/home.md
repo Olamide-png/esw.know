@@ -25,20 +25,12 @@ Explore our guides and documentation.
 ::
 
 
-<!-- Hero image -->
-  <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-      <img
-        src="https://demo.themesberg.com/landwind/images/hero.png"
-        alt="Illustration of analytics dashboard hero"
-        loading="lazy"
-        decoding="async"
-        width="640"
-        height="640"
-        class="h-auto w-full"
-      />
-    </div>
-  </div>
-</section>
+::card
+---
+img: /science.png
+---
+::
+
 
 ::card-group
   ::card
