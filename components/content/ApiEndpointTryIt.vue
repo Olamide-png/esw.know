@@ -5,16 +5,16 @@ import { ref, computed } from 'vue'
 type HttpMethod = 'GET'|'POST'|'PUT'|'PATCH'|'DELETE'
 type Dict = Record<string, any>
 
-// 1) Broaden the prop type
 const props = withDefaults(defineProps<{
-  method: 'GET'|'POST'|'PUT'|'PATCH'|'DELETE'
+  method: HttpMethod
   path: string
   baseUrl?: string
   title?: string
-  defaults?: string | {           // <= accept string too
-    path?: Record<string, any>
-    query?: Record<string, any>
-    headers?: Record<string, any>
+  // Accept string | object so MDC JSON works
+  defaults?: string | {
+    path?: Dict
+    query?: Dict
+    headers?: Dict
     body?: any
     auth?: { type?: 'none'|'bearer'|'basic', token?: string, username?: string, password?: string }
   }
@@ -28,32 +28,38 @@ const props = withDefaults(defineProps<{
   allowMethodSwitch: false
 })
 
-// 2) Add a tiny normalizer and use it everywhere instead of props.defaults
+/* ✅ Normalize MDC strings to objects */
 function parseMaybeJson<T = any>(v: unknown, fallback: T): T {
   if (typeof v !== 'string') return (v as T) ?? fallback
   try { return JSON.parse(v) as T } catch { return fallback }
 }
-
 const normalizedDefaults = computed(() =>
   parseMaybeJson(props.defaults, {}) as {
-    path?: Record<string, any>
-    query?: Record<string, any>
-    headers?: Record<string, any>
-    body?: any
+    path?: Dict; query?: Dict; headers?: Dict; body?: any;
     auth?: { type?: 'none'|'bearer'|'basic', token?: string, username?: string, password?: string }
   }
 )
 
-// 3) Replace reads of props.defaults with normalizedDefaults.value
-const pathParams = ref({ ...(normalizedDefaults.value?.path || {}) })
-const queryParams = ref({ ...(normalizedDefaults.value?.query || {}) })
-const headers    = ref({ 'Content-Type': 'application/json', ...(normalizedDefaults.value?.headers || {}) })
-const auth = ref({
+const open = ref(false)
+/* 🔹 Tabs */
+const reqTab = ref<'path'|'query'|'headers'|'auth'>('path')
+const respTab = ref<'body'|'headers'>('body')
+
+/* 🔹 Local method state (avoid mutating prop) */
+const methodLocal = ref<HttpMethod>(props.method)
+
+const envBaseUrl = ref(props.baseUrl || (props.baseUrls?.[0] || ''))
+const livePath = ref(props.path)
+const pathParams = ref<Dict>({ ...(normalizedDefaults.value?.path || {}) })
+const queryParams = ref<Dict>({ ...(normalizedDefaults.value?.query || {}) })
+const headers = ref<Dict>({ 'Content-Type': 'application/json', ...(normalizedDefaults.value?.headers || {}) })
+const auth = ref<{type:'none'|'bearer'|'basic', token?:string, username?:string, password?:string}>({
   type: normalizedDefaults.value?.auth?.type || 'none',
   token: normalizedDefaults.value?.auth?.token,
   username: normalizedDefaults.value?.auth?.username,
   password: normalizedDefaults.value?.auth?.password
 })
+function tryStringify(v:any){ try{ return JSON.stringify(v,null,2) }catch{ return String(v) } }
 const bodyRaw = ref(
   typeof normalizedDefaults.value?.body === 'undefined'
     ? '' : tryStringify(normalizedDefaults.value?.body)
@@ -90,13 +96,13 @@ function sh(s:string){ const q=`'`; return q + String(s).replace(/'/g, `'\\''`) 
 const curl = computed(() => {
   const h = Object.entries(headers.value || {}).filter(([,v]) => String(v).length).map(([k,v]) => `-H ${sh(`${k}: ${v}`)}`)
   const body = parsedBody()
-  const bodyPart = (method.value==='GET'||method.value==='DELETE') ? '' :
+  const bodyPart = (methodLocal.value==='GET'||methodLocal.value==='DELETE') ? '' :
     (typeof body==='undefined' ? '' : ` \\\n  --data ${sh(isJsonContent()?JSON.stringify(body):String(body))}`)
   const authPart =
     auth.value.type==='bearer' && auth.value.token ? ` \\\n  -H ${sh('Authorization: Bearer ' + auth.value.token)}`
     : auth.value.type==='basic' && auth.value.username ? ` \\\n  -u ${sh(`${auth.value.username}:${auth.value.password || ''}`)}`
     : ''
-  return ['curl','-X',method.value, ...h, authPart.trim(), sh(buildUrl())].filter(Boolean).join(' ') + bodyPart
+  return ['curl','-X', methodLocal.value, ...h, authPart.trim(), sh(buildUrl())].filter(Boolean).join(' ') + bodyPart
 })
 
 const methodColor = computed(() => ({
@@ -105,7 +111,7 @@ const methodColor = computed(() => ({
   PUT: 'bg-amber-600 text-white',
   PATCH: 'bg-violet-600 text-white',
   DELETE: 'bg-rose-600 text-white'
-}[method.value] || 'bg-gray-600 text-white'))
+}[methodLocal.value] || 'bg-gray-600 text-white'))
 
 const pathSegments = computed(() => {
   const segs: Array<{text:string,isParam:boolean}> = []
@@ -137,14 +143,14 @@ async function sendRequest() {
   responseText.value = ''
 
   const url = buildUrl()
-  const init: RequestInit = { method: method.value, headers: { ...headers.value } }
+  const init: RequestInit = { method: methodLocal.value, headers: { ...headers.value } }
 
   if (auth.value.type==='bearer' && auth.value.token) (init.headers as any)['Authorization'] = `Bearer ${auth.value.token}`
   else if (auth.value.type==='basic' && auth.value.username) {
     ;(init.headers as any)['Authorization'] = `Basic ${btoa(`${auth.value.username}:${auth.value.password || ''}`)}`
   }
 
-  if (!['GET','DELETE'].includes(method.value)) {
+  if (!['GET','DELETE'].includes(methodLocal.value)) {
     const body = parsedBody()
     if (typeof body !== 'undefined') init.body = isJsonContent() && typeof body !== 'string' ? JSON.stringify(body) : (body as any)
   }
@@ -185,7 +191,7 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
   <!-- Endpoint pill -->
   <div class="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-neutral-900/60 px-3 py-2 shadow-sm">
     <div class="flex items-center gap-3">
-      <span :class="['px-2 py-1 text-xs font-semibold rounded-md', methodColor]">{{ method }}</span>
+      <span :class="['px-2 py-1 text-xs font-semibold rounded-md', methodColor]">{{ methodLocal }}</span>
       <div class="rounded-lg bg-black/30 px-3 py-1.5 text-sm font-mono text-neutral-200">
         <span class="opacity-80">/</span>
         <template v-for="(seg, i) in pathSegments" :key="i">
@@ -213,7 +219,7 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
                 rounded-xl bg-neutral-950 text-neutral-100 border border-white/10 shadow-2xl overflow-hidden">
       <!-- Header -->
       <div class="flex items-center gap-3 border-b border-white/10 px-4 py-3">
-        <span :class="['px-2 py-1 text-xs font-semibold rounded-md', methodColor]">{{ method }}</span>
+        <span :class="['px-2 py-1 text-xs font-semibold rounded-md', methodColor]">{{ methodLocal }}</span>
         <div class="font-mono text-sm truncate">{{ livePath }}</div>
         <div class="ml-auto">
           <button class="rounded-md px-2 py-1 text-sm hover:bg-white/5" @click="open=false">Close</button>
@@ -228,7 +234,7 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
               <div v-if="allowMethodSwitch">
                 <label class="mb-1 block text-xs opacity-80">Method</label>
-                <select v-model="method" class="w-full rounded-md bg-neutral-900 border border-white/10 px-2 py-2">
+                <select v-model="methodLocal" class="w-full rounded-md bg-neutral-900 border border-white/10 px-2 py-2">
                   <option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option>
                 </select>
               </div>
@@ -327,7 +333,7 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
             </div>
 
             <!-- Body -->
-            <div v-if="!['GET','DELETE'].includes(method)" class="space-y-1">
+            <div v-if="!['GET','DELETE'].includes(methodLocal)" class="space-y-1">
               <label class="mb-1 block text-xs opacity-80">Body</label>
               <textarea v-model="bodyRaw" rows="8" class="w-full rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono" placeholder="{}"></textarea>
               <p class="text-xs text-neutral-400">TIP: Body is parsed as JSON when <code>Content-Type: application/json</code>.</p>
@@ -410,10 +416,12 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
 
 <style scoped>
 :where(.font-mono){ font-variant-ligatures: none; }
+/* quick primary tokens (inherit from your theme if present) */
 :root { --primary: #3b82f6; --primary-foreground: #fff; }
 .bg-primary{ background: var(--primary); }
 .text-primary-foreground{ color: var(--primary-foreground); }
 </style>
+
 
 
 
