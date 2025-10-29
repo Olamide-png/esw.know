@@ -1,19 +1,20 @@
-<!-- components/ApiEndpointTryIt.vue -->
+<!-- components/content/ApiEndpointTryIt.vue -->
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
 type HttpMethod = 'GET'|'POST'|'PUT'|'PATCH'|'DELETE'
 type Dict = Record<string, any>
 
+// 1) Broaden the prop type
 const props = withDefaults(defineProps<{
-  method: HttpMethod
+  method: 'GET'|'POST'|'PUT'|'PATCH'|'DELETE'
   path: string
   baseUrl?: string
   title?: string
-  defaults?: {
-    path?: Dict
-    query?: Dict
-    headers?: Dict
+  defaults?: string | {           // <= accept string too
+    path?: Record<string, any>
+    query?: Record<string, any>
+    headers?: Record<string, any>
     body?: any
     auth?: { type?: 'none'|'bearer'|'basic', token?: string, username?: string, password?: string }
   }
@@ -22,29 +23,41 @@ const props = withDefaults(defineProps<{
 }>(), {
   baseUrl: '',
   title: '',
-  defaults: () => ({}),
+  defaults: () => ({} as any),
   baseUrls: () => [],
   allowMethodSwitch: false
 })
 
-const open = ref(false)
-/* 🔹 Split tabs: request editor + response viewer */
-const reqTab = ref<'path'|'query'|'headers'|'auth'>('path')
-const respTab = ref<'body'|'headers'>('body')  // ✅ Body shown by default
+// 2) Add a tiny normalizer and use it everywhere instead of props.defaults
+function parseMaybeJson<T = any>(v: unknown, fallback: T): T {
+  if (typeof v !== 'string') return (v as T) ?? fallback
+  try { return JSON.parse(v) as T } catch { return fallback }
+}
 
-const method = ref<HttpMethod>(props.method)
-const envBaseUrl = ref(props.baseUrl || (props.baseUrls[0] || ''))
-const livePath = ref(props.path)
-const pathParams = ref<Dict>({ ...(props.defaults?.path || {}) })
-const queryParams = ref<Dict>({ ...(props.defaults?.query || {}) })
-const headers = ref<Dict>({ 'Content-Type': 'application/json', ...(props.defaults?.headers || {}) })
-const auth = ref<{type:'none'|'bearer'|'basic', token?:string, username?:string, password?:string}>({
-  type: props.defaults?.auth?.type || 'none',
-  token: props.defaults?.auth?.token,
-  username: props.defaults?.auth?.username,
-  password: props.defaults?.auth?.password
+const normalizedDefaults = computed(() =>
+  parseMaybeJson(props.defaults, {}) as {
+    path?: Record<string, any>
+    query?: Record<string, any>
+    headers?: Record<string, any>
+    body?: any
+    auth?: { type?: 'none'|'bearer'|'basic', token?: string, username?: string, password?: string }
+  }
+)
+
+// 3) Replace reads of props.defaults with normalizedDefaults.value
+const pathParams = ref({ ...(normalizedDefaults.value?.path || {}) })
+const queryParams = ref({ ...(normalizedDefaults.value?.query || {}) })
+const headers    = ref({ 'Content-Type': 'application/json', ...(normalizedDefaults.value?.headers || {}) })
+const auth = ref({
+  type: normalizedDefaults.value?.auth?.type || 'none',
+  token: normalizedDefaults.value?.auth?.token,
+  username: normalizedDefaults.value?.auth?.username,
+  password: normalizedDefaults.value?.auth?.password
 })
-const bodyRaw = ref(typeof props.defaults?.body === 'undefined' ? '' : tryStringify(props.defaults?.body))
+const bodyRaw = ref(
+  typeof normalizedDefaults.value?.body === 'undefined'
+    ? '' : tryStringify(normalizedDefaults.value?.body)
+)
 
 const sending = ref(false)
 const responseStatus = ref<number|null>(null)
@@ -52,7 +65,6 @@ const responseTimeMs = ref<number|null>(null)
 const responseHeaders = ref<Dict>({})
 const responseText = ref<string>('')
 
-function tryStringify(v:any){ try{ return JSON.stringify(v,null,2) }catch{ return String(v) } }
 function isJsonContent(){
   const ct = String(headers.value['Content-Type'] || headers.value['content-type'] || '').toLowerCase()
   return ct.includes('application/json')
@@ -109,7 +121,7 @@ function renameKv(target:'query'|'headers', oldKey:string, newKey:string){
   if (!newKey || newKey === oldKey) return
   const src = target === 'query' ? { ...queryParams.value } : { ...headers.value }
   if (!Object.prototype.hasOwnProperty.call(src, oldKey)) return
-  const val = src[oldKey]; delete src[oldKey]
+  const val = (src as any)[oldKey]; delete (src as any)[oldKey]
   let key = newKey, i = 1
   while (Object.prototype.hasOwnProperty.call(src, key)) key = `${newKey}_${i++}`
   ;(src as any)[key] = val
@@ -129,7 +141,7 @@ async function sendRequest() {
 
   if (auth.value.type==='bearer' && auth.value.token) (init.headers as any)['Authorization'] = `Bearer ${auth.value.token}`
   else if (auth.value.type==='basic' && auth.value.username) {
-    (init.headers as any)['Authorization'] = `Basic ${btoa(`${auth.value.username}:${auth.value.password || ''}`)}`
+    ;(init.headers as any)['Authorization'] = `Basic ${btoa(`${auth.value.username}:${auth.value.password || ''}`)}`
   }
 
   if (!['GET','DELETE'].includes(method.value)) {
@@ -146,7 +158,6 @@ async function sendRequest() {
     const hh: Dict = {}; res.headers.forEach((v,k)=>{ hh[k]=v }); responseHeaders.value = hh
     const txt = await res.text()
     try { responseText.value = JSON.stringify(JSON.parse(txt), null, 2) } catch { responseText.value = txt }
-    /* After a request, keep Body tab visible */
     respTab.value = 'body'
   } catch (e:any) {
     const t1 = performance.now()
@@ -190,8 +201,7 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
         </template>
       </div>
     </div>
-    <button class="rounded-lg bg-primary text-primary-foreground px-3 py-1.5 hover:opacity-90"
-            @click="open = true">
+    <button class="rounded-lg bg-primary text-primary-foreground px-3 py-1.5 hover:opacity-90" @click="open = true">
       Try it ▶
     </button>
   </div>
@@ -205,13 +215,13 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
       <div class="flex items-center gap-3 border-b border-white/10 px-4 py-3">
         <span :class="['px-2 py-1 text-xs font-semibold rounded-md', methodColor]">{{ method }}</span>
         <div class="font-mono text-sm truncate">{{ livePath }}</div>
-        <div class="ml-auto flex items-center gap-2">
+        <div class="ml-auto">
           <button class="rounded-md px-2 py-1 text-sm hover:bg-white/5" @click="open=false">Close</button>
         </div>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 h-[calc(100%-48px)]">
-        <!-- Left: Request -->
+        <!-- Request -->
         <div class="rounded-lg border border-white/10 overflow-hidden flex flex-col">
           <div class="border-b border-white/10 px-4 py-2 text-sm font-semibold">Request</div>
           <div class="p-4 space-y-4 overflow-auto">
@@ -227,7 +237,7 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
                 <div class="flex gap-2">
                   <input v-model="envBaseUrl" placeholder="https://api.example.com"
                          class="w-full rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono" />
-                  <select v-if="baseUrls.length" v-model="envBaseUrl"
+                  <select v-if="baseUrls?.length" v-model="envBaseUrl"
                           class="w-40 rounded-md bg-neutral-900 border border-white/10 px-2 py-2">
                     <option v-for="url in baseUrls" :key="url" :value="url">{{ url }}</option>
                   </select>
@@ -255,12 +265,10 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
                   <input :value="k" disabled class="col-span-2 rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono opacity-70" />
                   <input v-model="pathParams[k]" class="col-span-3 rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono" />
                   <div class="col-span-5">
-                    <button class="text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5"
-                            @click="removeKv('path', k)">Remove</button>
+                    <button class="text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5" @click="removeKv('path', k)">Remove</button>
                   </div>
                 </div>
-                <button class="mt-1 text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5"
-                        @click="addKv('path')">Add</button>
+                <button class="mt-1 text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5" @click="addKv('path')">Add</button>
               </div>
 
               <!-- QUERY -->
@@ -271,12 +279,10 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
                          @input="renameKv('query', k, ($event.target as HTMLInputElement).value)" />
                   <input v-model="queryParams[k]" class="col-span-3 rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono" placeholder="value" />
                   <div class="col-span-5">
-                    <button class="text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5"
-                            @click="removeKv('query', k)">Remove</button>
+                    <button class="text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5" @click="removeKv('query', k)">Remove</button>
                   </div>
                 </div>
-                <button class="mt-1 text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5"
-                        @click="addKv('query')">Add</button>
+                <button class="mt-1 text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5" @click="addKv('query')">Add</button>
               </div>
 
               <!-- HEADERS -->
@@ -287,12 +293,10 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
                          @input="renameKv('headers', k, ($event.target as HTMLInputElement).value)" />
                   <input v-model="headers[k]" class="col-span-3 rounded-md bg-neutral-900 border border-white/10 px-3 py-2 font-mono" placeholder="Value" />
                   <div class="col-span-5">
-                    <button class="text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5"
-                            @click="removeKv('headers', k)">Remove</button>
+                    <button class="text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5" @click="removeKv('headers', k)">Remove</button>
                   </div>
                 </div>
-                <button class="mt-1 text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5"
-                        @click="addKv('headers')">Add</button>
+                <button class="mt-1 text-xs rounded-md border border-white/10 px-2 py-1 hover:bg-white/5" @click="addKv('headers')">Add</button>
               </div>
 
               <!-- AUTH -->
@@ -348,14 +352,11 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
             </div>
           </div>
 
-        <!-- Footer: no border so it doesn't draw a line across the modal -->
           <div class="px-4 py-3 flex justify-end">
             <button class="rounded-md bg-primary text-primary-foreground px-3 py-1.5 hover:opacity-90 disabled:opacity-50"
-                    :disabled="sending"
-                    @click="sendRequest">
+                    :disabled="sending" @click="sendRequest">
               <span v-if="!sending" class="inline-flex items-center gap-1.5">
-                <!-- Nuxt Icon / lucide icon (globally available) -->
-                <Icon name="lucide:send" class="w-8 h-8" />
+                <Icon name="lucide:send" class="w-4 h-4" />
                 Send Request
               </span>
               <span v-else class="animate-pulse">Sending…</span>
@@ -363,7 +364,7 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
           </div>
         </div>
 
-        <!-- Right: Response -->
+        <!-- Response -->
         <div class="rounded-lg border border-white/10 overflow-hidden flex flex-col">
           <div class="border-b border-white/10 px-4 py-2 text-sm font-semibold">Response</div>
           <div class="p-4 space-y-3 overflow-auto">
@@ -379,8 +380,7 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
                 {{ responseStatus === -1 ? 'Network Error' : `HTTP ${responseStatus}` }}
               </span>
               <span v-if="responseTimeMs !== null" class="text-neutral-400">Time: {{ responseTimeMs }} ms</span>
-              <button class="ml-auto px-2 py-1 rounded hover:bg-white/10 text-sm"
-                      @click="copyToClipboard(responseText)">Copy Body</button>
+              <button class="ml-auto px-2 py-1 rounded hover:bg-white/10 text-sm" @click="copyToClipboard(responseText)">Copy Body</button>
             </div>
 
             <div class="grid grid-cols-2 gap-2">
@@ -398,7 +398,6 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
         </div>
       </div>
 
-      <!-- Subtle helper text, lifted above the modal border (no border line) -->
       <div class="absolute left-0 right-0 bottom-2 px-4 text-xs text-neutral-400/80 flex items-center pointer-events-none">
         <span class="pointer-events-auto">
           Try it Console • <kbd class="px-1 rounded bg-white/10">Esc</kbd> to close
@@ -411,11 +410,11 @@ function copyToClipboard(text:string){ navigator.clipboard?.writeText(text).catc
 
 <style scoped>
 :where(.font-mono){ font-variant-ligatures: none; }
-/* quick primary tokens (inherit from your theme if present) */
 :root { --primary: #3b82f6; --primary-foreground: #fff; }
 .bg-primary{ background: var(--primary); }
 .text-primary-foreground{ color: var(--primary-foreground); }
 </style>
+
 
 
 
