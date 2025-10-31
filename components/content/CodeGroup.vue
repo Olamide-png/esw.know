@@ -17,7 +17,7 @@ function render() {
   return h(
     Tabs,
     {
-      variant: 'card',
+      variant: 'line',
       inStack,
       sync,
     },
