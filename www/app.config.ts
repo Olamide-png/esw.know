@@ -126,7 +126,6 @@ export default defineAppConfig({
         'yarn': 'vscode-icons:file-type-yarn',
         'bun': 'vscode-icons:file-type-bun',
         'yml': 'vscode-icons:file-type-light-yaml',
-        'json': 'vscode-icons:file-type-json',
         'terminal': 'lucide:terminal',
         'sh': 'vscode-icons:file-type-shellscript',
         'bash': 'vscode-icons:file-type-shellscript',
