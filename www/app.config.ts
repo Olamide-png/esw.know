@@ -115,7 +115,7 @@ export default defineAppConfig({
         'js': 'logos:javascript',
         'jsx': 'vscode-icons:file-type-js',
         'shell': 'logos:curl',
-        'java': 'logos:java',
+        'java': 'vscode-icons:file-type-java',
         'md': 'vscode-icons:file-type-markdown',
         'mdc': 'vscode-icons:file-type-markdown',
         'css': 'vscode-icons:file-type-css',
