@@ -106,8 +106,8 @@ const curl = computed(() => {
 })
 
 const methodColor = computed(() => ({
-  GET: 'bg-emerald-600 text-white',
-  POST: 'bg-blue-600 text-white',
+  GET: 'bg-blue-600 text-white',
+  POST: 'bg-emerald-600 text-white',
   PUT: 'bg-amber-600 text-white',
   PATCH: 'bg-violet-600 text-white',
   DELETE: 'bg-rose-600 text-white'
