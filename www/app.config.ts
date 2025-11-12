@@ -47,6 +47,31 @@ export default defineAppConfig({
         triggerType: 'icon',
         dropdownType: 'select',
       },
+      nav: [
+        {
+          title: 'Docs',
+          links: [
+            {
+              title: 'Shopify',
+              to: '/shopify/getting-started-guide/getting-started',
+              description: 'Install the ESW Shopify Apps.',
+              icon: 'lucide:shopping-bag',
+            },
+            {
+              title: 'SFCC',
+              to: '/sfcc/getting-started/prerequisites',
+              description: 'Explore our SFCC Docs.',
+              icon: 'lucide:landmark',
+            },
+            {
+              title: 'APIs',
+              to: '/apis/fulfillment-api/overview',
+              description: 'Explore our API documentation.',
+              icon: 'lucide:code',
+            }
+          ]
+        }
+      ],
       links: [
         {
           title: 'API References',
@@ -64,7 +89,6 @@ export default defineAppConfig({
     },
     aside: {
       useLevel: true,
-      levelStyle: 'aside',
       collapse: true,
       collapseLevel: 1,
       folderStyle: 'default',
@@ -112,20 +136,19 @@ export default defineAppConfig({
         'tsx': 'vscode-icons:file-type-typescript',
         'mjs': 'vscode-icons:file-type-js',
         'cjs': 'vscode-icons:file-type-js',
-        'js': 'logos:javascript',
+        'js': 'vscode-icons:file-type-js',
         'jsx': 'vscode-icons:file-type-js',
-        'shell': 'logos:curl',
-        'java': 'vscode-icons:file-type-java',
         'md': 'vscode-icons:file-type-markdown',
         'mdc': 'vscode-icons:file-type-markdown',
         'css': 'vscode-icons:file-type-css',
-        'py': 'material-icon-theme:python',
+        'py': 'vscode-icons:file-type-python',
         'npm': 'vscode-icons:file-type-npm',
         'pnpm': 'vscode-icons:file-type-pnpm',
         'npx': 'vscode-icons:file-type-npm',
         'yarn': 'vscode-icons:file-type-yarn',
         'bun': 'vscode-icons:file-type-bun',
         'yml': 'vscode-icons:file-type-light-yaml',
+        'json': 'vscode-icons:file-type-json',
         'terminal': 'lucide:terminal',
         'sh': 'vscode-icons:file-type-shellscript',
         'bash': 'vscode-icons:file-type-shellscript',
