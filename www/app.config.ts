@@ -47,31 +47,6 @@ export default defineAppConfig({
         triggerType: 'icon',
         dropdownType: 'select',
       },
-      nav: [
-        {
-          title: 'Docs',
-          links: [
-            {
-              title: 'Shopify',
-              to: '/shopify/getting-started-guide/getting-started',
-              description: 'Install the ESW Shopify Apps.',
-              icon: 'lucide:shopping-bag',
-            },
-            {
-              title: 'SFCC',
-              to: '/sfcc/getting-started/prerequisites',
-              description: 'Explore our SFCC Docs.',
-              icon: 'lucide:landmark',
-            },
-            {
-              title: 'APIs',
-              to: '/apis/fulfillment-api/overview',
-              description: 'Explore our API documentation.',
-              icon: 'lucide:code',
-            }
-          ]
-        }
-      ],
       links: [
         {
           title: 'API References',
@@ -89,6 +64,7 @@ export default defineAppConfig({
     },
     aside: {
       useLevel: true,
+      levelStyle: 'aside',
       collapse: true,
       collapseLevel: 1,
       folderStyle: 'default',
