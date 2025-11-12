@@ -1,0 +1,2901 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Logistics.Fulfillment.WebApiService",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://logistics-fulfillment-api.test.eshopworld.net"
+    }
+  ],
+  "paths": {
+    "/v1/Events/OrderEvent": {
+      "post": {
+        "tags": [
+          "ThirdPartyGatewayEventTriggers"
+        ],
+        "operationId": "OrderEvent",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderEvent"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderEvent"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderEvent"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderEvent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/{tenantCode}/Inventory/Availability": {
+      "post": {
+        "tags": [
+          "Inventory"
+        ],
+        "summary": "Get product availability",
+        "operationId": "GetProductAvailability",
+        "parameters": [
+          {
+            "name": "tenantCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Product availability request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductAvailabilityRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request is processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductAvailabilityResponseItem"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/{tenantCode}/Inventory/SoftReservation": {
+      "post": {
+        "tags": [
+          "Inventory"
+        ],
+        "summary": "Creates a soft reservation for the specified cart.",
+        "operationId": "SoftReservation",
+        "parameters": [
+          {
+            "name": "tenantCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The soft reservation request containing cart details.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SoftReservationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request is processed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SoftReservationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request is invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error."
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/{tenantCode}/Inventory/SoftRelease": {
+      "post": {
+        "tags": [
+          "Inventory"
+        ],
+        "summary": "Soft release items for the specified cart.",
+        "operationId": "SoftRelease",
+        "parameters": [
+          {
+            "name": "tenantCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The soft release request containing cart details.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SoftReleaseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request is processed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SoftReleaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request is invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error."
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/Inventory/Sync": {
+      "post": {
+        "tags": [
+          "ThirdPartyGateway"
+        ],
+        "summary": "Sync inventory",
+        "description": "Used by retailers or 3PL providers to synchronize inventory quantities for one or more SKUs at a specific fulfillment center.",
+        "operationId": "SyncInventory",
+        "requestBody": {
+          "description": "Inventory sync payload",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventorySyncRequest"
+              },
+              "example": {
+                "tenantCode": "GOCAS",
+                "fulfillmentCentreId": "AGVAGV-ES-001",
+                "provider": "mirolog",
+                "items": [
+                  {
+                    "sku": "ABC-BLUE-XL-12345",
+                    "variantProductCode": "60433",
+                    "upc": "036000291452",
+                    "ean": "4006381333931",
+                    "size": "L",
+                    "color": "Black",
+                    "articleStatus": "Active",
+                    "quantity": 10
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventorySyncRequest"
+              },
+              "example": {
+                "tenantCode": "GOCAS",
+                "fulfillmentCentreId": "AGVAGV-ES-001",
+                "provider": "mirolog",
+                "items": [
+                  {
+                    "sku": "ABC-BLUE-XL-12345",
+                    "variantProductCode": "60433",
+                    "upc": "036000291452",
+                    "ean": "4006381333931",
+                    "size": "L",
+                    "color": "Black",
+                    "articleStatus": "Active",
+                    "quantity": 10
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventorySyncRequest"
+              },
+              "example": {
+                "tenantCode": "GOCAS",
+                "fulfillmentCentreId": "AGVAGV-ES-001",
+                "provider": "mirolog",
+                "items": [
+                  {
+                    "sku": "ABC-BLUE-XL-12345",
+                    "variantProductCode": "60433",
+                    "upc": "036000291452",
+                    "ean": "4006381333931",
+                    "size": "L",
+                    "color": "Black",
+                    "articleStatus": "Active",
+                    "quantity": 10
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventorySyncRequest"
+              },
+              "example": {
+                "tenantCode": "GOCAS",
+                "fulfillmentCentreId": "AGVAGV-ES-001",
+                "provider": "mirolog",
+                "items": [
+                  {
+                    "sku": "ABC-BLUE-XL-12345",
+                    "variantProductCode": "60433",
+                    "upc": "036000291452",
+                    "ean": "4006381333931",
+                    "size": "L",
+                    "color": "Black",
+                    "articleStatus": "Active",
+                    "quantity": 10
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                },
+                "example": {
+                  "errors": {
+                    "FulfillmentCentreId": [
+                      "The FulfillmentCentreId field is required."
+                    ],
+                    "Provider": [
+                      "The Provider field is required."
+                    ]
+                  },
+                  "type": "https://httpstatuses.com/400",
+                  "title": "One or more validation errors occurred.",
+                  "status": 400,
+                  "detail": "Validation failed for one or more fields.",
+                  "traceId": "00-0403053dcf6dc794b02b09b0ca3ef956-e6eda743157a8d75-0"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/PickPack/Confirm": {
+      "post": {
+        "tags": [
+          "PickPack"
+        ],
+        "summary": "Confirm a pick and pack operation.",
+        "description": "Used by a 3PL to confirm that an order has been picked, packed, and is ready for shipment. The confirmation includes timestamps and a detailed response payload describing the pick/pack outcome.",
+        "operationId": "PickPackConfirm",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PickPackConfirm"
+              },
+              "example": {
+                "confirmationId": "556223225",
+                "confirmationDateTime": "2025-11-10T16:12:07.3514889+00:00",
+                "eswOrderReference": "6658874585",
+                "tenantCode": "GOCAS",
+                "pickPackResponse": {
+                  "status": "PartiallyConfirmedByProvider",
+                  "failureReason": "None",
+                  "problemMessage": null,
+                  "itemsResult": [
+                    {
+                      "productCode": "W-FD7090-NBL-M",
+                      "quantityConfirmed": 20,
+                      "status": "Success",
+                      "problemMessage": null
+                    },
+                    {
+                      "productCode": "W-M9779-BLK-S",
+                      "quantityConfirmed": 0,
+                      "status": "Failed",
+                      "problemMessage": "OutOfStock"
+                    }
+                  ]
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PickPackConfirm"
+              },
+              "example": {
+                "confirmationId": "556223225",
+                "confirmationDateTime": "2025-11-10T16:12:07.3514889+00:00",
+                "eswOrderReference": "6658874585",
+                "tenantCode": "GOCAS",
+                "pickPackResponse": {
+                  "status": "PartiallyConfirmedByProvider",
+                  "failureReason": "None",
+                  "problemMessage": null,
+                  "itemsResult": [
+                    {
+                      "productCode": "W-FD7090-NBL-M",
+                      "quantityConfirmed": 20,
+                      "status": "Success",
+                      "problemMessage": null
+                    },
+                    {
+                      "productCode": "W-M9779-BLK-S",
+                      "quantityConfirmed": 0,
+                      "status": "Failed",
+                      "problemMessage": "OutOfStock"
+                    }
+                  ]
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PickPackConfirm"
+              },
+              "example": {
+                "confirmationId": "556223225",
+                "confirmationDateTime": "2025-11-10T16:12:07.3514889+00:00",
+                "eswOrderReference": "6658874585",
+                "tenantCode": "GOCAS",
+                "pickPackResponse": {
+                  "status": "PartiallyConfirmedByProvider",
+                  "failureReason": "None",
+                  "problemMessage": null,
+                  "itemsResult": [
+                    {
+                      "productCode": "W-FD7090-NBL-M",
+                      "quantityConfirmed": 20,
+                      "status": "Success",
+                      "problemMessage": null
+                    },
+                    {
+                      "productCode": "W-M9779-BLK-S",
+                      "quantityConfirmed": 0,
+                      "status": "Failed",
+                      "problemMessage": "OutOfStock"
+                    }
+                  ]
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PickPackConfirm"
+              },
+              "example": {
+                "confirmationId": "556223225",
+                "confirmationDateTime": "2025-11-10T16:12:07.3514889+00:00",
+                "eswOrderReference": "6658874585",
+                "tenantCode": "GOCAS",
+                "pickPackResponse": {
+                  "status": "PartiallyConfirmedByProvider",
+                  "failureReason": "None",
+                  "problemMessage": null,
+                  "itemsResult": [
+                    {
+                      "productCode": "W-FD7090-NBL-M",
+                      "quantityConfirmed": 20,
+                      "status": "Success",
+                      "problemMessage": null
+                    },
+                    {
+                      "productCode": "W-M9779-BLK-S",
+                      "quantityConfirmed": 0,
+                      "status": "Failed",
+                      "problemMessage": "OutOfStock"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                },
+                "example": {
+                  "errors": {
+                    "TenantCode": [
+                      "The TenantCode field is required."
+                    ]
+                  },
+                  "type": "https://httpstatuses.com/400",
+                  "title": "One or more validation errors occurred.",
+                  "status": 400,
+                  "detail": "Validation failed for one or more fields.",
+                  "traceId": "00-0403053dcf6dc794b02b09b0ca3ef956-e6eda743157a8d75-0"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/PickPack/Retry": {
+      "post": {
+        "tags": [
+          "PickPack"
+        ],
+        "operationId": "PickPackRetry",
+        "parameters": [
+          {
+            "name": "eswOrderReference",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "threePlRequest",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                },
+                "example": {
+                  "errors": {
+                    "TenantCode": [
+                      "The TenantCode field is required."
+                    ]
+                  },
+                  "type": "https://httpstatuses.com/400",
+                  "title": "One or more validation errors occurred.",
+                  "status": 400,
+                  "detail": "Validation failed for one or more fields.",
+                  "traceId": "00-0403053dcf6dc794b02b09b0ca3ef956-e6eda743157a8d75-0"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/PickPack/AdvancedShippingNotice": {
+      "post": {
+        "tags": [
+          "PickPack"
+        ],
+        "summary": "Submit an Advanced Shipping Notice (ASN).",
+        "description": "Used by 3PLs or retailers to notify the system when an order is shipped. Includes package, carrier, and item-level details.",
+        "operationId": "AdvancedShippingNotice",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdvancedShippingNoticeRequest"
+              },
+              "example": {
+                "shipmentId": "SHIP123456789",
+                "eswOrderReference": "ORD987654321",
+                "shipmentDateTime": "2025-11-10T16:12:07.4399847+00:00",
+                "shipmentStatus": "Shipped",
+                "shipFrom": {
+                  "name": "Main Fulfillment Center",
+                  "locationCode": "AGVAGV-GB-001"
+                },
+                "carrierId": "1015",
+                "packageReference": null,
+                "carrierSCAC": "FDXE",
+                "carrierReference": "DHL1234567890",
+                "packageWeight": {
+                  "weight": 12.5,
+                  "weightUnit": "KG"
+                },
+                "packageDimensions": {
+                  "length": 30,
+                  "width": 25.5,
+                  "height": 15,
+                  "dimensionUnit": "CM"
+                },
+                "items": [
+                  {
+                    "sku": "SKU123456",
+                    "quantityOrdered": 3,
+                    "quantityShipped": 3,
+                    "unitOfMeasure": "EA",
+                    "itemStatus": "Shipped"
+                  },
+                  {
+                    "sku": "SKU789012",
+                    "quantityOrdered": 2,
+                    "quantityShipped": 1,
+                    "unitOfMeasure": "BOX",
+                    "itemStatus": "Shipped"
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdvancedShippingNoticeRequest"
+              },
+              "example": {
+                "shipmentId": "SHIP123456789",
+                "eswOrderReference": "ORD987654321",
+                "shipmentDateTime": "2025-11-10T16:12:07.4399847+00:00",
+                "shipmentStatus": "Shipped",
+                "shipFrom": {
+                  "name": "Main Fulfillment Center",
+                  "locationCode": "AGVAGV-GB-001"
+                },
+                "carrierId": "1015",
+                "packageReference": null,
+                "carrierSCAC": "FDXE",
+                "carrierReference": "DHL1234567890",
+                "packageWeight": {
+                  "weight": 12.5,
+                  "weightUnit": "KG"
+                },
+                "packageDimensions": {
+                  "length": 30,
+                  "width": 25.5,
+                  "height": 15,
+                  "dimensionUnit": "CM"
+                },
+                "items": [
+                  {
+                    "sku": "SKU123456",
+                    "quantityOrdered": 3,
+                    "quantityShipped": 3,
+                    "unitOfMeasure": "EA",
+                    "itemStatus": "Shipped"
+                  },
+                  {
+                    "sku": "SKU789012",
+                    "quantityOrdered": 2,
+                    "quantityShipped": 1,
+                    "unitOfMeasure": "BOX",
+                    "itemStatus": "Shipped"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdvancedShippingNoticeRequest"
+              },
+              "example": {
+                "shipmentId": "SHIP123456789",
+                "eswOrderReference": "ORD987654321",
+                "shipmentDateTime": "2025-11-10T16:12:07.4399847+00:00",
+                "shipmentStatus": "Shipped",
+                "shipFrom": {
+                  "name": "Main Fulfillment Center",
+                  "locationCode": "AGVAGV-GB-001"
+                },
+                "carrierId": "1015",
+                "packageReference": null,
+                "carrierSCAC": "FDXE",
+                "carrierReference": "DHL1234567890",
+                "packageWeight": {
+                  "weight": 12.5,
+                  "weightUnit": "KG"
+                },
+                "packageDimensions": {
+                  "length": 30,
+                  "width": 25.5,
+                  "height": 15,
+                  "dimensionUnit": "CM"
+                },
+                "items": [
+                  {
+                    "sku": "SKU123456",
+                    "quantityOrdered": 3,
+                    "quantityShipped": 3,
+                    "unitOfMeasure": "EA",
+                    "itemStatus": "Shipped"
+                  },
+                  {
+                    "sku": "SKU789012",
+                    "quantityOrdered": 2,
+                    "quantityShipped": 1,
+                    "unitOfMeasure": "BOX",
+                    "itemStatus": "Shipped"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdvancedShippingNoticeRequest"
+              },
+              "example": {
+                "shipmentId": "SHIP123456789",
+                "eswOrderReference": "ORD987654321",
+                "shipmentDateTime": "2025-11-10T16:12:07.4399847+00:00",
+                "shipmentStatus": "Shipped",
+                "shipFrom": {
+                  "name": "Main Fulfillment Center",
+                  "locationCode": "AGVAGV-GB-001"
+                },
+                "carrierId": "1015",
+                "packageReference": null,
+                "carrierSCAC": "FDXE",
+                "carrierReference": "DHL1234567890",
+                "packageWeight": {
+                  "weight": 12.5,
+                  "weightUnit": "KG"
+                },
+                "packageDimensions": {
+                  "length": 30,
+                  "width": 25.5,
+                  "height": 15,
+                  "dimensionUnit": "CM"
+                },
+                "items": [
+                  {
+                    "sku": "SKU123456",
+                    "quantityOrdered": 3,
+                    "quantityShipped": 3,
+                    "unitOfMeasure": "EA",
+                    "itemStatus": "Shipped"
+                  },
+                  {
+                    "sku": "SKU789012",
+                    "quantityOrdered": 2,
+                    "quantityShipped": 1,
+                    "unitOfMeasure": "BOX",
+                    "itemStatus": "Shipped"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                },
+                "example": {
+                  "errors": {
+                    "ShipmentDateTime": [
+                      "ShipmentDateTime is required.",
+                      "ShipmentDateTime must be a valid ISO 8601 timestamp."
+                    ]
+                  },
+                  "type": "https://httpstatuses.com/400",
+                  "title": "One or more validation errors occurred.",
+                  "status": 400,
+                  "detail": "Validation failed for one or more fields.",
+                  "traceId": "00-0403053dcf6dc794b02b09b0ca3ef956-e6eda743157a8d75-0"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Address": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "monolithId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "nickName": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "address1": {
+            "type": "string",
+            "nullable": true
+          },
+          "address2": {
+            "type": "string",
+            "nullable": true
+          },
+          "address3": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "region": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "telephone": {
+            "type": "string",
+            "nullable": true
+          },
+          "poBox": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailMarketingOptIn": {
+            "type": "boolean"
+          },
+          "lastUpdateDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateDateTimeByEvoOrder": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdvancedShippingNoticeRequest": {
+        "type": "object",
+        "properties": {
+          "shipmentId": {
+            "type": "string",
+            "nullable": true
+          },
+          "eswOrderReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "shipmentDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "shipmentStatus": {
+            "$ref": "#/components/schemas/ShipmentStatus"
+          },
+          "shipFrom": {
+            "$ref": "#/components/schemas/ShipmentLocation"
+          },
+          "carrierId": {
+            "type": "string",
+            "nullable": true
+          },
+          "packageReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "carrierSCAC": {
+            "type": "string",
+            "nullable": true
+          },
+          "carrierReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "packageWeight": {
+            "$ref": "#/components/schemas/PackageWeight"
+          },
+          "packageDimensions": {
+            "$ref": "#/components/schemas/PackageDimensions"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShipmentItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AggregateId": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Article": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "monolithId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sequence": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "cancelStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "returnStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "refundStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "shipped": {
+            "type": "boolean"
+          },
+          "replaced": {
+            "type": "boolean"
+          },
+          "exchange": {
+            "type": "boolean"
+          },
+          "shippedMerchandiseSettlementReference": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "settled": {
+            "type": "boolean"
+          },
+          "replacementDetails": {
+            "$ref": "#/components/schemas/ReplacementDetails"
+          },
+          "articleCharges": {
+            "$ref": "#/components/schemas/ArticleCharge"
+          },
+          "otherArticleCharges": {
+            "$ref": "#/components/schemas/ArticleCharge"
+          },
+          "retailerArticleCharges": {
+            "$ref": "#/components/schemas/ArticleCharge"
+          },
+          "refunds": {
+            "$ref": "#/components/schemas/ArticleCharge"
+          },
+          "dates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NamedDate"
+            },
+            "nullable": true
+          },
+          "lastUpdateDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateDateTimeByEvoOrder": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "returnOrderNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "packageReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "articlePaymentReceived": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "fulfilmentCountryIso": {
+            "type": "string",
+            "nullable": true
+          },
+          "fulfilmentCentreId": {
+            "type": "string",
+            "nullable": true
+          },
+          "allocated": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "allocationStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Currency"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ArticleCharge": {
+        "type": "object",
+        "properties": {
+          "chargesInCurrency": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NamedCharges"
+            },
+            "nullable": true
+          },
+          "lastUpdateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateUser": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ArticleStatus": {
+        "enum": [
+          "Expected",
+          "Active",
+          "Quarantine",
+          "Suspended"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ArticleStatus",
+          "modelAsString": true
+        }
+      },
+      "AssociatedArticle": {
+        "type": "object",
+        "properties": {
+          "articleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "monolithArticleId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BaseTransaction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CartItemDto": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lineItemId": {
+            "type": "string",
+            "nullable": true
+          },
+          "destinationCountryIso": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Charge": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "$ref": "#/components/schemas/Value"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "actionType": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "creationDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateDateTimeByEvoOrder": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreditBreakdown": {
+        "type": "object",
+        "properties": {
+          "orderArticleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "monolithOrderArticleId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "creditRuleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "monolithCreditRuleId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "creditTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "creditType": {
+            "type": "string",
+            "nullable": true
+          },
+          "creditsInCurrency": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NamedCharges"
+            },
+            "nullable": true
+          },
+          "lastUpdateDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateDateTimeByEvoOrder": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Currency": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeliveryOption": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "vatRate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DimensionUnit": {
+        "enum": [
+          "IN",
+          "CM"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "DimensionUnit",
+          "modelAsString": true
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FinancialTransaction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "monolithId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "settlementType": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "monetaryStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "stopCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "authoriseDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "authoriseUser": {
+            "type": "string",
+            "nullable": true
+          },
+          "authoriseStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "monolithPaymentId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "paymentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "monolithPackageId": {
+            "type": "string",
+            "nullable": true
+          },
+          "monolithInstructionsHeaderId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "comment": {
+            "type": "string",
+            "nullable": true
+          },
+          "monolithOrderTransactionId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "orderTransactionId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "creationDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateDateTimeByEvoOrder": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateUser": {
+            "type": "string",
+            "nullable": true
+          },
+          "packageReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "paymentDetailCollectionStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "chargesInCurrency": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NamedCharges"
+            },
+            "nullable": true
+          },
+          "creditBreakdowns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreditBreakdown"
+            },
+            "nullable": true
+          },
+          "splitFintrans": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SplitFintran"
+            },
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "monolithReplacementFintranId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "replacementFintranId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FxRate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "fromCurrency": {
+            "type": "string",
+            "nullable": true
+          },
+          "toCurrency": {
+            "type": "string",
+            "nullable": true
+          },
+          "rawRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "margin": {
+            "type": "number",
+            "format": "double"
+          },
+          "marginRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "rawSynchronizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "brandSynchronizationId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Instruction": {
+        "type": "object",
+        "properties": {
+          "monolithOrderArticleId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "orderArticleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "preship": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InstructionsHeader": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "monolithId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "instructionMapId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "instructionCategory": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "instructionTypeId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "typeCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyInstructionCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuerReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "instructionsHeaderStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "instructions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Instruction"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventorySyncItem": {
+        "required": [
+          "articleStatus",
+          "sku"
+        ],
+        "type": "object",
+        "properties": {
+          "sku": {
+            "maxLength": 32,
+            "minLength": 3,
+            "type": "string"
+          },
+          "variantProductCode": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "nullable": true
+          },
+          "upc": {
+            "type": "string",
+            "nullable": true
+          },
+          "ean": {
+            "type": "string",
+            "nullable": true
+          },
+          "size": {
+            "type": "string",
+            "nullable": true
+          },
+          "color": {
+            "type": "string",
+            "nullable": true
+          },
+          "articleStatus": {
+            "$ref": "#/components/schemas/ArticleStatus"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventorySyncRequest": {
+        "required": [
+          "fulfillmentCentreId",
+          "items",
+          "provider",
+          "tenantCode"
+        ],
+        "type": "object",
+        "properties": {
+          "tenantCode": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "fulfillmentCentreId": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "provider": {
+            "type": "string",
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InventorySyncItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemProviderResponse": {
+        "type": "object",
+        "properties": {
+          "productCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantityConfirmed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "$ref": "#/components/schemas/_3PlProviderItemStatus"
+          },
+          "problemMessage": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemStatus": {
+        "enum": [
+          "Shipped"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ItemStatus",
+          "modelAsString": true
+        }
+      },
+      "LineItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lineItemId": {
+            "type": "string",
+            "nullable": true
+          },
+          "retailerLineItemId": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentLineItemId": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "product": {
+            "$ref": "#/components/schemas/Product"
+          },
+          "metadataItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetadataItem"
+            },
+            "nullable": true
+          },
+          "articles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Article"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MetadataItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NamedCharges": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "charges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Charge"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NamedDate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderBalances": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "monolithId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "balancesInCurrency": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NamedCharges"
+            },
+            "nullable": true
+          },
+          "lastUpdateDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateDateTimeByEvoOrder": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderCharge": {
+        "type": "object",
+        "properties": {
+          "chargesInCurrency": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NamedCharges"
+            },
+            "nullable": true
+          },
+          "monolithId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "lastUpdateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateUser": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastUpdateDateTimeByEvoOrder": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderEvent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "monolithId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "orderType": {
+            "type": "string",
+            "nullable": true
+          },
+          "brandOrderReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentBrandOrderReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "eswOrderReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenantCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "orderConfirmed": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "deliveryCountryIso": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Currency"
+            },
+            "nullable": true
+          },
+          "fxRates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FxRate"
+            },
+            "nullable": true
+          },
+          "creationDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdateDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdateDateTimeByEvoOrder": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateUser": {
+            "type": "string",
+            "nullable": true
+          },
+          "retailerInvoice": {
+            "$ref": "#/components/schemas/RetailerInvoice"
+          },
+          "aggregateIds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AggregateId"
+            },
+            "nullable": true
+          },
+          "shopperExperience": {
+            "$ref": "#/components/schemas/ShopperExperience"
+          },
+          "metadataItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetadataItem"
+            },
+            "nullable": true
+          },
+          "dates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NamedDate"
+            },
+            "nullable": true
+          },
+          "deliveryOption": {
+            "$ref": "#/components/schemas/DeliveryOption"
+          },
+          "payment": {
+            "$ref": "#/components/schemas/Payment"
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Address"
+            },
+            "nullable": true
+          },
+          "lineItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineItem"
+            },
+            "nullable": true
+          },
+          "orderCharges": {
+            "$ref": "#/components/schemas/OrderCharge"
+          },
+          "retailerOrderCharges": {
+            "$ref": "#/components/schemas/OrderCharge"
+          },
+          "otherOrderCharges": {
+            "$ref": "#/components/schemas/OrderCharge"
+          },
+          "balances": {
+            "$ref": "#/components/schemas/OrderBalances"
+          },
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Comment"
+            },
+            "nullable": true
+          },
+          "financialTransactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FinancialTransaction"
+            },
+            "nullable": true
+          },
+          "lastTransaction": {
+            "$ref": "#/components/schemas/BaseTransaction"
+          },
+          "orderTransactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderTransaction"
+            },
+            "nullable": true
+          },
+          "instructionsHeaders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InstructionsHeader"
+            },
+            "nullable": true
+          },
+          "holdStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "allocationStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "cartValueType": {
+            "type": "string",
+            "nullable": true
+          },
+          "channelId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderTransaction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "monolithId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "transactionReference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "retailerTransactionDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "settlementReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "associatedArticles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssociatedArticle"
+            },
+            "nullable": true
+          },
+          "actionedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "actionedByUser": {
+            "type": "string",
+            "nullable": true
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "shipStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "settledStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastUpdateDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateDateTimeByEvoOrder": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "error": {
+            "$ref": "#/components/schemas/Error"
+          },
+          "metadataItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetadataItem"
+            },
+            "nullable": true
+          },
+          "originService": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PackageDimensions": {
+        "type": "object",
+        "properties": {
+          "length": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "width": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "height": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "dimensionUnit": {
+            "$ref": "#/components/schemas/DimensionUnit"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PackageWeight": {
+        "type": "object",
+        "properties": {
+          "weight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "weightUnit": {
+            "$ref": "#/components/schemas/WeightUnit"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Payment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentAttemptReference": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "method": {
+            "type": "string",
+            "nullable": true
+          },
+          "paymentBrand": {
+            "type": "string",
+            "nullable": true
+          },
+          "last4Digits": {
+            "type": "string",
+            "nullable": true
+          },
+          "preAuthorized": {
+            "type": "boolean"
+          },
+          "settled": {
+            "type": "boolean"
+          },
+          "paymentTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateDateTimeByEvoOrder": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "splitPayments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SplitPayment"
+            },
+            "nullable": true
+          },
+          "isOverCounterMethod": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PickPackConfirm": {
+        "required": [
+          "confirmationId",
+          "eswOrderReference",
+          "pickPackResponse",
+          "tenantCode"
+        ],
+        "type": "object",
+        "properties": {
+          "confirmationId": {
+            "type": "string",
+            "nullable": true
+          },
+          "confirmationDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "eswOrderReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenantCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "pickPackResponse": {
+            "$ref": "#/components/schemas/PickPackResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PickPackProviderFailureReason": {
+        "enum": [
+          "None",
+          "TransientError",
+          "NotFound",
+          "BadAddress",
+          "TimeOut",
+          "_3PLNotConfigured",
+          "CancelledItem",
+          "OperationalCancel",
+          "Damaged",
+          "ReallocatedExclude",
+          "EndOfDay"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "PickPackProviderFailureReason",
+          "modelAsString": true
+        }
+      },
+      "PickPackResponse": {
+        "required": [
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/PickPackResponseStatus"
+          },
+          "failureReason": {
+            "$ref": "#/components/schemas/PickPackProviderFailureReason"
+          },
+          "problemMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemsResult": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemProviderResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PickPackResponseStatus": {
+        "enum": [
+          "AcceptedForProcessing",
+          "PartiallyConfirmedByProvider",
+          "Confirmed",
+          "Failed",
+          "BadRequest",
+          "BadAddress",
+          "TimeOut"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "PickPackResponseStatus",
+          "modelAsString": true
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {}
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "customsDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "prohibitedItem": {
+            "type": "boolean"
+          },
+          "isCustomized": {
+            "type": "boolean"
+          },
+          "isReturnProhibited": {
+            "type": "boolean"
+          },
+          "nonShippable": {
+            "type": "boolean"
+          },
+          "productCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "hsCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryOfOriginIso": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "weight": {
+            "type": "number",
+            "format": "double"
+          },
+          "weightUnit": {
+            "type": "string",
+            "nullable": true
+          },
+          "color": {
+            "type": "string",
+            "nullable": true
+          },
+          "colorNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "size": {
+            "type": "string",
+            "nullable": true
+          },
+          "styleNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "vatRate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "dutyRate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "taxCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastUpdateDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateDateTimeByEvoOrder": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "sourceCountryIso": {
+            "type": "string",
+            "nullable": true
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductAvailabilityRequest": {
+        "required": [
+          "deliveryCountryIso",
+          "skUs"
+        ],
+        "type": "object",
+        "properties": {
+          "skUs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "deliveryCountryIso": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductAvailabilityResponseItem": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "type": "string",
+            "nullable": true
+          },
+          "availableToPurchase": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReplacementDetails": {
+        "type": "object",
+        "properties": {
+          "brandOrderReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "lineItemId": {
+            "type": "string",
+            "nullable": true
+          },
+          "replacementOfArticleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "replacementOfMonolithArticleId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RetailerInvoice": {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "string",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShipmentItem": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantityOrdered": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantityShipped": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unitOfMeasure": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemStatus": {
+            "$ref": "#/components/schemas/ItemStatus"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShipmentLocation": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "locationCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShipmentStatus": {
+        "enum": [
+          "Unshipped",
+          "PartiallyShipped",
+          "Shipped"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ShipmentStatus",
+          "modelAsString": true
+        }
+      },
+      "ShopperExperience": {
+        "type": "object",
+        "properties": {
+          "cultureLanguage": {
+            "type": "string",
+            "nullable": true
+          },
+          "customerNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "carrierCustomerNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailMarketingOptIn": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SoftReleaseRequest": {
+        "type": "object",
+        "properties": {
+          "cartId": {
+            "type": "string",
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItemDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SoftReleaseResponse": {
+        "type": "object",
+        "properties": {
+          "cartId": {
+            "type": "string",
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SoftReleaseResponseItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SoftReleaseResponseItem": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lineItemId": {
+            "type": "string",
+            "nullable": true
+          },
+          "released": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SoftReservationRequest": {
+        "type": "object",
+        "properties": {
+          "cartId": {
+            "type": "string",
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItemDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SoftReservationResponse": {
+        "type": "object",
+        "properties": {
+          "cartId": {
+            "type": "string",
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SoftReservationResponseItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SoftReservationResponseItem": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lineItemId": {
+            "type": "string",
+            "nullable": true
+          },
+          "reserved": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SplitFintran": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "monolithId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "monetaryStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "paymentId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "monolithPaymentId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "chargesInCurrency": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NamedCharges"
+            },
+            "nullable": true
+          },
+          "creationTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateTimeByEvoOrder": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdateUser": {
+            "type": "string",
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SplitPayment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "pspReference": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "attemptRef": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "paymentMethod": {
+            "type": "string",
+            "nullable": true
+          },
+          "last4Digits": {
+            "type": "string",
+            "nullable": true
+          },
+          "preAuthorized": {
+            "type": "boolean"
+          },
+          "settled": {
+            "type": "boolean"
+          },
+          "chargesInCurrency": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NamedCharges"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ValidationProblemDetails": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {}
+      },
+      "Value": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WeightUnit": {
+        "enum": [
+          "KG",
+          "LB"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "WeightUnit",
+          "modelAsString": true
+        }
+      },
+      "_3PlProviderItemStatus": {
+        "enum": [
+          "Created",
+          "Success",
+          "Failed",
+          "PartialSuccess"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "_3PlProviderItemStatus",
+          "modelAsString": true
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "Please insert JWT with Bearer into field",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ]
+}
