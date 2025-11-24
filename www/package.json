@@ -25,6 +25,7 @@
     "@nuxtjs/i18n": "^9.5.4",
     "@nuxtjs/mdc": "^0.17.0",
     "@tailwindcss/vite": "^4.1.7",
+    "@vercel/analytics": "^1.5.0",
     "@ztl-uwu/nuxt-content": "^2.13.7",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
