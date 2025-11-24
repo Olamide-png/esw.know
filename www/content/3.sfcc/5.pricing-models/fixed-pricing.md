@@ -126,6 +126,7 @@ Price from the price book: **GBP 201.60**.
 ::
 
 <br>
+<br>
 
 ::GlossaryDrawer{term="Fixed Pricing Model Example B" subtitle="Example B"}
 Example B — Fixed price without override, with FX
