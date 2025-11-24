@@ -52,30 +52,6 @@ A Fixed pricing model is a localized price that is not dynamically converted bas
   #### :smart-icon{name="lucide:binoculars" size=20 class="align-middle mr-2"} Verify prices on Product Listing Page (PLP)
 
   Navigate to a PLP page and verify that the prices on the page are the same as in the price book for the country.
-
-  #### :smart-icon{name="lucide:telescope" size=20 class="align-middle mr-2"} Verify price on Quick View
-
-  Open the Quick View modal for a product on the PLP page and verify that the prices on the Quick View are the same as in the price book.
-
-  #### :smart-icon{name="lucide:monitor-cog" size=20 class="align-middle mr-2"} Verify price on Product Details Page (PDP)
-
-  Open a PDP page for a product and verify that the prices on the PDP page are the same as in the price book.
-
-  #### :smart-icon{name="lucide:shopping-cart" size=20 class="align-middle mr-2"} Add a product to the cart
-
-  Add a product to the cart and open the mini cart modal. Verify that the prices for the product are the same as in the price book.
-
-  #### :smart-icon{name="lucide:shopping-basket" size=20 class="align-middle mr-2"} Navigate to the basket page
-
-  Open the basket page and verify that the prices for the product are the same as in the price book.
-
-  #### :smart-icon{name="lucide:credit-card" size=20 class="align-middle mr-2"} Proceed to checkout
-
-  Proceed to checkout and verify that the prices for the product are the same as in the price book.
-
-  #### :smart-icon{name="lucide:credit-card" size=20 class="align-middle mr-2"} Place an order
-
-  Complete the checkout process and place an order.
 ::
 
 ### Business Manager
@@ -148,7 +124,9 @@ Price from the price book: **GBP 201.60**.
   ![](/Screenshot2025-07-04132743_PhotoGrid.png){lifted}
   </div>
 ::
-  
+
+<br>
+
 ::GlossaryDrawer{term="Fixed Pricing Model Example B" subtitle="Example B"}
 Example B — Fixed price without override, with FX
 Price in price book: **EUR 92**, Shopper currency: **PLN**.
