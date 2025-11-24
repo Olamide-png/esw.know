@@ -1,4 +1,5 @@
 <template>
+  <Analytics />
   <NuxtLoadingIndicator :color="false" class="z-100 bg-primary/80" />
   <LayoutBanner v-if="config.banner.enable" />
   <LayoutHeader />
@@ -58,6 +59,7 @@
 
 <script setup lang="ts">
 import Toaster from '@/components/ui/toast/Toaster.vue';
+import { Analytics } from '@vercel/analytics/nuxt';
 
 const { page } = useContent();
 const config = useConfig();
