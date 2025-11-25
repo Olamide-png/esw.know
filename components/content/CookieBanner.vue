@@ -1,0 +1,61 @@
+<template>
+  <div v-if="bannerVisible"
+       id="cookie-banner"
+       class="fixed bottom-0 end-0 z-60 sm:max-w-xl w-full mx-auto p-6">
+    <!-- Card -->
+    <div class="p-4 bg-white border border-gray-200 rounded-xl shadow-2xs dark:bg-neutral-900 dark:border-neutral-800">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-y-3 sm:gap-y-0 sm:gap-x-5">
+        <div class="grow">
+          <h2 class="text-gray-500 dark:text-neutral-500">
+            <span class="font-semibold text-gray-800 dark:text-neutral-200">We use cookies</span>
+            to analyze our traffic and create a smooth user experience.
+          </h2>
+        </div>
+        <div class="inline-flex gap-x-2">
+          <button @click="hideBanner"
+                  class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg
+                         border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50
+                         dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700">
+            Reject
+          </button>
+          <button @click="acceptCookies"
+                  class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg
+                         border border-transparent bg-blue-600 text-white hover:bg-blue-700">
+            Accept
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- End Card -->
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
+
+// Reactive state controlling visibility
+const bannerVisible = ref(true);
+
+onMounted(() => {
+  // Hide banner if user previously accepted cookies
+  if (localStorage.getItem('cookiesAccepted')) {
+    bannerVisible.value = false;
+  }
+  // Ensure Preline applies interactive classes
+  if (typeof window !== 'undefined' && window.HSStaticMethods) {
+    window.HSStaticMethods.autoInit();
+  }
+});
+
+// Hide banner without saving consent
+function hideBanner() {
+  bannerVisible.value = false;
+}
+
+// Accept cookies and store choice
+function acceptCookies() {
+  localStorage.setItem('cookiesAccepted', 'true');
+  bannerVisible.value = false;
+}
+</script>
+
