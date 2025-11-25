@@ -50,7 +50,6 @@ export default defineNuxtConfig({
 
   modules: [
     'shadcn-nuxt',
-    '@nuxt/content',
     '@vueuse/nuxt',
     '@ztl-uwu/nuxt-content',
     '@nuxt/image',
