@@ -2,10 +2,7 @@
   "name": "shadcn-docs-nuxt",
   "type": "module",
   "version": "1.0.0",
-  "packageManager": "pnpm@10.19.0",
-  "engines": {
-    "node": "20.x"
-  },
+  "packageManager": "pnpm@10.11.0",
   "description": "Effortless and beautiful docs template built with Nuxt Content & shadcn-vue.",
   "author": "Tony Zhang <zhangtianli2006@gmail.com>",
   "license": "MIT",
@@ -44,7 +41,7 @@
     "dev": "pnpm run -C www dev",
     "generate": "pnpm run -C www generate",
     "preview": "pnpm run -C www preview",
-    "postinstall": "true",
+    "postinstall": "nuxt prepare",
     "typecheck": "nuxt typecheck",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -54,19 +51,17 @@
     "mcp:docs": "tsx mcp-docs.ts"
   },
   "dependencies": {
-    "@ztl-uwu/shadcn-docs-nuxt": "^0.4.0",
-    "@ztl-uwu/nuxt-content": "^2.13.8",
     "@iconify-json/lucide": "^1.2.45",
-    "@nuxt/content": "^2.13.4",
     "@iconify-json/vscode-icons": "^1.2.21",
     "@nuxt/fonts": "^0.11.4",
     "@nuxt/icon": "^1.13.0",
+    "@nuxt/image": "^1.10.0",
     "@nuxt/scripts": "^0.11.7",
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/i18n": "^9.5.4",
     "@nuxtjs/mdc": "^0.17.0",
     "@tailwindcss/vite": "^4.1.7",
-    "better-sqlite3": "^12.4.1",
+    "@ztl-uwu/nuxt-content": "^2.13.7",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cors": "^2.8.5",
@@ -91,9 +86,7 @@
     "@iconify-json/lucide-lab": "^1.2.3",
     "@iconify/utils": "^2.3.0",
     "@modelcontextprotocol/sdk": "^1.18.2",
-    "@nuxt/content": "^3.7.1",
-    "@nuxt/devtools": "^2.6.3",
-    "@nuxt/image": "^2.0.0",
+    "@nuxt/devtools": "^2.4.1",
     "@nuxt/kit": "^3.17.4",
     "@nuxt/vite-builder": "^3.19.2",
     "@types/cors": "^2.8.19",
@@ -120,13 +113,13 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.20.5",
     "typescript": "^5.8.3",
+    "vite": "^5.4.20",
     "vue": "^3.5.15",
     "vue-router": "^4.5.1",
     "vue-tsc": "^2.2.10"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "better-sqlite3",
       "sharp"
     ],
     "ignoredBuiltDependencies": [
