@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { navigationMenuTriggerStyle } from '~/www/components/ui/navigation-menu';
+import { navigationMenuTriggerStyle } from '~/components/ui/navigation-menu';
 
 const { nav } = useConfig().value.header;
 const { localePath } = useI18nDocs();
