@@ -39,11 +39,10 @@ export default defineNuxtConfig({
   modules: [
     'shadcn-nuxt',
     '@vueuse/nuxt',
-    '@ztl-uwu/nuxt-content',
     '@nuxt/image',
-    '@nuxt/content',
     '@nuxt/icon',
     '@nuxtjs/color-mode',
+    '@nuxt/content',
     'nuxt-og-image',
     '@nuxt/scripts',
     '@nuxtjs/i18n',
