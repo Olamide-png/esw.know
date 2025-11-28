@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, computed, nextTick, onMounted, onBeforeUnmount } from 'vue'
+import { useContent } from '#imports'  // ✅ make it explicit
 
 const props = withDefaults(defineProps<{
   title: string

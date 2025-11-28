@@ -36,6 +36,7 @@
 </template>
 
 <script setup lang="ts">
+import { useContent } from '#imports'  // ✅ make it explicit
 defineProps<{ isMobile: boolean }>();
 
 const { navDirFromPath } = useContentHelpers();

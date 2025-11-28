@@ -121,6 +121,7 @@ import { ref, watch, onMounted, computed, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 import { queryContent } from '#content'
 import MessageBubble from '~/components/MessageBubble.vue'
+import { useContent } from '#imports'  // ✅ make it explicit
 
 defineOptions({ name: 'AiChatDrawer' })
 

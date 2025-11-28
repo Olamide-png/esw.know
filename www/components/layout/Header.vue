@@ -46,6 +46,8 @@
 
 
 <script setup lang="ts">
+import { useContent } from '#imports'  // ✅ make it explicit
+
 const config = useConfig();
 const { i18nEnabled, localePath } = useI18nDocs();
 const { page } = useContent();
