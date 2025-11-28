@@ -29,6 +29,7 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
+    "@nuxt/image": "^2.0.0",
     "@types/node": "^24.5.2",
     "@types/pg": "^8.15.5",
     "dotenv": "^17.2.2",
