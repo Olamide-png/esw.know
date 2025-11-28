@@ -43,7 +43,6 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/icon',
     '@nuxtjs/color-mode',
-    '@nuxt/content',
     'nuxt-og-image',
     '@nuxt/scripts',
     '@nuxtjs/i18n',

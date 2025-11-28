@@ -54,6 +54,8 @@
     "mcp:docs": "tsx mcp-docs.ts"
   },
   "dependencies": {
+    "@ztl-uwu/nuxt-content": "^2.13.8",
+    "@ztl-uwu/shadcn-docs-nuxt": "^0.4.0", 
     "@iconify-json/lucide": "^1.2.45",
     "@nuxt/content": "^2.13.4",
     "@iconify-json/vscode-icons": "^1.2.21",
