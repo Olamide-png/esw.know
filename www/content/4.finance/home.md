@@ -230,7 +230,7 @@ img: /business-finance-illustration-concept-flat-illustration-isolated-on-white-
   icon-size: 50
   ---
   - There is no payout threshold in ESW
-  - ESW will remit the full value of your settlement net of our feed in the agreed settlement period
+  - ESW will remit the full value of your settlement net of our fees in the agreed settlement period
   ::
 ::
 
