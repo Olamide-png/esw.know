@@ -12,7 +12,6 @@
 </template>
 
 <script setup lang="ts">
-import { useContent } from '#imports'  // ✅ make it explicit
 
 const { page } = useContent();
 const { config } = useConfigs();

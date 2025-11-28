@@ -79,7 +79,6 @@
 
 <script setup lang="ts">
 import { VisuallyHidden } from 'reka-ui';
-import { useContent } from '#imports'  // ✅ make it explicit
 
 const { darkModeToggle } = useConfig().value.header;
 

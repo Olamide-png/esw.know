@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { useContent } from '#imports'  // ✅ make it explicit
 
 // Uses your layer's auto-imported useContent()
 const { page } = useContent()

@@ -58,7 +58,6 @@
 
 <script setup lang="ts">
 import Toaster from '@/components/ui/toast/Toaster.vue';
-import { useContent } from '#imports'  // ✅ make it explicit
 
 const { page } = useContent();
 const config = useConfig();

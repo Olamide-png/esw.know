@@ -73,7 +73,6 @@
 </template>
 
 <script setup lang="ts">
-import { useContent } from '#imports'  // ✅ make it explicit
 defineProps<{ isSmall: boolean }>();
 
 const { toc } = useContent();
