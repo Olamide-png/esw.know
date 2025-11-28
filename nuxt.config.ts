@@ -51,14 +51,16 @@ export default defineNuxtConfig({
   modules: [
     'shadcn-nuxt',
     '@vueuse/nuxt',
-    '@ztl-uwu/nuxt-content',
+    // 🚫 temporarily comment these out to avoid conflicts
+    // '@ztl-uwu/nuxt-content',
+    // '@nuxt/content',
     '@nuxt/image',
     '@nuxt/icon',
     '@nuxtjs/color-mode',
     'nuxt-og-image',
     '@nuxt/scripts',
     '@nuxtjs/i18n',
-    '@nuxt/fonts'
+    '@nuxt/fonts',
   ],
 
   shadcn: {
