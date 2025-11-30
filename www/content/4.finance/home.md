@@ -214,8 +214,6 @@ img: /business-finance-illustration-concept-flat-illustration-isolated-on-white-
   ::card
   ---
   title: Flexibility
-  icon: streamline-ultimate-color:browser-page-media
-  icon-size: 50
   ---
   Flexible settlement cadences to match your internal requirements: 
   - Weekly
@@ -226,8 +224,6 @@ img: /business-finance-illustration-concept-flat-illustration-isolated-on-white-
   ::card
   ---
   title: Cashflow
-  icon: streamline-ultimate-color:saving-money-flower
-  icon-size: 50
   ---
   - There is no payout threshold in ESW
   - ESW will remit the full value of your settlement net of our fees in the agreed settlement period
@@ -237,9 +233,6 @@ img: /business-finance-illustration-concept-flat-illustration-isolated-on-white-
 <br>
 
 ::card
----
-icon: 'streamline-ultimate-color:data-transfer-circle'
-icon-size: 50
 ---
 
 #title
