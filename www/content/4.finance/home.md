@@ -239,7 +239,7 @@ img: /business-finance-illustration-concept-flat-illustration-isolated-on-white-
 Payment processing
 
 #description
-ESW will remit payment within **two business days** of your selected settlement period, via bank transfer or ACH to your designated account.
+ESW will remit payment within two business days of your selected settlement period, via bank transfer or ACH to your designated account.
 ::
 
 
