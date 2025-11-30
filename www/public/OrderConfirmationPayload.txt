@@ -1,0 +1,439 @@
+{
+  "retailerCartId": "PTI250904113524817GB",
+  "eShopWorldOrderNumber": "ce8b284a-c202-4578-affe-75cacf00dec0",
+  "checkoutTotal": {
+    "retailer": {
+      "currency": "EUR",
+      "amount": "23.51"
+    },
+    "shopper": {
+      "currency": "GBP",
+      "amount": "20.99"
+    }
+  },
+  "pricingSynchronizationId": null,
+  "paymentDetails": {
+    "time": "2025-09-04T13:07:15.3334361Z",
+    "method": "PaymentCard",
+    "methodCardBrand": "Visa",
+    "fraudHold": null,
+    "amountPaid": 20.99,
+    "isOverCounter": null,
+    "ticketDetails": null
+  },
+  "retailerPromoCodes": [
+    
+  ],
+  "lineItems": [
+    {
+      "quantity": 1,
+      "product": {
+        "productCode": "123456789",
+        "hsCode": "62114900",
+        "title": "Test product",
+        "description": "Test product description",
+        "productUnitPriceInfo": {
+          "price": {
+            "retailer": {
+              "currency": "EUR",
+              "amount": "16.80"
+            },
+            "shopper": {
+              "currency": "GBP",
+              "amount": "15.00"
+            }
+          },
+          "discounts": [
+            
+          ]
+        },
+        "imageUrl": "https://i.pinimg.com/736x/ae/23/32/ae233275ce831208cc677538d95ed66c.jpg",
+        "color": "Blk",
+        "size": "M",
+        "isReturnProhibited": null,
+        "metadataItems": [
+          
+        ],
+        "category": null
+      },
+      "estimatedDeliveryDate": {
+        "fromRetailer": null,
+        "fromEShopWorld": "2025-09-11T00:00:00Z",
+        "fromEShopWorldRangeFrom": null,
+        "fromEShopWorldRangeTo": null
+      },
+      "lineItemId": 1,
+      "charges": {
+        "subTotalBeforeTaxesAndCartDiscountsApplied": {
+          "retailer": {
+            "currency": "EUR",
+            "amount": "16.80"
+          },
+          "shopper": {
+            "currency": "GBP",
+            "amount": "15.00"
+          }
+        },
+        "subTotalAfterCartDiscount": {
+          "retailer": {
+            "currency": "EUR",
+            "amount": "16.80"
+          },
+          "shopper": {
+            "currency": "GBP",
+            "amount": "15.00"
+          }
+        },
+        "cartDiscountAttribution": {
+          "retailer": {
+            "currency": "EUR",
+            "amount": "0.00"
+          },
+          "shopper": {
+            "currency": "GBP",
+            "amount": "0.00"
+          }
+        },
+        "subTotal": {
+          "retailer": {
+            "currency": "EUR",
+            "amount": "14.00"
+          },
+          "shopper": {
+            "currency": "GBP",
+            "amount": "12.50"
+          }
+        },
+        "uplift": {
+          "retailer": {
+            "currency": "EUR",
+            "amount": "0.00"
+          },
+          "shopper": {
+            "currency": "GBP",
+            "amount": "0.00"
+          }
+        },
+        "delivery": {
+          "retailer": {
+            "currency": "EUR",
+            "amount": "5.59"
+          },
+          "shopper": {
+            "currency": "GBP",
+            "amount": "4.99"
+          }
+        },
+        "deliveryDuty": {
+          "retailer": {
+            "currency": "EUR",
+            "amount": "0.00"
+          },
+          "shopper": {
+            "currency": "GBP",
+            "amount": "0.00"
+          }
+        },
+        "deliveryTaxes": {
+          "retailer": {
+            "currency": "EUR",
+            "amount": "1.12"
+          },
+          "shopper": {
+            "currency": "GBP",
+            "amount": "1.00"
+          }
+        },
+        "taxes": {
+          "retailer": {
+            "currency": "EUR",
+            "amount": "2.80"
+          },
+          "shopper": {
+            "currency": "GBP",
+            "amount": "2.50"
+          }
+        },
+        "otherTaxes": {
+          "retailer": {
+            "currency": "EUR",
+            "amount": "0.00"
+          },
+          "shopper": {
+            "currency": "GBP",
+            "amount": "0.00"
+          }
+        },
+        "administration": {
+          "retailer": {
+            "currency": "EUR",
+            "amount": "0.00"
+          },
+          "shopper": {
+            "currency": "GBP",
+            "amount": "0.00"
+          }
+        },
+        "duty": {
+          "retailer": {
+            "currency": "EUR",
+            "amount": "0.00"
+          },
+          "shopper": {
+            "currency": "GBP",
+            "amount": "0.00"
+          }
+        },
+        "cashOnDelivery": null,
+        "cashOnDeliveryTaxes": null,
+        "dutyPromoDiscount": null
+      },
+      "metadataItems": [
+        
+      ],
+      "fulfilmentCountryIso": null,
+      "deliveryOption": null,
+      "articles": null,
+      "lineItemZeroValueCharges": null
+    }
+  ],
+  "cartDiscountPriceInfo": null,
+  "deliveryCountryIso": "GB",
+  "shopperCheckoutExperience": {
+    "shopperCultureLanguageIso": "en-IE",
+    "emailMarketingOptIn": null,
+    "registeredProfileId": null,
+    "saveAddressForNextPurchase": false,
+    "metadataItems": [
+      
+    ],
+    "packagingOption": null,
+    "smsMarketingOptIn": null,
+    "notes": null,
+    "phoneMarketingOptIn": null,
+    "postMarketingOptIn": null
+  },
+  "retailerCheckoutExperience": {
+    "metadataItems": [
+      {
+        "name": "OrderConfirmationUri_TestOnly",
+        "value": "https://checkout-api-PTIPTI.sandbox.eshopworld.com"
+      },
+      {
+        "name": "InventoryCheckUri_TestOnly",
+        "value": "https://checkout-api-PTIPTI.sandbox.eshopworld.com"
+      }
+    ]
+  },
+  "deliveryOption": {
+    "deliveryOption": "POST",
+    "isShipToStore": null,
+    "isMultiOrigin": null,
+    "isPriceOverrideFromRetailer": true,
+    "deliveryOptionPriceInfo": {
+      "price": {
+        "retailer": {
+          "currency": "EUR",
+          "amount": "6.71"
+        },
+        "shopper": {
+          "currency": "GBP",
+          "amount": "5.99"
+        }
+      },
+      "discounts": [
+        
+      ]
+    },
+    "metadataItems": [
+      
+    ]
+  },
+  "retailerDeliveryOption": null,
+  "charges": {
+    "totalBeforeTaxesAndCartDiscountsApplied": {
+      "retailer": {
+        "currency": "EUR",
+        "amount": "16.80"
+      },
+      "shopper": {
+        "currency": "GBP",
+        "amount": "15.00"
+      }
+    },
+    "totalAfterCartDiscount": {
+      "retailer": {
+        "currency": "EUR",
+        "amount": "16.80"
+      },
+      "shopper": {
+        "currency": "GBP",
+        "amount": "15.00"
+      }
+    },
+    "totalCartDiscount": {
+      "retailer": {
+        "currency": "EUR",
+        "amount": "0.00"
+      },
+      "shopper": {
+        "currency": "GBP",
+        "amount": "0.00"
+      }
+    },
+    "total": {
+      "retailer": {
+        "currency": "EUR",
+        "amount": "14.00"
+      },
+      "shopper": {
+        "currency": "GBP",
+        "amount": "12.50"
+      }
+    },
+    "delivery": {
+      "retailer": {
+        "currency": "EUR",
+        "amount": "5.59"
+      },
+      "shopper": {
+        "currency": "GBP",
+        "amount": "4.99"
+      }
+    },
+    "deliveryDuty": {
+      "retailer": {
+        "currency": "EUR",
+        "amount": "0.00"
+      },
+      "shopper": {
+        "currency": "GBP",
+        "amount": "0.00"
+      }
+    },
+    "deliveryTaxes": {
+      "retailer": {
+        "currency": "EUR",
+        "amount": "1.12"
+      },
+      "shopper": {
+        "currency": "GBP",
+        "amount": "1.00"
+      }
+    },
+    "taxes": {
+      "retailer": {
+        "currency": "EUR",
+        "amount": "2.80"
+      },
+      "shopper": {
+        "currency": "GBP",
+        "amount": "2.50"
+      }
+    },
+    "otherTaxes": {
+      "retailer": {
+        "currency": "EUR",
+        "amount": "0.00"
+      },
+      "shopper": {
+        "currency": "GBP",
+        "amount": "0.00"
+      }
+    },
+    "administration": {
+      "retailer": {
+        "currency": "EUR",
+        "amount": "0.00"
+      },
+      "shopper": {
+        "currency": "GBP",
+        "amount": "0.00"
+      }
+    },
+    "duty": {
+      "retailer": {
+        "currency": "EUR",
+        "amount": "0.00"
+      },
+      "shopper": {
+        "currency": "GBP",
+        "amount": "0.00"
+      }
+    },
+    "uplift": {
+      "retailer": {
+        "currency": "EUR",
+        "amount": "0.00"
+      },
+      "shopper": {
+        "currency": "GBP",
+        "amount": "0.00"
+      }
+    },
+    "cashOnDelivery": null,
+    "cashOnDeliveryTaxes": null,
+    "dutyPromoDiscount": null
+  },
+  "zeroValueOrderCharges": null,
+  "contactDetails": [
+    {
+      "contactDetailType": "IsDelivery",
+      "contactDetailsNickName": null,
+      "addressId": null,
+      "firstName": "Bxb",
+      "lastName": "Bxxxxxh",
+      "gender": "None",
+      "addressType": null,
+      "address1": "Ixxxx Xxxxe",
+      "address2": "rxxxxxx*xxxxn",
+      "address3": null,
+      "city": "London",
+      "poBox": null,
+      "postalCode": "WX9X 9XA",
+      "region": null,
+      "country": "GB",
+      "email": "txxx@xxxxxxxxxxxxx.xxm",
+      "telephone": "+999999999994",
+      "metadataItems": [
+        
+      ],
+      "isSelected": true,
+      "isDefault": null,
+      "saveToProfile": null,
+      "status": null,
+      "nativeFirstName": null,
+      "nativeLastName": null
+    },
+    {
+      "contactDetailType": "IsPayment",
+      "contactDetailsNickName": null,
+      "addressId": null,
+      "firstName": "Bxb",
+      "lastName": "Bxxxxxh",
+      "gender": "None",
+      "addressType": null,
+      "address1": "Ixxxx Xxxxe",
+      "address2": "rxxxxxx*xxxxn",
+      "address3": null,
+      "city": "London",
+      "poBox": null,
+      "postalCode": "WX9X 9XA",
+      "region": null,
+      "country": "GB",
+      "email": "txxx@xxxxxxxxxxxxx.xxm",
+      "telephone": "+999999999994",
+      "metadataItems": [
+        
+      ],
+      "isSelected": true,
+      "isDefault": null,
+      "saveToProfile": null,
+      "status": null,
+      "nativeFirstName": null,
+      "nativeLastName": null
+    }
+  ],
+  "paymentRecords": null,
+  "cartType": null
+}

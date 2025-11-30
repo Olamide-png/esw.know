@@ -1,0 +1,77 @@
+{
+  "retailerCartId": "PTI250904113524817GB",
+  "contactDetails": [
+    {
+      "contactDetailsType": "IsDeliveryAndPayment",
+      "contactDetailsNickName": null,
+      "address1": "India House",
+      "address2": "ravelin-green",
+      "address3": null,
+      "city": "London",
+      "postalCode": "WC2B 4NA",
+      "country": "GB",
+      "email": "test@unitedkingdom.com",
+      "firstName": "Bob",
+      "lastName": "British",
+      "gender": "None",
+      "telephone": "+4480 00478124",
+      "poBox": null
+    }
+  ],
+  "shopperCurrencyIso": "GBP",
+  "deliveryCountryIso": "GB",
+  "shopperCheckoutExperience": {
+    "shopperCultureLanguageIso": "en-IE"
+  },
+  "lineItems": [
+    {
+      "quantity": 1,
+      "estimatedDeliveryDate": "2021-12-31T11:54:24.631Z",
+      "product": {
+        "productCode": "123456789",
+        "title": "Test product",
+        "description": "Test product description",
+        "productionCustomsDescription": "Test product description",
+        "color": "Blk",
+        "size": "M",
+        "imageUrl": "https://i.pinimg.com/736x/ae/23/32/ae233275ce831208cc677538d95ed66c.jpg",
+        "productUrl": "https://esw.com/",
+        "productUnitPriceInfo": {
+          "price": {
+            "currency": "GBP",
+            "amount": "15.000"
+          }
+        },
+        "metadataItems": null
+      },
+      "cartGrouping": "Group 1",
+      "metadataItems": null
+    }
+  ],
+  "retailerCheckoutExperience": {
+    "retailerCheckoutExperienceId": null,
+    "backToCartUrl": "https://es-mm.digitalcoat.org/cart",
+    "continueShoppingUrl": "https://es-mm.digitalcoat.org/",
+    "metadataItems": [
+      {
+        "name": "OrderConfirmationUri_TestOnly",
+        "value": "https://checkout-api-PTIPTI.sandbox.eshopworld.com"
+      },
+      {
+        "name": "InventoryCheckUri_TestOnly",
+        "value": "https://checkout-api-PTIPTI.sandbox.eshopworld.com"
+      }
+    ]
+  },
+  "deliveryOptions": [
+    {
+      "deliveryOption": "POST",
+      "deliveryOptionOverridePriceInfo": {
+        "price": {
+          "currency": "GBP",
+          "amount": "5.99"
+        }
+      }
+    }
+  ]
+}
