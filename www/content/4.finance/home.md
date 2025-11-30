@@ -233,7 +233,6 @@ img: /business-finance-illustration-concept-flat-illustration-isolated-on-white-
 <br>
 
 ::card
----
 
 #title
 Payment processing
