@@ -6,8 +6,6 @@ export default defineAppConfig({
       ogImage: '/Screenshot 2025-07-04 144755.png',
       ogImageComponent: 'ShadcnDocs',
       ogImageColor: 'light',
-      url: 'https://esw-know.vercel.app',
-      links: { github: 'https://github.com/Olamide-png/esw.know' },
       umami: {
         enable: false,
         src: 'https://cloud.umami.is/script.js',
@@ -47,6 +45,33 @@ export default defineAppConfig({
         triggerType: 'icon',
         dropdownType: 'select',
       },
+      nav: [
+        {
+          title: 'Docs',
+          links: [
+            {
+              title: 'Shopify',
+              to: '/shopify/getting-started-guide/getting-started',
+              description: 'Install the ESW Shopify Apps.',
+              icon: 'lucide:shopping-bag',
+            },
+            {
+              title: 'Finance',
+              to: '/finance/settlement-and-billing/reconciliation-process',
+              description: 'Explore our Finance Docs.',
+              icon: 'lucide:landmark',
+            },
+            {
+              title: 'API References',
+              to: 'https://eswapis.vercel.app',
+              target: '_blank',
+              showLinkIcon: true,
+              description: 'API documentation for ESW services',
+              icon: 'lucide:code',
+            }
+          ]
+        }
+      ],
       links: [
         {
           title: 'API References',
@@ -64,7 +89,6 @@ export default defineAppConfig({
     },
     aside: {
       useLevel: true,
-      levelStyle: 'aside',
       collapse: true,
       collapseLevel: 1,
       folderStyle: 'default',
