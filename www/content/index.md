@@ -1,5 +1,5 @@
 ---
-title: Home
+title: ESW Docs
 fullpage: false
 navigation: false
 aside: false
