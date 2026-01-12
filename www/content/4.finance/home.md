@@ -246,11 +246,14 @@ ESW will remit payment within two business days of your selected settlement peri
 
 ::card
 ---
-img: /Picture8.png
+img: /Screenshot 2026-01-12 001525.png
 ---
 ::
 
 
+::alert{type="info" icon="lucide:info"}
+  The information provided in this Knowledge Centre is for general informational purposes only and does not constitute any legal or commercial advice. Settlement processes will vary depending on the specific terms and conditions agreed upon between ESW and each individual retailer. 
+::
 
 
 
