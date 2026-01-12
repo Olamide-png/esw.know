@@ -20,10 +20,10 @@ actions:
     variant: ghost
     to: /shopify/installation/apps
     leftIcon: 'lucide:plug'
-  - name: Configuration
+  - name: Finance
     variant: ghost
-    to: /shopify/configuration/configure-new-markets
-    leftIcon: 'lucide:wrench'
+    to: /finance/home
+    leftIcon: 'lucide:hand-coins'
 ---
 
 #title
