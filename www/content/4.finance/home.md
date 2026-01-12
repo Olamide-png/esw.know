@@ -1,5 +1,5 @@
 ---
-title: Knowledge Centre
+title: Finance
 fullpage: true
 navigation: false
 aside: false
