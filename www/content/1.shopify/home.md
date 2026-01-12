@@ -26,6 +26,10 @@ actions:
     variant: ghost
     to: /shopify/integration/overview
     leftIcon: 'lucide:unplug'
+  - name: Finance
+    variant: ghost
+    to: /finance/home
+    leftIcon: 'lucide:hand-coins'
 ---
 
 #title
