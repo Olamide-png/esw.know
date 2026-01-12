@@ -1,5 +1,5 @@
 ---
-title: Shopify
+title: Knowledge Centre
 fullpage: false
 navigation: false
 aside: false
