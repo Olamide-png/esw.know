@@ -18,18 +18,14 @@ actions:
     variant: ghost
     to: /shopify/installation/apps
     leftIcon: 'lucide:plug'
-  - name: Configuration
-    variant: ghost
-    to: /shopify/configuration/configure-new-markets
-    leftIcon: 'lucide:wrench'
-  - name: Integration
-    variant: ghost
-    to: /shopify/integration/overview
-    leftIcon: 'lucide:unplug'
   - name: Finance
     variant: ghost
     to: /finance/home
     leftIcon: 'lucide:hand-coins'
+  - name: Integration
+    variant: ghost
+    to: /shopify/integration/overview
+    leftIcon: 'lucide:unplug'
 ---
 
 #title
