@@ -1,5 +1,5 @@
 ---
-title: Knowledge Centre
+title: Home
 fullpage: false
 navigation: false
 aside: false
