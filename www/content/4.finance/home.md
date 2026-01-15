@@ -66,7 +66,7 @@ img: /business-finance-illustration-concept-flat-illustration-isolated-on-white-
             <line x1="16" x2="16" y1="16" y2="16" />
           </svg>
           <div>
-            <h3 class="text-lg font-semibold text-foreground">Decrease complexity</h3>
+            <h3 class="text-lg font-semibold text-foreground cursor-default">Decrease complexity</h3>
             <p class="mt-1 text-muted-foreground">ESW decreases complexity to provide a seamless experience to shoppers everywhere.</p>
           </div>
         </div><!-- End Icon Block -->
