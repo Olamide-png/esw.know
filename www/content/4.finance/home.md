@@ -118,7 +118,7 @@ img: /business-finance-illustration-concept-flat-illustration-isolated-on-white-
 <div class="px-4 py-8 bg-white dark:bg-neutral-900">
   <div class="max-w-4xl mx-auto">
     <div class="text-center">
-      <h2 class="text-3xl font-bold leading-tight text-gray-900 dark:text-white sm:text-4xl lg:text-5xl">What this means</h2>
+      <h2 class="text-3xl font-bold leading-tight text-gray-900 dark:text-white sm:text-4xl lg:text-5xl cursor-default pointer-events-none">What this means</h2>
       <p class="text-[15px] text-slate-600 dark:text-slate-300">ESW benefits.</p>
     </div>
   </div>
