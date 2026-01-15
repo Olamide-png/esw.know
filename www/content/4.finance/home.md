@@ -45,7 +45,7 @@ img: /business-finance-illustration-concept-flat-illustration-isolated-on-white-
   <!-- Grid -->
   <div class="grid lg:grid-cols-3 gap-8 lg:gap-12">
     <div class="lg:col-span-1">
-      <h2 class="font-bold text-2xl md:text-3xl text-foreground">
+      <h2 class="font-bold text-2xl md:text-3xl text-foreground cursor-default pointer-events-none">
         ESW believes in making worldwide commerce simple
       </h2>
       <p class="mt-2 md:mt-4 text-muted-foreground">
@@ -77,7 +77,7 @@ img: /business-finance-illustration-concept-flat-illustration-isolated-on-white-
             <path d="M7 10v12" />
             <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z" />
           </svg>
-          <div class="grow">
+          <div class="cursor-default pointer-events-none">
             <h3 class="text-lg font-semibold text-foreground">Shared revenue model</h3>
             <p class="mt-1 text-muted-foreground">ESW has a shared revenue model and a vested interest in your growth and cross border potential.</p>
           </div>
@@ -89,7 +89,7 @@ img: /business-finance-illustration-concept-flat-illustration-isolated-on-white-
             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
           </svg>
-          <div class="grow">
+          <div class="cursor-default pointer-events-none">
             <h3 class="text-lg font-semibold text-foreground">Tax and compliance</h3>
             <p class="mt-1 text-muted-foreground">ESW handles tax, compliance and collection of money from PSPs.</p>
           </div>
@@ -103,7 +103,7 @@ img: /business-finance-illustration-concept-flat-illustration-isolated-on-white-
             <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
             <path d="M16 3.13a4 4 0 0 1 0 7.75" />
           </svg>
-          <div class="grow">
+          <div class="cursor-default pointer-events-none">
             <h3 class="text-lg font-semibold text-foreground">Flexibility</h3>
             <p class="mt-1 text-muted-foreground">Flexible settlement cadences to match your internal requirements: weekly, fortnightly, or monthly.</p>
           </div>
